@@ -1,0 +1,417 @@
+{
+  "meta": {
+    "title": "Santa Helper – magiczne losowanie Secret Santa",
+    "description": "Losowanie Secret Santa w rodzinie, wśród przyjaciół i w pracy, prowadzone przez samego Mikołaja."
+  },
+  "nav": {
+    "mySessions": "Moje sesje"
+  },
+  "home": {
+    "eyebrow": "Secret Santa z prawdziwym Mikołajem",
+    "title": "Zamień losowanie w <em>odrobinę magii</em>",
+    "lead": "Zbierz rodzinę, przyjaciół albo zespół. Mikołaj wita wszystkich, opowiada historię i uczciwie losuje: nikt nie wylosuje siebie, a pary, które mają się ominąć, się ominą.",
+    "create": "Stwórz Secret Santa",
+    "haveCode": "Masz kod sesji?",
+    "codePlaceholder": "KOD",
+    "join": "Dołącz",
+    "modesTitle": "Jeden wieczór, trzy sposoby świętowania",
+    "modes": {
+      "sync": {
+        "title": "Razem w jednym pokoju",
+        "body": "Mikołaj prowadzi ceremonię na dużym ekranie. Każdy dołącza z telefonu przez kod QR i dyskretnie poznaje swoją osobę."
+      },
+      "hybrid": {
+        "title": "Część z was daleko",
+        "body": "Elfy, które nie mogą przyjść, oglądają transmisję Mikołaja na swoim urządzeniu, obok profilu elfa, równo z resztą pokoju."
+      },
+      "async": {
+        "title": "Każdy w swoim czasie",
+        "body": "Zaproś mailem. Elfy tworzą profile, kiedy chcą, a gdy Naczelnik elfów odblokuje losowanie, Mikołaj każdemu przekaże wynik w krótkiej, osobistej wiadomości."
+      }
+    },
+    "features": {
+      "fair": {
+        "title": "Uczciwie i ostatecznie",
+        "body": "Każdy poprawny wynik jest tak samo prawdopodobny, a losowanie jest nieodwracalne."
+      },
+      "exclusions": {
+        "title": "Wykluczenia par",
+        "body": "Pary albo dowolne osoby mogą się nie wylosować – w jedną lub w obie strony."
+      },
+      "languages": {
+        "title": "Pięć języków",
+        "body": "Polski, English, Deutsch, Español i Português – razem z głosem Mikołaja."
+      }
+    },
+    "footer": "Zrobione w warsztacie Mikołaja. Ho, ho, ho!"
+  },
+  "create": {
+    "heading": "Nowy Secret Santa",
+    "lead": "Zostaniesz Naczelnikiem elfów: wpuszczasz gości, ustalasz wykluczenia i budżet.",
+    "you": "Ty, Naczelnik elfów",
+    "hostName": "Twoje imię",
+    "hostEmail": "Twój e-mail",
+    "hostHint": "Wyślemy Ci link, który zawsze zaprowadzi Cię z powrotem do panelu.",
+    "session": "Sesja",
+    "title": "Nazwa",
+    "titlePlaceholder": "Wigilia u babci 2026",
+    "mode": "Jak się spotykacie?",
+    "modes": {
+      "sync": {
+        "title": "Ceremonia na żywo",
+        "body": "Wszyscy w jednym momencie – w pokoju albo zdalnie."
+      },
+      "async": {
+        "title": "Każdy w swoim czasie",
+        "body": "Profile przez e-mail, potem odblokowujesz losowanie."
+      }
+    },
+    "date": "Data",
+    "time": "Godzina",
+    "language": "Język maili",
+    "location": "Miejsce",
+    "locationPlaceholder": "Salon u babci",
+    "onlineUrl": "Link do spotkania online",
+    "budget": "Budżet na prezent (opcjonalnie)",
+    "budgetPlaceholder": "np. 100",
+    "currency": "Waluta",
+    "invites": "Zaproś mailem",
+    "invitesHintSync": "Opcjonalnie. W dniu spotkania goście mogą też zeskanować kod QR, a Ty ich wpuścisz.",
+    "invitesHintAsync": "Każdy dostanie świąteczne zaproszenie z linkiem do stworzenia profilu elfa.",
+    "invitesCount": "Wyślemy {count, plural, one {# zaproszenie} few {# zaproszenia} many {# zaproszeń} other {# zaproszenia}}",
+    "creating": "Rozpalamy kominek…",
+    "submit": "Utwórz sesję"
+  },
+  "errors": {
+    "not_found": "Nie znaleźliśmy tej sesji.",
+    "forbidden": "Nie masz do tego dostępu.",
+    "invalid": "Sprawdź formularz.",
+    "unknown": "Coś poszło nie tak. Spróbuj ponownie.",
+    "closed": "Ta sesja już się zakończyła.",
+    "already_drawn": "Losowanie już się odbyło.",
+    "ceremony_started": "Ceremonia już się rozpoczęła.",
+    "wrong_mode": "W tym trybie to niemożliwe.",
+    "finished": "Ceremonia dobiegła końca.",
+    "pending_guests": "Ktoś jeszcze czeka pod drzwiami. Najpierw go wpuść albo odpraw:",
+    "too_few": "Do losowania potrzeba co najmniej dwóch elfów.",
+    "infeasible": "Przy tych wykluczeniach losowanie jest niemożliwe. Poluzuj zasady dla:",
+    "not_approved": "Naczelnik elfów jeszcze Cię nie wpuścił."
+  },
+  "join": {
+    "eyebrow": "Zaproszenie do",
+    "hostedBy": "Naczelnik elfów: {name}",
+    "closed": "Ten Secret Santa już się zakończył.",
+    "name": "Twoje imię",
+    "email": "Twój e-mail",
+    "emailHint": "Żeby Mikołaj mógł przesłać Ci wynik losowania.",
+    "joining": "Pukamy do drzwi…",
+    "submit": "Zapukaj do warsztatu",
+    "checkEmailTitle": "Sprawdź skrzynkę",
+    "checkEmailBody": "Już jesteś w tej sesji. Wysłaliśmy Ci link, żeby kontynuować na tym urządzeniu."
+  },
+  "login": {
+    "heading": "Twoje sesje",
+    "lead": "Podaj e-mail, a wyślemy Ci magiczny link.",
+    "expired": "Ten link wygasł. Poproś o nowy poniżej.",
+    "email": "E-mail",
+    "submit": "Wyślij magiczny link",
+    "error": "Podaj poprawny e-mail.",
+    "sentTitle": "Już leci!",
+    "sentBody": "Jeśli Mikołaj zna ten adres, link dotrze za chwilę."
+  },
+  "mySessions": {
+    "heading": "Moje Secret Santa",
+    "new": "Nowa sesja",
+    "signOut": "Wyloguj",
+    "empty": "Nie masz jeszcze sesji.",
+    "noDate": "Bez daty",
+    "status": {
+      "open": "Otwarta",
+      "ceremony": "Trwa ceremonia",
+      "drawn": "Po losowaniu",
+      "done": "Zakończona"
+    },
+    "roleHost": "Naczelnik",
+    "roleElf": "Elf"
+  },
+  "elf": {
+    "rejectedTitle": "Drzwi pozostały zamknięte",
+    "rejectedBody": "Naczelnik elfów nie wpuścił tej prośby. Jeśli to pomyłka, zapytaj go osobiście.",
+    "waitingTitle": "Już prawie, {name}!",
+    "waitingBody": "Naczelnik elfów za chwilę wpuści Cię do warsztatu. Nie zamykaj tej strony.",
+    "hello": "Cześć, {name}!",
+    "hostPanel": "Panel Naczelnika",
+    "drawDone": "Mikołaj rozlosował imiona!",
+    "watchReveal": "Zobacz, co mówi Mikołaj",
+    "remoteOn": "Dołączasz z daleka – transmisja Mikołaja gra właśnie tutaj.",
+    "watchScreen": "Ceremonia trwa. Patrz na duży ekran!",
+    "inRoom": "Jesteś w pokoju razem z innymi.",
+    "imHere": "Jestem w pokoju",
+    "notInRoom": "Nie ma mnie w pokoju",
+    "asyncWaiting": "Twój elf jest gotowy. Napiszemy, gdy Naczelnik odblokuje losowanie.",
+    "yourElf": "Twój elf",
+    "createElf": "Stwórz swojego elfa",
+    "team": "Drużyna ({count})",
+    "surprise": "Zaskocz mnie",
+    "name": "Imię elfa",
+    "options": {
+      "hairStyle": "Fryzura",
+      "hat": "Czapka",
+      "glasses": "Okulary",
+      "skin": "Karnacja",
+      "hairColor": "Kolor włosów",
+      "sweater": "Sweter",
+      "scarf": "Szalik",
+      "background": "Tło",
+      "blush": "Rumiane policzki"
+    },
+    "values": {
+      "short": "Krótkie",
+      "long": "Długie",
+      "bun": "Kok",
+      "curly": "Loki",
+      "bald": "Brak",
+      "none": "Brak",
+      "santa": "Mikołajkowa",
+      "elf": "Elfia",
+      "beanie": "Zimowa",
+      "antlers": "Rogi renifera",
+      "round": "Okrągłe"
+    },
+    "saved": "Zapisane!",
+    "save": "Zapisz elfa",
+    "create": "Stwórz elfa",
+    "dressing": "Jeszcze wybiera strój"
+  },
+  "reveal": {
+    "eyebrow": "Ściśle tajne",
+    "youGiveTo": "W tym roku robisz prezent dla",
+    "budget": "Budżet do {budget}",
+    "hide": "Ukryj",
+    "hold": "Przytrzymaj, żeby rozpakować",
+    "holdHint": "Zasłoń ekran przed ciekawskimi.",
+    "again": "Posłuchaj jeszcze raz",
+    "back": "Wróć do elfa",
+    "skip": "Przejdź do wyniku"
+  },
+  "sound": {
+    "start": "Rozpal kominek (włącz dźwięk)",
+    "mute": "Wycisz",
+    "unmute": "Włącz dźwięk"
+  },
+  "stage": {
+    "steps": {
+      "lobby": "Zbiórka",
+      "welcome": "Powitanie",
+      "elves": "Elfy",
+      "rules": "Zasady",
+      "draw": "Losowanie",
+      "reveal": "Odsłonięcie",
+      "farewell": "Pożegnanie"
+    },
+    "scanToJoin": "Zeskanuj, by wejść do warsztatu Mikołaja",
+    "orEnterCode": "albo otwórz stronę i wpisz kod",
+    "elvesReady": "{count, plural, =0 {Czekamy na pierwszego elfa…} one {Jest już # elf} few {Są już # elfy} many {Jest już # elfów} other {Jest już # elfa}}",
+    "budgetLabel": "Budżet",
+    "noBudget": "Od serca",
+    "ruleLabel": "Złota zasada",
+    "ruleSecret": "Ani słowa, dopóki prezenty nie zostaną otwarte",
+    "drawing": "Mikołaj losuje imiona…",
+    "lookAtDevice": "Spójrz na swoje urządzenie",
+    "revealed": "{revealed} z {total} elfów rozpakowało swój wynik",
+    "merry": "Wesołych Świąt!"
+  },
+  "host": {
+    "eyebrow": "Panel Naczelnika elfów",
+    "code": "Kod",
+    "mode": {
+      "sync": "Ceremonia na żywo",
+      "async": "Każdy w swoim czasie"
+    },
+    "status": {
+      "open": "Otwarta",
+      "ceremony": "Trwa ceremonia",
+      "drawn": "Po losowaniu",
+      "done": "Zakończona"
+    },
+    "myElf": "Mój elf",
+    "openScreen": "Otwórz duży ekran",
+    "ceremony": "Ceremonia",
+    "steps": {
+      "lobby": "Zbiórka",
+      "welcome": "Powitanie",
+      "elves": "Elfy",
+      "rules": "Zasady",
+      "draw": "Losowanie",
+      "reveal": "Odsłonięcie",
+      "farewell": "Pożegnanie"
+    },
+    "stepHint": {
+      "lobby": "Otwórz duży ekran i pozwól wszystkim zeskanować kod QR. Zacznij, gdy cała drużyna będzie w środku.",
+      "welcome": "Mikołaj wita wszystkich.",
+      "elves": "Mikołaj poznaje każdego elfa.",
+      "rules": "Mikołaj tłumaczy zasady i budżet. Następny rozdział to losowanie – potem nikt już nie dołączy.",
+      "draw": "Imiona są rozlosowane i ostateczne. Dalej każdy zobaczy wynik na swoim urządzeniu.",
+      "reveal": "Wszyscy rozpakowują swoje wyniki. Każdy elf dostał też maila.",
+      "farewell": "To już koniec. Wesołych Świąt!"
+    },
+    "start": "Rozpocznij ceremonię",
+    "next": "Dalej: {step}",
+    "replay": "Powtórz ten rozdział",
+    "revealProgress": "{revealed} z {total} elfów rozpakowało swój wynik.",
+    "asyncTitle": "Losowanie",
+    "asyncReady": "{ready} z {total} elfów stworzyło swój profil.",
+    "unlockConfirm": "Nie wszyscy stworzyli jeszcze elfa. Losować mimo to?",
+    "unlocked": "Mikołaj rozlosował imiona i napisał do wszystkich.",
+    "unlock": "Odblokuj losowanie",
+    "unlockedProgress": "Po losowaniu. {revealed} z {total} elfów obejrzało wiadomość od Mikołaja.",
+    "feasibility": {
+      "tooFew": "Do losowania potrzeba co najmniej dwóch elfów.",
+      "blocked": "Przy obecnych wykluczeniach losowanie jest niemożliwe. Poluzuj zasady dla: {names}."
+    },
+    "fingerprint": "Odcisk losowania:",
+    "elves": "Elfy ({count})",
+    "hideQr": "Ukryj QR",
+    "showQr": "Pokaż QR i link",
+    "shareLink": "Każdy z tym linkiem może poprosić o wejście. Ty decydujesz, kogo wpuścić.",
+    "copy": "Kopiuj link",
+    "atTheDoor": "Pod drzwiami",
+    "resent": "Zaproszenie wysłane ponownie.",
+    "resend": "Wyślij ponownie",
+    "letIn": "Wpuść",
+    "reject": "Odpraw",
+    "remoteHint": "Zdalne elfy widzą transmisję Mikołaja na swoim urządzeniu.",
+    "remote": "Zdalnie",
+    "inRoom": "W pokoju",
+    "removeConfirm": "Usunąć {name} z sesji?",
+    "remove": "Usuń",
+    "invitesSent": "Zaproszenia wysłane.",
+    "online": "Online",
+    "offline": "Offline",
+    "chief": "Naczelnik",
+    "profileReady": "elf gotowy",
+    "profileMissing": "bez elfa",
+    "participantStatus": {
+      "invited": "zaproszony",
+      "pending": "prosi o wejście",
+      "approved": "w środku",
+      "rejected": "odprawiony"
+    },
+    "inviteLabel": "Zaproś kolejne osoby mailem",
+    "inviteSend": "{count, plural, =0 {Wyślij zaproszenia} one {Wyślij # zaproszenie} few {Wyślij # zaproszenia} many {Wyślij # zaproszeń} other {Wyślij # zaproszenia}}",
+    "exclusions": "Kto kogo nie losuje",
+    "exclusionsHint": "Dla par albo osób, które i tak wymieniają się prezentami.",
+    "giver": "Daje",
+    "receiver": "Dostaje",
+    "bothWays": "W obie strony",
+    "addExclusion": "Dodaj zasadę",
+    "noExclusions": "Brak zasad: każdy może wylosować każdego (oprócz siebie).",
+    "settings": "Ustawienia",
+    "saveSettings": "Zapisz ustawienia",
+    "settingsSaved": "Ustawienia zapisane.",
+    "fullscreen": "Pełny ekran"
+  },
+  "screen": {
+    "noAccessTitle": "To jest duży ekran",
+    "noAccessBody": "Poproś Naczelnika elfów, by otworzył go linkiem ze swojego panelu."
+  },
+  "email": {
+    "footer": "Dostajesz tę wiadomość, bo ktoś zaprosił Cię do Secret Santa w Santa Helper. Ho, ho, ho!",
+    "calendarTitle": "Secret Santa: {title}",
+    "calendarDescription": "Ceremonia Mikołaja, organizuje {host}. Kod sesji: {code}.",
+    "details": {
+      "host": "Naczelnik elfów",
+      "when": "Kiedy",
+      "where": "Gdzie",
+      "online": "Online",
+      "budget": "Budżet",
+      "code": "Kod sesji"
+    },
+    "invite": {
+      "subject": "{host} zaprasza Cię do Secret Santa: {title}",
+      "preview": "Mikołaj zarezerwował dla Ciebie miejsce w warsztacie: {title}",
+      "eyebrow": "Zaproszenie",
+      "heading": "Biegun Północny wzywa, {name}!",
+      "body": "{host} organizuje Secret Santa „{title}” i zarezerwował(a) dla Ciebie miejsce w warsztacie Mikołaja.",
+      "bodyAsync": "Stwórz profil elfa, kiedy tylko chcesz. Gdy wszyscy będą gotowi, Naczelnik elfów odblokuje losowanie, a my napiszemy do Ciebie.",
+      "bodySync": "Przygotuj kakao i dołącz do ceremonii Mikołaja o podanej godzinie. Elfa możesz stworzyć już teraz.",
+      "cta": "Stwórz profil elfa",
+      "google": "Dodaj do Kalendarza Google",
+      "ics": "Dodaj do Apple / Outlook"
+    },
+    "host": {
+      "subject": "Twój Secret Santa „{title}” jest gotowy",
+      "eyebrow": "Naczelnik elfów",
+      "heading": "Od teraz jesteś Naczelnikiem elfów, {name}!",
+      "body": "Zachowaj tego maila: przycisk poniżej zawsze zaprowadzi Cię do panelu. Kod sesji: {code}.",
+      "cta": "Otwórz panel Naczelnika"
+    },
+    "profile": {
+      "subject": "Dzięki za założenie profilu elfa!",
+      "eyebrow": "Profil elfa gotowy",
+      "heading": "Witaj w warsztacie, {name}!",
+      "bodyAsync": "Twój elf jest gotowy. Damy Ci znać, gdy nadejdzie wielka chwila losowania.",
+      "bodySync": "Twój elf jest gotowy. Do zobaczenia na ceremonii Mikołaja!",
+      "cta": "Zobacz mojego elfa"
+    },
+    "drawReady": {
+      "subject": "Już czas! Zobacz, komu dajesz prezent",
+      "eyebrow": "Losowanie zakończone",
+      "heading": "Mikołaj rozlosował imiona, {name}!",
+      "body": "Każde imię znalazło swojego elfa. Mikołaj ma krótką wiadomość tylko dla Ciebie. Otwórz ją, gdy nikt nie zagląda Ci przez ramię.",
+      "cta": "Zobacz wiadomość od Mikołaja"
+    },
+    "result": {
+      "subject": "Twój wynik Secret Santa – {title}",
+      "preview": "Psst… pamiątka z losowania",
+      "eyebrow": "Ściśle tajne",
+      "heading": "Psst, {name}…",
+      "body": "Oto pamiątka z losowania, gdyby magia wieczoru sprawiła, że zapomnisz.",
+      "label": "Robisz prezent dla",
+      "budgetNote": "Budżet do {budget}",
+      "cta": "Otwórz stronę elfa"
+    },
+    "login": {
+      "subject": "Twój magiczny link do Santa Helper",
+      "eyebrow": "Logowanie",
+      "heading": "Oto Twój magiczny link",
+      "body": "Kliknij przycisk, żeby się zalogować. Link działa przez 30 minut.",
+      "cta": "Zaloguj mnie"
+    },
+    "continue": {
+      "subject": "Kontynuuj „{title}” na nowym urządzeniu",
+      "eyebrow": "Nowe urządzenie",
+      "heading": "Witaj ponownie, {name}!",
+      "body": "Ktoś (mamy nadzieję, że Ty) chce otworzyć Twojego elfa na innym urządzeniu. Kliknij przycisk na urządzeniu, którego chcesz użyć.",
+      "cta": "Kontynuuj jako mój elf"
+    }
+  },
+  "ceremony": {
+    "lobby1": "Ho, ho, ho! Wchodźcie, wchodźcie i ogrzejcie dłonie przy kominku. Zeskanujcie kod, żeby dołączyć do mojego warsztatu.",
+    "welcome1": "Ho, ho, ho! Dobry wieczór, moi drodzy!",
+    "welcome2": "To ja, Święty Mikołaj. Dziś mój warsztat należy do was. Elfy wypolerowały każdy dzwoneczek i podgrzały kakao.",
+    "welcome3": "Spotykamy się na „{title}” i widzę tu {count, plural, one {jednego wspaniałego elfa} few {# wspaniałe elfy} many {# wspaniałych elfów} other {# wspaniałego elfa}}.",
+    "elves1": "Pozwólcie, że dobrze wam się przyjrzę.",
+    "elvesNames": "{names}.",
+    "elves2": "Co za wspaniała drużyna! Każde z was jest w tym roku na mojej liście grzecznych.",
+    "elvesRemote": "I ciepłe pozdrowienia dla tych, którzy są z nami z daleka: {names}. Świąteczna magia działa na każdą odległość.",
+    "rules1": "A teraz zasady warsztatu. Każde z was w tajemnicy dostanie jedną osobę, którą trzeba zaskoczyć prezentem.",
+    "rulesExclusions": "Nikt nie wylosuje siebie, a Naczelnik elfów zadbał, by niektóre pary się ominęły, żeby każda niespodzianka pozostała niespodzianką.",
+    "rulesNoSelf": "Nikt nie wylosuje siebie, a każde imię ma dokładnie taką samą szansę.",
+    "rulesBudget": "Prezent ma kosztować do {budget}. Liczy się myśl i odrobina brokatu.",
+    "rulesNoBudget": "Dziś nie ma limitu, ale pamiętajcie: najlepsze prezenty płyną prosto z serca.",
+    "rules2": "I najważniejsze: zachowajcie wynik w tajemnicy, aż prezenty zostaną otwarte!",
+    "draw1": "Elfy, na stanowiska! Niech zacznie się wielkie losowanie!",
+    "draw2": "Imiona wirują, dzwoneczki dzwonią…",
+    "draw3": "Gotowe! Każde imię znalazło swojego elfa.",
+    "reveal1": "Teraz spójrzcie na swoje urządzenia i trzymajcie je blisko siebie.",
+    "reveal2": "Przytrzymajcie prezent, żeby go rozpakować. Ciii, nikomu ani słowa!",
+    "farewell1": "To cała magia na dzisiejszy wieczór. Dziękuję, że odwiedziliście mój warsztat.",
+    "farewell2": "Wesołych Świąt, moje kochane elfy! Ho, ho, ho!",
+    "personal1": "Ho, ho, ho! Witaj, {name}!",
+    "personal2": "Elfy skończyły wielkie losowanie „{title}” i mam dla Ciebie mały sekret.",
+    "personal3": "Gotowe? No to słuchaj…",
+    "personalReveal": "W tym roku zaskoczysz… {receiver}!",
+    "personalBye": "Zachowaj to w tajemnicy i baw się dobrze. Ho, ho, ho!"
+  }
+}

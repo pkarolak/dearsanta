@@ -1,0 +1,417 @@
+{
+  "meta": {
+    "title": "Santa Helper – a magical Secret Santa",
+    "description": "Draw Secret Santa with family, friends or colleagues, hosted by Santa himself."
+  },
+  "nav": {
+    "mySessions": "My sessions"
+  },
+  "home": {
+    "eyebrow": "Secret Santa, hosted by Santa",
+    "title": "Turn the name draw into <em>a little bit of magic</em>",
+    "lead": "Gather your family, friends or team. Santa welcomes everyone, tells the story and draws the names fairly, with nobody drawing themselves and with the pairs you want to keep apart.",
+    "create": "Create a Secret Santa",
+    "haveCode": "Got a session code?",
+    "codePlaceholder": "CODE",
+    "join": "Join",
+    "modesTitle": "One evening, three ways to celebrate",
+    "modes": {
+      "sync": {
+        "title": "Together in one room",
+        "body": "Santa runs the ceremony on the big screen. Everyone joins from their phone with a QR code and gets their match discreetly."
+      },
+      "hybrid": {
+        "title": "Some of you far away",
+        "body": "Elves who can’t be there watch Santa’s broadcast on their own device, next to their elf profile, in sync with the room."
+      },
+      "async": {
+        "title": "Everyone in their own time",
+        "body": "Invite by e-mail. Elves create profiles whenever they like; when the Elf Chief unlocks the draw, Santa tells each of them in a short personal message."
+      }
+    },
+    "features": {
+      "fair": {
+        "title": "Fair and final",
+        "body": "Every valid outcome is equally likely, and the result is fixed the moment Santa draws."
+      },
+      "exclusions": {
+        "title": "Pairs kept apart",
+        "body": "Couples or anyone else can be kept from drawing each other, one way or both ways."
+      },
+      "languages": {
+        "title": "Five languages",
+        "body": "Polski, English, Deutsch, Español and Português, including Santa’s voice."
+      }
+    },
+    "footer": "Made in Santa’s workshop. Ho ho ho!"
+  },
+  "create": {
+    "heading": "A new Secret Santa",
+    "lead": "You will be the Elf Chief: you let people in, keep pairs apart and set the budget.",
+    "you": "You, the Elf Chief",
+    "hostName": "Your name",
+    "hostEmail": "Your e-mail",
+    "hostHint": "We’ll send you a link that always brings you back to the control panel.",
+    "session": "The session",
+    "title": "Name",
+    "titlePlaceholder": "Family Christmas 2026",
+    "mode": "How do you meet?",
+    "modes": {
+      "sync": {
+        "title": "Live ceremony",
+        "body": "Everyone together at one moment, in the room or remotely."
+      },
+      "async": {
+        "title": "Everyone in their own time",
+        "body": "Profiles by e-mail, then you unlock the draw."
+      }
+    },
+    "date": "Date",
+    "time": "Time",
+    "language": "Language of e-mails",
+    "location": "Place",
+    "locationPlaceholder": "Grandma’s living room",
+    "onlineUrl": "Video call link",
+    "budget": "Gift budget (optional)",
+    "budgetPlaceholder": "e.g. 100",
+    "currency": "Currency",
+    "invites": "Invite by e-mail",
+    "invitesHintSync": "Optional. People can also scan a QR code on the night, and you let them in.",
+    "invitesHintAsync": "Everyone gets a festive invitation with a link to create their elf profile.",
+    "invitesCount": "{count, plural, one {# invitation} other {# invitations}} will be sent",
+    "creating": "Lighting the fireplace…",
+    "submit": "Create the session"
+  },
+  "errors": {
+    "not_found": "We couldn’t find that session.",
+    "forbidden": "You don’t have access to this.",
+    "invalid": "Please check the form.",
+    "unknown": "Something went wrong. Please try again.",
+    "closed": "This session has already finished.",
+    "already_drawn": "The names have already been drawn.",
+    "ceremony_started": "The ceremony has already started.",
+    "wrong_mode": "This isn’t possible in this mode.",
+    "finished": "The ceremony is over.",
+    "pending_guests": "Some guests are still waiting at the door. Let them in or turn them away first:",
+    "too_few": "You need at least two elves to draw.",
+    "infeasible": "These exclusions make a draw impossible. Loosen them for:",
+    "not_approved": "The Elf Chief hasn’t let you in yet."
+  },
+  "join": {
+    "eyebrow": "You are invited to",
+    "hostedBy": "Elf Chief: {name}",
+    "closed": "This Secret Santa has already finished.",
+    "name": "Your name",
+    "email": "Your e-mail",
+    "emailHint": "So Santa can send you your match.",
+    "joining": "Knocking on the door…",
+    "submit": "Knock on the workshop door",
+    "checkEmailTitle": "Check your inbox",
+    "checkEmailBody": "You are already part of this session. We sent you a link to continue on this device."
+  },
+  "login": {
+    "heading": "Your sessions",
+    "lead": "Enter your e-mail and we’ll send you a magic link.",
+    "expired": "That link has expired. Ask for a new one below.",
+    "email": "E-mail",
+    "submit": "Send me a magic link",
+    "error": "Please enter a valid e-mail.",
+    "sentTitle": "On its way!",
+    "sentBody": "If this address is known to Santa, the link will arrive in a minute."
+  },
+  "mySessions": {
+    "heading": "My Secret Santas",
+    "new": "New session",
+    "signOut": "Sign out",
+    "empty": "No sessions yet.",
+    "noDate": "No date",
+    "status": {
+      "open": "Open",
+      "ceremony": "Ceremony in progress",
+      "drawn": "Names drawn",
+      "done": "Finished"
+    },
+    "roleHost": "Elf Chief",
+    "roleElf": "Elf"
+  },
+  "elf": {
+    "rejectedTitle": "The door stayed closed",
+    "rejectedBody": "The Elf Chief didn’t let this request in. If that’s a mistake, ask them in person.",
+    "waitingTitle": "Almost there, {name}!",
+    "waitingBody": "The Elf Chief will let you into the workshop in a moment. Keep this page open.",
+    "hello": "Hello, {name}!",
+    "hostPanel": "Elf Chief panel",
+    "drawDone": "Santa has drawn the names!",
+    "watchReveal": "Watch Santa’s reveal",
+    "remoteOn": "You are joining from afar: Santa’s broadcast plays right here.",
+    "watchScreen": "The ceremony has started. Watch the big screen!",
+    "inRoom": "You are in the room with everyone.",
+    "imHere": "I’m in the room",
+    "notInRoom": "I’m not in the room",
+    "asyncWaiting": "Your elf is ready. We’ll e-mail you when the Elf Chief unlocks the draw.",
+    "yourElf": "Your elf",
+    "createElf": "Create your elf",
+    "team": "The team ({count})",
+    "surprise": "Surprise me",
+    "name": "Elf name",
+    "options": {
+      "hairStyle": "Hair",
+      "hat": "Hat",
+      "glasses": "Glasses",
+      "skin": "Skin",
+      "hairColor": "Hair colour",
+      "sweater": "Sweater",
+      "scarf": "Scarf",
+      "background": "Background",
+      "blush": "Rosy cheeks"
+    },
+    "values": {
+      "short": "Short",
+      "long": "Long",
+      "bun": "Bun",
+      "curly": "Curly",
+      "bald": "None",
+      "none": "None",
+      "santa": "Santa hat",
+      "elf": "Elf hat",
+      "beanie": "Beanie",
+      "antlers": "Antlers",
+      "round": "Round"
+    },
+    "saved": "Saved!",
+    "save": "Save my elf",
+    "create": "Create my elf",
+    "dressing": "Still choosing an outfit"
+  },
+  "reveal": {
+    "eyebrow": "Top secret",
+    "youGiveTo": "This year you are surprising",
+    "budget": "Budget up to {budget}",
+    "hide": "Hide",
+    "hold": "Hold to unwrap",
+    "holdHint": "Shield your screen from curious eyes.",
+    "again": "Listen again",
+    "back": "Back to my elf",
+    "skip": "Skip to the reveal"
+  },
+  "sound": {
+    "start": "Light the fireplace (sound on)",
+    "mute": "Mute",
+    "unmute": "Unmute"
+  },
+  "stage": {
+    "steps": {
+      "lobby": "Gathering",
+      "welcome": "Welcome",
+      "elves": "The elves",
+      "rules": "The rules",
+      "draw": "The draw",
+      "reveal": "The reveal",
+      "farewell": "Farewell"
+    },
+    "scanToJoin": "Scan to join Santa’s workshop",
+    "orEnterCode": "or open the site and enter the code",
+    "elvesReady": "{count, plural, =0 {Waiting for the first elf…} one {# elf is here} other {# elves are here}}",
+    "budgetLabel": "Gift budget",
+    "noBudget": "From the heart",
+    "ruleLabel": "Golden rule",
+    "ruleSecret": "Keep it secret until the gifts are opened",
+    "drawing": "Santa is drawing the names…",
+    "lookAtDevice": "Look at your own device",
+    "revealed": "{revealed} of {total} elves have unwrapped their match",
+    "merry": "Merry Christmas!"
+  },
+  "host": {
+    "eyebrow": "Elf Chief panel",
+    "code": "Code",
+    "mode": {
+      "sync": "Live ceremony",
+      "async": "In their own time"
+    },
+    "status": {
+      "open": "Open",
+      "ceremony": "Ceremony in progress",
+      "drawn": "Names drawn",
+      "done": "Finished"
+    },
+    "myElf": "My elf",
+    "openScreen": "Open the big screen",
+    "ceremony": "The ceremony",
+    "steps": {
+      "lobby": "Gathering",
+      "welcome": "Welcome",
+      "elves": "The elves",
+      "rules": "The rules",
+      "draw": "The draw",
+      "reveal": "The reveal",
+      "farewell": "Farewell"
+    },
+    "stepHint": {
+      "lobby": "Open the big screen and let everyone scan the QR code. Start when the whole team is in.",
+      "welcome": "Santa is greeting everyone.",
+      "elves": "Santa is meeting every elf.",
+      "rules": "Santa explains the rules and the budget. The next chapter draws the names, after which nobody can join.",
+      "draw": "The names are drawn and fixed. Next, everyone sees their match on their own device.",
+      "reveal": "Everyone is unwrapping their match. We also sent each elf an e-mail.",
+      "farewell": "That’s a wrap. Merry Christmas!"
+    },
+    "start": "Start the ceremony",
+    "next": "Next: {step}",
+    "replay": "Replay this chapter",
+    "revealProgress": "{revealed} of {total} elves have unwrapped their match.",
+    "asyncTitle": "The draw",
+    "asyncReady": "{ready} of {total} elves have created their profile.",
+    "unlockConfirm": "Not everyone has created their elf yet. Draw anyway?",
+    "unlocked": "Santa has drawn the names and e-mailed everyone.",
+    "unlock": "Unlock the draw",
+    "unlockedProgress": "Names drawn. {revealed} of {total} elves have watched Santa’s reveal.",
+    "feasibility": {
+      "tooFew": "You need at least two elves for a draw.",
+      "blocked": "With the current exclusions the draw is impossible. Loosen the rules for: {names}."
+    },
+    "fingerprint": "Draw fingerprint:",
+    "elves": "Elves ({count})",
+    "hideQr": "Hide QR",
+    "showQr": "Show QR & link",
+    "shareLink": "Anyone with this link can ask to join. You let them in.",
+    "copy": "Copy link",
+    "atTheDoor": "At the door",
+    "resent": "Invitation sent again.",
+    "resend": "Resend",
+    "letIn": "Let in",
+    "reject": "Turn away",
+    "remoteHint": "Remote elves see Santa’s broadcast on their own device.",
+    "remote": "Remote",
+    "inRoom": "In the room",
+    "removeConfirm": "Remove {name} from the session?",
+    "remove": "Remove",
+    "invitesSent": "Invitations sent.",
+    "online": "Online",
+    "offline": "Offline",
+    "chief": "Chief",
+    "profileReady": "elf ready",
+    "profileMissing": "no elf yet",
+    "participantStatus": {
+      "invited": "invited",
+      "pending": "asking to join",
+      "approved": "in",
+      "rejected": "turned away"
+    },
+    "inviteLabel": "Invite more people by e-mail",
+    "inviteSend": "{count, plural, =0 {Send invitations} one {Send # invitation} other {Send # invitations}}",
+    "exclusions": "Who shouldn’t draw whom",
+    "exclusionsHint": "For couples, or anyone who already exchanges gifts anyway.",
+    "giver": "Giver",
+    "receiver": "Receiver",
+    "bothWays": "Both ways",
+    "addExclusion": "Add rule",
+    "noExclusions": "No rules yet: anyone can draw anyone (except themselves).",
+    "settings": "Settings",
+    "saveSettings": "Save settings",
+    "settingsSaved": "Settings saved.",
+    "fullscreen": "Full screen"
+  },
+  "screen": {
+    "noAccessTitle": "This is the big screen",
+    "noAccessBody": "Ask the Elf Chief to open it with the link from their panel."
+  },
+  "email": {
+    "footer": "You are receiving this because someone invited you to a Secret Santa on Santa Helper. Ho ho ho!",
+    "calendarTitle": "Secret Santa: {title}",
+    "calendarDescription": "Santa’s ceremony hosted by {host}. Session code: {code}.",
+    "details": {
+      "host": "Elf Chief",
+      "when": "When",
+      "where": "Where",
+      "online": "Online",
+      "budget": "Budget",
+      "code": "Session code"
+    },
+    "invite": {
+      "subject": "{host} invites you to a Secret Santa: {title}",
+      "preview": "Santa saved a spot for you in his workshop: {title}",
+      "eyebrow": "You’re invited",
+      "heading": "The North Pole is calling, {name}!",
+      "body": "{host} is organising a Secret Santa called “{title}” and saved a spot for you in Santa’s workshop.",
+      "bodyAsync": "Create your elf profile whenever you like. Once everyone is ready, the Elf Chief unlocks the draw and you’ll get an e-mail.",
+      "bodySync": "Warm up some cocoa and join Santa’s ceremony at the time below. You can create your elf already now.",
+      "cta": "Create my elf profile",
+      "google": "Add to Google Calendar",
+      "ics": "Add to Apple / Outlook"
+    },
+    "host": {
+      "subject": "Your Secret Santa “{title}” is ready",
+      "eyebrow": "Elf Chief",
+      "heading": "You are the Elf Chief now, {name}!",
+      "body": "Keep this e-mail: the button below always brings you back to the control panel. Session code: {code}.",
+      "cta": "Open the Elf Chief panel"
+    },
+    "profile": {
+      "subject": "Thanks for creating your elf profile!",
+      "eyebrow": "Elf profile ready",
+      "heading": "Welcome to the workshop, {name}!",
+      "bodyAsync": "Your elf is ready. We’ll let you know when the big moment of the draw arrives.",
+      "bodySync": "Your elf is ready. See you at Santa’s ceremony!",
+      "cta": "View my elf"
+    },
+    "drawReady": {
+      "subject": "It’s time! See who you are giving a gift to",
+      "eyebrow": "The names are drawn",
+      "heading": "Santa has drawn the names, {name}!",
+      "body": "Every name has found its elf. Santa has a short message just for you. Open it when nobody is peeking over your shoulder.",
+      "cta": "Watch Santa’s reveal"
+    },
+    "result": {
+      "subject": "Your Secret Santa match – {title}",
+      "preview": "Psst… a keepsake of your match",
+      "eyebrow": "Top secret",
+      "heading": "Psst, {name}…",
+      "body": "Here is a keepsake of your match, in case the magic of the evening makes you forget.",
+      "label": "You are giving a gift to",
+      "budgetNote": "Budget up to {budget}",
+      "cta": "Open my elf page"
+    },
+    "login": {
+      "subject": "Your magic link to Santa Helper",
+      "eyebrow": "Sign in",
+      "heading": "Here is your magic link",
+      "body": "Click the button to sign in. The link works for 30 minutes.",
+      "cta": "Sign me in"
+    },
+    "continue": {
+      "subject": "Continue “{title}” on a new device",
+      "eyebrow": "New device",
+      "heading": "Hello again, {name}!",
+      "body": "Someone (hopefully you) asked to open your elf on another device. Use the button on the device you want to use.",
+      "cta": "Continue as my elf"
+    }
+  },
+  "ceremony": {
+    "lobby1": "Ho, ho, ho! Come in, come in, and warm your hands by the fire. Scan the code to join my workshop.",
+    "welcome1": "Ho, ho, ho! Good evening, my dear friends!",
+    "welcome2": "It is me, Santa Claus. Tonight my workshop is all yours. The elves have polished every bell and warmed up the cocoa.",
+    "welcome3": "We are gathered for {title}, and I can see {count, plural, one {one wonderful elf} other {# wonderful elves}}.",
+    "elves1": "Let me take a good look at you all.",
+    "elvesNames": "{names}.",
+    "elves2": "What a splendid team! Every single one of you is on my nice list this year.",
+    "elvesRemote": "And a warm wave to those joining from afar: {names}. Christmas magic works across any distance.",
+    "rules1": "Now, the rules of the workshop. Each of you will secretly get one person to surprise with a gift.",
+    "rulesExclusions": "Nobody draws themselves, and the Elf Chief has made sure some pairs stay apart, so every surprise stays a surprise.",
+    "rulesNoSelf": "Nobody draws themselves, and every name has exactly the same chance.",
+    "rulesBudget": "Keep the gift up to {budget}. It is the thought, and a little glitter, that counts.",
+    "rulesNoBudget": "There is no limit tonight, but remember: the best gifts come from the heart.",
+    "rules2": "And most important of all: keep your match a secret until the gifts are opened!",
+    "draw1": "Elves, to your places! Let the great draw begin!",
+    "draw2": "The names are tumbling, the bells are ringing…",
+    "draw3": "Done! Every name has found its elf.",
+    "reveal1": "Now, look at your own device, and hold it close to your chest.",
+    "reveal2": "Hold the gift to unwrap it. Shh, not a word to anyone!",
+    "farewell1": "That is all the magic for tonight. Thank you for visiting my workshop.",
+    "farewell2": "Merry Christmas, my dear elves! Ho, ho, ho!",
+    "personal1": "Ho, ho, ho! Hello, {name}!",
+    "personal2": "The elves have finished the great draw for {title}, and I have a little secret just for you.",
+    "personal3": "Are you ready? Here it comes…",
+    "personalReveal": "This year, you will surprise… {receiver}!",
+    "personalBye": "Keep it secret, keep it merry. Ho, ho, ho!"
+  }
+}

@@ -1,0 +1,417 @@
+{
+  "meta": {
+    "title": "Santa Helper – ein magisches Wichteln",
+    "description": "Wichteln mit Familie, Freunden oder Kollegen, moderiert vom Weihnachtsmann persönlich."
+  },
+  "nav": {
+    "mySessions": "Meine Runden"
+  },
+  "home": {
+    "eyebrow": "Wichteln mit dem Weihnachtsmann",
+    "title": "Mach aus der Auslosung <em>ein bisschen Magie</em>",
+    "lead": "Versammle Familie, Freunde oder dein Team. Der Weihnachtsmann begrüßt alle, erzählt die Geschichte und lost fair aus: Niemand zieht sich selbst, und Paare, die sich nicht ziehen sollen, bleiben getrennt.",
+    "create": "Wichteln erstellen",
+    "haveCode": "Hast du einen Code?",
+    "codePlaceholder": "CODE",
+    "join": "Beitreten",
+    "modesTitle": "Ein Abend, drei Arten zu feiern",
+    "modes": {
+      "sync": {
+        "title": "Gemeinsam in einem Raum",
+        "body": "Der Weihnachtsmann führt auf dem großen Bildschirm durch die Zeremonie. Alle treten per QR-Code mit dem Handy bei und sehen ihr Los diskret."
+      },
+      "hybrid": {
+        "title": "Einige sind weit weg",
+        "body": "Wer nicht dabei sein kann, sieht die Übertragung des Weihnachtsmanns auf dem eigenen Gerät, neben dem Wichtelprofil, zeitgleich mit dem Raum."
+      },
+      "async": {
+        "title": "Jeder, wann er will",
+        "body": "Lade per E-Mail ein. Die Wichtel legen ihre Profile an, wann sie möchten. Sobald der Oberwichtel die Auslosung freigibt, verrät der Weihnachtsmann allen ihr Los in einer kurzen, persönlichen Botschaft."
+      }
+    },
+    "features": {
+      "fair": {
+        "title": "Fair und endgültig",
+        "body": "Jedes gültige Ergebnis ist gleich wahrscheinlich, und das Los steht fest, sobald gezogen wurde."
+      },
+      "exclusions": {
+        "title": "Getrennte Paare",
+        "body": "Paare oder beliebige Personen ziehen sich nicht – in eine oder beide Richtungen."
+      },
+      "languages": {
+        "title": "Fünf Sprachen",
+        "body": "Polski, English, Deutsch, Español und Português – inklusive der Stimme des Weihnachtsmanns."
+      }
+    },
+    "footer": "Gemacht in der Werkstatt des Weihnachtsmanns. Ho, ho, ho!"
+  },
+  "create": {
+    "heading": "Neues Wichteln",
+    "lead": "Du wirst Oberwichtel: Du lässt Gäste herein, legst Ausschlüsse fest und bestimmst das Budget.",
+    "you": "Du, der Oberwichtel",
+    "hostName": "Dein Name",
+    "hostEmail": "Deine E-Mail",
+    "hostHint": "Wir schicken dir einen Link, der dich immer zurück zum Steuerpult bringt.",
+    "session": "Die Runde",
+    "title": "Name",
+    "titlePlaceholder": "Familienweihnacht 2026",
+    "mode": "Wie trefft ihr euch?",
+    "modes": {
+      "sync": {
+        "title": "Live-Zeremonie",
+        "body": "Alle zur selben Zeit – im Raum oder aus der Ferne."
+      },
+      "async": {
+        "title": "Jeder, wann er will",
+        "body": "Profile per E-Mail, dann gibst du die Auslosung frei."
+      }
+    },
+    "date": "Datum",
+    "time": "Uhrzeit",
+    "language": "Sprache der E-Mails",
+    "location": "Ort",
+    "locationPlaceholder": "Omas Wohnzimmer",
+    "onlineUrl": "Link zum Videocall",
+    "budget": "Geschenkbudget (optional)",
+    "budgetPlaceholder": "z. B. 25",
+    "currency": "Währung",
+    "invites": "Per E-Mail einladen",
+    "invitesHintSync": "Optional. Am Abend können Gäste auch einen QR-Code scannen, und du lässt sie herein.",
+    "invitesHintAsync": "Alle bekommen eine festliche Einladung mit einem Link zum Wichtelprofil.",
+    "invitesCount": "{count, plural, one {# Einladung wird} other {# Einladungen werden}} verschickt",
+    "creating": "Der Kamin wird angezündet…",
+    "submit": "Runde erstellen"
+  },
+  "errors": {
+    "not_found": "Diese Runde haben wir nicht gefunden.",
+    "forbidden": "Dafür hast du keinen Zugriff.",
+    "invalid": "Bitte prüfe das Formular.",
+    "unknown": "Etwas ist schiefgelaufen. Bitte versuch es noch einmal.",
+    "closed": "Diese Runde ist bereits beendet.",
+    "already_drawn": "Die Namen wurden bereits gezogen.",
+    "ceremony_started": "Die Zeremonie hat schon begonnen.",
+    "wrong_mode": "In diesem Modus nicht möglich.",
+    "finished": "Die Zeremonie ist vorbei.",
+    "pending_guests": "Es warten noch Gäste vor der Tür. Lass sie zuerst herein oder weise sie ab:",
+    "too_few": "Für die Auslosung braucht es mindestens zwei Wichtel.",
+    "infeasible": "Mit diesen Ausschlüssen ist keine Auslosung möglich. Lockere die Regeln für:",
+    "not_approved": "Der Oberwichtel hat dich noch nicht hereingelassen."
+  },
+  "join": {
+    "eyebrow": "Du bist eingeladen zu",
+    "hostedBy": "Oberwichtel: {name}",
+    "closed": "Dieses Wichteln ist bereits beendet.",
+    "name": "Dein Name",
+    "email": "Deine E-Mail",
+    "emailHint": "Damit der Weihnachtsmann dir dein Los schicken kann.",
+    "joining": "Wir klopfen an…",
+    "submit": "An die Werkstatttür klopfen",
+    "checkEmailTitle": "Schau in dein Postfach",
+    "checkEmailBody": "Du bist schon Teil dieser Runde. Wir haben dir einen Link geschickt, um auf diesem Gerät weiterzumachen."
+  },
+  "login": {
+    "heading": "Deine Runden",
+    "lead": "Gib deine E-Mail ein, und wir schicken dir einen magischen Link.",
+    "expired": "Dieser Link ist abgelaufen. Fordere unten einen neuen an.",
+    "email": "E-Mail",
+    "submit": "Magischen Link senden",
+    "error": "Bitte gib eine gültige E-Mail ein.",
+    "sentTitle": "Ist unterwegs!",
+    "sentBody": "Wenn der Weihnachtsmann diese Adresse kennt, kommt der Link gleich an."
+  },
+  "mySessions": {
+    "heading": "Mein Wichteln",
+    "new": "Neue Runde",
+    "signOut": "Abmelden",
+    "empty": "Noch keine Runden.",
+    "noDate": "Kein Datum",
+    "status": {
+      "open": "Offen",
+      "ceremony": "Zeremonie läuft",
+      "drawn": "Ausgelost",
+      "done": "Beendet"
+    },
+    "roleHost": "Oberwichtel",
+    "roleElf": "Wichtel"
+  },
+  "elf": {
+    "rejectedTitle": "Die Tür blieb zu",
+    "rejectedBody": "Der Oberwichtel hat diese Anfrage nicht hereingelassen. Falls das ein Irrtum ist, frag persönlich nach.",
+    "waitingTitle": "Gleich geschafft, {name}!",
+    "waitingBody": "Der Oberwichtel lässt dich gleich in die Werkstatt. Lass diese Seite offen.",
+    "hello": "Hallo, {name}!",
+    "hostPanel": "Oberwichtel-Pult",
+    "drawDone": "Der Weihnachtsmann hat die Namen gezogen!",
+    "watchReveal": "Botschaft des Weihnachtsmanns ansehen",
+    "remoteOn": "Du bist aus der Ferne dabei: Die Übertragung läuft genau hier.",
+    "watchScreen": "Die Zeremonie läuft. Schau auf den großen Bildschirm!",
+    "inRoom": "Du bist mit allen im Raum.",
+    "imHere": "Ich bin im Raum",
+    "notInRoom": "Ich bin nicht im Raum",
+    "asyncWaiting": "Dein Wichtel ist fertig. Wir schreiben dir, sobald der Oberwichtel die Auslosung freigibt.",
+    "yourElf": "Dein Wichtel",
+    "createElf": "Erstelle deinen Wichtel",
+    "team": "Das Team ({count})",
+    "surprise": "Überrasch mich",
+    "name": "Wichtelname",
+    "options": {
+      "hairStyle": "Frisur",
+      "hat": "Mütze",
+      "glasses": "Brille",
+      "skin": "Hautton",
+      "hairColor": "Haarfarbe",
+      "sweater": "Pullover",
+      "scarf": "Schal",
+      "background": "Hintergrund",
+      "blush": "Rote Wangen"
+    },
+    "values": {
+      "short": "Kurz",
+      "long": "Lang",
+      "bun": "Dutt",
+      "curly": "Locken",
+      "bald": "Keine",
+      "none": "Keine",
+      "santa": "Nikolausmütze",
+      "elf": "Wichtelmütze",
+      "beanie": "Strickmütze",
+      "antlers": "Geweih",
+      "round": "Rund"
+    },
+    "saved": "Gespeichert!",
+    "save": "Wichtel speichern",
+    "create": "Wichtel erstellen",
+    "dressing": "Sucht noch ein Outfit aus"
+  },
+  "reveal": {
+    "eyebrow": "Streng geheim",
+    "youGiveTo": "Dieses Jahr beschenkst du",
+    "budget": "Budget bis {budget}",
+    "hide": "Verbergen",
+    "hold": "Gedrückt halten zum Auspacken",
+    "holdHint": "Schirm den Bildschirm vor neugierigen Blicken ab.",
+    "again": "Noch einmal hören",
+    "back": "Zurück zum Wichtel",
+    "skip": "Direkt zum Ergebnis"
+  },
+  "sound": {
+    "start": "Kamin anzünden (Ton an)",
+    "mute": "Stumm",
+    "unmute": "Ton an"
+  },
+  "stage": {
+    "steps": {
+      "lobby": "Ankommen",
+      "welcome": "Begrüßung",
+      "elves": "Die Wichtel",
+      "rules": "Die Regeln",
+      "draw": "Die Auslosung",
+      "reveal": "Die Enthüllung",
+      "farewell": "Abschied"
+    },
+    "scanToJoin": "Scannen und in die Werkstatt kommen",
+    "orEnterCode": "oder die Seite öffnen und den Code eingeben",
+    "elvesReady": "{count, plural, =0 {Wir warten auf den ersten Wichtel…} one {# Wichtel ist da} other {# Wichtel sind da}}",
+    "budgetLabel": "Budget",
+    "noBudget": "Von Herzen",
+    "ruleLabel": "Goldene Regel",
+    "ruleSecret": "Pssst, bis die Geschenke ausgepackt sind",
+    "drawing": "Der Weihnachtsmann zieht die Namen…",
+    "lookAtDevice": "Schau auf dein eigenes Gerät",
+    "revealed": "{revealed} von {total} Wichteln haben ihr Los ausgepackt",
+    "merry": "Frohe Weihnachten!"
+  },
+  "host": {
+    "eyebrow": "Oberwichtel-Pult",
+    "code": "Code",
+    "mode": {
+      "sync": "Live-Zeremonie",
+      "async": "Jeder, wann er will"
+    },
+    "status": {
+      "open": "Offen",
+      "ceremony": "Zeremonie läuft",
+      "drawn": "Ausgelost",
+      "done": "Beendet"
+    },
+    "myElf": "Mein Wichtel",
+    "openScreen": "Großen Bildschirm öffnen",
+    "ceremony": "Die Zeremonie",
+    "steps": {
+      "lobby": "Ankommen",
+      "welcome": "Begrüßung",
+      "elves": "Die Wichtel",
+      "rules": "Die Regeln",
+      "draw": "Die Auslosung",
+      "reveal": "Die Enthüllung",
+      "farewell": "Abschied"
+    },
+    "stepHint": {
+      "lobby": "Öffne den großen Bildschirm und lass alle den QR-Code scannen. Starte, wenn das ganze Team da ist.",
+      "welcome": "Der Weihnachtsmann begrüßt alle.",
+      "elves": "Der Weihnachtsmann lernt jeden Wichtel kennen.",
+      "rules": "Der Weihnachtsmann erklärt Regeln und Budget. Im nächsten Kapitel wird gelost – danach kann niemand mehr beitreten.",
+      "draw": "Die Namen sind gezogen und stehen fest. Als Nächstes sieht jeder sein Los auf dem eigenen Gerät.",
+      "reveal": "Alle packen ihr Los aus. Jeder Wichtel hat auch eine E-Mail bekommen.",
+      "farewell": "Das war’s. Frohe Weihnachten!"
+    },
+    "start": "Zeremonie starten",
+    "next": "Weiter: {step}",
+    "replay": "Kapitel wiederholen",
+    "revealProgress": "{revealed} von {total} Wichteln haben ihr Los ausgepackt.",
+    "asyncTitle": "Die Auslosung",
+    "asyncReady": "{ready} von {total} Wichteln haben ihr Profil erstellt.",
+    "unlockConfirm": "Noch nicht alle haben ihren Wichtel erstellt. Trotzdem auslosen?",
+    "unlocked": "Der Weihnachtsmann hat gelost und allen geschrieben.",
+    "unlock": "Auslosung freigeben",
+    "unlockedProgress": "Ausgelost. {revealed} von {total} Wichteln haben die Botschaft angesehen.",
+    "feasibility": {
+      "tooFew": "Für die Auslosung braucht es mindestens zwei Wichtel.",
+      "blocked": "Mit den aktuellen Ausschlüssen ist keine Auslosung möglich. Lockere die Regeln für: {names}."
+    },
+    "fingerprint": "Fingerabdruck der Auslosung:",
+    "elves": "Wichtel ({count})",
+    "hideQr": "QR verbergen",
+    "showQr": "QR & Link zeigen",
+    "shareLink": "Mit diesem Link kann jeder um Einlass bitten. Du entscheidest, wer reinkommt.",
+    "copy": "Link kopieren",
+    "atTheDoor": "Vor der Tür",
+    "resent": "Einladung erneut verschickt.",
+    "resend": "Erneut senden",
+    "letIn": "Hereinlassen",
+    "reject": "Abweisen",
+    "remoteHint": "Wichtel aus der Ferne sehen die Übertragung auf ihrem eigenen Gerät.",
+    "remote": "Aus der Ferne",
+    "inRoom": "Im Raum",
+    "removeConfirm": "{name} aus der Runde entfernen?",
+    "remove": "Entfernen",
+    "invitesSent": "Einladungen verschickt.",
+    "online": "Online",
+    "offline": "Offline",
+    "chief": "Chef",
+    "profileReady": "Wichtel fertig",
+    "profileMissing": "noch kein Wichtel",
+    "participantStatus": {
+      "invited": "eingeladen",
+      "pending": "bittet um Einlass",
+      "approved": "drin",
+      "rejected": "abgewiesen"
+    },
+    "inviteLabel": "Weitere Personen per E-Mail einladen",
+    "inviteSend": "{count, plural, =0 {Einladungen senden} one {# Einladung senden} other {# Einladungen senden}}",
+    "exclusions": "Wer wen nicht zieht",
+    "exclusionsHint": "Für Paare oder alle, die sich sowieso beschenken.",
+    "giver": "Schenkt",
+    "receiver": "Bekommt",
+    "bothWays": "In beide Richtungen",
+    "addExclusion": "Regel hinzufügen",
+    "noExclusions": "Noch keine Regeln: Jeder kann jeden ziehen (außer sich selbst).",
+    "settings": "Einstellungen",
+    "saveSettings": "Einstellungen speichern",
+    "settingsSaved": "Einstellungen gespeichert.",
+    "fullscreen": "Vollbild"
+  },
+  "screen": {
+    "noAccessTitle": "Das ist der große Bildschirm",
+    "noAccessBody": "Bitte den Oberwichtel, ihn mit dem Link aus seinem Pult zu öffnen."
+  },
+  "email": {
+    "footer": "Du bekommst diese Nachricht, weil dich jemand zum Wichteln bei Santa Helper eingeladen hat. Ho, ho, ho!",
+    "calendarTitle": "Wichteln: {title}",
+    "calendarDescription": "Zeremonie des Weihnachtsmanns, organisiert von {host}. Code: {code}.",
+    "details": {
+      "host": "Oberwichtel",
+      "when": "Wann",
+      "where": "Wo",
+      "online": "Online",
+      "budget": "Budget",
+      "code": "Code"
+    },
+    "invite": {
+      "subject": "{host} lädt dich zum Wichteln ein: {title}",
+      "preview": "Der Weihnachtsmann hält dir einen Platz in der Werkstatt frei: {title}",
+      "eyebrow": "Einladung",
+      "heading": "Der Nordpol ruft, {name}!",
+      "body": "{host} organisiert das Wichteln „{title}“ und hält dir einen Platz in der Werkstatt des Weihnachtsmanns frei.",
+      "bodyAsync": "Erstelle dein Wichtelprofil, wann immer du möchtest. Sobald alle bereit sind, gibt der Oberwichtel die Auslosung frei und du bekommst eine E-Mail.",
+      "bodySync": "Mach dir einen Kakao und sei zur unten genannten Zeit bei der Zeremonie dabei. Deinen Wichtel kannst du schon jetzt erstellen.",
+      "cta": "Wichtelprofil erstellen",
+      "google": "Zu Google Kalender hinzufügen",
+      "ics": "Zu Apple / Outlook hinzufügen"
+    },
+    "host": {
+      "subject": "Dein Wichteln „{title}“ ist bereit",
+      "eyebrow": "Oberwichtel",
+      "heading": "Du bist jetzt Oberwichtel, {name}!",
+      "body": "Heb diese E-Mail auf: Der Button bringt dich immer zurück zum Pult. Code: {code}.",
+      "cta": "Oberwichtel-Pult öffnen"
+    },
+    "profile": {
+      "subject": "Danke für dein Wichtelprofil!",
+      "eyebrow": "Wichtelprofil fertig",
+      "heading": "Willkommen in der Werkstatt, {name}!",
+      "bodyAsync": "Dein Wichtel ist fertig. Wir melden uns, wenn der große Moment der Auslosung da ist.",
+      "bodySync": "Dein Wichtel ist fertig. Bis bald bei der Zeremonie!",
+      "cta": "Meinen Wichtel ansehen"
+    },
+    "drawReady": {
+      "subject": "Es ist so weit! Sieh nach, wen du beschenkst",
+      "eyebrow": "Die Namen sind gezogen",
+      "heading": "Der Weihnachtsmann hat gelost, {name}!",
+      "body": "Jeder Name hat seinen Wichtel gefunden. Der Weihnachtsmann hat eine kurze Botschaft nur für dich. Öffne sie, wenn niemand über deine Schulter schaut.",
+      "cta": "Botschaft ansehen"
+    },
+    "result": {
+      "subject": "Dein Wichtellos – {title}",
+      "preview": "Pssst… eine Erinnerung an dein Los",
+      "eyebrow": "Streng geheim",
+      "heading": "Pssst, {name}…",
+      "body": "Hier ist eine kleine Erinnerung an dein Los, falls dich der Zauber des Abends alles vergessen lässt.",
+      "label": "Du beschenkst",
+      "budgetNote": "Budget bis {budget}",
+      "cta": "Meine Wichtelseite öffnen"
+    },
+    "login": {
+      "subject": "Dein magischer Link zu Santa Helper",
+      "eyebrow": "Anmelden",
+      "heading": "Hier ist dein magischer Link",
+      "body": "Klicke auf den Button, um dich anzumelden. Der Link ist 30 Minuten gültig.",
+      "cta": "Anmelden"
+    },
+    "continue": {
+      "subject": "„{title}“ auf einem neuen Gerät fortsetzen",
+      "eyebrow": "Neues Gerät",
+      "heading": "Schön, dich wiederzusehen, {name}!",
+      "body": "Jemand (hoffentlich du) möchte deinen Wichtel auf einem anderen Gerät öffnen. Tippe auf dem gewünschten Gerät auf den Button.",
+      "cta": "Als mein Wichtel fortfahren"
+    }
+  },
+  "ceremony": {
+    "lobby1": "Ho, ho, ho! Kommt herein, kommt herein und wärmt euch die Hände am Kamin. Scannt den Code, um in meine Werkstatt zu kommen.",
+    "welcome1": "Ho, ho, ho! Guten Abend, meine Lieben!",
+    "welcome2": "Ich bin es, der Weihnachtsmann. Heute Abend gehört meine Werkstatt ganz euch. Die Wichtel haben jedes Glöckchen poliert und den Kakao aufgewärmt.",
+    "welcome3": "Wir sind hier für „{title}“, und ich sehe {count, plural, one {einen wunderbaren Wichtel} other {# wunderbare Wichtel}}.",
+    "elves1": "Lasst mich euch alle einmal gut ansehen.",
+    "elvesNames": "{names}.",
+    "elves2": "Was für ein großartiges Team! Ihr steht dieses Jahr alle auf meiner Liste der Braven.",
+    "elvesRemote": "Und herzliche Grüße an alle, die aus der Ferne dabei sind: {names}. Weihnachtszauber wirkt über jede Entfernung.",
+    "rules1": "Nun zu den Regeln der Werkstatt. Jeder von euch bekommt heimlich eine Person, die er mit einem Geschenk überrascht.",
+    "rulesExclusions": "Niemand zieht sich selbst, und der Oberwichtel hat dafür gesorgt, dass manche Paare getrennt bleiben, damit jede Überraschung eine Überraschung bleibt.",
+    "rulesNoSelf": "Niemand zieht sich selbst, und jeder Name hat genau dieselbe Chance.",
+    "rulesBudget": "Das Geschenk soll höchstens {budget} kosten. Es zählt der Gedanke und ein bisschen Glitzer.",
+    "rulesNoBudget": "Heute gibt es kein Limit, aber denkt daran: Die schönsten Geschenke kommen von Herzen.",
+    "rules2": "Und das Wichtigste: Behaltet euer Los für euch, bis die Geschenke ausgepackt sind!",
+    "draw1": "Wichtel, auf eure Plätze! Die große Auslosung beginnt!",
+    "draw2": "Die Namen wirbeln, die Glöckchen klingen…",
+    "draw3": "Fertig! Jeder Name hat seinen Wichtel gefunden.",
+    "reveal1": "Schaut jetzt auf euer eigenes Gerät und haltet es nah bei euch.",
+    "reveal2": "Haltet das Geschenk gedrückt, um es auszupacken. Pssst, kein Wort zu niemandem!",
+    "farewell1": "Das war aller Zauber für heute Abend. Danke, dass ihr meine Werkstatt besucht habt.",
+    "farewell2": "Frohe Weihnachten, meine lieben Wichtel! Ho, ho, ho!",
+    "personal1": "Ho, ho, ho! Hallo, {name}!",
+    "personal2": "Die Wichtel haben die große Auslosung für „{title}“ beendet, und ich habe ein kleines Geheimnis nur für dich.",
+    "personal3": "Bist du bereit? Jetzt kommt es…",
+    "personalReveal": "Dieses Jahr überraschst du… {receiver}!",
+    "personalBye": "Behalt es für dich und hab viel Freude. Ho, ho, ho!"
+  }
+}

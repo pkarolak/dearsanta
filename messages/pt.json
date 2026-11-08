@@ -1,0 +1,417 @@
+{
+  "meta": {
+    "title": "Santa Helper – um amigo secreto mágico",
+    "description": "Sorteio de amigo secreto com família, amigos ou colegas, apresentado pelo próprio Pai Natal."
+  },
+  "nav": {
+    "mySessions": "Os meus sorteios"
+  },
+  "home": {
+    "eyebrow": "Amigo secreto com o Pai Natal",
+    "title": "Transforme o sorteio num <em>pouco de magia</em>",
+    "lead": "Junte a família, os amigos ou a equipa. O Pai Natal dá as boas-vindas, conta a história e sorteia de forma justa: ninguém tira o próprio nome e os pares que quer separar ficam separados.",
+    "create": "Criar um amigo secreto",
+    "haveCode": "Tem um código?",
+    "codePlaceholder": "CÓDIGO",
+    "join": "Entrar",
+    "modesTitle": "Uma noite, três maneiras de celebrar",
+    "modes": {
+      "sync": {
+        "title": "Juntos na mesma sala",
+        "body": "O Pai Natal conduz a cerimónia no ecrã grande. Todos entram pelo telemóvel com um código QR e veem o resultado em segredo."
+      },
+      "hybrid": {
+        "title": "Alguns estão longe",
+        "body": "Quem não pode estar presente vê a transmissão do Pai Natal no seu próprio dispositivo, ao lado do perfil de duende, em sincronia com a sala."
+      },
+      "async": {
+        "title": "Cada um ao seu ritmo",
+        "body": "Convide por e-mail. Os duendes criam o perfil quando quiserem e, quando o Chefe dos duendes desbloquear o sorteio, o Pai Natal conta a cada um numa breve mensagem pessoal."
+      }
+    },
+    "features": {
+      "fair": {
+        "title": "Justo e definitivo",
+        "body": "Todos os resultados válidos são igualmente prováveis e o sorteio fica fixo no momento em que acontece."
+      },
+      "exclusions": {
+        "title": "Pares separados",
+        "body": "Casais ou quaisquer pessoas podem não se tirar um ao outro, num sentido ou em ambos."
+      },
+      "languages": {
+        "title": "Cinco idiomas",
+        "body": "Polski, English, Deutsch, Español e Português, incluindo a voz do Pai Natal."
+      }
+    },
+    "footer": "Feito na oficina do Pai Natal. Ho, ho, ho!"
+  },
+  "create": {
+    "heading": "Um novo amigo secreto",
+    "lead": "Vai ser o Chefe dos duendes: deixa as pessoas entrar, separa pares e define o orçamento.",
+    "you": "Você, o Chefe dos duendes",
+    "hostName": "O seu nome",
+    "hostEmail": "O seu e-mail",
+    "hostHint": "Vamos enviar-lhe um link que o leva sempre de volta ao painel.",
+    "session": "O sorteio",
+    "title": "Nome",
+    "titlePlaceholder": "Natal em família 2026",
+    "mode": "Como se vão encontrar?",
+    "modes": {
+      "sync": {
+        "title": "Cerimónia ao vivo",
+        "body": "Todos ao mesmo tempo, na sala ou à distância."
+      },
+      "async": {
+        "title": "Cada um ao seu ritmo",
+        "body": "Perfis por e-mail e depois desbloqueia o sorteio."
+      }
+    },
+    "date": "Data",
+    "time": "Hora",
+    "language": "Idioma dos e-mails",
+    "location": "Local",
+    "locationPlaceholder": "A sala da avó",
+    "onlineUrl": "Link da videochamada",
+    "budget": "Orçamento do presente (opcional)",
+    "budgetPlaceholder": "p. ex. 25",
+    "currency": "Moeda",
+    "invites": "Convidar por e-mail",
+    "invitesHintSync": "Opcional. Na noite, as pessoas também podem ler um código QR e você deixa-as entrar.",
+    "invitesHintAsync": "Todos recebem um convite festivo com um link para criar o perfil de duende.",
+    "invitesCount": "{count, plural, one {Será enviado # convite} other {Serão enviados # convites}}",
+    "creating": "A acender a lareira…",
+    "submit": "Criar o sorteio"
+  },
+  "errors": {
+    "not_found": "Não encontrámos esse sorteio.",
+    "forbidden": "Não tem acesso a isto.",
+    "invalid": "Verifique o formulário.",
+    "unknown": "Algo correu mal. Tente novamente.",
+    "closed": "Este sorteio já terminou.",
+    "already_drawn": "Os nomes já foram sorteados.",
+    "ceremony_started": "A cerimónia já começou.",
+    "wrong_mode": "Não é possível neste modo.",
+    "finished": "A cerimónia terminou.",
+    "pending_guests": "Ainda há convidados à porta. Deixe-os entrar ou recuse-os primeiro:",
+    "too_few": "São precisos pelo menos dois duendes para sortear.",
+    "infeasible": "Com estas exclusões o sorteio é impossível. Alivie as regras para:",
+    "not_approved": "O Chefe dos duendes ainda não o deixou entrar."
+  },
+  "join": {
+    "eyebrow": "Está convidado para",
+    "hostedBy": "Chefe dos duendes: {name}",
+    "closed": "Este amigo secreto já terminou.",
+    "name": "O seu nome",
+    "email": "O seu e-mail",
+    "emailHint": "Para que o Pai Natal lhe possa enviar o resultado.",
+    "joining": "A bater à porta…",
+    "submit": "Bater à porta da oficina",
+    "checkEmailTitle": "Veja o seu e-mail",
+    "checkEmailBody": "Já faz parte deste sorteio. Enviámos-lhe um link para continuar neste dispositivo."
+  },
+  "login": {
+    "heading": "Os seus sorteios",
+    "lead": "Indique o seu e-mail e enviamos-lhe um link mágico.",
+    "expired": "Esse link expirou. Peça um novo abaixo.",
+    "email": "E-mail",
+    "submit": "Enviar link mágico",
+    "error": "Indique um e-mail válido.",
+    "sentTitle": "A caminho!",
+    "sentBody": "Se o Pai Natal conhecer este endereço, o link chega dentro de um minuto."
+  },
+  "mySessions": {
+    "heading": "Os meus amigos secretos",
+    "new": "Novo sorteio",
+    "signOut": "Terminar sessão",
+    "empty": "Ainda não há sorteios.",
+    "noDate": "Sem data",
+    "status": {
+      "open": "Aberto",
+      "ceremony": "Cerimónia a decorrer",
+      "drawn": "Sorteado",
+      "done": "Terminado"
+    },
+    "roleHost": "Chefe",
+    "roleElf": "Duende"
+  },
+  "elf": {
+    "rejectedTitle": "A porta ficou fechada",
+    "rejectedBody": "O Chefe dos duendes não aceitou este pedido. Se for um engano, fale com ele pessoalmente.",
+    "waitingTitle": "Quase lá, {name}!",
+    "waitingBody": "O Chefe dos duendes vai deixá-lo entrar na oficina daqui a pouco. Mantenha esta página aberta.",
+    "hello": "Olá, {name}!",
+    "hostPanel": "Painel do Chefe",
+    "drawDone": "O Pai Natal sorteou os nomes!",
+    "watchReveal": "Ver a mensagem do Pai Natal",
+    "remoteOn": "Está a participar à distância: a transmissão do Pai Natal toca aqui mesmo.",
+    "watchScreen": "A cerimónia começou. Olhe para o ecrã grande!",
+    "inRoom": "Está na sala com todos.",
+    "imHere": "Estou na sala",
+    "notInRoom": "Não estou na sala",
+    "asyncWaiting": "O seu duende está pronto. Escrevemos-lhe quando o Chefe desbloquear o sorteio.",
+    "yourElf": "O seu duende",
+    "createElf": "Crie o seu duende",
+    "team": "A equipa ({count})",
+    "surprise": "Surpreenda-me",
+    "name": "Nome do duende",
+    "options": {
+      "hairStyle": "Cabelo",
+      "hat": "Gorro",
+      "glasses": "Óculos",
+      "skin": "Pele",
+      "hairColor": "Cor do cabelo",
+      "sweater": "Camisola",
+      "scarf": "Cachecol",
+      "background": "Fundo",
+      "blush": "Bochechas rosadas"
+    },
+    "values": {
+      "short": "Curto",
+      "long": "Comprido",
+      "bun": "Carrapito",
+      "curly": "Encaracolado",
+      "bald": "Nenhum",
+      "none": "Nenhum",
+      "santa": "Do Pai Natal",
+      "elf": "De duende",
+      "beanie": "De lã",
+      "antlers": "Hastes",
+      "round": "Redondos"
+    },
+    "saved": "Guardado!",
+    "save": "Guardar o meu duende",
+    "create": "Criar o meu duende",
+    "dressing": "Ainda está a escolher o visual"
+  },
+  "reveal": {
+    "eyebrow": "Ultrassecreto",
+    "youGiveTo": "Este ano vai surpreender",
+    "budget": "Orçamento até {budget}",
+    "hide": "Esconder",
+    "hold": "Mantenha premido para abrir",
+    "holdHint": "Proteja o ecrã de olhares curiosos.",
+    "again": "Ouvir outra vez",
+    "back": "Voltar ao meu duende",
+    "skip": "Ir para o resultado"
+  },
+  "sound": {
+    "start": "Acender a lareira (com som)",
+    "mute": "Silenciar",
+    "unmute": "Ligar som"
+  },
+  "stage": {
+    "steps": {
+      "lobby": "Chegada",
+      "welcome": "Boas-vindas",
+      "elves": "Os duendes",
+      "rules": "As regras",
+      "draw": "O sorteio",
+      "reveal": "A revelação",
+      "farewell": "Despedida"
+    },
+    "scanToJoin": "Leia o código para entrar na oficina do Pai Natal",
+    "orEnterCode": "ou abra o site e escreva o código",
+    "elvesReady": "{count, plural, =0 {À espera do primeiro duende…} one {Já cá está # duende} other {Já cá estão # duendes}}",
+    "budgetLabel": "Orçamento",
+    "noBudget": "Do coração",
+    "ruleLabel": "Regra de ouro",
+    "ruleSecret": "Segredo até os presentes serem abertos",
+    "drawing": "O Pai Natal está a sortear os nomes…",
+    "lookAtDevice": "Olhe para o seu dispositivo",
+    "revealed": "{revealed} de {total} duendes já abriram o resultado",
+    "merry": "Feliz Natal!"
+  },
+  "host": {
+    "eyebrow": "Painel do Chefe dos duendes",
+    "code": "Código",
+    "mode": {
+      "sync": "Cerimónia ao vivo",
+      "async": "Cada um ao seu ritmo"
+    },
+    "status": {
+      "open": "Aberto",
+      "ceremony": "Cerimónia a decorrer",
+      "drawn": "Sorteado",
+      "done": "Terminado"
+    },
+    "myElf": "O meu duende",
+    "openScreen": "Abrir o ecrã grande",
+    "ceremony": "A cerimónia",
+    "steps": {
+      "lobby": "Chegada",
+      "welcome": "Boas-vindas",
+      "elves": "Os duendes",
+      "rules": "As regras",
+      "draw": "O sorteio",
+      "reveal": "A revelação",
+      "farewell": "Despedida"
+    },
+    "stepHint": {
+      "lobby": "Abra o ecrã grande e deixe todos lerem o código QR. Comece quando a equipa estiver completa.",
+      "welcome": "O Pai Natal cumprimenta todos.",
+      "elves": "O Pai Natal conhece cada duende.",
+      "rules": "O Pai Natal explica as regras e o orçamento. O próximo capítulo é o sorteio; depois disso ninguém pode entrar.",
+      "draw": "Os nomes estão sorteados e fixos. A seguir, cada um vê o resultado no seu dispositivo.",
+      "reveal": "Todos estão a abrir o resultado. Cada duende recebeu também um e-mail.",
+      "farewell": "E pronto. Feliz Natal!"
+    },
+    "start": "Começar a cerimónia",
+    "next": "Seguinte: {step}",
+    "replay": "Repetir este capítulo",
+    "revealProgress": "{revealed} de {total} duendes já abriram o resultado.",
+    "asyncTitle": "O sorteio",
+    "asyncReady": "{ready} de {total} duendes criaram o perfil.",
+    "unlockConfirm": "Nem todos criaram ainda o seu duende. Sortear mesmo assim?",
+    "unlocked": "O Pai Natal sorteou os nomes e escreveu a todos.",
+    "unlock": "Desbloquear o sorteio",
+    "unlockedProgress": "Sorteado. {revealed} de {total} duendes já viram a mensagem do Pai Natal.",
+    "feasibility": {
+      "tooFew": "São precisos pelo menos dois duendes para sortear.",
+      "blocked": "Com as exclusões atuais o sorteio é impossível. Alivie as regras para: {names}."
+    },
+    "fingerprint": "Impressão digital do sorteio:",
+    "elves": "Duendes ({count})",
+    "hideQr": "Esconder QR",
+    "showQr": "Mostrar QR e link",
+    "shareLink": "Qualquer pessoa com este link pode pedir para entrar. Você decide quem entra.",
+    "copy": "Copiar link",
+    "atTheDoor": "À porta",
+    "resent": "Convite reenviado.",
+    "resend": "Reenviar",
+    "letIn": "Deixar entrar",
+    "reject": "Recusar",
+    "remoteHint": "Os duendes à distância veem a transmissão do Pai Natal no seu próprio dispositivo.",
+    "remote": "À distância",
+    "inRoom": "Na sala",
+    "removeConfirm": "Remover {name} do sorteio?",
+    "remove": "Remover",
+    "invitesSent": "Convites enviados.",
+    "online": "Online",
+    "offline": "Offline",
+    "chief": "Chefe",
+    "profileReady": "duende pronto",
+    "profileMissing": "sem duende",
+    "participantStatus": {
+      "invited": "convidado",
+      "pending": "pede para entrar",
+      "approved": "dentro",
+      "rejected": "recusado"
+    },
+    "inviteLabel": "Convidar mais pessoas por e-mail",
+    "inviteSend": "{count, plural, =0 {Enviar convites} one {Enviar # convite} other {Enviar # convites}}",
+    "exclusions": "Quem não tira quem",
+    "exclusionsHint": "Para casais ou para quem já troca presentes de qualquer forma.",
+    "giver": "Oferece",
+    "receiver": "Recebe",
+    "bothWays": "Nos dois sentidos",
+    "addExclusion": "Adicionar regra",
+    "noExclusions": "Sem regras: qualquer pessoa pode tirar qualquer outra (menos a si própria).",
+    "settings": "Definições",
+    "saveSettings": "Guardar definições",
+    "settingsSaved": "Definições guardadas.",
+    "fullscreen": "Ecrã inteiro"
+  },
+  "screen": {
+    "noAccessTitle": "Este é o ecrã grande",
+    "noAccessBody": "Peça ao Chefe dos duendes que o abra com o link do seu painel."
+  },
+  "email": {
+    "footer": "Recebe esta mensagem porque alguém o convidou para um amigo secreto no Santa Helper. Ho, ho, ho!",
+    "calendarTitle": "Amigo secreto: {title}",
+    "calendarDescription": "Cerimónia do Pai Natal organizada por {host}. Código: {code}.",
+    "details": {
+      "host": "Chefe dos duendes",
+      "when": "Quando",
+      "where": "Onde",
+      "online": "Online",
+      "budget": "Orçamento",
+      "code": "Código"
+    },
+    "invite": {
+      "subject": "{host} convida-o para um amigo secreto: {title}",
+      "preview": "O Pai Natal guardou-lhe um lugar na oficina: {title}",
+      "eyebrow": "Está convidado",
+      "heading": "O Polo Norte está a chamar, {name}!",
+      "body": "{host} está a organizar o amigo secreto «{title}» e guardou-lhe um lugar na oficina do Pai Natal.",
+      "bodyAsync": "Crie o seu perfil de duende quando quiser. Quando todos estiverem prontos, o Chefe dos duendes desbloqueia o sorteio e recebe um e-mail.",
+      "bodySync": "Prepare um chocolate quente e junte-se à cerimónia do Pai Natal à hora indicada. Já pode criar o seu duende.",
+      "cta": "Criar o meu perfil de duende",
+      "google": "Adicionar ao Google Calendar",
+      "ics": "Adicionar ao Apple / Outlook"
+    },
+    "host": {
+      "subject": "O seu amigo secreto «{title}» está pronto",
+      "eyebrow": "Chefe dos duendes",
+      "heading": "Agora é o Chefe dos duendes, {name}!",
+      "body": "Guarde este e-mail: o botão leva-o sempre ao painel. Código: {code}.",
+      "cta": "Abrir o painel do Chefe"
+    },
+    "profile": {
+      "subject": "Obrigado por criar o seu perfil de duende!",
+      "eyebrow": "Perfil de duende pronto",
+      "heading": "Bem-vindo à oficina, {name}!",
+      "bodyAsync": "O seu duende está pronto. Avisamos quando chegar o grande momento do sorteio.",
+      "bodySync": "O seu duende está pronto. Até à cerimónia do Pai Natal!",
+      "cta": "Ver o meu duende"
+    },
+    "drawReady": {
+      "subject": "Chegou a hora! Descubra a quem vai oferecer",
+      "eyebrow": "Nomes sorteados",
+      "heading": "O Pai Natal sorteou os nomes, {name}!",
+      "body": "Cada nome encontrou o seu duende. O Pai Natal tem uma pequena mensagem só para si. Abra-a quando ninguém estiver a espreitar.",
+      "cta": "Ver a mensagem do Pai Natal"
+    },
+    "result": {
+      "subject": "O seu amigo secreto – {title}",
+      "preview": "Psst… uma lembrança do seu resultado",
+      "eyebrow": "Ultrassecreto",
+      "heading": "Psst, {name}…",
+      "body": "Aqui fica uma lembrança do seu resultado, caso a magia da noite o faça esquecer.",
+      "label": "Vai oferecer a",
+      "budgetNote": "Orçamento até {budget}",
+      "cta": "Abrir a minha página de duende"
+    },
+    "login": {
+      "subject": "O seu link mágico para o Santa Helper",
+      "eyebrow": "Entrar",
+      "heading": "Aqui está o seu link mágico",
+      "body": "Clique no botão para entrar. O link funciona durante 30 minutos.",
+      "cta": "Entrar"
+    },
+    "continue": {
+      "subject": "Continue «{title}» num novo dispositivo",
+      "eyebrow": "Novo dispositivo",
+      "heading": "Olá outra vez, {name}!",
+      "body": "Alguém (esperamos que você) quer abrir o seu duende noutro dispositivo. Toque no botão no dispositivo que quer usar.",
+      "cta": "Continuar como o meu duende"
+    }
+  },
+  "ceremony": {
+    "lobby1": "Ho, ho, ho! Entrem, entrem e aqueçam as mãos junto à lareira. Leiam o código para entrar na minha oficina.",
+    "welcome1": "Ho, ho, ho! Boa noite, meus queridos amigos!",
+    "welcome2": "Sou eu, o Pai Natal. Esta noite a minha oficina é toda vossa. Os duendes poliram cada guizo e aqueceram o chocolate.",
+    "welcome3": "Estamos reunidos para «{title}», e vejo {count, plural, one {um duende maravilhoso} other {# duendes maravilhosos}}.",
+    "elves1": "Deixem-me olhar bem para todos vocês.",
+    "elvesNames": "{names}.",
+    "elves2": "Que equipa esplêndida! Este ano estão todos na minha lista dos bem-comportados.",
+    "elvesRemote": "E um abraço caloroso a quem está connosco à distância: {names}. A magia do Natal funciona a qualquer distância.",
+    "rules1": "Agora, as regras da oficina. Cada um vai receber, em segredo, uma pessoa para surpreender com um presente.",
+    "rulesExclusions": "Ninguém tira o próprio nome, e o Chefe dos duendes garantiu que alguns pares ficam separados, para que cada surpresa continue a ser surpresa.",
+    "rulesNoSelf": "Ninguém tira o próprio nome, e cada nome tem exatamente a mesma probabilidade.",
+    "rulesBudget": "O presente deve custar até {budget}. O que conta é a intenção, e um pouco de purpurina.",
+    "rulesNoBudget": "Esta noite não há limite, mas lembrem-se: os melhores presentes vêm do coração.",
+    "rules2": "E o mais importante: guardem o segredo até os presentes serem abertos!",
+    "draw1": "Duendes, aos vossos lugares! Que comece o grande sorteio!",
+    "draw2": "Os nomes rodopiam, os guizos tocam…",
+    "draw3": "Pronto! Cada nome encontrou o seu duende.",
+    "reveal1": "Agora olhem para o vosso dispositivo e segurem-no bem junto ao peito.",
+    "reveal2": "Mantenham o presente premido para o abrir. Chiu, nem uma palavra a ninguém!",
+    "farewell1": "É toda a magia por esta noite. Obrigado por visitarem a minha oficina.",
+    "farewell2": "Feliz Natal, meus queridos duendes! Ho, ho, ho!",
+    "personal1": "Ho, ho, ho! Olá, {name}!",
+    "personal2": "Os duendes terminaram o grande sorteio de «{title}», e tenho um pequeno segredo só para si.",
+    "personal3": "Está pronto? Aqui vai…",
+    "personalReveal": "Este ano vai surpreender… {receiver}!",
+    "personalBye": "Guarde o segredo e divirta-se. Ho, ho, ho!"
+  }
+}

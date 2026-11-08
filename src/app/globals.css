@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-cream: #f6ede1;
+  --color-paper: #fffbf5;
+  --color-ink: #3b2a22;
+  --color-muted: #8a7566;
+  --color-berry: #a8322d;
+  --color-berry-dark: #7f221f;
+  --color-pine: #2f5d46;
+  --color-pine-dark: #1d3d2e;
+  --color-gold: #c9963b;
+  --color-night: #142033;
+  --color-night-2: #1f3150;
+  --color-snow: #fdfaf6;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  --radius-clay: 1.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+  }
+  ::selection {
+    @apply bg-gold/40;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Soft "clay" surfaces: a light top-left highlight and a warm bottom-right shade. */
+@utility clay {
+  border-radius: var(--radius-clay);
+  background: var(--color-paper);
+  box-shadow:
+    inset 3px 3px 6px rgb(255 255 255 / 0.9),
+    inset -4px -5px 10px rgb(120 80 50 / 0.1),
+    0 14px 30px -12px rgb(80 45 25 / 0.28);
+}
+@utility clay-sunk {
+  border-radius: 1.25rem;
+  background: #f1e6d8;
+  box-shadow:
+    inset 3px 4px 8px rgb(120 80 50 / 0.16),
+    inset -3px -3px 6px rgb(255 255 255 / 0.7);
+}
+@utility clay-night {
+  border-radius: var(--radius-clay);
+  background: rgb(18 30 58 / 0.62);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    inset 1px 1px 0 rgb(255 255 255 / 0.14),
+    0 20px 40px -20px rgb(0 0 0 / 0.6);
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold transition select-none
+    active:translate-y-px disabled:opacity-50 disabled:pointer-events-none;
+}
+@utility btn-primary {
+  @apply btn bg-berry text-white;
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.25),
+    inset 0 -4px 0 rgb(0 0 0 / 0.2),
+    0 10px 20px -10px rgb(127 34 31 / 0.7);
+  &:hover {
+    @apply bg-berry-dark;
+  }
+}
+@utility btn-pine {
+  @apply btn bg-pine text-white;
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.2),
+    inset 0 -4px 0 rgb(0 0 0 / 0.2),
+    0 10px 20px -10px rgb(29 61 46 / 0.7);
+}
+@utility btn-ghost {
+  @apply btn bg-transparent text-ink hover:bg-ink/5;
+}
+@utility btn-soft {
+  @apply btn bg-paper text-ink;
+  box-shadow:
+    inset 2px 2px 4px rgb(255 255 255 / 0.9),
+    inset -3px -3px 6px rgb(120 80 50 / 0.12),
+    0 6px 14px -8px rgb(80 45 25 / 0.3);
+}
+
+@utility field {
+  @apply clay-sunk w-full px-4 py-3 text-ink placeholder:text-muted/70 outline-none focus:ring-2 focus:ring-gold/60;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-semibold text-muted;
+}
+
+@utility paper-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+.animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  45% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.85;
+  }
+}
+.animate-glow {
+  animation: glow 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-twinkle,
+  .animate-glow {
+    animation: none;
+  }
 }

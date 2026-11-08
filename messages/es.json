@@ -1,0 +1,417 @@
+{
+  "meta": {
+    "title": "Santa Helper – un amigo invisible mágico",
+    "description": "Sorteo de amigo invisible con familia, amigos o compañeros, presentado por el mismísimo Papá Noel."
+  },
+  "nav": {
+    "mySessions": "Mis sorteos"
+  },
+  "home": {
+    "eyebrow": "Amigo invisible con Papá Noel",
+    "title": "Convierte el sorteo en <em>un poco de magia</em>",
+    "lead": "Reúne a tu familia, tus amigos o tu equipo. Papá Noel da la bienvenida, cuenta la historia y sortea con justicia: nadie se toca a sí mismo y las parejas que quieras separar no se tocarán.",
+    "create": "Crear un amigo invisible",
+    "haveCode": "¿Tienes un código?",
+    "codePlaceholder": "CÓDIGO",
+    "join": "Entrar",
+    "modesTitle": "Una noche, tres maneras de celebrarla",
+    "modes": {
+      "sync": {
+        "title": "Juntos en una sala",
+        "body": "Papá Noel dirige la ceremonia en la pantalla grande. Todos se unen desde el móvil con un código QR y ven su resultado en secreto."
+      },
+      "hybrid": {
+        "title": "Algunos están lejos",
+        "body": "Quien no pueda venir ve la transmisión de Papá Noel en su propio dispositivo, junto a su perfil de elfo, al mismo tiempo que la sala."
+      },
+      "async": {
+        "title": "Cada uno a su ritmo",
+        "body": "Invita por correo. Los elfos crean su perfil cuando quieran y, cuando el Jefe de los elfos desbloquea el sorteo, Papá Noel se lo cuenta a cada uno en un breve mensaje personal."
+      }
+    },
+    "features": {
+      "fair": {
+        "title": "Justo y definitivo",
+        "body": "Todos los resultados válidos son igual de probables y el sorteo queda fijado al instante."
+      },
+      "exclusions": {
+        "title": "Parejas separadas",
+        "body": "Parejas o cualquier persona pueden no tocarse entre sí, en un sentido o en ambos."
+      },
+      "languages": {
+        "title": "Cinco idiomas",
+        "body": "Polski, English, Deutsch, Español y Português, incluida la voz de Papá Noel."
+      }
+    },
+    "footer": "Hecho en el taller de Papá Noel. ¡Jo, jo, jo!"
+  },
+  "create": {
+    "heading": "Un nuevo amigo invisible",
+    "lead": "Serás el Jefe de los elfos: dejas entrar a la gente, separas parejas y fijas el presupuesto.",
+    "you": "Tú, el Jefe de los elfos",
+    "hostName": "Tu nombre",
+    "hostEmail": "Tu correo",
+    "hostHint": "Te enviaremos un enlace que siempre te llevará de vuelta al panel.",
+    "session": "El sorteo",
+    "title": "Nombre",
+    "titlePlaceholder": "Navidad en familia 2026",
+    "mode": "¿Cómo os reunís?",
+    "modes": {
+      "sync": {
+        "title": "Ceremonia en directo",
+        "body": "Todos en el mismo momento, en la sala o a distancia."
+      },
+      "async": {
+        "title": "Cada uno a su ritmo",
+        "body": "Perfiles por correo y luego tú desbloqueas el sorteo."
+      }
+    },
+    "date": "Fecha",
+    "time": "Hora",
+    "language": "Idioma de los correos",
+    "location": "Lugar",
+    "locationPlaceholder": "El salón de la abuela",
+    "onlineUrl": "Enlace de videollamada",
+    "budget": "Presupuesto del regalo (opcional)",
+    "budgetPlaceholder": "p. ej. 25",
+    "currency": "Moneda",
+    "invites": "Invitar por correo",
+    "invitesHintSync": "Opcional. Esa noche también pueden escanear un código QR y tú los dejas entrar.",
+    "invitesHintAsync": "Todos recibirán una invitación festiva con un enlace para crear su perfil de elfo.",
+    "invitesCount": "Se {count, plural, one {enviará # invitación} other {enviarán # invitaciones}}",
+    "creating": "Encendiendo la chimenea…",
+    "submit": "Crear el sorteo"
+  },
+  "errors": {
+    "not_found": "No encontramos ese sorteo.",
+    "forbidden": "No tienes acceso a esto.",
+    "invalid": "Revisa el formulario.",
+    "unknown": "Algo ha salido mal. Inténtalo de nuevo.",
+    "closed": "Este sorteo ya ha terminado.",
+    "already_drawn": "Los nombres ya se han sorteado.",
+    "ceremony_started": "La ceremonia ya ha empezado.",
+    "wrong_mode": "No es posible en este modo.",
+    "finished": "La ceremonia ha terminado.",
+    "pending_guests": "Aún hay invitados esperando en la puerta. Déjalos entrar o recházalos primero:",
+    "too_few": "Hacen falta al menos dos elfos para sortear.",
+    "infeasible": "Con estas exclusiones el sorteo es imposible. Relaja las reglas para:",
+    "not_approved": "El Jefe de los elfos aún no te ha dejado entrar."
+  },
+  "join": {
+    "eyebrow": "Estás invitado a",
+    "hostedBy": "Jefe de los elfos: {name}",
+    "closed": "Este amigo invisible ya ha terminado.",
+    "name": "Tu nombre",
+    "email": "Tu correo",
+    "emailHint": "Para que Papá Noel pueda enviarte tu resultado.",
+    "joining": "Llamando a la puerta…",
+    "submit": "Llamar a la puerta del taller",
+    "checkEmailTitle": "Revisa tu correo",
+    "checkEmailBody": "Ya formas parte de este sorteo. Te hemos enviado un enlace para continuar en este dispositivo."
+  },
+  "login": {
+    "heading": "Tus sorteos",
+    "lead": "Escribe tu correo y te enviaremos un enlace mágico.",
+    "expired": "Ese enlace ha caducado. Pide uno nuevo abajo.",
+    "email": "Correo",
+    "submit": "Enviarme un enlace mágico",
+    "error": "Escribe un correo válido.",
+    "sentTitle": "¡En camino!",
+    "sentBody": "Si Papá Noel conoce esta dirección, el enlace llegará en un minuto."
+  },
+  "mySessions": {
+    "heading": "Mis amigos invisibles",
+    "new": "Nuevo sorteo",
+    "signOut": "Cerrar sesión",
+    "empty": "Todavía no hay sorteos.",
+    "noDate": "Sin fecha",
+    "status": {
+      "open": "Abierto",
+      "ceremony": "Ceremonia en curso",
+      "drawn": "Sorteado",
+      "done": "Terminado"
+    },
+    "roleHost": "Jefe",
+    "roleElf": "Elfo"
+  },
+  "elf": {
+    "rejectedTitle": "La puerta siguió cerrada",
+    "rejectedBody": "El Jefe de los elfos no aceptó esta solicitud. Si es un error, pregúntale en persona.",
+    "waitingTitle": "¡Casi estás, {name}!",
+    "waitingBody": "El Jefe de los elfos te dejará entrar al taller en un momento. Mantén esta página abierta.",
+    "hello": "¡Hola, {name}!",
+    "hostPanel": "Panel del Jefe",
+    "drawDone": "¡Papá Noel ha sorteado los nombres!",
+    "watchReveal": "Ver el mensaje de Papá Noel",
+    "remoteOn": "Te unes desde lejos: la transmisión de Papá Noel suena aquí mismo.",
+    "watchScreen": "La ceremonia ha empezado. ¡Mira la pantalla grande!",
+    "inRoom": "Estás en la sala con todos.",
+    "imHere": "Estoy en la sala",
+    "notInRoom": "No estoy en la sala",
+    "asyncWaiting": "Tu elfo está listo. Te escribiremos cuando el Jefe desbloquee el sorteo.",
+    "yourElf": "Tu elfo",
+    "createElf": "Crea tu elfo",
+    "team": "El equipo ({count})",
+    "surprise": "Sorpréndeme",
+    "name": "Nombre del elfo",
+    "options": {
+      "hairStyle": "Pelo",
+      "hat": "Gorro",
+      "glasses": "Gafas",
+      "skin": "Piel",
+      "hairColor": "Color de pelo",
+      "sweater": "Jersey",
+      "scarf": "Bufanda",
+      "background": "Fondo",
+      "blush": "Mejillas sonrosadas"
+    },
+    "values": {
+      "short": "Corto",
+      "long": "Largo",
+      "bun": "Moño",
+      "curly": "Rizado",
+      "bald": "Ninguno",
+      "none": "Ninguna",
+      "santa": "De Papá Noel",
+      "elf": "De elfo",
+      "beanie": "De lana",
+      "antlers": "Astas",
+      "round": "Redondas"
+    },
+    "saved": "¡Guardado!",
+    "save": "Guardar mi elfo",
+    "create": "Crear mi elfo",
+    "dressing": "Todavía elige su atuendo"
+  },
+  "reveal": {
+    "eyebrow": "Alto secreto",
+    "youGiveTo": "Este año sorprendes a",
+    "budget": "Presupuesto hasta {budget}",
+    "hide": "Ocultar",
+    "hold": "Mantén pulsado para abrir",
+    "holdHint": "Protege la pantalla de miradas curiosas.",
+    "again": "Escuchar otra vez",
+    "back": "Volver a mi elfo",
+    "skip": "Ir al resultado"
+  },
+  "sound": {
+    "start": "Encender la chimenea (con sonido)",
+    "mute": "Silenciar",
+    "unmute": "Activar sonido"
+  },
+  "stage": {
+    "steps": {
+      "lobby": "Llegada",
+      "welcome": "Bienvenida",
+      "elves": "Los elfos",
+      "rules": "Las reglas",
+      "draw": "El sorteo",
+      "reveal": "La revelación",
+      "farewell": "Despedida"
+    },
+    "scanToJoin": "Escanea para entrar al taller de Papá Noel",
+    "orEnterCode": "o abre la web y escribe el código",
+    "elvesReady": "{count, plural, =0 {Esperando al primer elfo…} one {Ya hay # elfo} other {Ya hay # elfos}}",
+    "budgetLabel": "Presupuesto",
+    "noBudget": "Del corazón",
+    "ruleLabel": "Regla de oro",
+    "ruleSecret": "Silencio hasta que se abran los regalos",
+    "drawing": "Papá Noel está sorteando los nombres…",
+    "lookAtDevice": "Mira tu propio dispositivo",
+    "revealed": "{revealed} de {total} elfos han abierto su resultado",
+    "merry": "¡Feliz Navidad!"
+  },
+  "host": {
+    "eyebrow": "Panel del Jefe de los elfos",
+    "code": "Código",
+    "mode": {
+      "sync": "Ceremonia en directo",
+      "async": "Cada uno a su ritmo"
+    },
+    "status": {
+      "open": "Abierto",
+      "ceremony": "Ceremonia en curso",
+      "drawn": "Sorteado",
+      "done": "Terminado"
+    },
+    "myElf": "Mi elfo",
+    "openScreen": "Abrir la pantalla grande",
+    "ceremony": "La ceremonia",
+    "steps": {
+      "lobby": "Llegada",
+      "welcome": "Bienvenida",
+      "elves": "Los elfos",
+      "rules": "Las reglas",
+      "draw": "El sorteo",
+      "reveal": "La revelación",
+      "farewell": "Despedida"
+    },
+    "stepHint": {
+      "lobby": "Abre la pantalla grande y deja que todos escaneen el código QR. Empieza cuando esté todo el equipo.",
+      "welcome": "Papá Noel saluda a todos.",
+      "elves": "Papá Noel conoce a cada elfo.",
+      "rules": "Papá Noel explica las reglas y el presupuesto. El siguiente capítulo es el sorteo; después nadie podrá unirse.",
+      "draw": "Los nombres están sorteados y fijados. Ahora cada uno verá su resultado en su dispositivo.",
+      "reveal": "Todos están abriendo su resultado. Cada elfo ha recibido también un correo.",
+      "farewell": "¡Y eso es todo! Feliz Navidad."
+    },
+    "start": "Empezar la ceremonia",
+    "next": "Siguiente: {step}",
+    "replay": "Repetir este capítulo",
+    "revealProgress": "{revealed} de {total} elfos han abierto su resultado.",
+    "asyncTitle": "El sorteo",
+    "asyncReady": "{ready} de {total} elfos han creado su perfil.",
+    "unlockConfirm": "Todavía no todos han creado su elfo. ¿Sortear igualmente?",
+    "unlocked": "Papá Noel ha sorteado los nombres y ha escrito a todos.",
+    "unlock": "Desbloquear el sorteo",
+    "unlockedProgress": "Sorteado. {revealed} de {total} elfos han visto el mensaje de Papá Noel.",
+    "feasibility": {
+      "tooFew": "Hacen falta al menos dos elfos para sortear.",
+      "blocked": "Con las exclusiones actuales el sorteo es imposible. Relaja las reglas para: {names}."
+    },
+    "fingerprint": "Huella del sorteo:",
+    "elves": "Elfos ({count})",
+    "hideQr": "Ocultar QR",
+    "showQr": "Mostrar QR y enlace",
+    "shareLink": "Cualquiera con este enlace puede pedir entrar. Tú decides a quién dejar pasar.",
+    "copy": "Copiar enlace",
+    "atTheDoor": "En la puerta",
+    "resent": "Invitación reenviada.",
+    "resend": "Reenviar",
+    "letIn": "Dejar entrar",
+    "reject": "Rechazar",
+    "remoteHint": "Los elfos a distancia ven la transmisión de Papá Noel en su propio dispositivo.",
+    "remote": "A distancia",
+    "inRoom": "En la sala",
+    "removeConfirm": "¿Quitar a {name} del sorteo?",
+    "remove": "Quitar",
+    "invitesSent": "Invitaciones enviadas.",
+    "online": "Conectado",
+    "offline": "Desconectado",
+    "chief": "Jefe",
+    "profileReady": "elfo listo",
+    "profileMissing": "sin elfo",
+    "participantStatus": {
+      "invited": "invitado",
+      "pending": "pide entrar",
+      "approved": "dentro",
+      "rejected": "rechazado"
+    },
+    "inviteLabel": "Invitar a más personas por correo",
+    "inviteSend": "{count, plural, =0 {Enviar invitaciones} one {Enviar # invitación} other {Enviar # invitaciones}}",
+    "exclusions": "Quién no le toca a quién",
+    "exclusionsHint": "Para parejas o para quienes ya se hacen regalos de todos modos.",
+    "giver": "Regala",
+    "receiver": "Recibe",
+    "bothWays": "En ambos sentidos",
+    "addExclusion": "Añadir regla",
+    "noExclusions": "Sin reglas: a cualquiera le puede tocar cualquiera (menos uno mismo).",
+    "settings": "Ajustes",
+    "saveSettings": "Guardar ajustes",
+    "settingsSaved": "Ajustes guardados.",
+    "fullscreen": "Pantalla completa"
+  },
+  "screen": {
+    "noAccessTitle": "Esta es la pantalla grande",
+    "noAccessBody": "Pide al Jefe de los elfos que la abra con el enlace de su panel."
+  },
+  "email": {
+    "footer": "Recibes este mensaje porque alguien te ha invitado a un amigo invisible en Santa Helper. ¡Jo, jo, jo!",
+    "calendarTitle": "Amigo invisible: {title}",
+    "calendarDescription": "Ceremonia de Papá Noel organizada por {host}. Código: {code}.",
+    "details": {
+      "host": "Jefe de los elfos",
+      "when": "Cuándo",
+      "where": "Dónde",
+      "online": "En línea",
+      "budget": "Presupuesto",
+      "code": "Código"
+    },
+    "invite": {
+      "subject": "{host} te invita a un amigo invisible: {title}",
+      "preview": "Papá Noel te ha guardado un sitio en su taller: {title}",
+      "eyebrow": "Estás invitado",
+      "heading": "¡El Polo Norte te llama, {name}!",
+      "body": "{host} organiza el amigo invisible «{title}» y te ha guardado un sitio en el taller de Papá Noel.",
+      "bodyAsync": "Crea tu perfil de elfo cuando quieras. Cuando todos estén listos, el Jefe de los elfos desbloqueará el sorteo y recibirás un correo.",
+      "bodySync": "Prepara un chocolate caliente y únete a la ceremonia de Papá Noel a la hora indicada. Ya puedes crear tu elfo.",
+      "cta": "Crear mi perfil de elfo",
+      "google": "Añadir a Google Calendar",
+      "ics": "Añadir a Apple / Outlook"
+    },
+    "host": {
+      "subject": "Tu amigo invisible «{title}» está listo",
+      "eyebrow": "Jefe de los elfos",
+      "heading": "¡Ahora eres el Jefe de los elfos, {name}!",
+      "body": "Guarda este correo: el botón te llevará siempre al panel. Código: {code}.",
+      "cta": "Abrir el panel del Jefe"
+    },
+    "profile": {
+      "subject": "¡Gracias por crear tu perfil de elfo!",
+      "eyebrow": "Perfil de elfo listo",
+      "heading": "¡Bienvenido al taller, {name}!",
+      "bodyAsync": "Tu elfo está listo. Te avisaremos cuando llegue el gran momento del sorteo.",
+      "bodySync": "Tu elfo está listo. ¡Nos vemos en la ceremonia de Papá Noel!",
+      "cta": "Ver mi elfo"
+    },
+    "drawReady": {
+      "subject": "¡Ha llegado el momento! Descubre a quién regalas",
+      "eyebrow": "Nombres sorteados",
+      "heading": "¡Papá Noel ha sorteado los nombres, {name}!",
+      "body": "Cada nombre ha encontrado a su elfo. Papá Noel tiene un breve mensaje solo para ti. Ábrelo cuando nadie mire por encima de tu hombro.",
+      "cta": "Ver el mensaje de Papá Noel"
+    },
+    "result": {
+      "subject": "Tu amigo invisible – {title}",
+      "preview": "Psst… un recuerdo de tu resultado",
+      "eyebrow": "Alto secreto",
+      "heading": "Psst, {name}…",
+      "body": "Aquí tienes un recuerdo de tu resultado, por si la magia de la noche te lo hace olvidar.",
+      "label": "Le regalas a",
+      "budgetNote": "Presupuesto hasta {budget}",
+      "cta": "Abrir mi página de elfo"
+    },
+    "login": {
+      "subject": "Tu enlace mágico a Santa Helper",
+      "eyebrow": "Iniciar sesión",
+      "heading": "Aquí tienes tu enlace mágico",
+      "body": "Pulsa el botón para entrar. El enlace funciona durante 30 minutos.",
+      "cta": "Entrar"
+    },
+    "continue": {
+      "subject": "Continúa «{title}» en un nuevo dispositivo",
+      "eyebrow": "Nuevo dispositivo",
+      "heading": "¡Hola de nuevo, {name}!",
+      "body": "Alguien (esperamos que tú) quiere abrir tu elfo en otro dispositivo. Pulsa el botón en el dispositivo que quieras usar.",
+      "cta": "Continuar como mi elfo"
+    }
+  },
+  "ceremony": {
+    "lobby1": "¡Jo, jo, jo! Pasad, pasad y calentaos las manos junto a la chimenea. Escanead el código para entrar en mi taller.",
+    "welcome1": "¡Jo, jo, jo! ¡Buenas noches, queridos amigos!",
+    "welcome2": "Soy yo, Papá Noel. Esta noche mi taller es todo vuestro. Los elfos han pulido cada cascabel y han calentado el chocolate.",
+    "welcome3": "Nos reunimos para «{title}», y veo {count, plural, one {a un elfo maravilloso} other {a # elfos maravillosos}}.",
+    "elves1": "Dejadme que os mire bien a todos.",
+    "elvesNames": "{names}.",
+    "elves2": "¡Qué equipo tan estupendo! Este año todos estáis en mi lista de los buenos.",
+    "elvesRemote": "Y un saludo muy cálido para quienes nos acompañan desde lejos: {names}. La magia de la Navidad funciona a cualquier distancia.",
+    "rules1": "Y ahora, las reglas del taller. A cada uno le tocará en secreto una persona a la que sorprender con un regalo.",
+    "rulesExclusions": "A nadie le tocará él mismo, y el Jefe de los elfos se ha asegurado de que algunas parejas no se toquen, para que cada sorpresa siga siendo una sorpresa.",
+    "rulesNoSelf": "A nadie le tocará él mismo, y cada nombre tiene exactamente la misma oportunidad.",
+    "rulesBudget": "El regalo debe costar hasta {budget}. Lo que cuenta es la intención y un poquito de purpurina.",
+    "rulesNoBudget": "Esta noche no hay límite, pero recordad: los mejores regalos salen del corazón.",
+    "rules2": "Y lo más importante: ¡guardad el secreto hasta que se abran los regalos!",
+    "draw1": "¡Elfos, a vuestros puestos! ¡Que empiece el gran sorteo!",
+    "draw2": "Los nombres dan vueltas, los cascabeles suenan…",
+    "draw3": "¡Listo! Cada nombre ha encontrado a su elfo.",
+    "reveal1": "Ahora mirad vuestro propio dispositivo y tenedlo bien cerca.",
+    "reveal2": "Mantened pulsado el regalo para abrirlo. ¡Chis, ni una palabra a nadie!",
+    "farewell1": "Esta es toda la magia por esta noche. Gracias por visitar mi taller.",
+    "farewell2": "¡Feliz Navidad, mis queridos elfos! ¡Jo, jo, jo!",
+    "personal1": "¡Jo, jo, jo! ¡Hola, {name}!",
+    "personal2": "Los elfos han terminado el gran sorteo de «{title}», y tengo un pequeño secreto solo para ti.",
+    "personal3": "¿Preparado? Allá va…",
+    "personalReveal": "Este año vas a sorprender a… ¡{receiver}!",
+    "personalBye": "Guarda el secreto y disfruta. ¡Jo, jo, jo!"
+  }
+}
