@@ -324,7 +324,7 @@ function Stable({ beat, beatMs }: ShotProps) {
         transition={sneezed ? { duration: 0.7 } : { duration: 1.6, delay: 0.35, times: [0, 0.2, 0.33, 0.55, 0.66, 1] }}
         style={{ transformOrigin: "50% 100%" }}
       >
-        <Cutout src="/show/film/reindeer-sick.webp" w={527} h={963} />
+        <Cutout src="/show/film/reindeer-sick.webp" w={557} h={1080} />
       </motion.div>
       {sneezed > 0 &&
         Array.from({ length: 7 }, (_, i) => (
