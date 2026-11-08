@@ -7,9 +7,7 @@
     "mySessions": "My sessions"
   },
   "home": {
-    "eyebrow": "Secret Santa, hosted by Santa",
-    "title": "Turn the name draw into <em>a little bit of magic</em>",
-    "lead": "Gather your family, friends or team. Santa welcomes everyone, tells the story and draws the names fairly, with nobody drawing themselves and with the pairs you want to keep apart.",
+    "title": "Turn the name draw into a show",
     "create": "Create a Secret Santa",
     "haveCode": "Got a session code?",
     "codePlaceholder": "CODE",
@@ -29,21 +27,20 @@
         "body": "Invite by e-mail. Elves create profiles whenever they like; when the Elf Chief unlocks the draw, Santa tells each of them in a short personal message."
       }
     },
-    "features": {
-      "fair": {
-        "title": "Fair and final",
-        "body": "Every valid outcome is equally likely, and the result is fixed the moment Santa draws."
-      },
-      "exclusions": {
-        "title": "Pairs kept apart",
-        "body": "Couples or anyone else can be kept from drawing each other, one way or both ways."
-      },
-      "languages": {
-        "title": "Five languages",
-        "body": "Polski, English, Deutsch, Español and Português, including Santa’s voice."
-      }
-    },
-    "footer": "Made in Santa’s workshop. Ho ho ho!"
+    "footer": "Made in Santa’s workshop. Ho ho ho!",
+    "heroLead": "Santa hosts your Secret Santa, draws the names fairly and whispers each match to the right phone.",
+    "gatherTitle": "Everyone gathers by the fire",
+    "gatherBody": "Guests scan the reindeer’s code, dress up their elf, and a stocking with their name appears on the mantel.",
+    "drawTitle": "Santa draws the names, fairly",
+    "drawBody": "Every valid outcome is equally likely. Nobody draws themselves, and the pairs you keep apart stay apart.",
+    "matchTitle": "Your match, in your hand",
+    "matchBody": "Hold the stocking to unwrap it. Only you see the name, so the neighbours can’t peek. Try it here.",
+    "matchHello": "Hello, Tom!",
+    "languagesTitle": "Santa speaks your language",
+    "languagesBody": "The whole show, Santa’s voice included, in five languages. Pick yours.",
+    "finaleTitle": "Ready for curtain up?",
+    "finaleBody": "Set it up in a minute. Everyone else joins with a code or a quick scan of the QR.",
+    "scan": "Scan to join"
   },
   "create": {
     "heading": "A new Secret Santa",

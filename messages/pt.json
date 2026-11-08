@@ -7,9 +7,7 @@
     "mySessions": "Os meus sorteios"
   },
   "home": {
-    "eyebrow": "Amigo secreto com o Pai Natal",
-    "title": "Transforme o sorteio num <em>pouco de magia</em>",
-    "lead": "Junte a família, os amigos ou a equipa. O Pai Natal dá as boas-vindas, conta a história e sorteia de forma justa: ninguém tira o próprio nome e os pares que quer separar ficam separados.",
+    "title": "Faça do sorteio um espetáculo",
     "create": "Criar um amigo secreto",
     "haveCode": "Tem um código?",
     "codePlaceholder": "CÓDIGO",
@@ -29,21 +27,20 @@
         "body": "Convide por e-mail. Os duendes criam o perfil quando quiserem e, quando o Chefe dos duendes desbloquear o sorteio, o Pai Natal conta a cada um numa breve mensagem pessoal."
       }
     },
-    "features": {
-      "fair": {
-        "title": "Justo e definitivo",
-        "body": "Todos os resultados válidos são igualmente prováveis e o sorteio fica fixo no momento em que acontece."
-      },
-      "exclusions": {
-        "title": "Pares separados",
-        "body": "Casais ou quaisquer pessoas podem não se tirar um ao outro, num sentido ou em ambos."
-      },
-      "languages": {
-        "title": "Cinco idiomas",
-        "body": "Polski, English, Deutsch, Español e Português, incluindo a voz do Pai Natal."
-      }
-    },
-    "footer": "Feito na oficina do Pai Natal. Ho, ho, ho!"
+    "footer": "Feito na oficina do Pai Natal. Ho, ho, ho!",
+    "heroLead": "O Pai Natal apresenta o vosso amigo secreto, sorteia os nomes com justiça e sussurra a cada um o seu par no telemóvel.",
+    "gatherTitle": "Todos juntos à lareira",
+    "gatherBody": "Os convidados leem o código da rena, vestem o seu elfo e aparece na lareira uma meia com o seu nome.",
+    "drawTitle": "O Pai Natal sorteia com justiça",
+    "drawBody": "Todos os resultados válidos são igualmente prováveis. Ninguém tira o próprio nome e os pares que quer separar ficam separados.",
+    "matchTitle": "O seu par, na sua mão",
+    "matchBody": "Mantenha a meia premida para a abrir. Só você vê o nome, por isso ninguém espreita. Experimente aqui.",
+    "matchHello": "Olá, Tomás!",
+    "languagesTitle": "O Pai Natal fala a sua língua",
+    "languagesBody": "Todo o espetáculo, com a voz do Pai Natal incluída, em cinco línguas. Escolha a sua.",
+    "finaleTitle": "Abram as cortinas!",
+    "finaleBody": "Prepara tudo num minuto. Os outros entram com um código ou lendo o QR.",
+    "scan": "Leia e entre"
   },
   "create": {
     "heading": "Um novo amigo secreto",

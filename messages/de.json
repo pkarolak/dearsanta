@@ -7,9 +7,7 @@
     "mySessions": "Meine Runden"
   },
   "home": {
-    "eyebrow": "Wichteln mit dem Weihnachtsmann",
-    "title": "Mach aus der Auslosung <em>ein bisschen Magie</em>",
-    "lead": "Versammle Familie, Freunde oder dein Team. Der Weihnachtsmann begrüßt alle, erzählt die Geschichte und lost fair aus: Niemand zieht sich selbst, und Paare, die sich nicht ziehen sollen, bleiben getrennt.",
+    "title": "Mach aus dem Losen eine Show",
     "create": "Wichteln erstellen",
     "haveCode": "Hast du einen Code?",
     "codePlaceholder": "CODE",
@@ -29,21 +27,20 @@
         "body": "Lade per E-Mail ein. Die Wichtel legen ihre Profile an, wann sie möchten. Sobald der Oberwichtel die Auslosung freigibt, verrät der Weihnachtsmann allen ihr Los in einer kurzen, persönlichen Botschaft."
       }
     },
-    "features": {
-      "fair": {
-        "title": "Fair und endgültig",
-        "body": "Jedes gültige Ergebnis ist gleich wahrscheinlich, und das Los steht fest, sobald gezogen wurde."
-      },
-      "exclusions": {
-        "title": "Getrennte Paare",
-        "body": "Paare oder beliebige Personen ziehen sich nicht – in eine oder beide Richtungen."
-      },
-      "languages": {
-        "title": "Fünf Sprachen",
-        "body": "Polski, English, Deutsch, Español und Português – inklusive der Stimme des Weihnachtsmanns."
-      }
-    },
-    "footer": "Gemacht in der Werkstatt des Weihnachtsmanns. Ho, ho, ho!"
+    "footer": "Gemacht in der Werkstatt des Weihnachtsmanns. Ho, ho, ho!",
+    "heroLead": "Der Weihnachtsmann moderiert euer Wichteln, lost die Namen fair aus und flüstert jedem sein Los aufs eigene Handy.",
+    "gatherTitle": "Alle versammeln sich am Kamin",
+    "gatherBody": "Die Gäste scannen den Code des Rentiers, verkleiden ihren Wichtel, und am Kamin erscheint ein Strumpf mit ihrem Namen.",
+    "drawTitle": "Der Weihnachtsmann lost fair",
+    "drawBody": "Jedes gültige Ergebnis ist gleich wahrscheinlich. Niemand zieht sich selbst, und Paare, die du trennen willst, bleiben getrennt.",
+    "matchTitle": "Dein Los in deiner Hand",
+    "matchBody": "Halte den Strumpf gedrückt, um ihn auszupacken. Nur du siehst den Namen, niemand kann mitlesen. Probier es hier aus.",
+    "matchHello": "Hallo, Tom!",
+    "languagesTitle": "Er spricht deine Sprache",
+    "languagesBody": "Die ganze Show, samt Stimme des Weihnachtsmanns, in fünf Sprachen. Wähl deine.",
+    "finaleTitle": "Vorhang auf fürs Wichteln",
+    "finaleBody": "In einer Minute eingerichtet. Alle anderen kommen per Code oder QR-Scan dazu.",
+    "scan": "Scannen und mitmachen"
   },
   "create": {
     "heading": "Neues Wichteln",

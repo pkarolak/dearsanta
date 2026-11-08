@@ -7,9 +7,7 @@
     "mySessions": "Moje sesje"
   },
   "home": {
-    "eyebrow": "Secret Santa z prawdziwym Mikołajem",
-    "title": "Zamień losowanie w <em>odrobinę magii</em>",
-    "lead": "Zbierz rodzinę, przyjaciół albo zespół. Mikołaj wita wszystkich, opowiada historię i uczciwie losuje: nikt nie wylosuje siebie, a pary, które mają się ominąć, się ominą.",
+    "title": "Zamień losowanie w przedstawienie",
     "create": "Stwórz Secret Santa",
     "haveCode": "Masz kod sesji?",
     "codePlaceholder": "KOD",
@@ -29,21 +27,20 @@
         "body": "Zaproś mailem. Elfy tworzą profile, kiedy chcą, a gdy Naczelnik elfów odblokuje losowanie, Mikołaj każdemu przekaże wynik w krótkiej, osobistej wiadomości."
       }
     },
-    "features": {
-      "fair": {
-        "title": "Uczciwie i ostatecznie",
-        "body": "Każdy poprawny wynik jest tak samo prawdopodobny, a losowanie jest nieodwracalne."
-      },
-      "exclusions": {
-        "title": "Wykluczenia par",
-        "body": "Pary albo dowolne osoby mogą się nie wylosować – w jedną lub w obie strony."
-      },
-      "languages": {
-        "title": "Pięć języków",
-        "body": "Polski, English, Deutsch, Español i Português – razem z głosem Mikołaja."
-      }
-    },
-    "footer": "Zrobione w warsztacie Mikołaja. Ho, ho, ho!"
+    "footer": "Zrobione w warsztacie Mikołaja. Ho, ho, ho!",
+    "heroLead": "Mikołaj poprowadzi wasze losowanie, uczciwie rozlosuje imiona i każdemu szepnie wynik na jego telefon.",
+    "gatherTitle": "Wszyscy zbierają się przy kominku",
+    "gatherBody": "Goście skanują kod od renifera, przebierają swojego elfa, a na kominku pojawia się skarpeta z ich imieniem.",
+    "drawTitle": "Mikołaj losuje, uczciwie",
+    "drawBody": "Każdy możliwy wynik jest równie prawdopodobny. Nikt nie wylosuje siebie, a pary, które chcesz rozdzielić, zostaną rozdzielone.",
+    "matchTitle": "Twój wynik w twojej dłoni",
+    "matchBody": "Przytrzymaj skarpetę, żeby ją rozpakować. Imię widzisz tylko ty, więc nikt nie podejrzy. Spróbuj tutaj.",
+    "matchHello": "Cześć, Tomek!",
+    "languagesTitle": "Mikołaj mówi w twoim języku",
+    "languagesBody": "Całe przedstawienie, razem z głosem Mikołaja, w pięciu językach. Wybierz swój.",
+    "finaleTitle": "Kurtyna w górę!",
+    "finaleBody": "Przygotujesz wszystko w minutę. Reszta dołącza kodem albo skanując QR.",
+    "scan": "Zeskanuj i dołącz"
   },
   "create": {
     "heading": "Nowy Secret Santa",

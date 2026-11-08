@@ -7,9 +7,7 @@
     "mySessions": "Mis sorteos"
   },
   "home": {
-    "eyebrow": "Amigo invisible con Papá Noel",
-    "title": "Convierte el sorteo en <em>un poco de magia</em>",
-    "lead": "Reúne a tu familia, tus amigos o tu equipo. Papá Noel da la bienvenida, cuenta la historia y sortea con justicia: nadie se toca a sí mismo y las parejas que quieras separar no se tocarán.",
+    "title": "Convierte el sorteo en un show",
     "create": "Crear un amigo invisible",
     "haveCode": "¿Tienes un código?",
     "codePlaceholder": "CÓDIGO",
@@ -29,21 +27,20 @@
         "body": "Invita por correo. Los elfos crean su perfil cuando quieran y, cuando el Jefe de los elfos desbloquea el sorteo, Papá Noel se lo cuenta a cada uno en un breve mensaje personal."
       }
     },
-    "features": {
-      "fair": {
-        "title": "Justo y definitivo",
-        "body": "Todos los resultados válidos son igual de probables y el sorteo queda fijado al instante."
-      },
-      "exclusions": {
-        "title": "Parejas separadas",
-        "body": "Parejas o cualquier persona pueden no tocarse entre sí, en un sentido o en ambos."
-      },
-      "languages": {
-        "title": "Cinco idiomas",
-        "body": "Polski, English, Deutsch, Español y Português, incluida la voz de Papá Noel."
-      }
-    },
-    "footer": "Hecho en el taller de Papá Noel. ¡Jo, jo, jo!"
+    "footer": "Hecho en el taller de Papá Noel. ¡Jo, jo, jo!",
+    "heroLead": "Papá Noel presenta vuestro amigo invisible, sortea los nombres con justicia y susurra a cada uno su resultado en su móvil.",
+    "gatherTitle": "Todos junto a la chimenea",
+    "gatherBody": "Los invitados escanean el código del reno, visten a su elfo y en la chimenea aparece un calcetín con su nombre.",
+    "drawTitle": "Papá Noel sortea con justicia",
+    "drawBody": "Todos los resultados válidos son igual de probables. Nadie se saca a sí mismo y las parejas que quieras separar quedan separadas.",
+    "matchTitle": "Tu resultado, en tu mano",
+    "matchBody": "Mantén pulsado el calcetín para abrirlo. Solo tú ves el nombre, así nadie puede espiar. Pruébalo aquí.",
+    "matchHello": "¡Hola, Tomás!",
+    "languagesTitle": "Papá Noel habla tu idioma",
+    "languagesBody": "Todo el espectáculo, con la voz de Papá Noel incluida, en cinco idiomas. Elige el tuyo.",
+    "finaleTitle": "¡Que se abra el telón!",
+    "finaleBody": "Lo preparas en un minuto. Los demás se unen con un código o escaneando el QR.",
+    "scan": "Escanea y únete"
   },
   "create": {
     "heading": "Un nuevo amigo invisible",
