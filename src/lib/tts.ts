@@ -18,7 +18,18 @@ class ElevenLabsProvider implements TtsProvider {
   ) {}
 
   async synthesize(text: string, lang: string) {
-    const res = await fetch(
+    // A Voice Library voice is added to the account on first use; parallel first calls get 409 until that's done.
+    for (let attempt = 1; ; attempt++) {
+      const res = await this.request(text, lang);
+      if (res.ok) return { audio: Buffer.from(await res.arrayBuffer()), mime: "audio/mpeg" };
+      const retry = res.status === 409 || res.status === 429 || res.status >= 500;
+      if (!retry || attempt === 5) throw new Error(`ElevenLabs ${res.status}: ${(await res.text()).slice(0, 200)}`);
+      await new Promise((r) => setTimeout(r, 1200 * attempt + Math.random() * 800));
+    }
+  }
+
+  private request(text: string, lang: string) {
+    return fetch(
       `https://api.elevenlabs.io/v1/text-to-speech/${this.voice}?output_format=mp3_44100_64`,
       {
         method: "POST",
@@ -31,8 +42,6 @@ class ElevenLabsProvider implements TtsProvider {
         }),
       },
     );
-    if (!res.ok) throw new Error(`ElevenLabs ${res.status}: ${(await res.text()).slice(0, 200)}`);
-    return { audio: Buffer.from(await res.arrayBuffer()), mime: "audio/mpeg" };
   }
 }
 

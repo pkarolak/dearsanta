@@ -35,7 +35,7 @@ export const clips: Clip[] = [
       { at: 9.8, sfx: "splat" },
     ],
   },
-  { id: "walkStable", entry: "white", cues: [{ at: 0.3, line: "trying", sfx: "steps" }] },
+  { id: "walkStable", entry: "white", cues: [{ at: 0.1, line: "trying", sfx: "steps" }] },
   {
     id: "stable",
     entry: "cut",
