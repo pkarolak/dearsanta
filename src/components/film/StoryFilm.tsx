@@ -83,35 +83,44 @@ export function StoryFilm({ lines, lang }: Props) {
     let next = cues.findIndex((q) => q.at >= v.currentTime - 0.05);
     if (next < 0) next = cues.length;
     let voice: Promise<unknown> = Promise.resolve();
+    let talking = false;
     let frame = 0;
     let stopped = false;
     const timers: ReturnType<typeof setTimeout>[] = [];
 
     const say = (l: VoiceLine) => {
+      talking = true;
       setLine(l);
       const spoken = soundRef.current ? audio.speak(l, lang) : Promise.resolve();
       const read = new Promise<void>((r) => timers.push(setTimeout(r, readingMs(l.text))));
       voice = Promise.all([spoken, read]).then(() => {
+        talking = false;
         if (stopped) return;
         setLine((cur) => (cur?.id === l.id ? null : cur));
         if (clip === lastClip) setEnded(true);
       });
     };
+    const fire = () => {
+      const q = cues[next++];
+      if (q.sfx && soundRef.current) audio.effect(q.sfx);
+      if (q.line) say(lines[q.line]);
+    };
+    // A line waits for the one before it to finish, so Santa never talks over himself.
     const tick = () => {
-      while (next < cues.length && v.currentTime >= cues[next].at) {
-        const q = cues[next++];
-        if (q.sfx && soundRef.current) audio.effect(q.sfx);
-        if (q.line) say(lines[q.line]);
-      }
+      while (next < cues.length && v.currentTime >= cues[next].at && !(cues[next].line && talking)) fire();
       if (v.duration) progress.set(v.currentTime / v.duration);
       frame = requestAnimationFrame(tick);
     };
-    const onEnd = () =>
-      voice.then(() => {
-        if (stopped) return;
-        setBehind(clip);
-        setClip(clip + 1);
-      });
+    const onEnd = async () => {
+      await voice;
+      while (next < cues.length && !stopped) {
+        fire();
+        await voice;
+      }
+      if (stopped) return;
+      setBehind(clip);
+      setClip(clip + 1);
+    };
 
     if (active) {
       v.play().catch((e: DOMException) => e.name === "NotAllowedError" && setPaused(true));

@@ -40,7 +40,11 @@
   "film": {
     "label": "A little tale of Santa, who needs your help",
     "lines": {
-      "worry": "Christmas is coming again, and as usual everything lands on my head.",
+      "season": "Christmas is coming!",
+      "busiest": "It's the busiest time of the year for me.",
+      "deadline": "24 hours to deliver all the presents, and we're still not ready!",
+      "letters": "I'm just finishing the letters, and I more or less know who's been good this year!",
+      "look": "But just look at what's going on around here…",
       "elves": "The elves are fooling around instead of working…",
       "time": "…and Christmas Eve is getting closer and closer.",
       "trying": "We’re doing our very best to get it all done, but we’ve got problems.",

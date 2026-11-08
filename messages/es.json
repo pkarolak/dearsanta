@@ -40,7 +40,11 @@
   "film": {
     "label": "Un pequeño cuento de Papá Noel, que necesita vuestra ayuda",
     "lines": {
-      "worry": "Ya vuelve la Navidad y, como siempre, todo me cae encima.",
+      "season": "¡Se acerca la Navidad!",
+      "busiest": "Para mí es la época más ajetreada del año.",
+      "deadline": "¡24 horas para repartir todos los regalos y todavía no está todo listo!",
+      "letters": "¡Estoy terminando de leer las cartas y ya sé más o menos quién se ha portado bien este año!",
+      "look": "Pero mirad lo que está pasando por aquí…",
       "elves": "Los elfos hacen travesuras en vez de trabajar…",
       "time": "…y cada vez queda menos tiempo para Nochebuena.",
       "trying": "Hacemos todo lo posible por llegar a todo, pero tenemos nuestros problemas.",

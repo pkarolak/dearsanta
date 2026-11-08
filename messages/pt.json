@@ -40,7 +40,11 @@
   "film": {
     "label": "Um pequeno conto do Pai Natal, que precisa da vossa ajuda",
     "lines": {
-      "worry": "O Natal está outra vez a chegar e, como sempre, tudo me cai em cima.",
+      "season": "O Natal está a chegar!",
+      "busiest": "Para mim, é a época mais atarefada do ano.",
+      "deadline": "24 horas para entregar os presentes todos, e ainda não está tudo pronto!",
+      "letters": "Estou a acabar de ler as cartas e já sei mais ou menos quem se portou bem este ano!",
+      "look": "Mas vejam só o que se passa por aqui…",
       "elves": "Os elfos andam na brincadeira em vez de trabalhar…",
       "time": "…e até à noite de Consoada há cada vez menos tempo.",
       "trying": "Estamos a fazer os possíveis para dar conta de tudo, mas temos os nossos problemas.",

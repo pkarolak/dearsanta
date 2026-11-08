@@ -18,11 +18,12 @@ export const clips = {
   village: {
     image: "key-village.jpg",
     end: "key-home.jpg",
-    duration: 8,
+    duration: 13,
     prompt:
-      "Snow falls gently over the felt miniature village at night, the northern lights ripple, chimney smoke curls up from Santa's house, " +
-      "the strings of coloured bulbs twinkle and the windows glow. The camera glides slowly down from the sky towards Santa's red house " +
-      "and pushes in through its glowing window, arriving inside the cosy living room where Santa sits in his armchair under a pile of letters.",
+      "Snow falls gently over the felt miniature village at night, the northern lights ripple, smoke curls up from the manor's chimneys, " +
+      "the strings of coloured bulbs twinkle and the windows glow; the reindeer puppet by the stable sniffles and waves. The camera first holds " +
+      "on the whole village for a few seconds, then glides slowly towards Santa's grand manor in the centre and pushes in through its big glowing window above the porch, arriving inside the " +
+      "cosy living room where Santa sits in his armchair under a pile of letters.",
   },
   home: {
     image: "key-home.jpg",
@@ -37,8 +38,9 @@ export const clips = {
     end: "key-workshop.jpg",
     duration: 5,
     prompt:
-      "Snow falls over the felt village at night, bulbs twinkle, chimney smoke curls. The camera travels left across the snow to the wooden toy " +
-      "workshop and flies in through its door into the warm workshop interior full of goofing elf puppets.",
+      "Snow falls over the felt village at night, bulbs twinkle, chimney smoke curls. The camera turns away from the manor and travels left " +
+      "across the snow, past the toy soldier and the rocking horse, to the small wooden elves' workshop on the left, and flies in through its " +
+      "round-topped door into the warm workshop interior full of goofing elf puppets.",
   },
   workshop: {
     image: "key-workshop.jpg",
@@ -54,8 +56,9 @@ export const clips = {
     end: "key-stable.jpg",
     duration: 6,
     prompt:
-      "Snow falls over the felt village at night, bulbs twinkle, smoke curls from the chimneys. The camera travels right along the snowy path " +
-      "past Santa's house to the wooden reindeer stable and glides in through its open front into the lantern-lit stable interior.",
+      "Snow falls over the felt village at night, bulbs twinkle, smoke curls from the manor's chimneys. The camera travels right along the " +
+      "snowy square to the wooden reindeer stable; the upright reindeer puppet in its sweater and scarf sniffles, turns and shuffles inside, " +
+      "and the camera follows it in through the open front into the lantern-lit stable interior.",
   },
   stable: {
     image: "key-stable.jpg",
@@ -83,19 +86,20 @@ export const clips = {
   finaleReveal: {
     image: "key-curtain.jpg",
     end: "key-finale.jpg",
-    duration: 8,
+    duration: 7,
     prompt:
       "The footlights glow, the velvet stage curtains part and sweep open to the sides, revealing Santa in the centre with five people puppets " +
       "in Christmas sweaters around him; magical golden sparkles swirl around them and pointy elf hats with bells and pointy felt elf ears " +
-      "appear on their heads. They look surprised and delighted.",
+      "appear on their heads. They look delighted, jump for joy and Santa throws his arms up laughing as confetti bursts.",
   },
   finaleParty: {
     image: "key-finale.jpg",
     end: "key-finale.jpg",
-    duration: 8,
+    duration: 6,
     prompt:
-      "Everyone on stage celebrates: the new elves cheer, bounce and wave their arms, Santa laughs and spreads his arms, confetti and golden " +
-      "sparkles fall, the footlights and marquee bulbs twinkle. Locked-off camera.",
+      "A joyful party that never stops moving: Santa laughs heartily, dances a little jig, claps and pumps his arms in the air; the new elves " +
+      "jump, dance, spin, high-five and hug each other, one fires the party popper, everyone keeps cheering and bouncing the whole time. " +
+      "Confetti and golden streamers keep falling, footlights and marquee bulbs twinkle. Locked-off camera.",
   },
 };
 
@@ -111,9 +115,9 @@ const tallPrompts = {
     "into the air and makes the lanterns swing; it wipes its red nose with the tissue. Then the camera pans right to the old red sleigh, " +
     "which creaks and wobbles while a loose patch plank pops off and falls to the floor. Lanterns flicker.",
   finaleReveal:
-    "The footlights glow, the velvet stage curtains part and sweep open to the sides, revealing Santa in the centre with six people puppets " +
+    "The footlights glow, the velvet stage curtains part and sweep open to the sides, revealing Santa in the centre with five people puppets " +
     "in Christmas sweaters around him; magical golden sparkles swirl around them and pointy elf hats with bells and pointy felt elf ears " +
-    "appear on their heads. They look surprised and delighted.",
+    "appear on their heads. They look delighted, jump for joy and Santa throws his arms up laughing as confetti bursts.",
 };
 const tall = (name) => name.replace(/\.jpg$/, "-v.jpg");
 for (const [id, clip] of Object.entries({ ...clips })) {

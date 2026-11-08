@@ -1,6 +1,13 @@
 import type { FilmSfx } from "@/lib/audio/engine";
 
-export type LineKey = "worry" | "elves" | "time" | "trying" | "reindeer" | "sleigh" | "factory" | "help" | "become" | "ready";
+export type LineKey =
+  | "season"
+  | "busiest"
+  | "deadline"
+  | "letters"
+  | "look"
+  | "elves"
+  | "time" | "trying" | "reindeer" | "sleigh" | "factory" | "help" | "become" | "ready";
 export type ClipId =
   | "village"
   | "home"
@@ -22,9 +29,18 @@ export type Clip = { id: ClipId; entry: Entry; cues: Cue[] };
 
 /** The whole film, clip by clip. The last clip loops under the call to action. */
 export const clips: Clip[] = [
-  { id: "village", entry: "fade", cues: [{ at: 0.2, sfx: "bells" }, { at: 5.6, sfx: "whoosh" }] },
-  { id: "home", entry: "cut", cues: [{ at: 0.6, line: "worry" }] },
-  { id: "walkWorkshop", entry: "fade", cues: [{ at: 0.3, sfx: "steps" }, { at: 3.2, sfx: "whoosh" }] },
+  {
+    id: "village",
+    entry: "fade",
+    cues: [
+      { at: 0.2, sfx: "bells" },
+      { at: 0.4, line: "season" },
+      { at: 3.0, line: "busiest" },
+      { at: 6.2, line: "deadline" },
+    ],
+  },
+  { id: "home", entry: "cut", cues: [{ at: 0.5, line: "letters" }] },
+  { id: "walkWorkshop", entry: "fade", cues: [{ at: 0.2, line: "look", sfx: "steps" }, { at: 3.2, sfx: "whoosh" }] },
   {
     id: "workshop",
     entry: "cut",

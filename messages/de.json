@@ -40,7 +40,11 @@
   "film": {
     "label": "Ein kleines Märchen vom Weihnachtsmann, der Hilfe braucht",
     "lines": {
-      "worry": "Bald ist wieder Weihnachten, und wie immer bleibt alles an mir hängen.",
+      "season": "Weihnachten steht vor der Tür!",
+      "busiest": "Für mich ist das die arbeitsreichste Zeit des Jahres.",
+      "deadline": "24 Stunden, um alle Geschenke auszuliefern – und noch ist nicht alles fertig!",
+      "letters": "Ich lese gerade die letzten Briefe und weiß schon ungefähr, wer dieses Jahr brav war!",
+      "look": "Aber seht euch nur an, was hier los ist…",
       "elves": "Die Wichtel albern herum, statt zu arbeiten…",
       "time": "…und bis Heiligabend bleibt immer weniger Zeit.",
       "trying": "Wir geben uns alle Mühe, alles zu schaffen, aber wir haben so unsere Probleme.",

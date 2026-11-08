@@ -40,7 +40,11 @@
   "film": {
     "label": "Bajka o Mikołaju, który potrzebuje pomocy",
     "lines": {
-      "worry": "Znowu zbliżają się święta i jak zwykle wszystko na mojej głowie.",
+      "season": "Zbliżają się święta Bożego Narodzenia!",
+      "busiest": "To dla mnie najbardziej pracowity czas w roku.",
+      "deadline": "24 godziny na rozwiezienie prezentów, a jeszcze nie wszystko gotowe!",
+      "letters": "Dopiero kończę czytać listy, mniej więcej już rozumiem, kto był w tym roku grzeczny!",
+      "look": "A zobaczcie tylko, co się dzieje dookoła…",
       "elves": "Elfy figlują zamiast pracować…",
       "time": "…a do nocy wigilijnej już coraz mniej czasu.",
       "trying": "Próbujemy z całych sił wyrobić się ze wszystkim, ale mamy swoje problemy.",
