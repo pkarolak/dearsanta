@@ -21,7 +21,8 @@ export const clips = {
     duration: 13,
     prompt:
       "Snow falls gently over the felt miniature village at night, the northern lights ripple, smoke curls up from the manor's chimneys, " +
-      "the strings of coloured bulbs twinkle and the windows glow; the reindeer puppet by the stable sniffles and waves. The camera first holds " +
+      "the strings of coloured bulbs twinkle and the windows glow; in front of the manor the three cheerful elf puppets decorate the big " +
+      "Christmas tree: one on the ladder sets the golden star on top, one hangs baubles, one wraps the lights, which light up. The camera first holds " +
       "on the whole village for a few seconds, then glides slowly towards Santa's grand manor in the centre and pushes in through its big glowing window above the porch, arriving inside the " +
       "cosy living room where Santa sits in his armchair under a pile of letters.",
   },
@@ -38,7 +39,7 @@ export const clips = {
     end: "key-workshop.jpg",
     duration: 5,
     prompt:
-      "Snow falls over the felt village at night, bulbs twinkle, chimney smoke curls. The camera turns away from the manor and travels left " +
+      "Snow falls over the felt village at night, bulbs twinkle, chimney smoke curls, elves decorate the Christmas tree. The camera turns away from the manor and travels left " +
       "across the snow, past the toy soldier and the rocking horse, to the small wooden elves' workshop on the left, and flies in through its " +
       "round-topped door into the warm workshop interior full of goofing elf puppets.",
   },
@@ -57,8 +58,8 @@ export const clips = {
     duration: 6,
     prompt:
       "Snow falls over the felt village at night, bulbs twinkle, smoke curls from the manor's chimneys. The camera travels right along the " +
-      "snowy square to the wooden reindeer stable; the upright reindeer puppet in its sweater and scarf sniffles, turns and shuffles inside, " +
-      "and the camera follows it in through the open front into the lantern-lit stable interior.",
+      "snowy square, past the elves decorating the Christmas tree, to the wooden reindeer stable, and glides in through its open front " +
+      "into the lantern-lit stable interior where the reindeer puppet waits.",
   },
   stable: {
     image: "key-stable.jpg",
