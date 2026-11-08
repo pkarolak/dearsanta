@@ -53,3 +53,4 @@ next-env.d.ts
 # design scratch output
 /design/shots
 /design/preview-*.jpg
+/design/clips

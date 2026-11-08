@@ -1,57 +1,61 @@
 "use client";
 
-import { animate, AnimatePresence, motion, useMotionValue, useReducedMotion, useTransform, type MotionValue } from "motion/react";
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useTransform, type MotionValue } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { JoinCodeForm } from "../JoinCodeForm";
 import { SiteHeader } from "../SiteHeader";
 import { SpeakerIcon } from "../icons";
-import { readingMs, santaOnScreen, shots, type LineKey, type Transition } from "./script";
-import { Shot } from "./shots";
+import { clipSrc, clips, readingMs, type LineKey } from "./script";
 import { Link } from "@/i18n/navigation";
 import { workshopAudio, type VoiceLine } from "@/lib/audio/engine";
 
 type Props = { lines: Record<LineKey, VoiceLine>; lang: string };
-type Pos = { shot: number; beat: number };
 
-const last: Pos = { shot: shots.length - 1, beat: shots[shots.length - 1].beats.length - 1 };
+const lastClip = clips.length - 1;
+const portrait = "(max-aspect-ratio: 4/5)";
 
-const enter = {
-  fade: { opacity: 0 },
-  zoom: { opacity: 0, scale: 1.08 },
-  whip: { x: "100%", filter: "blur(18px)" },
-  iris: { clipPath: "circle(0% at 50% 45%)" },
-} satisfies Record<Transition, object>;
-const leave = {
-  fade: { opacity: 0 },
-  zoom: { opacity: 0, scale: 1.5, filter: "blur(10px)" },
-  whip: { x: "-100%", filter: "blur(18px)" },
-  iris: { opacity: 1 },
-} satisfies Record<Transition, object>;
-const speed: Record<Transition, number> = { fade: 0.9, zoom: 0.9, whip: 0.55, iris: 1 };
+function useTall() {
+  return useSyncExternalStore(
+    (onChange) => {
+      const mq = matchMedia(portrait);
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    },
+    () => matchMedia(portrait).matches,
+    () => false,
+  );
+}
 
 /**
- * The landing page's opening: a little puppet film that plays by itself, silent with subtitles,
- * until the viewer turns the sound on. It ends on the call to action and stays there.
+ * The landing page's opening: a puppet film that plays by itself, silent with subtitles,
+ * until the viewer turns the sound on. It ends on the call to action, with the last clip looping behind it.
  */
 export function StoryFilm({ lines, lang }: Props) {
   const t = useTranslations("film");
   const th = useTranslations("home");
   const reduced = useReducedMotion();
+  const tall = useTall();
   const ref = useRef<HTMLElement>(null);
-  const [pos, setPos] = useState<Pos>({ shot: 0, beat: 0 });
+  const video = useRef<HTMLVideoElement>(null);
+  const [clip, setClip] = useState(0);
+  const [behind, setBehind] = useState<number | null>(null);
+  const [run, setRun] = useState(0);
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(true);
   const [sound, setSound] = useState(false);
-  const [run, setRun] = useState(0);
+  const [ended, setEnded] = useState(false);
+  const [line, setLine] = useState<VoiceLine | null>(null);
   const progress = useMotionValue(0);
-
-  const shot = shots[pos.shot];
-  const beat = shot.beats[pos.beat];
-  const line = beat.line ? lines[beat.line] : null;
-  const ended = !Number.isFinite(beat.ms);
   const active = !paused && visible;
-  const beatMs = line ? Math.max(beat.ms, readingMs(line.text)) : beat.ms;
+  const soundRef = useRef(sound);
+  useEffect(() => {
+    soundRef.current = sound;
+  }, [sound]);
+  // With reduced motion the film doesn't start by itself: it rests on the finale until asked to play.
+  const resting = !!reduced && !run;
+  const at = resting ? lastClip : clip;
+  const done = ended || resting;
 
   useEffect(() => {
     const el = ref.current;
@@ -70,28 +74,61 @@ export function StoryFilm({ lines, lang }: Props) {
     Object.values(lines).forEach((l) => workshopAudio().prefetch(l.audioUrl));
   }, [lines]);
 
+  // Plays the current clip, firing its cues on time, and moves on once it and its narration are done.
   useEffect(() => {
-    if (!active || ended) return;
+    const v = video.current;
+    if (!v || resting) return;
     const audio = workshopAudio();
-    let cancelled = false;
-    let timer: ReturnType<typeof setTimeout>;
-    progress.set(0);
-    const bar = animate(progress, 1, { duration: beatMs / 1000, ease: "linear" });
-    if (sound && beat.sfx) audio.effect(beat.sfx);
-    const minimum = new Promise<void>((r) => (timer = setTimeout(r, beatMs)));
-    const voice = sound && line ? audio.speak(line, lang) : Promise.resolve();
-    Promise.all([minimum, voice]).then(() => {
-      if (cancelled) return;
-      setPos((p) => (p.beat + 1 < shots[p.shot].beats.length ? { shot: p.shot, beat: p.beat + 1 } : { shot: p.shot + 1, beat: 0 }));
-    });
+    const cues = clips[clip].cues;
+    let next = cues.findIndex((q) => q.at >= v.currentTime - 0.05);
+    if (next < 0) next = cues.length;
+    let voice: Promise<unknown> = Promise.resolve();
+    let frame = 0;
+    let stopped = false;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    const say = (l: VoiceLine) => {
+      setLine(l);
+      const spoken = soundRef.current ? audio.speak(l, lang) : Promise.resolve();
+      const read = new Promise<void>((r) => timers.push(setTimeout(r, readingMs(l.text))));
+      voice = Promise.all([spoken, read]).then(() => {
+        if (stopped) return;
+        setLine((cur) => (cur?.id === l.id ? null : cur));
+        if (clip === lastClip) setEnded(true);
+      });
+    };
+    const tick = () => {
+      while (next < cues.length && v.currentTime >= cues[next].at) {
+        const q = cues[next++];
+        if (q.sfx && soundRef.current) audio.effect(q.sfx);
+        if (q.line) say(lines[q.line]);
+      }
+      if (v.duration) progress.set(v.currentTime / v.duration);
+      frame = requestAnimationFrame(tick);
+    };
+    const onEnd = () =>
+      voice.then(() => {
+        if (stopped) return;
+        setBehind(clip);
+        setClip(clip + 1);
+      });
+
+    if (active) {
+      v.play().catch((e: DOMException) => e.name === "NotAllowedError" && setPaused(true));
+      frame = requestAnimationFrame(tick);
+    } else {
+      v.pause();
+    }
+    v.addEventListener("ended", onEnd);
     return () => {
-      cancelled = true;
-      clearTimeout(timer);
-      bar.stop();
+      stopped = true;
+      cancelAnimationFrame(frame);
+      timers.forEach(clearTimeout);
+      v.removeEventListener("ended", onEnd);
       audio.stopVoice();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pos, active, sound, run]);
+  }, [clip, active, run, tall, resting]);
 
   useEffect(() => {
     const audio = workshopAudio();
@@ -118,43 +155,63 @@ export function StoryFilm({ lines, lang }: Props) {
     setSound(true);
   };
 
-  const seek = (p: Pos) => {
+  const seek = (to: number, end = false) => {
     setPaused(false);
-    setPos(p);
+    setBehind(null);
+    setLine(null);
+    setEnded(end);
+    setClip(to);
     setRun((r) => r + 1);
   };
 
-  const transition = reduced ? "fade" : shot.enter;
+  const current = clips[at];
+  const entry = reduced ? "fade" : current.entry;
+  const upcoming = resting ? undefined : clips[at + 1];
 
   return (
     <section ref={ref} aria-label={t("label")} className="relative h-svh min-h-[36rem] overflow-hidden bg-ink">
-      <AnimatePresence initial={false} custom={transition}>
-        <motion.div
-          key={pos.shot}
-          className="absolute inset-0"
-          custom={transition}
-          variants={{
-            initial: (tr: Transition) => ({ ...enter[tr], zIndex: 1 }),
-            shown: { opacity: 1, scale: 1, x: "0%", filter: "blur(0px)", clipPath: "circle(150% at 50% 45%)", zIndex: 1 },
-            gone: (tr: Transition) => ({ ...leave[tr], zIndex: 0 }),
-          }}
-          initial="initial"
-          animate="shown"
-          exit="gone"
-          transition={{ duration: speed[transition], ease: [0.6, 0, 0.2, 1] }}
-        >
-          <Shot
-            id={shot.id}
-            beat={pos.beat}
-            beatMs={beatMs}
-            talking={!!line && santaOnScreen.includes(shot.id) && active}
-            sound={sound}
-            ended={ended}
-            eve={t("eve")}
-            lang={lang}
+      {behind !== null && (
+        <video
+          key={`behind-${behind}-${tall}`}
+          src={clipSrc(clips[behind].id, tall, "mp4")}
+          className="absolute inset-0 h-full w-full object-cover"
+          muted
+          playsInline
+          preload="auto"
+          onLoadedMetadata={(e) => (e.currentTarget.currentTime = e.currentTarget.duration - 0.05)}
+          aria-hidden
+        />
+      )}
+      <motion.video
+        key={`${at}-${run}-${tall}`}
+        ref={video}
+        src={clipSrc(current.id, tall, "mp4")}
+        poster={clipSrc(current.id, tall, "jpg")}
+        className="absolute inset-0 h-full w-full object-cover"
+        muted
+        playsInline
+        preload="auto"
+        loop={at === lastClip}
+        initial={{ opacity: entry === "fade" && behind !== null ? 0 : 1 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.7 }}
+        onPlaying={() => setTimeout(() => setBehind(null), 800)}
+        aria-hidden
+      />
+      {upcoming && <video key={`next-${clip}-${tall}`} src={clipSrc(upcoming.id, tall, "mp4")} className="hidden" muted preload="auto" aria-hidden />}
+      <AnimatePresence>
+        {entry === "white" && behind !== null && (
+          <motion.div
+            key={`white-${clip}`}
+            className="absolute inset-0 bg-snow"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9, delay: 0.15 }}
           />
-        </motion.div>
+        )}
       </AnimatePresence>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/45 via-transparent to-ink/55" />
 
       <div className="absolute inset-x-0 top-0 z-30">
         <SiteHeader tone="dark" />
@@ -162,7 +219,7 @@ export function StoryFilm({ lines, lang }: Props) {
 
       <div className="pointer-events-none absolute inset-x-0 bottom-[6.5rem] z-20 flex justify-center px-5 md:bottom-28" aria-live="polite">
         <AnimatePresence mode="wait">
-          {line && (
+          {line && !done && (
             <motion.p
               key={line.id}
               className="max-w-[46rem] text-balance text-center font-display text-[clamp(1.3rem,2.5vw,2.2rem)] font-bold leading-snug text-snow"
@@ -177,40 +234,40 @@ export function StoryFilm({ lines, lang }: Props) {
         </AnimatePresence>
       </div>
 
-      <CallToAction shown={ended} title={th("title")} lead={th("heroLead")} create={th("create")} haveCode={th("haveCode")} />
+      <CallToAction shown={done} title={th("title")} lead={th("heroLead")} create={th("create")} haveCode={th("haveCode")} />
 
       <div
-        className={`absolute z-40 flex items-center gap-2 px-4 md:px-6 ${ended ? "right-0 top-[4.25rem] md:top-auto md:bottom-6" : "inset-x-0 bottom-5 md:bottom-7"}`}
+        className={`absolute z-40 flex items-center gap-2 px-4 md:px-6 ${done ? "right-0 top-[4.25rem] md:top-auto md:bottom-6" : "inset-x-0 bottom-5 md:bottom-7"}`}
       >
-        {!ended && (
+        {!done && (
           <>
             <button
-              onClick={() => (paused ? seek(pos) : setPaused(true))}
+              onClick={() => setPaused(!paused)}
               className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-snow text-ink hover:bg-cream"
               aria-label={paused ? t("play") : t("pause")}
             >
               {paused ? <PlayIcon /> : <PauseIcon />}
             </button>
             <div className="flex h-11 min-w-0 flex-1 items-center gap-1.5">
-              {shots.map((s, i) => (
+              {clips.map((c, i) => (
                 <button
-                  key={s.id}
-                  onClick={() => seek({ shot: i, beat: 0 })}
+                  key={c.id}
+                  onClick={() => seek(i)}
                   className="group flex h-full flex-1 items-center"
                   aria-label={t("scene", { n: i + 1 })}
-                  aria-current={i === pos.shot ? "step" : undefined}
+                  aria-current={i === clip ? "step" : undefined}
                 >
-                  <Segment index={i} pos={pos} progress={progress} />
+                  <Segment index={i} clip={at} progress={progress} />
                 </button>
               ))}
             </div>
-            <button onClick={() => seek(last)} className="h-11 shrink-0 rounded-full px-3 font-semibold text-snow hover:bg-snow/15">
+            <button onClick={() => seek(lastClip, true)} className="h-11 shrink-0 rounded-full px-3 font-semibold text-snow hover:bg-snow/15">
               {t("skip")}
             </button>
           </>
         )}
-        {ended && (
-          <button onClick={() => seek({ shot: 0, beat: 0 })} className="h-11 rounded-full bg-snow px-4 font-semibold text-ink hover:bg-cream">
+        {done && (
+          <button onClick={() => seek(0)} className="h-11 rounded-full bg-snow px-4 font-semibold text-ink hover:bg-cream">
             {t("replay")}
           </button>
         )}
@@ -228,13 +285,8 @@ export function StoryFilm({ lines, lang }: Props) {
   );
 }
 
-function Segment({ index, pos, progress }: { index: number; pos: Pos; progress: MotionValue<number> }) {
-  const beats = shots[index].beats.filter((b) => Number.isFinite(b.ms)).length;
-  const width = useTransform(progress, (p) => {
-    if (index < pos.shot) return "100%";
-    if (index > pos.shot) return "0%";
-    return `${Math.min(1, (pos.beat + p) / Math.max(1, beats)) * 100}%`;
-  });
+function Segment({ index, clip, progress }: { index: number; clip: number; progress: MotionValue<number> }) {
+  const width = useTransform(progress, (p) => (index < clip ? "100%" : index > clip ? "0%" : `${Math.min(1, p) * 100}%`));
   return (
     <span className="relative block h-1 w-full overflow-hidden rounded-full bg-snow/30 transition-[height] group-hover:h-2">
       <motion.span className="absolute inset-y-0 left-0 block bg-snow" style={{ width }} />
