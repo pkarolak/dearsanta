@@ -79,7 +79,7 @@
 }
 
 @utility field {
-  @apply well w-full px-4 py-3 text-ink placeholder:text-muted/70 outline-none focus:ring-3 focus:ring-gold;
+  @apply well w-full px-4 py-3 text-ink placeholder:text-muted/45 outline-none focus:ring-3 focus:ring-gold;
 }
 @utility label {
   @apply mb-1.5 block text-sm font-semibold text-muted;

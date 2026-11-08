@@ -30,7 +30,7 @@ export function CreateSessionForm() {
     const budget = Number(String(form.get("budget") ?? "").replace(",", "."));
     start(async () => {
       const result = await createSessionAction({
-        title: String(form.get("title")),
+        title: String(form.get("title") ?? "").trim() || t("titlePlaceholder"),
         mode,
         locale: String(form.get("sessionLocale") || locale),
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -70,7 +70,7 @@ export function CreateSessionForm() {
         <h2 className="font-display text-2xl font-bold">{t("session")}</h2>
         <div>
           <label className="label" htmlFor="title">{t("title")}</label>
-          <input id="title" name="title" required maxLength={80} placeholder={t("titlePlaceholder")} className="field" />
+          <input id="title" name="title" maxLength={80} placeholder={t("titlePlaceholder")} className="field" />
         </div>
 
         <div>
