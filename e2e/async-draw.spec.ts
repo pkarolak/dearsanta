@@ -24,6 +24,7 @@ test("own-time session: invites, elf profiles, unlock and personal reveal", asyn
   for (const email of elves) {
     const page = await (await browser.newContext({ viewport: { width: 390, height: 844 } })).newPage();
     await page.goto(await linkFromInbox(page, email));
+    if (!elfPages.length) await page.screenshot({ path: `${shots}/10-elf-builder.png`, fullPage: true });
     await page.getByRole("button", { name: "Stwórz elfa" }).click();
     await expect(page.getByText("Zapisane!")).toBeVisible();
     elfPages.push(page);
@@ -42,6 +43,7 @@ test("own-time session: invites, elf profiles, unlock and personal reveal", asyn
   await kasia.getByRole("button", { name: /Rozpal kominek/ }).click();
   await kasia.getByRole("button", { name: "Przejdź do wyniku" }).click();
   await expect(kasia.getByText("W tym roku robisz prezent dla")).toBeVisible();
-  await expect(kasia.locator("p.text-gold")).toHaveText(/^(Basia|marek-\d+)$/);
+  await expect(kasia.getByTestId("receiver-name")).toHaveText(/^(Basia|marek-\d+)$/);
+  await kasia.waitForTimeout(1200);
   await kasia.screenshot({ path: `${shots}/08-async-reveal.png` });
 });

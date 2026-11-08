@@ -50,9 +50,9 @@ export function CreateSessionForm() {
 
   return (
     <form action={submit} className="space-y-8">
-      <fieldset className="clay space-y-5 p-6 md:p-8">
+      <fieldset className="card space-y-5 p-6 md:p-8">
         <legend className="sr-only">{t("you")}</legend>
-        <h2 className="font-display text-2xl">{t("you")}</h2>
+        <h2 className="font-display text-2xl font-bold">{t("you")}</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="label" htmlFor="hostName">{t("hostName")}</label>
@@ -66,8 +66,8 @@ export function CreateSessionForm() {
         <p className="text-sm text-muted">{t("hostHint")}</p>
       </fieldset>
 
-      <fieldset className="clay space-y-5 p-6 md:p-8">
-        <h2 className="font-display text-2xl">{t("session")}</h2>
+      <fieldset className="card space-y-5 p-6 md:p-8">
+        <h2 className="font-display text-2xl font-bold">{t("session")}</h2>
         <div>
           <label className="label" htmlFor="title">{t("title")}</label>
           <input id="title" name="title" required maxLength={80} placeholder={t("titlePlaceholder")} className="field" />
@@ -82,9 +82,9 @@ export function CreateSessionForm() {
                 key={m}
                 onClick={() => setMode(m)}
                 aria-pressed={mode === m}
-                className={`rounded-3xl p-5 text-left transition ${mode === m ? "clay ring-2 ring-berry" : "clay-sunk opacity-80 hover:opacity-100"}`}
+                className={`rounded-3xl p-5 text-left transition ${mode === m ? "card ring-2 ring-berry" : "well opacity-80 hover:opacity-100"}`}
               >
-                <span className="block font-display text-xl">{t(`modes.${m}.title`)}</span>
+                <span className="block font-display text-xl font-bold">{t(`modes.${m}.title`)}</span>
                 <span className="mt-1 block text-sm text-muted">{t(`modes.${m}.body`)}</span>
               </button>
             ))}
@@ -136,8 +136,8 @@ export function CreateSessionForm() {
         </div>
       </fieldset>
 
-      <fieldset className="clay space-y-4 p-6 md:p-8">
-        <h2 className="font-display text-2xl">{t("invites")}</h2>
+      <fieldset className="card space-y-4 p-6 md:p-8">
+        <h2 className="font-display text-2xl font-bold">{t("invites")}</h2>
         <p className="text-sm text-muted">{mode === "async" ? t("invitesHintAsync") : t("invitesHintSync")}</p>
         <textarea
           value={invites}

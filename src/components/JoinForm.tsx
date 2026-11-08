@@ -16,8 +16,8 @@ export function JoinForm({ code, defaultEmail }: { code: string; defaultEmail?: 
 
   if (checkEmail) {
     return (
-      <div className="clay p-6 text-center">
-        <p className="font-display text-2xl">{t("checkEmailTitle")}</p>
+      <div className="card p-6 text-center">
+        <p className="font-display text-2xl font-bold">{t("checkEmailTitle")}</p>
         <p className="mt-2 text-muted">{t("checkEmailBody")}</p>
       </div>
     );
@@ -25,7 +25,7 @@ export function JoinForm({ code, defaultEmail }: { code: string; defaultEmail?: 
 
   return (
     <form
-      className="clay space-y-4 p-6"
+      className="card space-y-4 p-6"
       action={(form) => {
         setError(null);
         start(async () => {

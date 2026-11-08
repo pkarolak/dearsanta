@@ -144,7 +144,6 @@ export async function joinSessionAction(input: { code: string; name: string; ema
           email: {
             lang: session.locale,
             preview: t("continue.subject", { title: session.title }),
-            eyebrow: t("continue.eyebrow"),
             heading: t("continue.heading", { name: existing.displayName }),
             paragraphs: [t("continue.body")],
             cta: { label: t("continue.cta"), href: link },

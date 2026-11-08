@@ -5,7 +5,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { useState, useTransition } from "react";
 import { Avatar } from "./Avatar";
 import { parseEmails, currencies } from "./CreateSessionForm";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { PageBand } from "./PageBand";
 import { RemoteIcon } from "./icons";
 import { Link } from "@/i18n/navigation";
 import { localeNames, locales } from "@/i18n/routing";
@@ -58,27 +58,26 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
   const upcoming = nextStep(s.step);
 
   return (
-    <main className="paper-grain min-h-dvh pb-20">
+    <main className="felt-texture min-h-dvh pb-20">
+      <PageBand
+        title={s.title}
+        lead={
+          <>
+            {t("code")} <span className="font-display font-bold tracking-[0.18em] text-snow">{s.code}</span> · {t(`mode.${s.mode}`)} ·{" "}
+            {t(`status.${s.status}`)}
+          </>
+        }
+      >
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          <Link href={`/s/${code}/me`} className="btn-soft px-4 py-2 text-sm">{t("myElf")}</Link>
+          {s.mode === "sync" && (
+            <a href={screenUrl} target="_blank" rel="noreferrer" className="btn-pine px-4 py-2 text-sm">
+              {t("openScreen")}
+            </a>
+          )}
+        </div>
+      </PageBand>
       <div className="mx-auto max-w-6xl px-5 py-6">
-        <header className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-berry">{t("eyebrow")}</p>
-            <h1 className="font-display text-4xl">{s.title}</h1>
-            <p className="mt-1 text-muted">
-              {t("code")} <span className="font-mono text-lg font-bold tracking-[0.25em] text-ink">{s.code}</span> · {t(`mode.${s.mode}`)} ·{" "}
-              {t(`status.${s.status}`)}
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <Link href={`/s/${code}/me`} className="btn-soft px-4 py-2 text-sm">{t("myElf")}</Link>
-            {s.mode === "sync" && (
-              <a href={screenUrl} target="_blank" rel="noreferrer" className="btn-pine px-4 py-2 text-sm">
-                {t("openScreen")}
-              </a>
-            )}
-            <LanguageSwitcher />
-          </div>
-        </header>
 
         {message && (
           <p
@@ -92,10 +91,10 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.25fr_1fr]">
           <div className="space-y-6">
             {/* Ceremony / draw controls */}
-            <section className="clay p-6">
+            <section className="card p-6">
               {s.mode === "sync" ? (
                 <>
-                  <h2 className="font-display text-2xl">{t("ceremony")}</h2>
+                  <h2 className="font-display text-2xl font-bold">{t("ceremony")}</h2>
                   <ol className="mt-4 flex flex-wrap gap-2">
                     {ceremonySteps.map((step) => {
                       const i = ceremonySteps.indexOf(step);
@@ -104,7 +103,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
                         <li
                           key={step}
                           className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                            i === current ? "bg-berry text-white" : i < current ? "bg-pine/15 text-pine" : "clay-sunk text-muted"
+                            i === current ? "bg-berry text-white" : i < current ? "bg-pine/15 text-pine" : "well text-muted"
                           }`}
                         >
                           {t(`steps.${step}`)}
@@ -133,7 +132,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
                 </>
               ) : (
                 <>
-                  <h2 className="font-display text-2xl">{t("asyncTitle")}</h2>
+                  <h2 className="font-display text-2xl font-bold">{t("asyncTitle")}</h2>
                   <p className="mt-2 text-muted">{t("asyncReady", { ready, total: approved.length })}</p>
                   <div className="mt-3 h-3 overflow-hidden rounded-full bg-ink/10">
                     <div className="h-full rounded-full bg-pine transition-all" style={{ width: `${approved.length ? (ready / approved.length) * 100 : 0}%` }} />
@@ -170,9 +169,9 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
             </section>
 
             {/* People */}
-            <section className="clay p-6">
+            <section className="card p-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <h2 className="font-display text-2xl">{t("elves", { count: approved.length })}</h2>
+                <h2 className="font-display text-2xl font-bold">{t("elves", { count: approved.length })}</h2>
                 <button className="btn-soft px-4 py-2 text-sm" onClick={() => setShowQr((v) => !v)}>
                   {showQr ? t("hideQr") : t("showQr")}
                 </button>
@@ -192,7 +191,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
 
               {waiting.length > 0 && (
                 <div className="mt-5">
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-muted">{t("atTheDoor")}</h3>
+                  <h3 className="font-semibold text-muted">{t("atTheDoor")}</h3>
                   <ul className="mt-2 space-y-2">
                     {waiting.map((p) => (
                       <PersonRow key={p.id} p={p}>
@@ -218,7 +217,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
                   <PersonRow key={p.id} p={p}>
                     {s.mode === "sync" && (
                       <button
-                        className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold ${p.isRemote ? "bg-gold/25 text-ink" : "clay-sunk text-muted"}`}
+                        className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold ${p.isRemote ? "bg-gold/25 text-ink" : "well text-muted"}`}
                         disabled={pending}
                         onClick={() => act(() => setRemoteAction(code, p.id, !p.isRemote))}
                         title={t("remoteHint")}
@@ -326,8 +325,8 @@ function ExclusionsBox({
   const name = (id: string) => people.find((p) => p.id === id)?.displayName ?? "?";
 
   return (
-    <section className="clay p-6">
-      <h2 className="font-display text-2xl">{t("exclusions")}</h2>
+    <section className="card p-6">
+      <h2 className="font-display text-2xl font-bold">{t("exclusions")}</h2>
       <p className="mt-1 text-sm text-muted">{t("exclusionsHint")}</p>
       <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto_1fr]">
         <select className="field" value={giver} onChange={(e) => setGiver(e.target.value)} disabled={disabled} aria-label={t("giver")}>
@@ -400,8 +399,8 @@ function SettingsBox({
   const when = toLocalInputs(s.scheduledAt);
 
   return (
-    <section className="clay p-6">
-      <h2 className="font-display text-2xl">{t("settings")}</h2>
+    <section className="card p-6">
+      <h2 className="font-display text-2xl font-bold">{t("settings")}</h2>
       <form
         key={[s.title, s.scheduledAt, s.location, s.onlineUrl, s.budgetAmount, s.currency, s.locale, s.mode, s.drawn].join("|")}
         className="mt-4 space-y-4"

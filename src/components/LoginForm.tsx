@@ -13,8 +13,8 @@ export function LoginForm() {
 
   if (sent) {
     return (
-      <div className="clay p-6 text-center">
-        <p className="font-display text-2xl">{t("sentTitle")}</p>
+      <div className="card p-6 text-center">
+        <p className="font-display text-2xl font-bold">{t("sentTitle")}</p>
         <p className="mt-2 text-muted">{t("sentBody")}</p>
       </div>
     );
@@ -22,7 +22,7 @@ export function LoginForm() {
 
   return (
     <form
-      className="clay space-y-4 p-6"
+      className="card space-y-4 p-6"
       action={(form) =>
         start(async () => {
           const result = await requestLoginLinkAction({ email: String(form.get("email")), locale });

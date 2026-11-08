@@ -32,7 +32,7 @@ export function useSoundGate(ambience = true) {
 export function SoundGateOverlay({ onEnable, compact }: { onEnable: () => void; compact?: boolean }) {
   const t = useTranslations("sound");
   return (
-    <div className="absolute inset-0 z-30 flex items-center justify-center bg-night/55 backdrop-blur-[2px]">
+    <div className="absolute inset-0 z-30 flex items-center justify-center bg-ink/45">
       <button onClick={onEnable} className={`btn-primary ${compact ? "text-base" : "px-8 py-4 text-xl"}`}>
         <SpeakerIcon className="h-6 w-6" />
         {t("start")}
@@ -44,7 +44,7 @@ export function SoundGateOverlay({ onEnable, compact }: { onEnable: () => void; 
 export function MuteButton({ muted, onToggle }: { muted: boolean; onToggle: () => void }) {
   const t = useTranslations("sound");
   return (
-    <button onClick={onToggle} className="rounded-full bg-white/10 p-2.5 text-snow hover:bg-white/20" aria-label={muted ? t("unmute") : t("mute")}>
+    <button onClick={onToggle} className="rounded-full bg-snow p-2.5 text-ink hover:bg-cream" aria-label={muted ? t("unmute") : t("mute")}>
       <SpeakerIcon muted={muted} />
     </button>
   );

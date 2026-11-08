@@ -23,7 +23,7 @@ export function JoinCodeForm() {
         onChange={(e) => setCode(e.target.value)}
         placeholder={t("codePlaceholder")}
         aria-label={t("codePlaceholder")}
-        className="field font-mono text-lg uppercase tracking-[0.3em]"
+        className="field font-display text-lg font-bold uppercase tracking-[0.18em]"
         autoCapitalize="characters"
         autoComplete="off"
         inputMode="text"

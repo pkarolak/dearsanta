@@ -87,9 +87,11 @@ test("live ceremony: create, join, let in, exclusions, draw and reveal", async (
   await guest.mouse.up();
   await expect(guest.getByText("This year you are surprising")).toBeVisible();
   // With Anna -> Ola excluded, the only valid three-person draw is Anna -> Tom -> Ola -> Anna.
-  await expect(guest.locator("p.font-display.text-4xl")).toHaveText("Anna");
+  await expect(guest.getByTestId("receiver-name")).toHaveText("Anna");
+  await guest.waitForTimeout(800);
   await guest.screenshot({ path: `${shots}/06-guest-revealed.png` });
 
+  await invited.waitForTimeout(1500);
   await invited.screenshot({ path: `${shots}/07-remote-split.png` });
 
   // Everyone got a keepsake e-mail.

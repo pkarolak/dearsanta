@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Avatar } from "./Avatar";
-import { GiftIcon } from "./icons";
+import { Cast } from "./show/Vignette";
 import type { AvatarConfig } from "@/lib/avatar";
 import { workshopAudio } from "@/lib/audio/engine";
 
@@ -61,8 +61,8 @@ export function RevealCard({ receiver, budget, initiallyRevealed, onReveal }: Pr
   };
 
   return (
-    <div className="clay relative overflow-hidden p-6 text-center">
-      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-berry">{t("eyebrow")}</p>
+    <div className="relative overflow-hidden rounded-felt bg-pine p-6 text-center text-snow">
+      <div className="stitched pointer-events-none absolute inset-0 rounded-felt text-snow/35" />
       <AnimatePresence mode="wait">
         {open ? (
           <motion.div
@@ -73,20 +73,20 @@ export function RevealCard({ receiver, budget, initiallyRevealed, onReveal }: Pr
             transition={{ type: "spring", stiffness: 220, damping: 16 }}
             className="mt-4 flex flex-col items-center"
           >
-            <p className="text-muted">{t("youGiveTo")}</p>
-            <div className="mt-3 h-36 w-36">
+            <p className="text-snow/80">{t("youGiveTo")}</p>
+            <div className="mt-3 h-36 w-36 rounded-full bg-snow p-1">
               <Avatar config={receiver.avatar} className="h-full w-full" title={receiver.displayName} />
             </div>
-            <p className="mt-3 font-display text-4xl text-berry">{receiver.displayName}</p>
-            {budget && <p className="mt-2 text-sm text-muted">{t("budget", { budget })}</p>}
-            <button className="btn-soft mt-5 px-4 py-2 text-sm" onClick={() => setOpen(false)}>
+            <p data-testid="receiver-name" className="mt-3 font-display text-5xl font-black text-gold">{receiver.displayName}</p>
+            {budget && <p className="mt-2 text-snow/80">{t("budget", { budget })}</p>}
+            <button className="btn-soft relative mt-5 px-4 py-2 text-sm" onClick={() => setOpen(false)}>
               {t("hide")}
             </button>
           </motion.div>
         ) : (
           <motion.div key="closed" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mt-4 flex flex-col items-center">
             <button
-              className="relative touch-none select-none rounded-full p-6 outline-none focus-visible:ring-4 focus-visible:ring-gold"
+              className="relative h-56 w-56 touch-none select-none rounded-full outline-none focus-visible:ring-4 focus-visible:ring-gold"
               onPointerDown={begin}
               onPointerUp={end}
               onPointerLeave={end}
@@ -97,25 +97,27 @@ export function RevealCard({ receiver, budget, initiallyRevealed, onReveal }: Pr
               aria-label={t("hold")}
             >
               <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 100 100" aria-hidden>
-                <circle cx="50" cy="50" r="46" fill="none" stroke="#EADFD2" strokeWidth="5" />
+                <circle cx="50" cy="50" r="46" fill="none" stroke="rgb(255 249 240 / 0.18)" strokeWidth="4" />
                 <circle
                   cx="50"
                   cy="50"
                   r="46"
                   fill="none"
-                  stroke="#C9963B"
-                  strokeWidth="5"
+                  stroke="#F2B935"
+                  strokeWidth="4"
                   strokeLinecap="round"
                   strokeDasharray={289}
                   strokeDashoffset={289 * (1 - progress)}
                 />
               </svg>
               <motion.div animate={{ rotate: progress > 0 ? [-4, 4, -4] : 0, scale: 1 + progress * 0.12 }} transition={{ duration: 0.25, repeat: progress > 0 ? Infinity : 0 }}>
-                <GiftIcon className="h-28 w-28" />
+                <div className="relative mx-auto w-24">
+                  <Cast who="stocking" className="relative! w-full" />
+                </div>
               </motion.div>
             </button>
-            <p className="mt-3 font-display text-xl">{t("hold")}</p>
-            <p className="text-sm text-muted">{t("holdHint")}</p>
+            <p className="mt-3 font-display text-2xl font-bold">{t("hold")}</p>
+            <p className="text-sm text-snow/75">{t("holdHint")}</p>
           </motion.div>
         )}
       </AnimatePresence>

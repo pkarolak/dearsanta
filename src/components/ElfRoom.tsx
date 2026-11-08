@@ -5,9 +5,10 @@ import { useTransition } from "react";
 import { Avatar } from "./Avatar";
 import { AvatarEditor } from "./AvatarEditor";
 import { CeremonyStage } from "./CeremonyStage";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 import { RevealCard } from "./RevealCard";
-import { Santa } from "./Santa";
+import { PageBand } from "./PageBand";
+import { SantaPuppet } from "./show/SantaPuppet";
+import { Cast, Vignette } from "./show/Vignette";
 import { MuteButton, SoundGateOverlay, useSoundGate } from "./SoundControls";
 import { Link } from "@/i18n/navigation";
 import { markRevealedAction, setRemoteAction } from "@/lib/actions";
@@ -31,11 +32,12 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
 
   if (me.status !== "approved") {
     return (
-      <main className="paper-grain flex min-h-dvh flex-col items-center justify-center px-5 text-center">
-        <div className="w-40 animate-float">
-          <Santa className="h-auto w-full" />
-        </div>
-        <h1 className="mt-6 font-display text-3xl">{me.status === "rejected" ? t("rejectedTitle") : t("waitingTitle", { name: me.displayName })}</h1>
+      <main className="felt-texture flex min-h-dvh flex-col items-center justify-center px-5 py-10 text-center">
+        <Vignette set="home" focus="45% 50%" className="aspect-[4/3] w-full max-w-sm">
+          <SantaPuppet className="absolute left-[22%] top-[10%] w-[56%] animate-sway" />
+          <Cast who="presents" className="-bottom-[8%] left-[4%] w-[92%]" />
+        </Vignette>
+        <h1 className="mt-8 font-display text-3xl font-bold">{me.status === "rejected" ? t("rejectedTitle") : t("waitingTitle", { name: me.displayName })}</h1>
         <p className="mt-2 max-w-sm text-muted">{me.status === "rejected" ? t("rejectedBody") : t("waitingBody")}</p>
         <p className="mt-6 text-sm text-muted">{s.title} · {s.code}</p>
       </main>
@@ -50,20 +52,16 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
       await refresh();
     });
 
+  const band = (
+    <PageBand title={t("hello", { name: me.displayName })} lead={s.title} cast="elves">
+      {state.isHost && (
+        <Link href={`/s/${code}/host`} className="btn-soft mt-5 px-4 py-2 text-sm">{t("hostPanel")}</Link>
+      )}
+    </PageBand>
+  );
+
   const panel = (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-berry">{s.title}</p>
-          <h1 className="font-display text-3xl">{t("hello", { name: me.displayName })}</h1>
-        </div>
-        <div className="flex items-center gap-2">
-          {state.isHost && (
-            <Link href={`/s/${code}/host`} className="btn-soft px-4 py-2 text-sm">{t("hostPanel")}</Link>
-          )}
-          <LanguageSwitcher />
-        </div>
-      </header>
 
       {state.assignment && (s.mode === "sync" ? (
         <RevealCard
@@ -73,14 +71,14 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
           onReveal={() => void markRevealedAction(code)}
         />
       ) : (
-        <div className="clay p-6 text-center">
-          <p className="font-display text-2xl">{t("drawDone")}</p>
+        <div className="card p-6 text-center">
+          <p className="font-display text-2xl font-bold">{t("drawDone")}</p>
           <Link href={`/s/${code}/reveal`} className="btn-primary mt-4">{t("watchReveal")}</Link>
         </div>
       ))}
 
       {s.mode === "sync" && !state.assignment && (
-        <div className="clay-sunk flex flex-wrap items-center justify-between gap-3 px-5 py-4">
+        <div className="well flex flex-wrap items-center justify-between gap-3 px-5 py-4">
           <p className="text-sm">{isRemote ? t("remoteOn") : ceremonyRunning ? t("watchScreen") : t("inRoom")}</p>
           <button className="btn-soft px-4 py-2 text-sm" onClick={toggleRemote} disabled={pending}>
             {me.isRemote ? t("imHere") : t("notInRoom")}
@@ -89,12 +87,12 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
       )}
 
       {s.mode === "async" && !s.drawn && me.profileComplete && (
-        <div className="clay-sunk px-5 py-4 text-sm">{t("asyncWaiting")}</div>
+        <div className="well px-5 py-4 text-sm">{t("asyncWaiting")}</div>
       )}
 
       {!state.assignment && (
         <section>
-          <h2 className="mb-3 font-display text-2xl">{me.profileComplete ? t("yourElf") : t("createElf")}</h2>
+          <h2 className="mb-3 font-display text-2xl font-bold">{me.profileComplete ? t("yourElf") : t("createElf")}</h2>
           <AvatarEditor
             code={code}
             initialName={me.displayName}
@@ -106,13 +104,13 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
       )}
 
       <section>
-        <h2 className="mb-3 font-display text-xl">{t("team", { count: state.participants.length })}</h2>
+        <h2 className="mb-3 font-display text-xl font-bold">{t("team", { count: state.participants.length })}</h2>
         <ul className="flex flex-wrap gap-2">
           {state.participants.map((p) => (
             <li
               key={p.id}
               title={p.profileComplete ? undefined : t("dressing")}
-              className={`clay-sunk flex items-center gap-2 py-1 pl-1 pr-3 text-sm ${p.profileComplete ? "" : "opacity-60"}`}
+              className={`well flex items-center gap-2 py-1 pl-1 pr-3 text-sm ${p.profileComplete ? "" : "opacity-60"}`}
             >
               <Avatar config={p.avatar} className="h-7 w-7" />
               {p.displayName}
@@ -124,15 +122,20 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
   );
 
   if (!isRemote) {
-    return <main className="paper-grain min-h-dvh px-5 py-8"><div className="mx-auto max-w-2xl">{panel}</div></main>;
+    return (
+      <main className="felt-texture min-h-dvh pb-12">
+        {band}
+        <div className="mx-auto max-w-2xl px-5 pt-8">{panel}</div>
+      </main>
+    );
   }
 
   // Remote elves get Santa's broadcast next to their own panel (stacked picture-in-picture on phones).
   return (
-    <main className="min-h-dvh bg-cream lg:grid lg:grid-cols-[1.35fr_1fr]">
-      <div className="sticky top-0 z-20 h-[44dvh] p-2 lg:h-dvh lg:p-4">
-        <div className="relative h-full overflow-hidden rounded-[1.75rem]">
-          <CeremonyStage state={state} locale={locale} audible={sound.enabled} serverToLocal={serverToLocal} compact />
+    <main className="min-h-dvh bg-cream lg:grid lg:grid-cols-[1.6fr_1fr]">
+      <div className="sticky top-0 z-20 bg-wall p-2 lg:h-dvh lg:p-4">
+        <div className="relative aspect-video overflow-hidden rounded-felt lg:aspect-auto lg:h-full">
+          <CeremonyStage state={state} locale={locale} audible={sound.enabled} serverToLocal={serverToLocal} compact className="h-full w-full" />
           {!sound.enabled && <SoundGateOverlay onEnable={sound.enable} compact />}
           {sound.enabled && (
             <div className="absolute right-4 top-14 z-30">
@@ -141,7 +144,10 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
           )}
         </div>
       </div>
-      <div className="paper-grain px-5 py-6 lg:h-dvh lg:overflow-y-auto">{panel}</div>
+      <div className="felt-texture pb-10 lg:h-dvh lg:overflow-y-auto">
+        {band}
+        <div className="px-5 pt-6">{panel}</div>
+      </div>
     </main>
   );
 }

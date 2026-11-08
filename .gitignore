@@ -49,3 +49,7 @@ next-env.d.ts
 /test-results
 /playwright-report
 /e2e/screens
+
+# design scratch output
+/design/shots
+/design/preview-*.jpg

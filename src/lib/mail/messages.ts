@@ -51,7 +51,6 @@ export async function sendInvites(session: Session, host: Participant | undefine
       email: {
         lang: session.locale,
         preview: t("invite.preview", { title: session.title }),
-        eyebrow: t("invite.eyebrow"),
         heading: t("invite.heading", { name: p.displayName }),
         paragraphs: [
           t("invite.body", { host: host?.displayName ?? "Santa", title: session.title }),
@@ -77,7 +76,6 @@ export async function sendHostWelcome(session: Session, host: Participant) {
       email: {
         lang: session.locale,
         preview: t("host.subject", { title: session.title }),
-        eyebrow: t("host.eyebrow"),
         heading: t("host.heading", { name: host.displayName }),
         paragraphs: [t("host.body", { code: session.code })],
         details: sessionDetails(session, host),
@@ -98,7 +96,6 @@ export async function sendProfileThanks(session: Session, participant: Participa
       email: {
         lang: session.locale,
         preview: t("profile.subject"),
-        eyebrow: t("profile.eyebrow"),
         heading: t("profile.heading", { name: participant.displayName }),
         paragraphs: [session.mode === "async" ? t("profile.bodyAsync") : t("profile.bodySync")],
         cta: { label: t("profile.cta"), href: link },
@@ -120,7 +117,6 @@ export async function sendDrawReady(session: Session, participants: Participant[
       email: {
         lang: session.locale,
         preview: t("drawReady.subject"),
-        eyebrow: t("drawReady.eyebrow"),
         heading: t("drawReady.heading", { name: p.displayName }),
         paragraphs: [t("drawReady.body")],
         cta: { label: t("drawReady.cta"), href: link },
@@ -143,7 +139,6 @@ export async function sendResults(session: Session, pairs: { giver: Participant;
       email: {
         lang: session.locale,
         preview: t("result.preview"),
-        eyebrow: t("result.eyebrow"),
         heading: t("result.heading", { name: giver.displayName }),
         paragraphs: [t("result.body")],
         highlight: {
@@ -172,7 +167,6 @@ export async function sendLoginLink(email: string, locale: string) {
       email: {
         lang: locale,
         preview: t("login.subject"),
-        eyebrow: t("login.eyebrow"),
         heading: t("login.heading"),
         paragraphs: [t("login.body")],
         cta: { label: t("login.cta"), href },

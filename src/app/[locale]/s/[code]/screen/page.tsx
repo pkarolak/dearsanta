@@ -18,7 +18,7 @@ export default async function ScreenPage({ params, searchParams }: PageProps<"/[
   if (!viewer.isScreen && !viewer.isHost) {
     const t = await getTranslations("screen");
     return (
-      <main className="flex min-h-dvh items-center justify-center bg-night px-6 text-center text-snow">
+      <main className="flex min-h-dvh items-center justify-center bg-wall px-6 text-center text-snow">
         <div>
           <h1 className="font-display text-3xl">{t("noAccessTitle")}</h1>
           <p className="mt-2 text-snow/70">{t("noAccessBody")}</p>

@@ -49,7 +49,7 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
   };
 
   return (
-    <div className="clay p-5 md:p-7">
+    <div className="card p-5 md:p-7">
       <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-start">
         <div className="flex flex-col items-center gap-3">
           <div className="h-40 w-40 rounded-full shadow-[0_18px_30px_-14px_rgba(80,45,25,0.5)]">
@@ -84,7 +84,7 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
                     onClick={() => set(key, value as never)}
                     aria-pressed={avatar[key] === value}
                     className={`rounded-full px-3.5 py-1.5 text-sm font-semibold transition ${
-                      avatar[key] === value ? "bg-pine text-white shadow" : "clay-sunk text-ink/80 hover:text-ink"
+                      avatar[key] === value ? "bg-pine text-white shadow" : "well text-ink/80 hover:text-ink"
                     }`}
                   >
                     {t(`values.${value}`)}

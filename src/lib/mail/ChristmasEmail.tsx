@@ -6,16 +6,17 @@ import {
   Heading,
   Hr,
   Html,
+  Img,
   Link,
   Preview,
   Section,
   Text,
 } from "@react-email/components";
+import { appUrl } from "@/lib/auth";
 
 export type ChristmasEmailProps = {
   lang: string;
   preview: string;
-  eyebrow: string;
   heading: string;
   paragraphs: string[];
   highlight?: { label: string; value: string; note?: string };
@@ -26,13 +27,15 @@ export type ChristmasEmailProps = {
 };
 
 const colors = {
-  cream: "#F6EDE1",
-  paper: "#FFFBF5",
-  red: "#A8322D",
-  green: "#2F5D46",
-  ink: "#3B2A22",
-  muted: "#8A7566",
-  gold: "#C9963B",
+  snow: "#FFF9F0",
+  cream: "#F5E9D8",
+  paper: "#FFFDF8",
+  wall: "#9B1F29",
+  red: "#B8202C",
+  green: "#1D5A3A",
+  ink: "#2B1810",
+  muted: "#6F5547",
+  gold: "#F2B935",
 };
 
 const serif = "Georgia, 'Times New Roman', serif";
@@ -43,52 +46,39 @@ export function ChristmasEmail(props: ChristmasEmailProps) {
     <Html lang={props.lang}>
       <Head />
       <Preview>{props.preview}</Preview>
-      <Body style={{ backgroundColor: colors.cream, margin: 0, padding: "32px 12px", fontFamily: sans }}>
+      <Body style={{ backgroundColor: colors.snow, margin: 0, padding: "32px 12px", fontFamily: sans }}>
         <Container style={{ maxWidth: 560, margin: "0 auto" }}>
           <Section
             style={{
-              backgroundColor: colors.green,
+              backgroundColor: colors.wall,
               borderRadius: "28px 28px 0 0",
-              padding: "28px 32px 22px",
+              padding: "26px 32px 0",
               textAlign: "center",
             }}
           >
-            <Text style={{ color: colors.gold, letterSpacing: 6, fontSize: 13, margin: 0 }}>✦ ❄ ✦</Text>
-            <Text
-              style={{
-                color: colors.cream,
-                fontFamily: serif,
-                fontSize: 22,
-                fontStyle: "italic",
-                margin: "8px 0 0",
-              }}
-            >
+            <Text style={{ color: colors.snow, fontFamily: serif, fontSize: 22, fontWeight: 700, margin: "0 0 14px" }}>
               Santa Helper
             </Text>
+            <Img
+              src={`${appUrl()}/show/santa-email.png`}
+              width="180"
+              height="150"
+              alt="Santa"
+              style={{ display: "block", margin: "0 auto", border: 0 }}
+            />
           </Section>
           <Section
             style={{
               backgroundColor: colors.paper,
+              border: `2px solid ${colors.cream}`,
+              borderTop: 0,
               borderRadius: "0 0 28px 28px",
               padding: "32px 36px 36px",
-              boxShadow: "0 18px 40px rgba(59,42,34,0.12)",
             }}
           >
-            <Text
-              style={{
-                color: colors.red,
-                textTransform: "uppercase",
-                letterSpacing: 2,
-                fontSize: 12,
-                fontWeight: 700,
-                margin: 0,
-              }}
-            >
-              {props.eyebrow}
-            </Text>
             <Heading
               as="h1"
-              style={{ fontFamily: serif, color: colors.ink, fontSize: 30, lineHeight: "36px", margin: "10px 0 18px" }}
+              style={{ fontFamily: serif, color: colors.ink, fontSize: 30, fontWeight: 700, lineHeight: "36px", margin: "0 0 18px" }}
             >
               {props.heading}
             </Heading>
@@ -162,7 +152,7 @@ export function ChristmasEmail(props: ChristmasEmailProps) {
               </Text>
             )}
 
-            <Hr style={{ borderColor: "#EADFD2", margin: "28px 0 16px" }} />
+            <Hr style={{ borderColor: colors.cream, margin: "28px 0 16px" }} />
             <Text style={{ color: colors.muted, fontSize: 12, lineHeight: "18px", margin: 0 }}>{props.footer}</Text>
           </Section>
         </Container>

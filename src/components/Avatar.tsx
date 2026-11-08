@@ -3,61 +3,56 @@ import type { AvatarConfig } from "@/lib/avatar";
 
 type Props = { config: AvatarConfig; className?: string; title?: string };
 
-function Shape({ d, fill, s }: { d: string; fill: string; s: string }) {
-  return (
-    <>
-      <path d={d} fill={fill} />
-      <path d={d} fill={s} />
-    </>
-  );
-}
+const hatLift = { none: 0, santa: -9, elf: -9, beanie: -15, antlers: -2 } as const;
 
-function Circle({ cx, cy, r, fill, s }: { cx: number; cy: number; r: number; fill: string; s: string }) {
-  return (
-    <>
-      <circle cx={cx} cy={cy} r={r} fill={fill} />
-      <circle cx={cx} cy={cy} r={r} fill={s} />
-    </>
-  );
-}
+const yarn = { fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 
 /**
- * Elf avatar built from layered SVG shapes. Every shape gets a shared highlight/shade overlay,
- * which gives the soft clay look in any colour.
+ * An elf as a felt hand puppet: ping-pong-ball eyes, a pom-pom nose and an open puppet mouth.
+ * The felt filter roughens every edge and adds fibre grain, so flat colours read as fabric.
  */
-export function Avatar({ config, className, title }: Props) {
+export function Avatar({ config: c, className, title }: Props) {
   const id = useId().replace(/:/g, "");
-  const shade = `url(#${id}-shade)`;
-  const c = config;
-
+  const felt = `url(#${id}-felt)`;
+  const reindeer = c.hat === "antlers";
 
   const hairBack =
     c.hairStyle === "long" ? (
-      <Shape s={shade} d="M54 92 C54 50 146 50 146 92 L152 150 C130 160 70 160 48 150 Z" fill={c.hairColor} />
+      <g {...yarn} stroke={c.hairColor} strokeWidth="9">
+        <path d="M58 80 C46 110 48 140 56 168" />
+        <path d="M66 74 C56 108 60 138 66 166" />
+        <path d="M142 80 C154 110 152 140 144 168" />
+        <path d="M134 74 C144 108 140 138 134 166" />
+      </g>
     ) : null;
 
   const hairFront = {
-    short: <Shape s={shade} d="M58 88 C56 52 90 40 112 44 C138 48 148 70 142 90 C128 74 104 68 84 72 C72 74 64 80 58 88 Z" fill={c.hairColor} />,
-    long: <Shape s={shade} d="M58 92 C54 54 88 42 110 44 C140 48 150 74 142 96 C132 72 110 64 96 66 C82 70 68 78 58 92 Z" fill={c.hairColor} />,
+    short: (
+      <g {...yarn} stroke={c.hairColor} strokeWidth="8">
+        <path d="M62 70 C70 56 84 50 96 54" />
+        <path d="M76 64 C88 50 104 48 116 56" />
+        <path d="M100 58 C114 48 130 52 138 68" />
+      </g>
+    ),
+    long: (
+      <g {...yarn} stroke={c.hairColor} strokeWidth="8">
+        <path d="M60 76 C66 56 82 48 100 50" />
+        <path d="M100 50 C120 48 136 58 140 76" />
+        <path d="M78 58 C90 66 104 66 116 58" />
+      </g>
+    ),
     bun: (
-      <>
-        <Circle s={shade} cx={100} cy={40} r={18} fill={c.hairColor} />
-        <Shape s={shade} d="M58 88 C56 56 86 46 102 46 C130 46 146 66 142 90 C130 72 108 66 90 70 C76 73 66 79 58 88 Z" fill={c.hairColor} />
-      </>
+      <g {...yarn} stroke={c.hairColor} strokeWidth="8">
+        <circle cx="100" cy="36" r="12" fill={c.hairColor} />
+        <path d="M62 72 C70 54 86 48 100 48 C114 48 130 54 138 72" />
+      </g>
     ),
     curly: (
-      <>
-        {[
-          [64, 74],
-          [76, 58],
-          [94, 50],
-          [112, 50],
-          [128, 58],
-          [138, 74],
-        ].map(([x, y]) => (
-          <Circle s={shade} key={`${x}-${y}`} cx={x} cy={y} r={15} fill={c.hairColor} />
+      <g {...yarn} stroke={c.hairColor} strokeWidth="6.5">
+        {[64, 80, 96, 112, 128].map((x, i) => (
+          <circle key={x} cx={x + 4} cy={i % 2 ? 54 : 62} r="9" />
         ))}
-      </>
+      </g>
     ),
     bald: null,
   }[c.hairStyle];
@@ -66,30 +61,30 @@ export function Avatar({ config, className, title }: Props) {
     none: null,
     santa: (
       <>
-        <Shape s={shade} d="M58 70 C62 36 96 18 124 24 C148 30 162 52 166 76 C152 62 140 58 132 60 C138 66 140 72 140 74 Z" fill="#B8332C" />
-        <Circle s={shade} cx={166} cy={80} r={11} fill="#FBF6EF" />
-        <Shape s={shade} d="M52 66 C80 56 122 56 148 66 C152 74 150 82 146 86 C120 76 82 76 54 86 C50 80 50 72 52 66 Z" fill="#FBF6EF" />
+        <path d="M56 64 C62 28 104 10 134 22 C156 32 166 56 170 82 C156 66 144 60 136 62 C140 66 142 70 142 72 Z" fill="#C4232E" />
+        <circle cx="170" cy="84" r="12" fill="#F7F0E4" />
+        <path d="M48 62 C80 50 122 50 152 62 L150 82 C120 72 82 72 50 82 Z" fill="#F7F0E4" />
       </>
     ),
     elf: (
       <>
-        <Shape s={shade} d="M58 74 C70 40 110 10 168 14 C140 26 130 46 142 74 Z" fill="#2F5D46" />
-        <Circle s={shade} cx={168} cy={16} r={8} fill="#E7B54A" />
-        <Shape s={shade} d="M52 70 C84 60 118 60 148 70 L146 84 C118 76 84 76 54 84 Z" fill="#A8322D" />
+        <path d="M54 66 C64 34 104 6 170 8 C142 22 132 44 146 66 Z" fill="#2A7A4B" />
+        <circle cx="170" cy="10" r="8" fill="#E9B23A" />
+        <path d="M48 62 L58 76 L70 64 L82 77 L94 64 L106 77 L118 64 L130 77 L142 64 L152 76 L152 60 C118 50 82 50 48 60 Z" fill="#C4232E" />
       </>
     ),
     beanie: (
       <>
-        <Shape s={shade} d="M56 80 C54 40 146 40 144 80 Z" fill="#A8322D" />
-        <path d="M60 64 C80 58 120 58 140 64" stroke="#FBF6EF" strokeWidth="5" fill="none" opacity="0.85" />
-        <Shape s={shade} d="M52 76 C84 70 116 70 148 76 L148 90 C116 84 84 84 52 90 Z" fill="#FBF6EF" />
-        <Circle s={shade} cx={100} cy={36} r={10} fill="#FBF6EF" />
+        <path d="M56 74 C52 34 148 34 144 74 Z" fill="#C4232E" />
+        <path d="M58 58 C80 52 120 52 142 58 L142 66 C120 60 80 60 58 66 Z" fill="#F7F0E4" />
+        <path d="M50 70 C84 62 116 62 150 70 L150 86 C116 78 84 78 50 86 Z" fill="#F7F0E4" />
+        <circle cx="100" cy="30" r="11" fill="#F7F0E4" />
       </>
     ),
     antlers: (
-      <g stroke="#8A5A36" strokeWidth="7" strokeLinecap="round" fill="none">
-        <path d="M74 58 C66 40 60 30 52 22 M64 42 C56 40 50 42 44 46 M60 32 C64 24 66 18 66 12" />
-        <path d="M126 58 C134 40 140 30 148 22 M136 42 C144 40 150 42 156 46 M140 32 C136 24 134 18 134 12" />
+      <g fill="#7A4A2A">
+        <path d="M70 58 C62 42 56 30 48 18 C46 14 52 12 54 16 C58 22 62 28 64 32 C66 26 66 20 68 14 C70 10 76 12 74 16 C72 24 72 32 74 40 C78 34 84 30 90 28 C94 28 94 34 90 34 C84 36 80 42 80 52 Z" />
+        <path d="M130 58 C138 42 144 30 152 18 C154 14 148 12 146 16 C142 22 138 28 136 32 C134 26 134 20 132 14 C130 10 124 12 126 16 C128 24 128 32 126 40 C122 34 116 30 110 28 C106 28 106 34 110 34 C116 36 120 42 120 52 Z" />
       </g>
     ),
   }[c.hat];
@@ -98,51 +93,69 @@ export function Avatar({ config, className, title }: Props) {
     <svg viewBox="0 0 200 200" className={className} role="img" aria-label={title}>
       {title && <title>{title}</title>}
       <defs>
-        <radialGradient id={`${id}-shade`} cx="35%" cy="28%" r="85%">
-          <stop offset="0%" stopColor="#fff" stopOpacity="0.45" />
-          <stop offset="45%" stopColor="#fff" stopOpacity="0" />
-          <stop offset="100%" stopColor="#3B1A10" stopOpacity="0.28" />
-        </radialGradient>
+        <filter id={`${id}-felt`} x="-10%" y="-10%" width="120%" height="120%" colorInterpolationFilters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G" result="fuzz" />
+          <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.36 0 0 0 -0.17" result="grain" />
+          <feComposite in="grain" in2="fuzz" operator="in" result="grainIn" />
+          <feMerge>
+            <feMergeNode in="fuzz" />
+            <feMergeNode in="grainIn" />
+          </feMerge>
+        </filter>
         <clipPath id={`${id}-clip`}>
           <circle cx="100" cy="100" r="100" />
         </clipPath>
       </defs>
       <g clipPath={`url(#${id}-clip)`}>
         <circle cx="100" cy="100" r="100" fill={c.background} />
-        {hairBack}
-        <Shape s={shade} d="M30 210 C30 166 62 146 100 146 C138 146 170 166 170 210 Z" fill={c.sweater} />
-        <path d="M44 186 L156 186" stroke="#fff" strokeOpacity="0.35" strokeWidth="5" strokeDasharray="2 9" strokeLinecap="round" />
-        <Shape s={shade} d="M86 126 L114 126 L116 152 C106 158 94 158 84 152 Z" fill={c.skin} />
-        <Circle s={shade} cx={100} cy={94} r={44} fill={c.skin} />
-        <Circle s={shade} cx={57} cy={98} r={8} fill={c.skin} />
-        <Circle s={shade} cx={143} cy={98} r={8} fill={c.skin} />
-        {hairFront}
-        <ellipse cx="84" cy="98" rx="5" ry="6" fill="#2B1B14" />
-        <ellipse cx="116" cy="98" rx="5" ry="6" fill="#2B1B14" />
-        <circle cx="86" cy="96" r="1.6" fill="#fff" />
-        <circle cx="118" cy="96" r="1.6" fill="#fff" />
+        <g filter={felt}>
+          {hairBack}
+          <path d="M26 212 C26 168 60 146 100 146 C140 146 174 168 174 212 Z" fill={c.sweater} />
+          {!reindeer && (
+            <>
+              <path d="M56 98 C38 88 26 72 20 56 C40 60 56 72 64 86 Z" fill={c.skin} />
+              <path d="M144 98 C162 88 174 72 180 56 C160 60 144 72 136 86 Z" fill={c.skin} />
+            </>
+          )}
+          {reindeer && (
+            <>
+              <ellipse cx="50" cy="86" rx="16" ry="9" transform="rotate(-24 50 86)" fill={c.skin} />
+              <ellipse cx="150" cy="86" rx="16" ry="9" transform="rotate(24 150 86)" fill={c.skin} />
+            </>
+          )}
+          <ellipse cx="100" cy="98" rx="50" ry="48" fill={c.skin} />
+          {hairFront}
+          {c.blush && (
+            <>
+              <ellipse cx="64" cy="114" rx="10" ry="7" fill="#EF8C80" opacity="0.6" />
+              <ellipse cx="136" cy="114" rx="10" ry="7" fill="#EF8C80" opacity="0.6" />
+            </>
+          )}
+          <path d="M70 118 C76 146 124 146 130 118 C116 124 84 124 70 118 Z" fill="#5A1518" />
+          <path d="M86 134 C92 128 108 128 114 134 C108 142 92 142 86 134 Z" fill="#E77B7F" />
+          {c.scarf !== "none" && (
+            <>
+              <path d="M58 146 C80 160 120 160 142 146 L148 162 C120 178 80 178 52 162 Z" fill={c.scarf} />
+              <path d="M124 160 L142 158 L150 200 L128 200 Z" fill={c.scarf} />
+            </>
+          )}
+          <circle cx="100" cy="108" r="12" fill={reindeer ? "#D7262F" : "#E98A78"} />
+          <g transform={`translate(0 ${hatLift[c.hat]})`}>{hat}</g>
+        </g>
+        <circle cx="82" cy="86" r="15" fill="#FBF8F2" />
+        <circle cx="118" cy="86" r="15" fill="#FBF8F2" />
+        <circle cx="85" cy="89" r="6.5" fill="#1A0F0A" />
+        <circle cx="121" cy="89" r="6.5" fill="#1A0F0A" />
+        <circle cx="87" cy="86.5" r="2" fill="#fff" />
+        <circle cx="123" cy="86.5" r="2" fill="#fff" />
         {c.glasses === "round" && (
-          <g stroke="#3B2A22" strokeWidth="3" fill="#fff" fillOpacity="0.12">
-            <circle cx="84" cy="98" r="12" />
-            <circle cx="116" cy="98" r="12" />
-            <path d="M96 97 Q100 94 104 97" fill="none" />
+          <g stroke="#3B2A22" strokeWidth="3.2" fill="none">
+            <circle cx="82" cy="86" r="19" />
+            <circle cx="118" cy="86" r="19" />
+            <path d="M99 84 Q100 82 101 84" />
           </g>
         )}
-        {c.blush && (
-          <>
-            <ellipse cx="72" cy="114" rx="9" ry="6" fill="#F08A7A" opacity="0.45" />
-            <ellipse cx="128" cy="114" rx="9" ry="6" fill="#F08A7A" opacity="0.45" />
-          </>
-        )}
-        <circle cx="100" cy="108" r="6" fill="#E9967F" />
-        <path d="M88 120 Q100 130 112 120" stroke="#6B2A22" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-        {c.scarf !== "none" && (
-          <>
-            <Shape s={shade} d="M66 140 C84 152 116 152 134 140 L138 154 C116 166 84 166 62 154 Z" fill={c.scarf} />
-            <Shape s={shade} d="M120 150 L134 150 L140 192 L122 192 Z" fill={c.scarf} />
-          </>
-        )}
-        {hat}
       </g>
     </svg>
   );
