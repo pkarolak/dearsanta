@@ -3,7 +3,8 @@
 import { QRCodeSVG } from "qrcode.react";
 import { Avatar } from "@/components/Avatar";
 import { ShowFrame, ShowStage } from "@/components/show/ShowStage";
-import { seededAvatar } from "@/lib/avatar";
+import { Reindeer } from "@/components/show/Vignette";
+import { avatarOptions, defaultAvatar, seededAvatar } from "@/lib/avatar";
 import { ceremonySteps, type CeremonyStep } from "@/lib/ceremony/steps";
 
 const names = ["Anna", "Tom", "Ola", "Kasia", "Marek", "Lucía", "João", "Grete", "Piotr", "Sam", "Zofia", "Ben"];
@@ -62,6 +63,34 @@ export function ShowSheet({ step, count, level }: { step: string | null; count: 
 
   return (
     <main className="space-y-10 bg-snow p-8">
+      <section data-testid="reindeer" className="relative h-[480px] w-[360px] bg-pine">
+        <Reindeer className="inset-0 w-full">
+          <QRCodeSVG value="https://example.com/join/ABCD" className="mx-auto h-[92%] w-auto translate-y-[4%]" />
+        </Reindeer>
+      </section>
+      <section data-testid="avatar-matrix" className="grid grid-cols-10 gap-2">
+        {avatarOptions.hairStyle.flatMap((hairStyle, si) =>
+          avatarOptions.hat.flatMap((hat, hi) =>
+            [avatarOptions.skin[4], avatarOptions.skin[0]].map((skin, k) => (
+              <Avatar
+                key={`${hairStyle}-${hat}-${k}`}
+                config={{
+                  ...defaultAvatar,
+                  skin,
+                  hairStyle,
+                  hat,
+                  hairColor: avatarOptions.hairColor[(si + hi) % 6],
+                  glasses: (si + hi + k) % 2 ? "round" : "none",
+                  scarf: avatarOptions.scarf[(si + hi + k) % 5],
+                  sweater: avatarOptions.sweater[(hi + k) % 5],
+                  background: avatarOptions.background[si % 5],
+                }}
+                className="h-auto w-full"
+              />
+            )),
+          ),
+        )}
+      </section>
       <section className="grid grid-cols-6 gap-4">
         {names.concat(["Eli", "Noa", "Ida", "Max", "Leo", "Mia"]).map((n) => (
           <div key={n} className="text-center">
