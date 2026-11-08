@@ -52,7 +52,7 @@ export function MatchScene() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ type: "spring", stiffness: 90, damping: 12, delay: 0.5 }}
           >
-            <Image src="/show/elves.webp" alt="" width={900} height={896} unoptimized className="h-auto w-full" />
+            <Image src="/show/elves.webp" alt="" width={807} height={944} unoptimized className="h-auto w-full" />
           </motion.div>
         </motion.div>
       </div>

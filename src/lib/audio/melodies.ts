@@ -56,6 +56,17 @@ export const melodies: Melody[] = [
   },
 ];
 
+/** Chord per bar of the Jingle Bells chorus (16 bars of 4 beats), for the film's full arrangement. */
+export const jingleBellsChords = ["C", "C", "C", "C", "F", "C", "D7", "G7", "C", "C", "C", "C", "F", "C", "G7", "C"] as const;
+
+/** Bass root and fifth, then the chord stab, per chord. */
+export const chordVoicings: Record<(typeof jingleBellsChords)[number], { bass: [string, string]; stab: string[] }> = {
+  C: { bass: ["C3", "G2"], stab: ["G3", "C4", "E4"] },
+  F: { bass: ["F2", "C3"], stab: ["A3", "C4", "F4"] },
+  D7: { bass: ["D3", "A2"], stab: ["F#3", "A3", "C4"] },
+  G7: { bass: ["G2", "D3"], stab: ["B3", "D4", "F4"] },
+};
+
 const SEMITONES: Record<string, number> = { C: -9, D: -7, E: -5, F: -4, G: -2, A: 0, B: 2 };
 
 export function noteFrequency(note: string) {

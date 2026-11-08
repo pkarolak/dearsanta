@@ -29,18 +29,36 @@
     },
     "footer": "Zrobione w warsztacie Mikołaja. Ho, ho, ho!",
     "heroLead": "Mikołaj poprowadzi wasze losowanie, uczciwie rozlosuje imiona i każdemu szepnie wynik na jego telefon.",
-    "gatherTitle": "Wszyscy zbierają się przy kominku",
-    "gatherBody": "Goście skanują kod od renifera, przebierają swojego elfa, a na kominku pojawia się skarpeta z ich imieniem.",
-    "drawTitle": "Mikołaj losuje, uczciwie",
-    "drawBody": "Każdy możliwy wynik jest równie prawdopodobny. Nikt nie wylosuje siebie, a pary, które chcesz rozdzielić, zostaną rozdzielone.",
     "matchTitle": "Twój wynik w twojej dłoni",
     "matchBody": "Przytrzymaj skarpetę, żeby ją rozpakować. Imię widzisz tylko ty, więc nikt nie podejrzy. Spróbuj tutaj.",
     "matchHello": "Cześć, Tomek!",
     "languagesTitle": "Mikołaj mówi w twoim języku",
     "languagesBody": "Całe przedstawienie, razem z głosem Mikołaja, w pięciu językach. Wybierz swój.",
     "finaleTitle": "Kurtyna w górę!",
-    "finaleBody": "Przygotujesz wszystko w minutę. Reszta dołącza kodem albo skanując QR.",
-    "scan": "Zeskanuj i dołącz"
+    "finaleBody": "Przygotujesz wszystko w minutę. Reszta dołącza kodem albo skanując QR."
+  },
+  "film": {
+    "label": "Bajka o Mikołaju, który potrzebuje pomocy",
+    "lines": {
+      "worry": "Znowu zbliżają się święta i jak zwykle wszystko na mojej głowie.",
+      "elves": "Elfy figlują zamiast pracować…",
+      "time": "…a do nocy wigilijnej już coraz mniej czasu.",
+      "trying": "Próbujemy z całych sił wyrobić się ze wszystkim, ale mamy swoje problemy.",
+      "reindeer": "Renifery mają katar…",
+      "sleigh": "…sanie skrzypią…",
+      "factory": "…a w fabryce prezentów zepsuła się taśma produkcyjna!",
+      "help": "Potrzebujemy Waszej pomocy.",
+      "become": "W tym roku musicie wcielić się w rolę elfów, pomocników Świętego Mikołaja!",
+      "ready": "Przygotujcie się! Jesteście odpowiedzialni za przekazanie świątecznej radości Waszym najbliższym!"
+    },
+    "soundOn": "Włącz dźwięk",
+    "soundOff": "Wycisz",
+    "pause": "Pauza",
+    "play": "Odtwórz",
+    "replay": "Obejrzyj jeszcze raz",
+    "skip": "Pomiń",
+    "scene": "Scena {n}",
+    "eve": "Wigilia"
   },
   "create": {
     "heading": "Nowy Secret Santa",

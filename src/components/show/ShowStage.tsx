@@ -244,7 +244,7 @@ function Elves({ className }: { className: string }) {
       exit={{ y: "80%" }}
       transition={{ y: { duration: 0.9, repeat: Infinity, ease: "easeInOut" } }}
     >
-      <Image src="/show/elves.webp" alt="" width={900} height={896} unoptimized className="h-auto w-full" />
+      <Image src="/show/elves.webp" alt="" width={807} height={944} unoptimized className="h-auto w-full" />
     </motion.div>
   );
 }

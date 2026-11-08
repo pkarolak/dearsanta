@@ -29,18 +29,36 @@
     },
     "footer": "Hecho en el taller de Papá Noel. ¡Jo, jo, jo!",
     "heroLead": "Papá Noel presenta vuestro amigo invisible, sortea los nombres con justicia y susurra a cada uno su resultado en su móvil.",
-    "gatherTitle": "Todos junto a la chimenea",
-    "gatherBody": "Los invitados escanean el código del reno, visten a su elfo y en la chimenea aparece un calcetín con su nombre.",
-    "drawTitle": "Papá Noel sortea con justicia",
-    "drawBody": "Todos los resultados válidos son igual de probables. Nadie se saca a sí mismo y las parejas que quieras separar quedan separadas.",
     "matchTitle": "Tu resultado, en tu mano",
     "matchBody": "Mantén pulsado el calcetín para abrirlo. Solo tú ves el nombre, así nadie puede espiar. Pruébalo aquí.",
     "matchHello": "¡Hola, Tomás!",
     "languagesTitle": "Papá Noel habla tu idioma",
     "languagesBody": "Todo el espectáculo, con la voz de Papá Noel incluida, en cinco idiomas. Elige el tuyo.",
     "finaleTitle": "¡Que se abra el telón!",
-    "finaleBody": "Lo preparas en un minuto. Los demás se unen con un código o escaneando el QR.",
-    "scan": "Escanea y únete"
+    "finaleBody": "Lo preparas en un minuto. Los demás se unen con un código o escaneando el QR."
+  },
+  "film": {
+    "label": "Un pequeño cuento de Papá Noel, que necesita vuestra ayuda",
+    "lines": {
+      "worry": "Ya vuelve la Navidad y, como siempre, todo me cae encima.",
+      "elves": "Los elfos hacen travesuras en vez de trabajar…",
+      "time": "…y cada vez queda menos tiempo para Nochebuena.",
+      "trying": "Hacemos todo lo posible por llegar a todo, pero tenemos nuestros problemas.",
+      "reindeer": "Los renos están resfriados…",
+      "sleigh": "…el trineo chirría…",
+      "factory": "…¡y en la fábrica de regalos se ha estropeado la cinta transportadora!",
+      "help": "Necesitamos vuestra ayuda.",
+      "become": "¡Este año os toca ser los elfos, los ayudantes de Papá Noel!",
+      "ready": "¡Preparaos! ¡Sois los responsables de llevar la alegría navideña a vuestros seres queridos!"
+    },
+    "soundOn": "Activar sonido",
+    "soundOff": "Silenciar",
+    "pause": "Pausa",
+    "play": "Reproducir",
+    "replay": "Ver otra vez",
+    "skip": "Saltar",
+    "scene": "Escena {n}",
+    "eve": "Nochebuena"
   },
   "create": {
     "heading": "Un nuevo amigo invisible",

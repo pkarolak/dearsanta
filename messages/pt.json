@@ -29,18 +29,36 @@
     },
     "footer": "Feito na oficina do Pai Natal. Ho, ho, ho!",
     "heroLead": "O Pai Natal apresenta o vosso amigo secreto, sorteia os nomes com justiça e sussurra a cada um o seu par no telemóvel.",
-    "gatherTitle": "Todos juntos à lareira",
-    "gatherBody": "Os convidados leem o código da rena, vestem o seu elfo e aparece na lareira uma meia com o seu nome.",
-    "drawTitle": "O Pai Natal sorteia com justiça",
-    "drawBody": "Todos os resultados válidos são igualmente prováveis. Ninguém tira o próprio nome e os pares que quer separar ficam separados.",
     "matchTitle": "O seu par, na sua mão",
     "matchBody": "Mantenha a meia premida para a abrir. Só você vê o nome, por isso ninguém espreita. Experimente aqui.",
     "matchHello": "Olá, Tomás!",
     "languagesTitle": "O Pai Natal fala a sua língua",
     "languagesBody": "Todo o espetáculo, com a voz do Pai Natal incluída, em cinco línguas. Escolha a sua.",
     "finaleTitle": "Abram as cortinas!",
-    "finaleBody": "Prepara tudo num minuto. Os outros entram com um código ou lendo o QR.",
-    "scan": "Leia e entre"
+    "finaleBody": "Prepara tudo num minuto. Os outros entram com um código ou lendo o QR."
+  },
+  "film": {
+    "label": "Um pequeno conto do Pai Natal, que precisa da vossa ajuda",
+    "lines": {
+      "worry": "O Natal está outra vez a chegar e, como sempre, tudo me cai em cima.",
+      "elves": "Os elfos andam na brincadeira em vez de trabalhar…",
+      "time": "…e até à noite de Consoada há cada vez menos tempo.",
+      "trying": "Estamos a fazer os possíveis para dar conta de tudo, mas temos os nossos problemas.",
+      "reindeer": "As renas estão constipadas…",
+      "sleigh": "…o trenó range…",
+      "factory": "…e na fábrica de presentes avariou-se o tapete rolante!",
+      "help": "Precisamos da vossa ajuda.",
+      "become": "Este ano, vocês vão ser os elfos, os ajudantes do Pai Natal!",
+      "ready": "Preparem-se! Vocês são os responsáveis por levar a alegria do Natal aos vossos entes queridos!"
+    },
+    "soundOn": "Ligar o som",
+    "soundOff": "Silenciar",
+    "pause": "Pausa",
+    "play": "Reproduzir",
+    "replay": "Ver outra vez",
+    "skip": "Saltar",
+    "scene": "Cena {n}",
+    "eve": "Consoada"
   },
   "create": {
     "heading": "Um novo amigo secreto",
