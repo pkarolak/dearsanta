@@ -129,12 +129,91 @@
   animation: confetti linear infinite;
 }
 
+/* The landing intro runs in CSS so it starts at first paint, before the page's script arrives. */
+@keyframes curtain-open-left {
+  to {
+    translate: -105% 0;
+  }
+}
+@keyframes curtain-open-right {
+  to {
+    translate: 105% 0;
+  }
+}
+@keyframes pop-up {
+  from {
+    translate: 0 80%;
+  }
+  60% {
+    translate: 0 -4%;
+  }
+  80% {
+    translate: 0 1.5%;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@keyframes sign-drop {
+  from {
+    translate: 0 -130%;
+    rotate: -7deg;
+  }
+  40% {
+    translate: 0 2%;
+    rotate: 5deg;
+  }
+  52% {
+    translate: 0 0;
+  }
+  62% {
+    rotate: -3.5deg;
+  }
+  76% {
+    rotate: 2deg;
+  }
+  89% {
+    rotate: -0.8deg;
+  }
+  to {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+}
+@keyframes bob {
+  50% {
+    translate: 0 -3%;
+  }
+}
+
+.intro-curtain-left {
+  animation: curtain-open-left 1.6s cubic-bezier(0.7, 0, 0.3, 1) 0.35s both;
+}
+.intro-curtain-right {
+  animation: curtain-open-right 1.6s cubic-bezier(0.7, 0, 0.3, 1) 0.35s both;
+}
+.intro-pop {
+  animation: pop-up 0.9s cubic-bezier(0.3, 0.7, 0.4, 1) both;
+}
+.intro-sign {
+  animation: sign-drop 1.9s ease-out 1.4s both;
+  transform-origin: 50% -40%;
+}
+.animate-bob {
+  animation: bob 1s ease-in-out 2.6s infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-confetti {
+  .animate-confetti,
+  .intro-curtain-left,
+  .intro-curtain-right {
     display: none;
   }
   .animate-sway,
-  .animate-bulbs {
+  .animate-bulbs,
+  .animate-bob,
+  .intro-pop,
+  .intro-sign {
     animation: none;
   }
 }

@@ -12,8 +12,6 @@ import { CoverStage } from "./CoverStage";
 import { useHoHo } from "./useHoHo";
 import { Link } from "@/i18n/navigation";
 
-const pop = { type: "spring", stiffness: 170, damping: 13 } as const;
-
 export function HeroShow() {
   const t = useTranslations("home");
   const ref = useRef<HTMLElement>(null);
@@ -34,12 +32,7 @@ export function HeroShow() {
         <CoverStage set="stage" scale={camera} origin="50% 55%" priority>
           <div className="absolute left-[21%] top-[6.5%] h-[13%] w-[58%] animate-bulbs rounded-full bg-gold/10 mix-blend-screen" />
 
-          <motion.div
-            className="absolute left-[37%] top-[24%] w-[26%]"
-            initial={{ y: "75%" }}
-            animate={{ y: 0 }}
-            transition={{ ...pop, delay: 1.1 }}
-          >
+          <div className="intro-pop absolute left-[37%] top-[24%] w-[26%] [animation-delay:1.1s]">
             <motion.div
               animate={{ rotate: level > 0 ? 0 : [-1.4, 1.4, -1.4] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -47,18 +40,13 @@ export function HeroShow() {
             >
               <SantaPuppet level={level} priority />
             </motion.div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="absolute left-[64%] top-[42%] w-[23%]"
-            initial={{ y: "90%" }}
-            animate={{ y: ["0%", "-3%", "0%"] }}
-            transition={{ y: { delay: 1.9, duration: 1, repeat: Infinity, ease: "easeInOut" } }}
-          >
-            <motion.div initial={{ y: "90%" }} animate={{ y: 0 }} transition={{ ...pop, delay: 1.7 }}>
-              <Image src="/show/elves.webp" alt="" width={900} height={896} unoptimized className="h-auto w-full" />
-            </motion.div>
-          </motion.div>
+          <div className="animate-bob absolute left-[64%] top-[42%] w-[23%]">
+            <div className="intro-pop [animation-delay:1.7s]">
+              <Image src="/show/elves.webp" alt="" width={900} height={896} unoptimized priority className="h-auto w-full" />
+            </div>
+          </div>
 
           <Image src="/show/presents.webp" alt="" width={1280} height={470} unoptimized priority className="absolute bottom-[2%] left-[30%] w-[40%]" />
           <Image
@@ -82,12 +70,7 @@ export function HeroShow() {
         className="relative order-3 z-20 -mt-14 px-4 pb-12 md:absolute md:left-[max(1.25rem,4vw)] md:top-[15%] md:mt-0 md:w-[clamp(23rem,36vw,36rem)] md:p-0"
         style={{ y: signY }}
       >
-        <motion.div
-          initial={{ y: "-130%", rotate: -7 }}
-          animate={{ y: 0, rotate: 0 }}
-          transition={{ y: { ...pop, delay: 1.4 }, rotate: { type: "spring", stiffness: 60, damping: 4, delay: 1.6 } }}
-          style={{ transformOrigin: "50% -40%" }}
-        >
+        <div className="intro-sign">
           <div className="absolute bottom-full left-[16%] hidden h-[100svh] w-1.5 rounded-full bg-gold-dark md:block" />
           <div className="absolute bottom-full right-[16%] hidden h-[100svh] w-1.5 rounded-full bg-gold-dark md:block" />
           <div className="relative rounded-felt bg-berry p-2.5">
@@ -106,7 +89,7 @@ export function HeroShow() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );
@@ -116,13 +99,9 @@ function OpeningCurtains() {
   return (
     <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
       {[0, 1].map((side) => (
-        <motion.div
+        <div
           key={side}
-          className="absolute top-0 h-full w-[52%]"
-          style={{ [side ? "right" : "left"]: 0 }}
-          initial={{ x: 0 }}
-          animate={{ x: side ? "105%" : "-105%" }}
-          transition={{ delay: 0.35, duration: 1.6, ease: [0.7, 0, 0.3, 1] }}
+          className={`absolute top-0 h-full w-[52%] bg-pine-dark ${side ? "intro-curtain-right right-0" : "intro-curtain-left left-0"}`}
         >
           <Image
             src="/show/curtain.webp"
@@ -134,7 +113,7 @@ function OpeningCurtains() {
             className="object-cover"
             style={{ transform: side ? "scaleX(-1)" : undefined }}
           />
-        </motion.div>
+        </div>
       ))}
     </div>
   );
