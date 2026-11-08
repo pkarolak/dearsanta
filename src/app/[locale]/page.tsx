@@ -13,11 +13,14 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "film.lines" });
+  // Santa's voice reads `film.spoken` where the subtitle has something TTS mispronounces, like digits.
+  const spoken = await getTranslations({ locale, namespace: "film.spoken" });
   const lines = Object.fromEntries(
     await Promise.all(
       lineKeys.map(async (key): Promise<[LineKey, VoiceLine]> => {
         const text = t(key);
-        return [key, { id: `film-${key}`, text, audioUrl: await prepareLine(text, locale).catch(() => null) }];
+        const voice = spoken.has(key) ? spoken(key) : text;
+        return [key, { id: `film-${key}`, text, audioUrl: await prepareLine(voice, locale).catch(() => null) }];
       }),
     ),
   ) as Record<LineKey, VoiceLine>;

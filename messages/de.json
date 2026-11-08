@@ -55,6 +55,9 @@
       "become": "Dieses Jahr schlüpft ihr in die Rolle der Wichtel, der Helfer des Weihnachtsmanns!",
       "ready": "Macht euch bereit! Ihr seid dafür verantwortlich, euren Liebsten weihnachtliche Freude zu bringen!"
     },
+    "spoken": {
+      "deadline": "Vierundzwanzig Stunden, um alle Geschenke auszuliefern – und noch ist nicht alles fertig!"
+    },
     "soundOn": "Ton an",
     "soundOff": "Stumm",
     "pause": "Pause",

@@ -55,6 +55,9 @@
       "become": "Este ano, vocês vão ser os elfos, os ajudantes do Pai Natal!",
       "ready": "Preparem-se! Vocês são os responsáveis por levar a alegria do Natal aos vossos entes queridos!"
     },
+    "spoken": {
+      "deadline": "Vinte e quatro horas para entregar os presentes todos, e ainda não está tudo pronto!"
+    },
     "soundOn": "Ligar o som",
     "soundOff": "Silenciar",
     "pause": "Pausa",

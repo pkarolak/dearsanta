@@ -55,6 +55,9 @@
       "become": "This year, you will play the elves, Santa’s little helpers!",
       "ready": "Get ready! You’re in charge of bringing Christmas joy to your nearest and dearest!"
     },
+    "spoken": {
+      "deadline": "Twenty-four hours to deliver all the presents, and we're still not ready!"
+    },
     "soundOn": "Sound on",
     "soundOff": "Mute",
     "pause": "Pause",

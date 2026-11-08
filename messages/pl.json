@@ -55,6 +55,9 @@
       "become": "W tym roku musicie wcielić się w rolę elfów, pomocników Świętego Mikołaja!",
       "ready": "Przygotujcie się! Jesteście odpowiedzialni za przekazanie świątecznej radości Waszym najbliższym!"
     },
+    "spoken": {
+      "deadline": "Dwadzieścia cztery godziny na rozwiezienie prezentów, a jeszcze nie wszystko gotowe!"
+    },
     "soundOn": "Włącz dźwięk",
     "soundOff": "Wycisz",
     "pause": "Pauza",
