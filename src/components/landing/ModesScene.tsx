@@ -113,7 +113,7 @@ export function ModesScene() {
   );
 }
 
-function ModePicture({ mode }: { mode: (typeof modes)[number] }) {
+export function ModePicture({ mode }: { mode: (typeof modes)[number] }) {
   if (mode === "sync")
     return (
       <Vignette set="stage" focus="50% 40%" className="absolute! inset-0 rounded-none">

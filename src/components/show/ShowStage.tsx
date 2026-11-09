@@ -4,6 +4,7 @@ import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import layout from "./layout.json";
+import { Avatar } from "../Avatar";
 import { SantaPuppet } from "./SantaPuppet";
 import { Stocking } from "./Stocking";
 import type { AvatarConfig } from "@/lib/avatar";
@@ -171,6 +172,7 @@ function LivingRoom({ step, elves, level, card, remoteLabel }: Props) {
       <AnimatePresence>
         {step === "elves" && <Elves key="elves" className="left-[0%] top-[54%] w-[25%]" />}
       </AnimatePresence>
+      {step === "lobby" && <DressingRoom elves={elves} />}
     </>
   );
 }
@@ -341,5 +343,57 @@ export function Confetti({ count, scale = 1 }: { count: number; scale?: number }
         );
       })}
     </div>
+  );
+}
+
+const looksOf = (e: StageElf) => JSON.stringify(e.avatar);
+
+/**
+ * While elves dress up on their phones, whoever just changed their look (or just walked in)
+ * steps into a big spotlight on the screen, so the room can laugh along.
+ */
+function DressingRoom({ elves }: { elves: StageElf[] }) {
+  const [seen, setSeen] = useState(elves);
+  const [star, setStar] = useState<{ id: string; n: number } | null>(null);
+  if (seen !== elves) {
+    const before = new Map(seen.map((e) => [e.id, looksOf(e)]));
+    const changed = elves.find((e) => before.get(e.id) !== looksOf(e));
+    setSeen(elves);
+    if (changed) setStar((s) => ({ id: changed.id, n: (s?.n ?? 0) + 1 }));
+  }
+  useEffect(() => {
+    if (!star) return;
+    const timer = setTimeout(() => setStar(null), 5000);
+    return () => clearTimeout(timer);
+  }, [star]);
+  const elf = star && elves.find((e) => e.id === star.id);
+
+  return (
+    <AnimatePresence>
+      {elf && (
+        <motion.div
+          key={elf.id}
+          className="absolute left-[4%] top-[40%] z-10 w-[21%]"
+          initial={{ opacity: 0, scale: 0.4, rotate: -10, y: "20%" }}
+          animate={{ opacity: 1, scale: 1, rotate: -3, y: 0 }}
+          exit={{ opacity: 0, scale: 0.6, y: "15%" }}
+          transition={{ type: "spring", stiffness: 220, damping: 14 }}
+        >
+          <div className="absolute -inset-[18%] rounded-full bg-[radial-gradient(closest-side,rgb(255_220_140/0.65),transparent)]" />
+          <motion.div
+            key={star.n}
+            className="relative"
+            initial={{ scale: 0.9, rotate: -4 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 420, damping: 10 }}
+          >
+            <Avatar config={elf.avatar} title={elf.displayName} className="w-full ring-[0.5cqw] ring-gold shadow-[0_1.5cqw_3cqw_rgb(0_0_0/0.45)]" />
+          </motion.div>
+          <p className="relative mx-auto -mt-[1.6cqw] w-max max-w-full truncate rounded-full bg-snow px-[1.4cqw] py-[0.5cqw] font-display text-[2cqw] font-bold text-ink shadow-[0_0.6cqw_1.2cqw_rgb(0_0_0/0.3)]">
+            {elf.displayName}
+          </p>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

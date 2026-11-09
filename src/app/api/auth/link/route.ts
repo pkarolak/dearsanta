@@ -28,7 +28,7 @@ export async function GET(request: Request) {
     status: participant.status === "invited" ? "approved" : undefined,
   });
   await signInParticipant(session, participant.id);
-  await signInProfile(participant.email);
+  if (participant.email) await signInProfile(participant.email);
 
   const safeNext = next && next.startsWith(`/s/${session.code}/`) ? next : `/s/${session.code}/me`;
   return redirectTo(safeNext);

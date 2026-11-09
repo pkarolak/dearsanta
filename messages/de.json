@@ -102,7 +102,25 @@
     "invitesHintAsync": "Alle bekommen eine festliche Einladung mit einem Link zum Wichtelprofil.",
     "invitesCount": "{count, plural, one {# Einladung wird} other {# Einladungen werden}} verschickt",
     "creating": "Der Kamin wird angezündet…",
-    "submit": "Runde erstellen"
+    "submit": "Runde erstellen",
+    "quick": {
+      "hostName": "Elfenchef",
+      "heading": "Wie feiert ihr?",
+      "lead": "Ein Klick und die Werkstatt ist offen. Den Rest stellst du später ein, wenn überhaupt.",
+      "starting": "Wir öffnen die Werkstatt…",
+      "plan": "Lieber alles im Voraus planen?",
+      "planLink": "Das ganze Formular mit Datum, Budget und Einladungen",
+      "together": {
+        "body": "Alle an einem Tisch. QR-Code auf dem Bildschirm, gleich wird gelost."
+      },
+      "remote": {
+        "body": "Jemand ist weit weg und schaut den Weihnachtsmann auf dem eigenen Gerät."
+      },
+      "ownTime": {
+        "body": "Schick der Familie einen Link. Jeder macht mit, wann er will, dann gibst du die Auslosung frei."
+      },
+      "title": "Unser Wichteln"
+    }
   },
   "errors": {
     "not_found": "Diese Runde haben wir nicht gefunden.",
@@ -129,7 +147,9 @@
     "joining": "Wir klopfen an…",
     "submit": "An die Werkstatttür klopfen",
     "checkEmailTitle": "Schau in dein Postfach",
-    "checkEmailBody": "Du bist schon Teil dieser Runde. Wir haben dir einen Link geschickt, um auf diesem Gerät weiterzumachen."
+    "checkEmailBody": "Du bist schon Teil dieser Runde. Wir haben dir einen Link geschickt, um auf diesem Gerät weiterzumachen.",
+    "emailOptional": "Deine E-Mail (optional)",
+    "emailHintOptional": "Du bekommst eine Erinnerungsmail mit deinem Los und kannst von einem anderen Gerät zurückkommen."
   },
   "login": {
     "heading": "Deine Runden",
@@ -331,7 +351,24 @@
     "settings": "Einstellungen",
     "saveSettings": "Einstellungen speichern",
     "settingsSaved": "Einstellungen gespeichert.",
-    "fullscreen": "Vollbild"
+    "fullscreen": "Vollbild",
+    "room": {
+      "title": "Die Werkstatt ist offen!",
+      "lead": "Scannt den Code mit dem Handy oder öffnet die Seite und tippt den Code ein.",
+      "leadAsync": "Schick diesen Link an die Familie – jeder macht mit, wann er will.",
+      "waiting": "Wir warten auf die ersten Elfen…",
+      "inside": "{count, plural, one {# Elf drin} other {# Elfen drin}}",
+      "yourName": "Und du, wie heißt du?",
+      "saveName": "Speichern",
+      "share": "Link teilen",
+      "copy": "Link kopieren",
+      "copied": "Kopiert!",
+      "screen": "Großen Bildschirm öffnen",
+      "screenHint": "Schließ einen Fernseher oder Laptop an: Alle sehen, wie die Elfen entstehen.",
+      "tooFew": "Zum Losen braucht es mindestens 3 Elfen.",
+      "more": "Einstellungen, Regeln und Einladungen",
+      "myElf": "Deinen Elf gestalten"
+    }
   },
   "screen": {
     "noAccessTitle": "Das ist der große Bildschirm",

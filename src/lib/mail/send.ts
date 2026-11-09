@@ -4,7 +4,8 @@ import { ChristmasEmail, type ChristmasEmailProps } from "./ChristmasEmail";
 import { logMail } from "@/lib/db/repo";
 
 export type OutgoingMail = {
-  to: string;
+  /** Elves who joined with just a name have no address; their mail is skipped. */
+  to: string | null;
   subject: string;
   email: ChristmasEmailProps;
   attachments?: { filename: string; content: string; contentType: string }[];
@@ -22,7 +23,8 @@ export function devInboxEnabled() {
 }
 
 /** Sends mails in one batch. Without RESEND_API_KEY they land in the local inbox at /dev/mail. */
-export async function sendMails(mails: OutgoingMail[]) {
+export async function sendMails(all: OutgoingMail[]) {
+  const mails = all.filter((m): m is OutgoingMail & { to: string } => !!m.to);
   if (!mails.length) return;
   const rendered = await Promise.all(
     mails.map(async (m) => ({ ...m, html: await render(ChristmasEmail(m.email)), text: await render(ChristmasEmail(m.email), { plainText: true }) })),

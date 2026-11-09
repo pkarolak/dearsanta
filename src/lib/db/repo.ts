@@ -26,6 +26,8 @@ export type Session = {
   stepStartedAt: Date;
   drawCommitment: string | null;
   drawnAt: Date | null;
+  /** Spontaneous sessions let people in as soon as they knock. */
+  autoAdmit: boolean;
   version: number;
 };
 
@@ -33,7 +35,8 @@ export type Participant = {
   id: string;
   sessionId: string;
   profileId: string | null;
-  email: string;
+  /** Optional: a spontaneous elf can join with just a name. */
+  email: string | null;
   displayName: string;
   avatar: AvatarConfig;
   role: "host" | "elf";
@@ -71,6 +74,7 @@ function mapSession(r: any): Session {
     stepStartedAt: new Date(r.step_started_at),
     drawCommitment: r.draw_commitment,
     drawnAt: toDate(r.drawn_at),
+    autoAdmit: !!r.auto_admit,
     version: Number(r.version),
   };
 }
@@ -82,7 +86,7 @@ function mapParticipant(r: any): Participant {
     profileId: r.profile_id,
     email: r.email,
     displayName: r.display_name,
-    avatar: parseAvatar(r.avatar, r.email),
+    avatar: parseAvatar(r.avatar, r.email ?? r.id),
     role: r.role,
     status: r.status,
     isRemote: r.is_remote,
@@ -119,7 +123,8 @@ export type NewSession = {
   onlineUrl: string | null;
   budgetAmount: number | null;
   currency: string;
-  host: { name: string; email: string; locale: string };
+  autoAdmit?: boolean;
+  host: { name: string; email: string | null; locale: string };
 };
 
 export async function createSession(input: NewSession) {
@@ -128,8 +133,8 @@ export async function createSession(input: NewSession) {
     let row;
     for (let attempt = 0; attempt < 5 && !row; attempt++) {
       const rows = await tx.query(
-        `insert into sessions (code, screen_key, title, mode, locale, timezone, scheduled_at, location, online_url, budget_amount, currency)
-         values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+        `insert into sessions (code, screen_key, title, mode, locale, timezone, scheduled_at, location, online_url, budget_amount, currency, auto_admit)
+         values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
          on conflict (code) do nothing returning *`,
         [
           sessionCode(),
@@ -143,6 +148,7 @@ export async function createSession(input: NewSession) {
           input.onlineUrl,
           input.budgetAmount,
           input.currency,
+          input.autoAdmit ?? false,
         ],
       );
       row = rows[0];
@@ -226,7 +232,7 @@ export async function listSessionsForEmail(email: string) {
 /* ---------- participants & profiles ---------- */
 
 type NewParticipant = {
-  email: string;
+  email: string | null;
   displayName?: string;
   role?: "host" | "elf";
   status: ParticipantStatus;
@@ -235,6 +241,15 @@ type NewParticipant = {
 };
 
 async function insertParticipant(tx: Queryable, sessionId: string, input: NewParticipant) {
+  if (!input.email) {
+    const rows = await tx.query(
+      `insert into session_participants (session_id, email, display_name, avatar, role, status, email_verified)
+       values ($1,null,$2,$3::jsonb,$4,$5,false) returning *`,
+      [sessionId, input.displayName?.trim() || "Elf", JSON.stringify(seededAvatar(crypto.randomUUID())), input.role ?? "elf", input.status],
+    );
+    await bumpVersion(sessionId, tx);
+    return mapParticipant(rows[0]);
+  }
   const email = normalizeEmail(input.email);
   const [profileRow] = await tx.query("select * from profiles where email = $1", [email]);
   const profile = profileRow ? mapProfile(profileRow) : null;
@@ -280,10 +295,11 @@ export async function findParticipantByEmail(sessionId: string, email: string) {
 }
 
 export type ParticipantPatch = Partial<
-  Pick<Participant, "displayName" | "avatar" | "status" | "isRemote" | "emailVerified" | "profileCompletedAt" | "lastSeenAt">
+  Pick<Participant, "email" | "displayName" | "avatar" | "status" | "isRemote" | "emailVerified" | "profileCompletedAt" | "lastSeenAt">
 >;
 
 const participantColumns: Record<keyof ParticipantPatch, string> = {
+  email: "email",
   displayName: "display_name",
   avatar: "avatar",
   status: "status",
@@ -317,6 +333,7 @@ export async function findProfileByEmail(email: string) {
 
 /** Saves a verified participant's elf as their reusable profile for future sessions. */
 export async function saveProfileFromParticipant(participant: Participant, locale: string) {
+  if (!participant.email) return;
   const d = await db();
   const rows = await d.query(
     `insert into profiles (email, display_name, avatar, locale) values ($1,$2,$3::jsonb,$4)

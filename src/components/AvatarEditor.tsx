@@ -1,10 +1,10 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { Avatar } from "./Avatar";
 import { avatarOptions, type AvatarConfig } from "@/lib/avatar";
-import { saveProfileAction } from "@/lib/actions";
+import { previewProfileAction, saveProfileAction } from "@/lib/actions";
 
 type Props = {
   code: string;
@@ -26,6 +26,17 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
   const [pending, start] = useTransition();
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Everyone in the room watches the elves take shape on the big screen, so every tweak goes out right away.
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    const timer = setTimeout(() => void previewProfileAction(code, { displayName: name.trim() || undefined, avatar }), 250);
+    return () => clearTimeout(timer);
+  }, [code, name, avatar]);
 
   const set = <K extends keyof AvatarConfig>(key: K, value: AvatarConfig[K]) => {
     setSaved(false);
@@ -51,7 +62,7 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
   return (
     <div className="card p-5 md:p-7">
       <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-start">
-        <div className="flex flex-col items-center gap-3">
+        <div className="sticky top-3 z-10 flex flex-col items-center gap-3 sm:static">
           <div className="h-40 w-40 rounded-full shadow-[0_18px_30px_-14px_rgba(80,45,25,0.5)]">
             <Avatar config={avatar} className="h-full w-full" title={name} />
           </div>

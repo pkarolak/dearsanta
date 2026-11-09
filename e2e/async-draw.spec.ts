@@ -10,7 +10,7 @@ test("own-time session: invites, elf profiles, unlock and personal reveal", asyn
   const host = await (await browser.newContext({ viewport: { width: 1280, height: 900 } })).newPage();
   host.on("dialog", (d) => void d.accept());
 
-  await host.goto("/pl/new");
+  await host.goto("/pl/new/plan");
   await host.fill("#hostName", "Basia");
   await host.fill("#hostEmail", hostEmail);
   await host.fill("#title", "Biuro 2026");

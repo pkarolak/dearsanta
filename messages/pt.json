@@ -102,7 +102,25 @@
     "invitesHintAsync": "Todos recebem um convite festivo com um link para criar o perfil de duende.",
     "invitesCount": "{count, plural, one {Será enviado # convite} other {Serão enviados # convites}}",
     "creating": "A acender a lareira…",
-    "submit": "Criar o sorteio"
+    "submit": "Criar o sorteio",
+    "quick": {
+      "hostName": "Chefe dos elfos",
+      "heading": "Como vão celebrar?",
+      "lead": "Um toque e a oficina está aberta. O resto ajustas depois, se quiseres.",
+      "starting": "A abrir a oficina…",
+      "plan": "Preferes planear tudo com antecedência?",
+      "planLink": "O formulário completo com data, orçamento e convites",
+      "together": {
+        "body": "Todos à mesma mesa. Código QR no ecrã e o sorteio daqui a pouco."
+      },
+      "remote": {
+        "body": "Alguém junta-se de longe e vê a transmissão do Pai Natal no seu dispositivo."
+      },
+      "ownTime": {
+        "body": "Envia um link à família. Cada um junta-se quando quiser e depois desbloqueias o sorteio."
+      },
+      "title": "O nosso amigo secreto"
+    }
   },
   "errors": {
     "not_found": "Não encontrámos esse sorteio.",
@@ -129,7 +147,9 @@
     "joining": "A bater à porta…",
     "submit": "Bater à porta da oficina",
     "checkEmailTitle": "Veja o seu e-mail",
-    "checkEmailBody": "Já faz parte deste sorteio. Enviámos-lhe um link para continuar neste dispositivo."
+    "checkEmailBody": "Já faz parte deste sorteio. Enviámos-lhe um link para continuar neste dispositivo.",
+    "emailOptional": "O teu e-mail (opcional)",
+    "emailHintOptional": "Recebes um e-mail de recordação com o teu resultado e podes voltar noutro dispositivo."
   },
   "login": {
     "heading": "Os seus sorteios",
@@ -331,7 +351,24 @@
     "settings": "Definições",
     "saveSettings": "Guardar definições",
     "settingsSaved": "Definições guardadas.",
-    "fullscreen": "Ecrã inteiro"
+    "fullscreen": "Ecrã inteiro",
+    "room": {
+      "title": "A oficina está aberta!",
+      "lead": "Lê o código com o telemóvel ou abre a página e escreve o código.",
+      "leadAsync": "Envia este link à família – cada um junta-se quando quiser.",
+      "waiting": "À espera dos primeiros elfos…",
+      "inside": "{count, plural, one {# elfo lá dentro} other {# elfos lá dentro}}",
+      "yourName": "E tu, como te chamas?",
+      "saveName": "Guardar",
+      "share": "Partilhar link",
+      "copy": "Copiar link",
+      "copied": "Copiado!",
+      "screen": "Abrir o ecrã grande",
+      "screenHint": "Liga uma TV ou um portátil: todos vão ver os elfos a ganhar forma.",
+      "tooFew": "O sorteio precisa de pelo menos 3 elfos.",
+      "more": "Definições, regras e convites",
+      "myElf": "Cria o teu elfo"
+    }
   },
   "screen": {
     "noAccessTitle": "Este é o ecrã grande",

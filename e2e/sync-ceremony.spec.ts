@@ -16,7 +16,7 @@ test("live ceremony: create, join, let in, exclusions, draw and reveal", async (
   await host.screenshot({ path: `${shots}/01-landing.png` });
 
   // The Elf Chief creates a live session and invites Tom by e-mail.
-  await host.goto("/en/new");
+  await host.goto("/en/new/plan");
   await host.fill("#hostName", "Anna");
   await host.fill("#hostEmail", hostEmail);
   await host.fill("#title", "Family Christmas");

@@ -21,7 +21,7 @@ export type PublicParticipant = {
   isRemote: boolean;
   profileComplete: boolean;
   online: boolean;
-  email?: string;
+  email?: string | null;
 };
 
 export type SessionState = {
@@ -39,6 +39,7 @@ export type SessionState = {
     onlineUrl: string | null;
     budgetAmount: number | null;
     currency: string;
+    autoAdmit: boolean;
     step: CeremonyStep;
     stepStartedAt: number;
     drawn: boolean;
@@ -49,7 +50,7 @@ export type SessionState = {
   exclusions?: { id: string; giverId: string; receiverId: string; bidirectional: boolean }[];
   feasibility?: { ok: boolean; blockedNames: string[]; tooFew: boolean };
   revealProgress?: { total: number; revealed: number };
-  viewer: (PublicParticipant & { emailVerified: boolean; email: string }) | null;
+  viewer: (PublicParticipant & { emailVerified: boolean; email: string | null }) | null;
   isHost: boolean;
   isScreen: boolean;
   assignment: { receiver: { displayName: string; avatar: AvatarConfig }; revealed: boolean } | null;
@@ -127,6 +128,7 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
       onlineUrl: session.onlineUrl,
       budgetAmount: session.budgetAmount,
       currency: session.currency,
+      autoAdmit: session.autoAdmit,
       step: session.ceremonyStep,
       stepStartedAt: session.stepStartedAt.getTime(),
       drawn: !!session.drawnAt,

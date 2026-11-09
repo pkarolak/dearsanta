@@ -106,7 +106,7 @@ export async function createParticipantToken(participant: Pick<Participant, "id"
   await insertToken({
     hash: hashToken(raw),
     purpose: "participant",
-    email: participant.email,
+    email: participant.email ?? "",
     participantId: participant.id,
     expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 60),
   });

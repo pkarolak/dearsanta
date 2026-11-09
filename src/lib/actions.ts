@@ -126,11 +126,48 @@ export async function createSessionAction(input: z.input<typeof createSchema>) {
   });
 }
 
-export async function joinSessionAction(input: { code: string; name: string; email: string; locale: string }) {
+const quickModes = { together: "sync", remote: "sync", ownTime: "async" } as const;
+const localCurrency: Record<string, z.infer<typeof currency>> = { pl: "PLN", en: "GBP", de: "EUR", es: "EUR", pt: "EUR" };
+
+/**
+ * One tap from the landing page: a session with sensible defaults and an open door,
+ * so the Elf Chief lands straight in the waiting room. Everything else can be set there later.
+ */
+export async function quickStartAction(input: { kind: keyof typeof quickModes; locale: string; timezone: string }) {
+  return run(async () => {
+    const kind = z.enum(["together", "remote", "ownTime"]).parse(input.kind);
+    const locale = toLocale(input.locale);
+    const t = translatorFor(locale, "create");
+    const { session, host } = await createSession({
+      title: t("quick.title"),
+      mode: quickModes[kind],
+      locale,
+      timezone: z.string().max(64).catch("UTC").parse(input.timezone) || "UTC",
+      scheduledAt: null,
+      location: null,
+      onlineUrl: null,
+      budgetAmount: null,
+      currency: localCurrency[locale] ?? "EUR",
+      autoAdmit: true,
+      host: { name: t("quick.hostName"), email: null, locale },
+    });
+    await signInParticipant(session, host.id);
+    return { code: session.code };
+  });
+}
+
+export async function joinSessionAction(input: { code: string; name: string; email?: string; locale: string }) {
   return run(async () => {
     const session = await loadSession(input.code);
-    const data = z.object({ name, email }).parse(input);
+    const data = z.object({ name, email: email.optional().or(z.literal("").transform(() => undefined)) }).parse(input);
     if (session.status === "done") throw new ActionError("closed");
+    const status = session.autoAdmit ? "approved" : "pending";
+    if (!data.email) {
+      if (!session.autoAdmit) throw new ActionError("invalid", ["email"]);
+      const participant = await addParticipant(session.id, { email: null, displayName: data.name, status, emailVerified: false });
+      await signInParticipant(session, participant.id);
+      return { next: "waiting" as const };
+    }
     const existing = await findParticipantByEmail(session.id, data.email);
 
     if (existing && existing.status === "approved") {
@@ -157,7 +194,7 @@ export async function joinSessionAction(input: { code: string; name: string; ema
     const participant =
       existing && existing.status !== "rejected"
         ? existing
-        : await addParticipant(session.id, { email: data.email, displayName: data.name, status: "pending", emailVerified: false });
+        : await addParticipant(session.id, { email: data.email, displayName: data.name, status, emailVerified: false });
     if (!participant.profileCompletedAt && participant.displayName !== data.name) {
       await updateParticipant(participant, { displayName: data.name });
     }
@@ -381,6 +418,26 @@ export async function saveProfileAction(code: string, input: z.input<typeof prof
     if (me.emailVerified) await saveProfileFromParticipant(updated, toLocale(locale));
     const upcoming = session.mode === "async" || (session.scheduledAt && session.scheduledAt.getTime() > Date.now() + 3600_000);
     if (firstTime && upcoming && !session.drawnAt) await sendProfileThanks(session, updated);
+    return {};
+  });
+}
+
+/** Every tweak in the elf editor shows up on the big screen at once, before the elf is happy with it. */
+export async function previewProfileAction(code: string, input: { displayName?: string; avatar?: unknown }) {
+  return run(async () => {
+    const { me } = await requireParticipant(code);
+    if (me.status !== "approved") throw new ActionError("not_approved");
+    const data = z.object({ displayName: name.optional().catch(undefined), avatar: avatarSchema.optional() }).parse(input);
+    await updateParticipant(me, data);
+    return {};
+  });
+}
+
+/** The Elf Chief can leave an address later, to get the keepsake mail and come back from another device. */
+export async function setMyEmailAction(code: string, address: string) {
+  return run(async () => {
+    const { me } = await requireParticipant(code);
+    await updateParticipant(me, { email: email.parse(address) });
     return {};
   });
 }

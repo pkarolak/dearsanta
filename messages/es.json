@@ -102,7 +102,25 @@
     "invitesHintAsync": "Todos recibirán una invitación festiva con un enlace para crear su perfil de elfo.",
     "invitesCount": "Se {count, plural, one {enviará # invitación} other {enviarán # invitaciones}}",
     "creating": "Encendiendo la chimenea…",
-    "submit": "Crear el sorteo"
+    "submit": "Crear el sorteo",
+    "quick": {
+      "hostName": "Jefe de los elfos",
+      "heading": "¿Cómo lo celebráis?",
+      "lead": "Un toque y el taller está abierto. El resto lo ajustas después, si quieres.",
+      "starting": "Abriendo el taller…",
+      "plan": "¿Prefieres planearlo todo con antelación?",
+      "planLink": "El formulario completo con fecha, presupuesto e invitaciones",
+      "together": {
+        "body": "Todos en la misma mesa. Código QR en la pantalla y el sorteo en un momento."
+      },
+      "remote": {
+        "body": "Alguien se une desde lejos y ve la transmisión de Papá Noel en su dispositivo."
+      },
+      "ownTime": {
+        "body": "Envía un enlace a la familia. Cada uno se une cuando quiera y luego desbloqueas el sorteo."
+      },
+      "title": "Nuestro amigo invisible"
+    }
   },
   "errors": {
     "not_found": "No encontramos ese sorteo.",
@@ -129,7 +147,9 @@
     "joining": "Llamando a la puerta…",
     "submit": "Llamar a la puerta del taller",
     "checkEmailTitle": "Revisa tu correo",
-    "checkEmailBody": "Ya formas parte de este sorteo. Te hemos enviado un enlace para continuar en este dispositivo."
+    "checkEmailBody": "Ya formas parte de este sorteo. Te hemos enviado un enlace para continuar en este dispositivo.",
+    "emailOptional": "Tu correo (opcional)",
+    "emailHintOptional": "Recibirás un correo de recuerdo con tu resultado y podrás volver desde otro dispositivo."
   },
   "login": {
     "heading": "Tus sorteos",
@@ -331,7 +351,24 @@
     "settings": "Ajustes",
     "saveSettings": "Guardar ajustes",
     "settingsSaved": "Ajustes guardados.",
-    "fullscreen": "Pantalla completa"
+    "fullscreen": "Pantalla completa",
+    "room": {
+      "title": "¡El taller está abierto!",
+      "lead": "Escanead el código con el móvil o abrid la página y escribid el código.",
+      "leadAsync": "Envía este enlace a la familia: cada uno se une cuando quiera.",
+      "waiting": "Esperando a los primeros elfos…",
+      "inside": "{count, plural, one {# elfo dentro} other {# elfos dentro}}",
+      "yourName": "¿Y tú, cómo te llamas?",
+      "saveName": "Guardar",
+      "share": "Compartir enlace",
+      "copy": "Copiar enlace",
+      "copied": "¡Copiado!",
+      "screen": "Abrir la pantalla grande",
+      "screenHint": "Conecta una tele o un portátil: todos verán cómo nacen los elfos.",
+      "tooFew": "El sorteo necesita al menos 3 elfos.",
+      "more": "Ajustes, reglas e invitaciones",
+      "myElf": "Crea tu elfo"
+    }
   },
   "screen": {
     "noAccessTitle": "Esta es la pantalla grande",

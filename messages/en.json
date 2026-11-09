@@ -102,7 +102,25 @@
     "invitesHintAsync": "Everyone gets a festive invitation with a link to create their elf profile.",
     "invitesCount": "{count, plural, one {# invitation} other {# invitations}} will be sent",
     "creating": "Lighting the fireplace…",
-    "submit": "Create the session"
+    "submit": "Create the session",
+    "quick": {
+      "hostName": "Elf Chief",
+      "heading": "How are you celebrating?",
+      "lead": "One tap and the workshop is open. Set the rest later, if you ever want to.",
+      "starting": "Opening the workshop…",
+      "plan": "Prefer to plan everything ahead?",
+      "planLink": "The full form with date, budget and invitations",
+      "together": {
+        "body": "Everyone around one table. QR code on the screen, the draw in a moment."
+      },
+      "remote": {
+        "body": "Someone joins from afar and watches Santa's stream on their own device."
+      },
+      "ownTime": {
+        "body": "Send the family a link. Everyone joins when they like, then you unlock the draw."
+      },
+      "title": "Our Secret Santa"
+    }
   },
   "errors": {
     "not_found": "We couldn’t find that session.",
@@ -129,7 +147,9 @@
     "joining": "Knocking on the door…",
     "submit": "Knock on the workshop door",
     "checkEmailTitle": "Check your inbox",
-    "checkEmailBody": "You are already part of this session. We sent you a link to continue on this device."
+    "checkEmailBody": "You are already part of this session. We sent you a link to continue on this device.",
+    "emailOptional": "Your e-mail (optional)",
+    "emailHintOptional": "You'll get a keepsake mail with your match and can come back from another device."
   },
   "login": {
     "heading": "Your sessions",
@@ -331,7 +351,24 @@
     "settings": "Settings",
     "saveSettings": "Save settings",
     "settingsSaved": "Settings saved.",
-    "fullscreen": "Full screen"
+    "fullscreen": "Full screen",
+    "room": {
+      "title": "The workshop is open!",
+      "lead": "Scan the code with your phone, or open the page and type the code.",
+      "leadAsync": "Send this link to the family – everyone joins when they like.",
+      "waiting": "Waiting for the first elves…",
+      "inside": "{count, plural, one {# elf inside} other {# elves inside}}",
+      "yourName": "And you, what's your name?",
+      "saveName": "Save",
+      "share": "Share the link",
+      "copy": "Copy link",
+      "copied": "Copied!",
+      "screen": "Open the big screen",
+      "screenHint": "Hook up a TV or laptop: everyone gets to watch the elves being made.",
+      "tooFew": "The draw needs at least 3 elves.",
+      "more": "Settings, rules and invitations",
+      "myElf": "Make your elf"
+    }
   },
   "screen": {
     "noAccessTitle": "This is the big screen",

@@ -29,7 +29,7 @@ export default async function JoinPage({ params }: PageProps<"/[locale]/join/[co
           {session.status === "done" ? (
             <p className="card p-6 text-center">{t("closed")}</p>
           ) : (
-            <JoinForm code={session.code} defaultEmail={email ?? undefined} />
+            <JoinForm code={session.code} defaultEmail={email ?? undefined} emailOptional={session.autoAdmit} />
           )}
         </div>
       </div>

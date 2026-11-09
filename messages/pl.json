@@ -102,7 +102,25 @@
     "invitesHintAsync": "Każdy dostanie świąteczne zaproszenie z linkiem do stworzenia profilu elfa.",
     "invitesCount": "Wyślemy {count, plural, one {# zaproszenie} few {# zaproszenia} many {# zaproszeń} other {# zaproszenia}}",
     "creating": "Rozpalamy kominek…",
-    "submit": "Utwórz sesję"
+    "submit": "Utwórz sesję",
+    "quick": {
+      "hostName": "Naczelnik elfów",
+      "heading": "Jak świętujecie?",
+      "lead": "Jedno kliknięcie i warsztat otwarty. Resztę ustawisz później, jeśli w ogóle zechcesz.",
+      "starting": "Otwieramy warsztat…",
+      "plan": "Wolisz zaplanować wszystko z wyprzedzeniem?",
+      "planLink": "Pełny formularz z datą, budżetem i zaproszeniami",
+      "together": {
+        "body": "Wszyscy przy jednym stole. Kod QR na ekranie, losowanie za chwilę."
+      },
+      "remote": {
+        "body": "Ktoś dołącza z daleka i ogląda transmisję Mikołaja na swoim urządzeniu."
+      },
+      "ownTime": {
+        "body": "Wyślij link rodzinie. Każdy dołączy, kiedy zechce, a Ty odblokujesz losowanie."
+      },
+      "title": "Nasz Secret Santa"
+    }
   },
   "errors": {
     "not_found": "Nie znaleźliśmy tej sesji.",
@@ -129,7 +147,9 @@
     "joining": "Pukamy do drzwi…",
     "submit": "Zapukaj do warsztatu",
     "checkEmailTitle": "Sprawdź skrzynkę",
-    "checkEmailBody": "Już jesteś w tej sesji. Wysłaliśmy Ci link, żeby kontynuować na tym urządzeniu."
+    "checkEmailBody": "Już jesteś w tej sesji. Wysłaliśmy Ci link, żeby kontynuować na tym urządzeniu.",
+    "emailOptional": "Twój e-mail (opcjonalnie)",
+    "emailHintOptional": "Dostaniesz pamiątkowy mail z wynikiem i wrócisz do sesji z innego urządzenia."
   },
   "login": {
     "heading": "Twoje sesje",
@@ -331,7 +351,24 @@
     "settings": "Ustawienia",
     "saveSettings": "Zapisz ustawienia",
     "settingsSaved": "Ustawienia zapisane.",
-    "fullscreen": "Pełny ekran"
+    "fullscreen": "Pełny ekran",
+    "room": {
+      "title": "Warsztat otwarty!",
+      "lead": "Zeskanujcie kod telefonem albo wejdźcie na stronę i wpiszcie kod.",
+      "leadAsync": "Wyślij ten link rodzinie – każdy dołączy, kiedy zechce.",
+      "waiting": "Czekamy na pierwsze elfy…",
+      "inside": "{count, plural, one {# elf w środku} few {# elfy w środku} many {# elfów w środku} other {# elfa w środku}}",
+      "yourName": "A Ty, jak masz na imię?",
+      "saveName": "Zapisz",
+      "share": "Udostępnij link",
+      "copy": "Kopiuj link",
+      "copied": "Skopiowano!",
+      "screen": "Otwórz duży ekran",
+      "screenHint": "Podłącz telewizor albo laptop: wszyscy zobaczą, jak powstają elfy.",
+      "tooFew": "Do losowania potrzeba co najmniej 3 elfów.",
+      "more": "Ustawienia, zasady i zaproszenia",
+      "myElf": "Stwórz swojego elfa"
+    }
   },
   "screen": {
     "noAccessTitle": "To jest duży ekran",

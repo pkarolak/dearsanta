@@ -5,7 +5,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { joinSessionAction } from "@/lib/actions";
 
-export function JoinForm({ code, defaultEmail }: { code: string; defaultEmail?: string }) {
+export function JoinForm({ code, defaultEmail, emailOptional = false }: { code: string; defaultEmail?: string; emailOptional?: boolean }) {
   const t = useTranslations("join");
   const te = useTranslations("errors");
   const locale = useLocale();
@@ -43,12 +43,12 @@ export function JoinForm({ code, defaultEmail }: { code: string; defaultEmail?: 
     >
       <div>
         <label className="label" htmlFor="name">{t("name")}</label>
-        <input id="name" name="name" required maxLength={40} className="field text-lg" autoComplete="given-name" />
+        <input id="name" name="name" required maxLength={40} className="field text-lg" autoComplete="given-name" autoFocus={emailOptional} />
       </div>
       <div>
-        <label className="label" htmlFor="email">{t("email")}</label>
-        <input id="email" name="email" type="email" required defaultValue={defaultEmail} className="field text-lg" autoComplete="email" />
-        <p className="mt-1.5 text-xs text-muted">{t("emailHint")}</p>
+        <label className="label" htmlFor="email">{emailOptional ? t("emailOptional") : t("email")}</label>
+        <input id="email" name="email" type="email" required={!emailOptional} defaultValue={defaultEmail} className="field text-lg" autoComplete="email" />
+        <p className="mt-1.5 text-xs text-muted">{emailOptional ? t("emailHintOptional") : t("emailHint")}</p>
       </div>
       {error && <p className="text-sm text-berry" role="alert">{error}</p>}
       <button className="btn-primary w-full text-lg" disabled={pending}>
