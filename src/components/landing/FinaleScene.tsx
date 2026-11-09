@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { JoinCodeForm } from "../JoinCodeForm";
 import { SantaPuppet } from "../show/SantaPuppet";
 import { Confetti } from "../show/ShowStage";
+import { Snowfall, StringLights } from "./Atmosphere";
 import { CoverStage } from "./CoverStage";
 import { useHoHo } from "./useHoHo";
 import { Link } from "@/i18n/navigation";
@@ -79,8 +80,12 @@ export function FinaleScene() {
         </div>
       </section>
 
-      <footer className="overflow-hidden bg-berry-dark px-5 pb-8 pt-16 text-snow md:px-8">
-        <div className="mx-auto max-w-7xl">
+      <footer className="relative overflow-hidden bg-[#0c1838] px-5 pb-8 pt-20 text-snow md:px-8">
+        <Image src="/home/aurora.webp" alt="" fill unoptimized sizes="100vw" className="object-cover object-[50%_20%] opacity-70" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#0c1838] via-[#0c1838]/40 to-transparent" />
+        <StringLights swags={6} perSwag={6} sag={22} />
+        <Snowfall count={30} />
+        <div className="relative mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center justify-between gap-4 text-snow/85">
             <p className="font-display text-lg">{t("footer")}</p>
             <nav className="flex gap-5 font-semibold">
@@ -89,7 +94,7 @@ export function FinaleScene() {
             </nav>
           </div>
           <motion.p
-            className="mt-10 whitespace-nowrap pb-[0.12em] font-display text-[15.5vw] font-black leading-[0.85] tracking-[-0.045em] md:text-[min(15.5vw,15rem)]"
+            className="foil mt-10 whitespace-nowrap pb-[0.12em] font-display text-[15.5vw] font-black leading-[0.85] tracking-[-0.045em] md:text-[min(15.5vw,15rem)]"
             initial={{ y: "35%", opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}

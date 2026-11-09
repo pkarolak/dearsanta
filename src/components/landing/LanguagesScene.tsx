@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 import { useState } from "react";
 import { SantaPuppet } from "../show/SantaPuppet";
 import { useHoHo } from "./useHoHo";
@@ -25,13 +26,19 @@ export function LanguagesScene() {
   const hover = (locale: Locale) => setHovered((h) => (h?.locale === locale ? h : { locale, n: (h?.n ?? 0) + 1 }));
 
   return (
-    <section className="relative overflow-hidden bg-berry text-snow">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 pt-24 md:grid-cols-[1.25fr_1fr] md:items-stretch md:px-8 md:pt-0">
+    <section className="relative overflow-hidden bg-[#3a0d10] text-snow">
+      <Image src="/home/study.webp" alt="" fill unoptimized sizes="100vw" className="object-cover object-[70%_60%]" />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[linear-gradient(90deg,rgb(40_6_10/0.92)_0%,rgb(40_6_10/0.7)_38%,rgb(40_6_10/0.15)_65%,transparent_85%)]"
+      />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#1c0c0b] to-transparent" />
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-5 pt-24 md:grid-cols-[1.25fr_1fr] md:items-stretch md:px-8 md:pt-0">
         <div className="md:py-32">
-          <h2 className="font-display text-4xl font-black leading-[0.98] tracking-[-0.025em] md:text-[clamp(2.8rem,4.4vw,4.6rem)]">
+          <h2 className="glow-text font-display text-4xl font-black leading-[0.98] tracking-[-0.025em] md:text-[clamp(2.8rem,4.4vw,4.6rem)]">
             {t("languagesTitle")}
           </h2>
-          <p className="mt-5 max-w-md text-lg leading-relaxed text-snow/90">{t("languagesBody")}</p>
+          <p className="glow-text mt-5 max-w-md text-lg leading-relaxed text-snow/90">{t("languagesBody")}</p>
           <ul className="mt-10 md:mt-14">
             {locales.map((l, i) => (
               <motion.li
@@ -49,7 +56,7 @@ export function LanguagesScene() {
                   onFocus={() => hover(l)}
                   aria-current={l === current ? "true" : undefined}
                   className={`inline-block font-display text-[clamp(3rem,8vw,7.5rem)] font-black leading-[0.98] tracking-[-0.035em] transition-[color,transform] duration-300 hover:translate-x-3 focus-visible:translate-x-3 ${
-                    l === speaking ? "text-snow" : "text-snow/35 hover:text-snow"
+                    l === speaking ? "foil" : "glow-text text-snow/50 hover:text-snow"
                   }`}
                 >
                   {localeNames[l]}
@@ -71,7 +78,7 @@ export function LanguagesScene() {
               <motion.p
                 key={speaking}
                 lang={speaking}
-                className="absolute bottom-[96%] left-1/2 z-10 w-max max-w-[min(22rem,90vw)] -translate-x-1/2 rounded-felt bg-snow px-6 py-4 text-center font-display text-2xl font-bold text-ink md:text-3xl"
+                className="absolute bottom-[96%] left-1/2 z-10 w-max max-w-[min(22rem,90vw)] -translate-x-1/2 rounded-felt bg-snow px-6 py-4 text-center font-display text-2xl font-bold text-ink shadow-[0_18px_40px_-12px_rgb(0_0_0/0.6)] md:text-3xl"
                 initial={{ opacity: 0, y: 12, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -8 }}
@@ -80,7 +87,9 @@ export function LanguagesScene() {
                 {greetings[speaking]}
               </motion.p>
             </AnimatePresence>
-            <SantaPuppet level={level} />
+            <div className="drop-shadow-[0_0_40px_rgb(255_190_100/0.35)]">
+              <SantaPuppet level={level} />
+            </div>
           </motion.div>
         </div>
       </div>
