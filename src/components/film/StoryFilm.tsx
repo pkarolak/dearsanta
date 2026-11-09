@@ -221,6 +221,7 @@ export function StoryFilm({ lines, lang }: Props) {
         )}
       </AnimatePresence>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/45 via-transparent to-ink/55" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[16%] bg-gradient-to-b from-transparent to-ink" />
 
       <div className="absolute inset-x-0 top-0 z-30">
         <SiteHeader tone="dark" />

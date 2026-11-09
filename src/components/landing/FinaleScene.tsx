@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { JoinCodeForm } from "../JoinCodeForm";
 import { SantaPuppet } from "../show/SantaPuppet";
 import { Confetti } from "../show/ShowStage";
-import { Snowfall, StringLights } from "./Atmosphere";
+import { Aurora, Snowfall, Stars, StringLights } from "./Atmosphere";
 import { CoverStage } from "./CoverStage";
 import { useHoHo } from "./useHoHo";
 import { Link } from "@/i18n/navigation";
@@ -44,6 +44,7 @@ export function FinaleScene() {
             />
           </motion.div>
         ))}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[22%] bg-gradient-to-b from-[#1c0c0b] to-transparent" />
 
         <motion.div
           className="absolute bottom-0 left-1/2 w-[min(22rem,62vw)] -translate-x-1/2"
@@ -80,9 +81,9 @@ export function FinaleScene() {
         </div>
       </section>
 
-      <footer className="relative overflow-hidden bg-[#0c1838] px-5 pb-8 pt-20 text-snow md:px-8">
-        <Image src="/home/aurora.webp" alt="" fill unoptimized sizes="100vw" className="object-cover object-[50%_20%] opacity-70" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#0c1838] via-[#0c1838]/40 to-transparent" />
+      <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#101a3c,#0b1230)] px-5 pb-8 pt-20 text-snow md:px-8">
+        <Stars count={50} />
+        <Aurora className="-top-[20%]" />
         <StringLights swags={6} perSwag={6} sag={22} />
         <Snowfall count={30} />
         <div className="relative mx-auto max-w-7xl">

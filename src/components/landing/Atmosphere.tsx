@@ -38,6 +38,42 @@ export function Snowfall({ count = 40, className = "" }: { count?: number; class
   );
 }
 
+/** A twinkling starry sky; stars thin out towards the bottom. */
+export function Stars({ count = 70, className = "" }: { count?: number; className?: string }) {
+  return (
+    <div aria-hidden className={`pointer-events-none absolute inset-0 ${className}`}>
+      {Array.from({ length: count }, (_, i) => {
+        const size = fix(1 + noise(i, 11) * 2.2);
+        return (
+          <span
+            key={i}
+            className="animate-twinkle absolute rounded-full bg-[#fff6dc]"
+            style={{
+              left: `${fix(noise(i, 12) * 100)}%`,
+              top: `${fix(noise(i, 13) ** 1.6 * 100)}%`,
+              width: size,
+              height: size,
+              boxShadow: size > 2.4 ? "0 0 6px 1px rgb(255 240 200 / 0.8)" : undefined,
+              animationDuration: `${fix(2 + noise(i, 14) * 4)}s`,
+              animationDelay: `-${fix(noise(i, 15) * 4)}s`,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+/** Slow ribbons of northern lights, drawn with soft gradients instead of a photo. */
+export function Aurora({ className = "" }: { className?: string }) {
+  return (
+    <div aria-hidden className={`pointer-events-none absolute inset-0 ${className}`}>
+      <div className="animate-aurora absolute left-[30%] top-[30%] h-[45%] w-[75%] -rotate-12 rounded-[50%] bg-[radial-gradient(closest-side,rgb(70_230_160/0.38),rgb(40_160_170/0.18)_55%,transparent)] blur-3xl" />
+      <div className="animate-aurora absolute left-[72%] top-[22%] h-[38%] w-[55%] rotate-[18deg] rounded-[50%] bg-[radial-gradient(closest-side,rgb(150_110_230/0.3),rgb(60_200_170/0.14)_60%,transparent)] blur-3xl [animation-delay:-5s] [animation-duration:13s]" />
+    </div>
+  );
+}
+
 const bulbColors = ["#ff5a4e", "#ffd25e", "#5fe08a", "#6cb8ff", "#ff7ad1", "#ffb347"];
 
 /** A string of glowing coloured bulbs hung in sagging swags across the top of a scene. */

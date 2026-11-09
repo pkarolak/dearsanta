@@ -32,7 +32,7 @@ export function LanguagesScene() {
         aria-hidden
         className="absolute inset-0 bg-[linear-gradient(90deg,rgb(40_6_10/0.92)_0%,rgb(40_6_10/0.7)_38%,rgb(40_6_10/0.15)_65%,transparent_85%)]"
       />
-      <div aria-hidden className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#1c0c0b] to-transparent" />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-[#1c0c0b] via-[#1c0c0b]/60 to-transparent" />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-5 pt-24 md:grid-cols-[1.25fr_1fr] md:items-stretch md:px-8 md:pt-0">
         <div className="md:py-32">
           <h2 className="glow-text font-display text-4xl font-black leading-[0.98] tracking-[-0.025em] md:text-[clamp(2.8rem,4.4vw,4.6rem)]">
@@ -93,6 +93,7 @@ export function LanguagesScene() {
           </motion.div>
         </div>
       </div>
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#1c0c0b] to-transparent" />
     </section>
   );
 }

@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { RevealCard } from "../RevealCard";
-import { Snowfall } from "./Atmosphere";
+import { Aurora, Snowfall, Stars } from "./Atmosphere";
 import { seededAvatar } from "@/lib/avatar";
 
 const receiver = { displayName: "Ola", avatar: seededAvatar("ola") };
@@ -18,10 +18,9 @@ const rise = (delay: number) => ({
 export function MatchScene() {
   const t = useTranslations("home");
   return (
-    <section className="relative overflow-hidden bg-[#0c1838] text-snow">
-      <Image src="/home/aurora.webp" alt="" fill unoptimized sizes="100vw" className="object-cover object-[70%_50%]" />
-      <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgb(8_14_40/0.75)_0%,rgb(8_14_40/0.35)_45%,transparent_70%)]" />
-      <div aria-hidden className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0c1838] to-transparent" />
+    <section className="relative overflow-hidden bg-[linear-gradient(180deg,var(--color-ink)_0%,#101a3c_26%,#0d1a42_62%,#1c0c0b_100%)] text-snow">
+      <Stars className="top-[12%] bottom-[30%]" />
+      <Aurora className="top-[14%]" />
       <Snowfall count={46} />
       <div className="relative mx-auto grid min-h-svh max-w-7xl items-center gap-14 px-5 py-24 md:grid-cols-[1fr_1fr] md:px-8 md:py-32">
         <div>

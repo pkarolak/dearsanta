@@ -32,6 +32,7 @@ export function ModesScene() {
           className="absolute inset-0 bg-[radial-gradient(60%_70%_at_72%_55%,rgb(160_40_40/0.55),transparent_70%),radial-gradient(45%_60%_at_15%_70%,rgb(29_90_58/0.35),transparent_70%)]"
         />
         <div aria-hidden className="felt-texture absolute inset-0 opacity-60" />
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,#1c0c0b_0%,transparent_22%,transparent_75%,#1c0c0b_100%)]" />
         <StringLights swags={5} perSwag={6} sag={30} className="opacity-90" />
         <div className="relative mx-auto grid w-full max-w-7xl items-center gap-6 px-5 md:grid-cols-[5fr_7fr] md:gap-14 md:px-8">
           <div className="relative order-2 md:order-1">
