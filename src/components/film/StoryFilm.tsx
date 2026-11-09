@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useMotionValue, useReducedMotion, useTransform, type MotionValue } from "motion/react";
+import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { JoinCodeForm } from "../JoinCodeForm";
@@ -47,7 +47,14 @@ export function StoryFilm({ lines, lang }: Props) {
   const [ended, setEnded] = useState(false);
   const [line, setLine] = useState<VoiceLine | null>(null);
   const progress = useMotionValue(0);
-  const active = !paused && visible;
+  // Scrolling on, the film sinks back and dims while the next scene slides up over it.
+  const { scrollYProgress: leaving } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const sink = useTransform(leaving, [0, 1], ["0%", reduced ? "0%" : "55%"]);
+  const dim = useTransform(leaving, [0, 0.9], [0, 0.85]);
+  // Sinking keeps the film in the viewport, so it counts as gone once the next scene covers most of it.
+  const [covered, setCovered] = useState(false);
+  useMotionValueEvent(leaving, "change", (v) => setCovered(v > 0.6));
+  const active = !paused && visible && !covered;
   const soundRef = useRef(sound);
   useEffect(() => {
     soundRef.current = sound;
@@ -178,7 +185,7 @@ export function StoryFilm({ lines, lang }: Props) {
   const upcoming = resting ? undefined : clips[at + 1];
 
   return (
-    <section ref={ref} aria-label={t("label")} className="relative h-svh min-h-[36rem] overflow-hidden bg-ink">
+    <motion.section ref={ref} aria-label={t("label")} className="relative h-svh min-h-[36rem] overflow-hidden bg-ink" style={{ y: sink }}>
       {behind !== null && (
         <video
           key={`behind-${behind}-${tall}`}
@@ -221,7 +228,6 @@ export function StoryFilm({ lines, lang }: Props) {
         )}
       </AnimatePresence>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/45 via-transparent to-ink/55" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[16%] bg-gradient-to-b from-transparent to-ink" />
 
       <div className="absolute inset-x-0 top-0 z-30">
         <SiteHeader tone="dark" />
@@ -291,7 +297,8 @@ export function StoryFilm({ lines, lang }: Props) {
           {!sound && <span className="hidden sm:inline">{t("soundOn")}</span>}
         </button>
       </div>
-    </section>
+      <motion.div className="pointer-events-none absolute inset-0 z-50 bg-ink" style={{ opacity: dim }} />
+    </motion.section>
   );
 }
 

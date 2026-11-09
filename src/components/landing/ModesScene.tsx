@@ -7,33 +7,52 @@ import { useRef, useState } from "react";
 import { SantaPuppet } from "../show/SantaPuppet";
 import { Cast, Reindeer, Vignette } from "../show/Vignette";
 import { StringLights } from "./Atmosphere";
+import { useDepth, useSceneScroll } from "./useDepth";
 
 const modes = ["sync", "hybrid", "async"] as const;
 
 export function ModesScene() {
   const t = useTranslations("home");
   const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
   const [active, setActive] = useState(0);
+  // The section scrolls 4 screens from first peek to gone: a screen to arrive, two pinned, one to leave.
+  const scene = useSceneScroll(ref);
+  const drop = useDepth(scene, [0.08, 0.25], [-110, 0]);
+  const swing = useDepth(scene, [0.05, 0.25], [-7, 0], "deg");
+  const grow = useDepth(scene, [0.05, 0.25], [0.82, 1], "", 1);
+  const sink = useDepth(scene, [0.75, 1], [0, 45]);
+  const dim = useDepth(scene, [0.75, 1], [0, 0.85], "");
   useMotionValueEvent(scrollYProgress, "change", (v) => setActive(Math.min(2, Math.floor(v * 3))));
 
   const jump = (i: number) => {
     const el = ref.current;
     if (!el) return;
     const top = el.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: top + ((el.offsetHeight - window.innerHeight) * (i + 0.5)) / 3, behavior: "smooth" });
+    window.scrollTo({
+      top: top + ((el.offsetHeight - window.innerHeight) * (i + 0.5)) / 3,
+      behavior: "smooth",
+    });
   };
 
   return (
     <section ref={ref} className="relative h-[300svh] bg-[#1c0c0b] text-snow">
-      <div className="sticky top-0 flex h-svh items-center overflow-hidden">
+      <motion.div className="sticky top-0 flex h-svh items-center overflow-hidden" style={{ y: sink }}>
         <div
           aria-hidden
           className="absolute inset-0 bg-[radial-gradient(60%_70%_at_72%_55%,rgb(160_40_40/0.55),transparent_70%),radial-gradient(45%_60%_at_15%_70%,rgb(29_90_58/0.35),transparent_70%)]"
         />
         <div aria-hidden className="felt-texture absolute inset-0 opacity-60" />
-        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,#1c0c0b_0%,transparent_22%,transparent_75%,#1c0c0b_100%)]" />
-        <StringLights swags={5} perSwag={6} sag={30} className="opacity-90" />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[linear-gradient(180deg,#1c0c0b_0%,transparent_22%,transparent_75%,#1c0c0b_100%)]"
+        />
+        <motion.div className="absolute inset-x-0 top-0" style={{ y: drop }}>
+          <StringLights swags={5} perSwag={6} sag={30} className="opacity-90" />
+        </motion.div>
         <div className="relative mx-auto grid w-full max-w-7xl items-center gap-6 px-5 md:grid-cols-[5fr_7fr] md:gap-14 md:px-8">
           <div className="relative order-2 md:order-1">
             <h2 className="foil font-display text-4xl font-black leading-[1.02] tracking-[-0.025em] md:text-[clamp(2.8rem,4.4vw,4.6rem)]">
@@ -55,7 +74,10 @@ export function ModesScene() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: [0.2, 0.7, 0.2, 1] }}
+                          transition={{
+                            duration: 0.35,
+                            ease: [0.2, 0.7, 0.2, 1],
+                          }}
                         >
                           <span className="block pt-2 text-base leading-relaxed text-snow/85 md:text-lg">{t(`modes.${m}.body`)}</span>
                         </motion.span>
@@ -67,7 +89,10 @@ export function ModesScene() {
             </ul>
           </div>
 
-          <div className="gilt relative order-1 aspect-[4/3] max-h-[42svh] w-full overflow-hidden rounded-felt md:order-2 md:max-h-none">
+          <motion.div
+            className="gilt relative order-1 aspect-[4/3] max-h-[42svh] w-full overflow-hidden rounded-felt md:order-2 md:max-h-none"
+            style={{ rotate: swing, scale: grow, transformOrigin: "50% -20%" }}
+          >
             <AnimatePresence initial={false}>
               <motion.div
                 key={active}
@@ -80,9 +105,10 @@ export function ModesScene() {
                 <ModePicture mode={modes[active]} />
               </motion.div>
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
-      </div>
+        <motion.div className="pointer-events-none absolute inset-0 bg-[#1c0c0b]" style={{ opacity: dim }} />
+      </motion.div>
     </section>
   );
 }
