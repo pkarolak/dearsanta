@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { JoinCodeForm } from "../JoinCodeForm";
 import { SiteHeader } from "../SiteHeader";
-import { SpeakerIcon } from "../icons";
+import { GiftIcon, SpeakerIcon } from "../icons";
 import { clipSrc, clips, readingMs, type LineKey } from "./script";
 import { Link } from "@/i18n/navigation";
 import { workshopAudio, type VoiceLine } from "@/lib/audio/engine";
@@ -227,13 +227,13 @@ export function StoryFilm({ lines, lang }: Props) {
           />
         )}
       </AnimatePresence>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/45 via-transparent to-ink/55" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/55 via-transparent via-45% to-ink/75" />
 
       <div className="absolute inset-x-0 top-0 z-30">
         <SiteHeader tone="dark" cta={!done} />
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-[6.5rem] z-20 flex justify-center px-5 md:bottom-28" aria-live="polite">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[5.5rem] z-20 flex justify-center px-5 md:bottom-28" aria-live="polite">
         <AnimatePresence mode="wait">
           {line && !done && (
             <motion.p
@@ -253,49 +253,72 @@ export function StoryFilm({ lines, lang }: Props) {
       <CallToAction shown={done} title={th("title")} lead={th("heroLead")} create={th("create")} haveCode={th("haveCode")} />
 
       <div
-        className={`absolute z-40 flex items-center gap-2 px-4 md:px-6 ${done ? "right-0 top-[4.25rem] md:top-auto md:bottom-6" : "inset-x-0 bottom-5 md:bottom-7"}`}
+        className={`pointer-events-none absolute z-40 flex items-end gap-3 px-3 md:px-6 ${done ? "right-0 top-[4.25rem] md:top-auto md:bottom-6" : "inset-x-0 bottom-4 md:bottom-6"}`}
       >
-        {!done && (
-          <>
-            <button
-              onClick={() => setPaused(!paused)}
-              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-snow text-ink hover:bg-cream"
-              aria-label={paused ? t("play") : t("pause")}
+        <AnimatePresence>
+          {!done && (
+            <motion.div
+              className="pointer-events-auto hidden md:block"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 12 }}
+              transition={{ duration: 0.3 }}
             >
-              {paused ? <PlayIcon /> : <PauseIcon />}
-            </button>
-            <div className="flex h-11 min-w-0 flex-1 items-center gap-1.5">
-              {clips.map((c, i) => (
-                <button
-                  key={c.id}
-                  onClick={() => seek(i)}
-                  className="group flex h-full flex-1 items-center"
-                  aria-label={t("scene", { n: i + 1 })}
-                  aria-current={i === clip ? "step" : undefined}
-                >
-                  <Segment index={i} clip={at} progress={progress} />
-                </button>
-              ))}
-            </div>
-            <button onClick={() => seek(lastClip, true)} className="h-11 shrink-0 rounded-full px-3 font-semibold text-snow hover:bg-snow/15">
-              {t("skip")}
-            </button>
-          </>
-        )}
-        {done && (
-          <button onClick={() => seek(0)} className="h-11 rounded-full bg-snow px-4 font-semibold text-ink hover:bg-cream">
-            {t("replay")}
-          </button>
-        )}
-        <button
-          onClick={toggleSound}
-          className={`flex h-11 shrink-0 items-center gap-2 rounded-full font-semibold ${sound ? "w-11 justify-center bg-snow/15 text-snow hover:bg-snow/25" : "animate-nudge bg-berry px-4 text-snow hover:bg-berry-dark"}`}
-          aria-label={sound ? t("soundOff") : t("soundOn")}
-          aria-pressed={sound}
+              <Link
+                href="/new"
+                className="btn-primary whitespace-nowrap px-7 py-3.5 text-lg shadow-[0_12px_30px_-10px_rgb(0_0_0/0.7),inset_0_-3px_0_rgb(0_0_0/0.18)] ring-2 ring-gold/70"
+              >
+                <GiftIcon className="h-5 w-5" />
+                {th("create")}
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <div
+          className={`pointer-events-auto flex items-center gap-1.5 rounded-full bg-ink/60 p-1.5 shadow-[0_12px_30px_-12px_rgb(0_0_0/0.8)] ring-1 ring-snow/15 backdrop-blur-md ${done ? "" : "min-w-0 flex-1 md:ml-auto md:max-w-xl"}`}
         >
-          <SpeakerIcon muted={!sound} className="h-5 w-5" />
-          {!sound && <span className="hidden sm:inline">{t("soundOn")}</span>}
-        </button>
+          {!done && (
+            <>
+              <button
+                onClick={() => setPaused(!paused)}
+                className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-snow text-ink hover:bg-cream"
+                aria-label={paused ? t("play") : t("pause")}
+              >
+                {paused ? <PlayIcon /> : <PauseIcon />}
+              </button>
+              <div className="flex h-11 min-w-0 flex-1 items-center gap-1 px-1.5">
+                {clips.map((c, i) => (
+                  <button
+                    key={c.id}
+                    onClick={() => seek(i)}
+                    className="group flex h-full flex-1 items-center"
+                    aria-label={t("scene", { n: i + 1 })}
+                    aria-current={i === clip ? "step" : undefined}
+                  >
+                    <Segment index={i} clip={at} progress={progress} />
+                  </button>
+                ))}
+              </div>
+              <button onClick={() => seek(lastClip, true)} className="h-11 shrink-0 rounded-full px-3.5 font-semibold text-snow hover:bg-snow/15">
+                {t("skip")}
+              </button>
+            </>
+          )}
+          {done && (
+            <button onClick={() => seek(0)} className="h-11 rounded-full bg-snow px-4 font-semibold text-ink hover:bg-cream">
+              {t("replay")}
+            </button>
+          )}
+          <button
+            onClick={toggleSound}
+            className={`flex h-11 shrink-0 items-center gap-2 rounded-full font-semibold ${sound ? "w-11 justify-center bg-snow/15 text-snow hover:bg-snow/25" : "animate-nudge bg-berry px-4 text-snow hover:bg-berry-dark"}`}
+            aria-label={sound ? t("soundOff") : t("soundOn")}
+            aria-pressed={sound}
+          >
+            <SpeakerIcon muted={!sound} className="h-5 w-5" />
+            {!sound && <span className="hidden sm:inline">{t("soundOn")}</span>}
+          </button>
+        </div>
       </div>
       <motion.div className="pointer-events-none absolute inset-0 z-50 bg-ink" style={{ opacity: dim }} />
     </motion.section>
