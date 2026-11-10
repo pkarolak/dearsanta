@@ -1,17 +1,18 @@
 "use client";
 
-import { ArrowRight, ArrowsLeftRight, Copy, Television } from "@phosphor-icons/react";
+import { ArrowRight, ArrowsLeftRight, Clock, Copy, Television, UsersThree } from "@phosphor-icons/react";
 import { useLocale, useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
 import { useState, useTransition } from "react";
 import { Avatar } from "./Avatar";
-import { parseEmails, currencies } from "./CreateSessionForm";
+import { currencies, currencyOptions, parseEmails } from "./CreateSessionForm";
+import { localeOptions } from "./LanguageSwitcher";
+import { Select } from "./Select";
 import { PageBand } from "./PageBand";
 import { WaitingRoom } from "./WaitingRoom";
 import { RemoteIcon } from "./icons";
 import { PhoneHandoff } from "./PhoneHandoff";
 import { Link } from "@/i18n/navigation";
-import { localeNames, locales } from "@/i18n/routing";
 import {
   addExclusionAction,
   advanceCeremonyAction,
@@ -337,19 +338,16 @@ function ExclusionsBox({
       <h2 className="font-display text-2xl font-bold">{t("exclusions")}</h2>
       <p className="mt-1 text-sm text-muted">{t("exclusionsHint")}</p>
       <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto_1fr]">
-        <select className="field" value={giver} onChange={(e) => setGiver(e.target.value)} disabled={disabled} aria-label={t("giver")}>
-          <option value="">{t("giver")}</option>
-          {people.map((p) => (
-            <option key={p.id} value={p.id}>{p.displayName}</option>
-          ))}
-        </select>
+        <Select value={giver} onChange={setGiver} options={people.map(personOption)} placeholder={t("giver")} disabled={disabled} aria-label={t("giver")} />
         <span className="grid place-items-center self-center text-muted">{both ? <ArrowsLeftRight weight="bold" className="h-5 w-5" /> : <ArrowRight weight="bold" className="h-5 w-5" />}</span>
-        <select className="field" value={receiver} onChange={(e) => setReceiver(e.target.value)} disabled={disabled} aria-label={t("receiver")}>
-          <option value="">{t("receiver")}</option>
-          {people.filter((p) => p.id !== giver).map((p) => (
-            <option key={p.id} value={p.id}>{p.displayName}</option>
-          ))}
-        </select>
+        <Select
+          value={receiver}
+          onChange={setReceiver}
+          options={people.filter((p) => p.id !== giver).map(personOption)}
+          placeholder={t("receiver")}
+          disabled={disabled}
+          aria-label={t("receiver")}
+        />
       </div>
       <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
         <label className="flex items-center gap-2 text-sm">
@@ -459,28 +457,26 @@ function SettingsBox({
           </div>
           <div>
             <label className="label" htmlFor="s-currency">{tc("currency")}</label>
-            <select id="s-currency" name="currency" defaultValue={s.currency} className="field">
-              {currencies.map((c) => (
-                <option key={c}>{c}</option>
-              ))}
-            </select>
+            <Select id="s-currency" name="currency" defaultValue={s.currency} options={currencyOptions} className="field min-w-36" />
           </div>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
           <div>
             <label className="label" htmlFor="s-locale">{tc("language")}</label>
-            <select id="s-locale" name="sessionLocale" defaultValue={s.locale} className="field">
-              {locales.map((l) => (
-                <option key={l} value={l}>{localeNames[l]}</option>
-              ))}
-            </select>
+            <Select id="s-locale" name="sessionLocale" defaultValue={s.locale} options={localeOptions} />
           </div>
           <div>
             <label className="label" htmlFor="s-mode">{tc("mode")}</label>
-            <select id="s-mode" name="mode" defaultValue={s.mode} disabled={s.step !== "lobby" || s.drawn} className="field">
-              <option value="sync">{tc("modes.sync.title")}</option>
-              <option value="async">{tc("modes.async.title")}</option>
-            </select>
+            <Select
+              id="s-mode"
+              name="mode"
+              defaultValue={s.mode}
+              disabled={s.step !== "lobby" || s.drawn}
+              options={[
+                { value: "sync", label: tc("modes.sync.title"), leading: <UsersThree weight="bold" className="h-5 w-5 shrink-0 text-pine" /> },
+                { value: "async", label: tc("modes.async.title"), leading: <Clock weight="bold" className="h-5 w-5 shrink-0 text-pine" /> },
+              ]}
+            />
           </div>
         </div>
         <button className="btn-primary w-full" disabled={disabled}>
@@ -489,4 +485,8 @@ function SettingsBox({
       </form>
     </section>
   );
+}
+
+function personOption(p: PublicParticipant) {
+  return { value: p.id, label: p.displayName, leading: <Avatar config={p.avatar} title="" className="h-7 w-7 shrink-0" /> };
 }

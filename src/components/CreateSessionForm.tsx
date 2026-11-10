@@ -2,11 +2,20 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
+import { localeOptions } from "./LanguageSwitcher";
+import { OptionBadge, Select } from "./Select";
 import { useRouter } from "@/i18n/navigation";
-import { localeNames, locales } from "@/i18n/routing";
 import { createSessionAction } from "@/lib/actions";
 
 export const currencies = ["PLN", "EUR", "USD", "GBP", "BRL", "CHF"] as const;
+
+const currencySigns: Record<(typeof currencies)[number], string> = { PLN: "zł", EUR: "€", USD: "$", GBP: "£", BRL: "R$", CHF: "Fr" };
+
+export const currencyOptions = currencies.map((c) => ({
+  value: c,
+  label: c,
+  leading: (selected: boolean) => <OptionBadge active={selected}>{currencySigns[c]}</OptionBadge>,
+}));
 
 export function parseEmails(text: string) {
   return [...new Set(text.split(/[\s,;]+/).map((e) => e.trim().toLowerCase()).filter((e) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)))];
@@ -102,11 +111,7 @@ export function CreateSessionForm() {
           </div>
           <div>
             <label className="label" htmlFor="sessionLocale">{t("language")}</label>
-            <select id="sessionLocale" name="sessionLocale" defaultValue={locale} className="field">
-              {locales.map((l) => (
-                <option key={l} value={l}>{localeNames[l]}</option>
-              ))}
-            </select>
+            <Select id="sessionLocale" name="sessionLocale" defaultValue={locale} options={localeOptions} />
           </div>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -127,11 +132,13 @@ export function CreateSessionForm() {
           </div>
           <div>
             <label className="label" htmlFor="currency">{t("currency")}</label>
-            <select id="currency" name="currency" defaultValue={locale === "pl" ? "PLN" : locale === "pt" ? "EUR" : locale === "en" ? "GBP" : "EUR"} className="field">
-              {currencies.map((c) => (
-                <option key={c}>{c}</option>
-              ))}
-            </select>
+            <Select
+              id="currency"
+              name="currency"
+              defaultValue={locale === "pl" ? "PLN" : locale === "en" ? "GBP" : "EUR"}
+              options={currencyOptions}
+              className="field min-w-36"
+            />
           </div>
         </div>
       </fieldset>
