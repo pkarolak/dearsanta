@@ -101,14 +101,14 @@ export async function createLoginToken(email: string) {
 }
 
 /** Personal link that signs a participant into one session. Links survive repeated clicks and mail scanners. */
-export async function createParticipantToken(participant: Pick<Participant, "id" | "email">) {
+export async function createParticipantToken(participant: Pick<Participant, "id" | "email">, ttlMs = 1000 * 60 * 60 * 24 * 60) {
   const raw = randomBytes(32).toString("base64url");
   await insertToken({
     hash: hashToken(raw),
     purpose: "participant",
     email: participant.email ?? "",
     participantId: participant.id,
-    expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 60),
+    expiresAt: new Date(Date.now() + ttlMs),
   });
   return raw;
 }

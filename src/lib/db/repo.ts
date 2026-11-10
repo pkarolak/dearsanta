@@ -12,6 +12,7 @@ export type Session = {
   id: string;
   code: string;
   screenKey: string;
+  screenCode: string;
   title: string;
   mode: SessionMode;
   status: SessionStatus;
@@ -60,6 +61,7 @@ function mapSession(r: any): Session {
     id: r.id,
     code: r.code,
     screenKey: r.screen_key,
+    screenCode: r.screen_code,
     title: r.title,
     mode: r.mode,
     status: r.status,
@@ -106,6 +108,7 @@ export const normalizeEmail = (email: string) => email.trim().toLowerCase();
 
 const sessionCode = customAlphabet("ABCDEFGHJKLMNPQRSTUVWXYZ23456789", 6);
 const screenKey = customAlphabet("abcdefghijkmnpqrstuvwxyz23456789", 20);
+const screenCode = customAlphabet("0123456789", 6);
 
 async function db() {
   return getDb();
@@ -133,12 +136,13 @@ export async function createSession(input: NewSession) {
     let row;
     for (let attempt = 0; attempt < 5 && !row; attempt++) {
       const rows = await tx.query(
-        `insert into sessions (code, screen_key, title, mode, locale, timezone, scheduled_at, location, online_url, budget_amount, currency, auto_admit)
-         values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
-         on conflict (code) do nothing returning *`,
+        `insert into sessions (code, screen_key, screen_code, title, mode, locale, timezone, scheduled_at, location, online_url, budget_amount, currency, auto_admit)
+         values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
+         on conflict do nothing returning *`,
         [
           sessionCode(),
           screenKey(),
+          screenCode(),
           input.title,
           input.mode,
           input.locale,
@@ -169,6 +173,11 @@ export async function createSession(input: NewSession) {
 
 export async function getSessionByCode(code: string) {
   const rows = await (await db()).query("select * from sessions where code = $1", [code.toUpperCase()]);
+  return rows[0] ? mapSession(rows[0]) : null;
+}
+
+export async function getSessionByScreenCode(screenCode: string) {
+  const rows = await (await db()).query("select * from sessions where screen_code = $1", [screenCode.replace(/\D/g, "")]);
   return rows[0] ? mapSession(rows[0]) : null;
 }
 

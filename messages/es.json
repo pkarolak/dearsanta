@@ -364,10 +364,18 @@
       "copy": "Copiar enlace",
       "copied": "¡Copiado!",
       "screen": "Abrir la pantalla grande",
-      "screenHint": "Conecta una tele o un portátil: todos verán cómo nacen los elfos.",
       "tooFew": "El sorteo necesita al menos 3 elfos.",
       "more": "Ajustes, reglas e invitaciones",
-      "myElf": "Crea tu elfo"
+      "myElf": "Crea tu elfo",
+      "tvHint": "En la tele o en otro portátil, entra en <b>{url}</b> y escribe el código de pantalla:"
+    },
+    "phone": {
+      "button": "Llevarlo a mi móvil",
+      "title": "Sigue desde tu móvil",
+      "body": "Escanea el código con el móvil. Entrarás como tú: crea allí tu elfo y descubre a quién te ha tocado cuando llegue el momento. Este ordenador sigue funcionando igual.",
+      "expires": "El código caduca en {time}",
+      "failed": "No hemos podido preparar el código. Inténtalo de nuevo.",
+      "close": "Cerrar"
     }
   },
   "screen": {
@@ -472,5 +480,12 @@
     "personal3": "¿Preparado? Allá va…",
     "personalReveal": "Este año vas a sorprender a… ¡{receiver}!",
     "personalBye": "Guarda el secreto y disfruta. ¡Jo, jo, jo!"
+  },
+  "tv": {
+    "title": "Pantalla grande",
+    "lead": "Escribe el código de pantalla de 6 cifras del panel del Jefe de los elfos.",
+    "label": "Código de pantalla",
+    "open": "Abrir la pantalla",
+    "notFound": "No conocemos ese código. Revisa las cifras e inténtalo de nuevo."
   }
 }

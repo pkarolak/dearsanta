@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { avatarSchema } from "@/lib/avatar";
-import { getViewer, participantLink, signInParticipant, signOutProfile } from "@/lib/auth";
+import { createParticipantToken, getViewer, participantLink, signInParticipant, signOutProfile } from "@/lib/auth";
 import { nextStep, type CeremonyStep } from "@/lib/ceremony/steps";
 import {
   addExclusion,
@@ -15,6 +15,7 @@ import {
   getAssignmentForGiver,
   getParticipant,
   getSessionByCode,
+  getSessionByScreenCode,
   listParticipants,
   markRevealed,
   runDraw,
@@ -35,6 +36,7 @@ import {
   sendResults,
 } from "@/lib/mail/messages";
 import { sendMails } from "@/lib/mail/send";
+import { requestOrigin } from "@/lib/urls";
 
 export type ActionResult<T = object> = ({ ok: true } & T) | { ok: false; error: string; detail?: string[] };
 
@@ -448,5 +450,26 @@ export async function markRevealedAction(code: string) {
     await markRevealed(session.id, me.id);
     await bumpVersion(session.id);
     return {};
+  });
+}
+
+/* ---------- devices ---------- */
+
+/** A short-lived link that signs the Elf Chief in on their phone, as the same elf with the same powers. */
+export async function phoneLinkAction(code: string, locale: string) {
+  return run(async () => {
+    const { session, host } = await requireHost(code);
+    const token = await createParticipantToken(host, 1000 * 60 * 10);
+    const params = new URLSearchParams({ token, locale: toLocale(locale), next: `/s/${session.code}/me` });
+    return { url: `${await requestOrigin()}/api/auth/link?${params}`, expiresAt: Date.now() + 1000 * 60 * 10 };
+  });
+}
+
+/** Lets a TV or laptop that cannot scan QR codes open the big screen by typing the short code from the Elf Chief's panel. */
+export async function openScreenAction(screenCode: string) {
+  return run(async () => {
+    const session = await getSessionByScreenCode(z.string().trim().min(6).max(12).parse(screenCode));
+    if (!session) throw new ActionError("not_found");
+    return { path: `/s/${session.code}/screen?k=${session.screenKey}` };
   });
 }

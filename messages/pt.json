@@ -364,10 +364,18 @@
       "copy": "Copiar link",
       "copied": "Copiado!",
       "screen": "Abrir o ecrã grande",
-      "screenHint": "Liga uma TV ou um portátil: todos vão ver os elfos a ganhar forma.",
       "tooFew": "O sorteio precisa de pelo menos 3 elfos.",
       "more": "Definições, regras e convites",
-      "myElf": "Cria o teu elfo"
+      "myElf": "Cria o teu elfo",
+      "tvHint": "Na televisão ou noutro portátil, abra <b>{url}</b> e escreva o código do ecrã:"
+    },
+    "phone": {
+      "button": "Levar para o telemóvel",
+      "title": "Continue no telemóvel",
+      "body": "Leia o código com o telemóvel. Entra como você: crie lá o seu duende e veja quem lhe saiu quando chegar a hora. Este computador continua a funcionar como antes.",
+      "expires": "O código expira em {time}",
+      "failed": "Não foi possível preparar o código. Tente outra vez.",
+      "close": "Fechar"
     }
   },
   "screen": {
@@ -472,5 +480,12 @@
     "personal3": "Está pronto? Aqui vai…",
     "personalReveal": "Este ano vai surpreender… {receiver}!",
     "personalBye": "Guarde o segredo e divirta-se. Ho, ho, ho!"
+  },
+  "tv": {
+    "title": "Ecrã grande",
+    "lead": "Escreva o código do ecrã de 6 dígitos do painel do Chefe dos duendes.",
+    "label": "Código do ecrã",
+    "open": "Abrir o ecrã",
+    "notFound": "Não conhecemos esse código. Verifique os dígitos e tente outra vez."
   }
 }

@@ -364,10 +364,18 @@
       "copy": "Copy link",
       "copied": "Copied!",
       "screen": "Open the big screen",
-      "screenHint": "Hook up a TV or laptop: everyone gets to watch the elves being made.",
       "tooFew": "The draw needs at least 3 elves.",
       "more": "Settings, rules and invitations",
-      "myElf": "Make your elf"
+      "myElf": "Make your elf",
+      "tvHint": "On the TV or a second laptop, go to <b>{url}</b> and type the screen code:"
+    },
+    "phone": {
+      "button": "Take it to my phone",
+      "title": "Carry on from your phone",
+      "body": "Scan the code with your phone. It signs you in as you: make your elf there and see who you drew when the time comes. This computer keeps working as before.",
+      "expires": "Code expires in {time}",
+      "failed": "Couldn’t prepare the code. Please try again.",
+      "close": "Close"
     }
   },
   "screen": {
@@ -472,5 +480,12 @@
     "personal3": "Are you ready? Here it comes…",
     "personalReveal": "This year, you will surprise… {receiver}!",
     "personalBye": "Keep it secret, keep it merry. Ho, ho, ho!"
+  },
+  "tv": {
+    "title": "Big screen",
+    "lead": "Type the 6-digit screen code from the Elf Chief’s panel.",
+    "label": "Screen code",
+    "open": "Open the screen",
+    "notFound": "We don’t know that code. Check the digits and try again."
   }
 }

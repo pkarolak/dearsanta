@@ -9,6 +9,7 @@ import { parseEmails, currencies } from "./CreateSessionForm";
 import { PageBand } from "./PageBand";
 import { WaitingRoom } from "./WaitingRoom";
 import { RemoteIcon } from "./icons";
+import { PhoneHandoff } from "./PhoneHandoff";
 import { Link } from "@/i18n/navigation";
 import { localeNames, locales } from "@/i18n/routing";
 import {
@@ -72,6 +73,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
       >
         <div className="mt-5 flex flex-wrap items-center gap-2">
           <Link href={`/s/${code}/me`} className="btn-soft px-4 py-2 text-sm">{t("myElf")}</Link>
+          {!(s.step === "lobby" && !s.drawn) && <PhoneHandoff code={code} className="btn-soft px-4 py-2 text-sm max-sm:hidden" />}
           {s.mode === "sync" && !(s.step === "lobby" && !s.drawn) && (
             <a href={screenUrl} target="_blank" rel="noreferrer" className="btn-pine px-4 py-2 text-sm">
               <Television weight="bold" className="h-4 w-4" />

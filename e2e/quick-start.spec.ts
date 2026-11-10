@@ -47,4 +47,30 @@ test("spontaneous: one tap into the waiting room, guests join with a name and dr
   await host.screenshot({ path: `${shots}/11-waiting-room.png` });
   await guest.screenshot({ path: `${shots}/12-guest-dressing.png` });
   await screen.screenshot({ path: `${shots}/13-screen-lobby-live.png` });
+
+  // The TV cannot scan, so it opens the big screen by typing the short screen code.
+  const screenCode = (await host.getByTestId("screen-code").innerText()).replace(/\D/g, "");
+  const tv = await (await browser.newContext({ viewport: { width: 1280, height: 720 } })).newPage();
+  await tv.goto("/tv");
+  await tv.fill("#tv-code", "000000");
+  await tv.getByRole("button", { name: "Open the screen" }).click();
+  await expect(tv.getByText("We don’t know that code.")).toBeVisible();
+  await tv.fill("#tv-code", screenCode);
+  await tv.screenshot({ path: `${shots}/15-tv-code.png` });
+  await tv.getByRole("button", { name: "Open the screen" }).click();
+  await tv.waitForURL(new RegExp(`/s/${code}/screen\\?k=`));
+  await expect(tv.getByText("Anna").first()).toBeVisible();
+
+  // The Elf Chief scans a QR code with their phone and carries on there as the same elf.
+  await host.getByRole("button", { name: "Take it to my phone" }).click();
+  const qr = host.getByTestId("phone-qr");
+  await expect(qr).toHaveAttribute("data-url", /\/api\/auth\/link\?/);
+  await host.waitForTimeout(600);
+  await host.screenshot({ path: `${shots}/16-phone-handoff.png` });
+  const phone = await (await browser.newContext({ viewport: { width: 390, height: 844 } })).newPage();
+  await phone.goto((await qr.getAttribute("data-url"))!);
+  await phone.waitForURL(new RegExp(`/s/${code}/me`));
+  await expect(phone.getByRole("link", { name: "Elf Chief panel" })).toBeVisible();
+  await phone.getByRole("button", { name: "Elf hat" }).click();
+  await expect(host.locator('[aria-label="Anna"] img[src*="hat-"][src*="elf"]').first()).toBeVisible({ timeout: 10_000 });
 });

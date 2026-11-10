@@ -7,6 +7,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { useState, useTransition } from "react";
 import { Avatar } from "./Avatar";
 import { Snowfall, StringLights } from "./landing/Atmosphere";
+import { PhoneHandoff } from "./PhoneHandoff";
 import { Link } from "@/i18n/navigation";
 import { saveProfileAction } from "@/lib/actions";
 import type { SessionState } from "@/lib/state";
@@ -27,6 +28,7 @@ export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
   const [pending, start] = useTransition();
   const [name, setName] = useState("");
   const shortUrl = joinUrl.replace(/^https?:\/\//, "");
+  const tvUrl = `${shortUrl.split("/")[0]}/tv`;
 
   const share = async () => {
     if (navigator.share) {
@@ -67,8 +69,16 @@ export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
               {copied ? <Check weight="bold" className="h-5 w-5" /> : <ShareNetwork weight="bold" className="h-5 w-5" />}
               {copied ? t("copied") : t("share")}
             </button>
+            <PhoneHandoff code={s.code} className="btn-ghost text-snow hover:bg-snow/10 max-sm:hidden" />
           </div>
-          {s.mode === "sync" && <p className="mt-2 text-sm text-snow/60">{t("screenHint")}</p>}
+          {s.mode === "sync" && s.screenCode && (
+            <div className="mt-4 flex max-w-lg flex-wrap items-center gap-x-4 gap-y-2 rounded-[1.25rem] bg-snow/10 px-4 py-3">
+              <p className="min-w-0 flex-1 text-sm text-snow/80">{t.rich("tvHint", { url: tvUrl, b: (chunks) => <strong className="text-snow">{chunks}</strong> })}</p>
+              <p className="font-display text-3xl font-black tracking-[0.12em] text-gold" data-testid="screen-code">
+                {s.screenCode.replace(/(\d{3})(\d{3})/, "$1 $2")}
+              </p>
+            </div>
+          )}
 
           <div className="mt-8">
             <p className="font-semibold text-snow/80">{elves.length > 1 ? t("inside", { count: elves.length }) : t("waiting")}</p>

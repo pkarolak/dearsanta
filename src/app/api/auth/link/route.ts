@@ -24,7 +24,7 @@ export async function GET(request: Request) {
 
   // Clicking a personal link proves ownership of the e-mail address.
   await updateParticipant(participant, {
-    emailVerified: true,
+    emailVerified: participant.email ? true : undefined,
     status: participant.status === "invited" ? "approved" : undefined,
   });
   await signInParticipant(session, participant.id);

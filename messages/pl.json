@@ -364,10 +364,18 @@
       "copy": "Kopiuj link",
       "copied": "Skopiowano!",
       "screen": "Otwórz duży ekran",
-      "screenHint": "Podłącz telewizor albo laptop – wszyscy zobaczą, jak powstają elfy.",
       "tooFew": "Do losowania potrzeba co najmniej 3 elfów.",
       "more": "Ustawienia, zasady i zaproszenia",
-      "myElf": "Stwórz swojego elfa"
+      "myElf": "Stwórz swojego elfa",
+      "tvHint": "Na telewizorze albo drugim laptopie wejdź na <b>{url}</b> i wpisz kod ekranu:"
+    },
+    "phone": {
+      "button": "Weź sesję na telefon",
+      "title": "Przejdź na telefon",
+      "body": "Zeskanuj kod telefonem. Zalogujesz się tam jako Ty: stworzysz swojego elfa, a podczas losowania sprawdzisz, kogo wylosowałeś. Ten komputer dalej działa jak wcześniej.",
+      "expires": "Kod wygaśnie za {time}",
+      "failed": "Nie udało się przygotować kodu. Spróbuj ponownie.",
+      "close": "Zamknij"
     }
   },
   "screen": {
@@ -472,5 +480,12 @@
     "personal3": "Gotowe? No to słuchaj…",
     "personalReveal": "W tym roku zaskoczysz… {receiver}!",
     "personalBye": "Zachowaj to w tajemnicy i baw się dobrze. Ho, ho, ho!"
+  },
+  "tv": {
+    "title": "Duży ekran",
+    "lead": "Wpisz 6-cyfrowy kod ekranu z panelu organizatora.",
+    "label": "Kod ekranu",
+    "open": "Otwórz ekran",
+    "notFound": "Nie znamy takiego kodu. Sprawdź cyfry i spróbuj jeszcze raz."
   }
 }

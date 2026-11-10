@@ -364,10 +364,18 @@
       "copy": "Link kopieren",
       "copied": "Kopiert!",
       "screen": "Großen Bildschirm öffnen",
-      "screenHint": "Schließ einen Fernseher oder Laptop an: Alle sehen, wie die Elfen entstehen.",
       "tooFew": "Zum Losen braucht es mindestens 3 Elfen.",
       "more": "Einstellungen, Regeln und Einladungen",
-      "myElf": "Deinen Elf gestalten"
+      "myElf": "Deinen Elf gestalten",
+      "tvHint": "Geh auf dem Fernseher oder einem zweiten Laptop auf <b>{url}</b> und gib den Bildschirmcode ein:"
+    },
+    "phone": {
+      "button": "Aufs Handy holen",
+      "title": "Weiter auf dem Handy",
+      "body": "Scanne den Code mit deinem Handy. Dort bist du dann als du angemeldet: Gestalte deinen Wichtel und sieh bei der Auslosung, wen du gezogen hast. Dieser Computer funktioniert weiter wie bisher.",
+      "expires": "Code läuft in {time} ab",
+      "failed": "Der Code konnte nicht erstellt werden. Bitte versuch es noch einmal.",
+      "close": "Schließen"
     }
   },
   "screen": {
@@ -472,5 +480,12 @@
     "personal3": "Bist du bereit? Jetzt kommt es…",
     "personalReveal": "Dieses Jahr überraschst du… {receiver}!",
     "personalBye": "Behalt es für dich und hab viel Freude. Ho, ho, ho!"
+  },
+  "tv": {
+    "title": "Großer Bildschirm",
+    "lead": "Gib den 6-stelligen Bildschirmcode aus dem Panel des Oberwichtels ein.",
+    "label": "Bildschirmcode",
+    "open": "Bildschirm öffnen",
+    "notFound": "Diesen Code kennen wir nicht. Prüf die Ziffern und versuch es noch einmal."
   }
 }
