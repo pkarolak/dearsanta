@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ArrowsClockwise, ArrowsLeftRight, Clock, Copy, Television, Trash, UsersThree } from "@phosphor-icons/react";
+import { ArrowRight, ArrowsClockwise, CaretDown, ArrowsLeftRight, Clock, Copy, DoorOpen, GearSix, Television, Trash, UsersThree } from "@phosphor-icons/react";
 import { useLocale, useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
 import { useState, useTransition } from "react";
@@ -8,6 +8,7 @@ import { Avatar } from "./Avatar";
 import { currencies, currencyOptions, parseEmails } from "./CreateSessionForm";
 import { localeOptions } from "./LanguageSwitcher";
 import { Select } from "./Select";
+import { Disclosure } from "./Disclosure";
 import { PageBand } from "./PageBand";
 import { WaitingRoom } from "./WaitingRoom";
 import { RemoteIcon } from "./icons";
@@ -40,7 +41,6 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
   const { state, refresh } = useSessionState(code, locale, { initial });
   const [pending, start] = useTransition();
   const [message, setMessage] = useState<{ kind: "error" | "ok"; text: string } | null>(null);
-  const [showQr, setShowQr] = useState(false);
 
   if (!state) return null;
   const s = state.session;
@@ -62,14 +62,19 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
   const ready = approved.filter((p) => p.profileComplete).length;
   const upcoming = nextStep(s.step);
 
+  const stepAt = ceremonySteps.indexOf(s.step);
+  const rules = state.exclusions ?? [];
+  const budget = s.budgetAmount ? new Intl.NumberFormat(locale, { style: "currency", currency: s.currency, maximumFractionDigits: 0 }).format(s.budgetAmount) : null;
+  const when = s.scheduledAt ? new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(s.scheduledAt)) : null;
+  const blocked = state.feasibility && !locked && !state.feasibility.ok;
+
   return (
     <main className="felt-texture min-h-dvh pb-20">
       <PageBand
         title={s.title}
         lead={
           <>
-            {t("code")} <span className="font-display font-bold tracking-[0.18em] text-snow">{s.code}</span> · {t(`mode.${s.mode}`)} ·{" "}
-            {t(`status.${s.status}`)}
+            {t("code")} <span className="font-display font-bold tracking-[0.18em] text-snow">{s.code}</span> · {t(`mode.${s.mode}`)}
           </>
         }
       >
@@ -84,175 +89,169 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
           )}
         </div>
       </PageBand>
-      <div className="mx-auto max-w-6xl px-5 py-6">
-        {s.step === "lobby" && !s.drawn && <WaitingRoom state={state} joinUrl={joinUrl} screenUrl={screenUrl} onChanged={refresh} />}
+      {s.step === "lobby" && !s.drawn && (
+        <div className="mx-auto max-w-6xl px-5 pt-6">
+          <WaitingRoom state={state} joinUrl={joinUrl} screenUrl={screenUrl} onChanged={refresh} />
+        </div>
+      )}
+      <div className="mx-auto max-w-3xl space-y-5 px-5 py-6">
 
         {message && (
           <p
             role={message.kind === "error" ? "alert" : "status"}
-            className={`mt-6 rounded-2xl px-4 py-3 ${message.kind === "error" ? "bg-berry/10 text-berry" : "bg-pine/10 text-pine"}`}
+            className={`rounded-2xl px-4 py-3 ${message.kind === "error" ? "bg-berry/10 text-berry" : "bg-pine/10 text-pine"}`}
           >
             {message.text}
           </p>
         )}
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1.25fr_1fr]">
-          <div className="space-y-6">
-            {/* Ceremony / draw controls */}
-            <section className="card p-6">
-              {s.mode === "sync" ? (
-                <>
-                  <h2 className="font-display text-2xl font-bold">{t("ceremony")}</h2>
-                  <ol className="mt-4 flex flex-wrap gap-2">
-                    {ceremonySteps.map((step) => {
-                      const i = ceremonySteps.indexOf(step);
-                      const current = ceremonySteps.indexOf(s.step);
-                      return (
-                        <li
-                          key={step}
-                          className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                            i === current ? "bg-berry text-white" : i < current ? "bg-pine/15 text-pine" : "well text-muted"
-                          }`}
-                        >
-                          {t(`steps.${step}`)}
-                        </li>
-                      );
-                    })}
-                  </ol>
-                  <p className="mt-4 text-sm text-muted">{t(`stepHint.${s.step}`)}</p>
-                  <div className="mt-5 flex flex-wrap gap-3">
-                    {upcoming && (
-                      <button className="btn-primary" disabled={pending} onClick={() => act(() => advanceCeremonyAction(code))}>
-                        {s.step === "lobby" ? t("start") : t("next", { step: t(`steps.${upcoming}`) })}
-                      </button>
-                    )}
-                    {s.step !== "lobby" && (
-                      <button className="btn-soft" disabled={pending} onClick={() => act(() => advanceCeremonyAction(code, s.step))}>
-                        {t("replay")}
-                      </button>
-                    )}
-                  </div>
-                  {state.revealProgress && s.drawn && (
-                    <p className="mt-4 text-sm font-semibold text-pine">
-                      {t("revealProgress", { revealed: state.revealProgress.revealed, total: state.revealProgress.total })}
-                    </p>
-                  )}
-                </>
-              ) : (
-                <>
-                  <h2 className="font-display text-2xl font-bold">{t("asyncTitle")}</h2>
-                  <p className="mt-2 text-muted">{t("asyncReady", { ready, total: approved.length })}</p>
-                  <div className="mt-3 h-3 overflow-hidden rounded-full bg-ink/10">
-                    <div className="h-full rounded-full bg-pine transition-all" style={{ width: `${approved.length ? (ready / approved.length) * 100 : 0}%` }} />
-                  </div>
-                  {!s.drawn ? (
-                    <button
-                      className="btn-primary mt-5"
-                      disabled={pending}
-                      onClick={() => {
-                        if (ready < approved.length && !window.confirm(t("unlockConfirm"))) return;
-                        act(() => unlockDrawAction(code), t("unlocked"));
-                      }}
-                    >
-                      {t("unlock")}
+        {waiting.length > 0 && (
+          <section className="card border-2 border-gold/60 p-5 md:p-6">
+            <h2 className="flex items-center gap-2 font-display text-xl font-bold">
+              <DoorOpen weight="bold" className="h-5 w-5 text-berry" />
+              {t("atTheDoor")} <span className="text-muted">({waiting.length})</span>
+            </h2>
+            <ul className="mt-3 space-y-2">
+              {waiting.map((p) => (
+                <PersonRow key={p.id} p={p}>
+                  {p.status === "invited" && (
+                    <button className="btn-ghost px-3 py-1.5 text-xs" disabled={pending} onClick={() => act(() => resendInviteAction(code, p.id), t("resent"))}>
+                      {t("resend")}
                     </button>
-                  ) : (
-                    <p className="mt-5 font-semibold text-pine">
-                      {t("unlockedProgress", { revealed: state.revealProgress?.revealed ?? 0, total: state.revealProgress?.total ?? 0 })}
-                    </p>
                   )}
-                </>
-              )}
+                  <button className="btn-pine px-3 py-1.5 text-xs" disabled={pending || locked} onClick={() => act(() => approveParticipantAction(code, p.id, true))}>
+                    {t("letIn")}
+                  </button>
+                  <button className="btn-ghost px-3 py-1.5 text-xs" disabled={pending || locked} onClick={() => act(() => approveParticipantAction(code, p.id, false))}>
+                    {t("reject")}
+                  </button>
+                </PersonRow>
+              ))}
+            </ul>
+          </section>
+        )}
 
-              {state.feasibility && !locked && !state.feasibility.ok && (
-                <p className="mt-5 rounded-2xl bg-gold/15 px-4 py-3 text-sm text-ink">
-                  {state.feasibility.tooFew ? t("feasibility.tooFew") : t("feasibility.blocked", { names: state.feasibility.blockedNames.join(", ") })}
-                </p>
-              )}
-              {s.commitment && (
-                <p className="mt-5 break-all text-xs text-muted">
-                  {t("fingerprint")} <span className="font-mono">{s.commitment.slice(0, 16)}…</span>
-                </p>
-              )}
-            </section>
-
-            {/* People */}
-            <section className="card p-6">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <h2 className="font-display text-2xl font-bold">{t("elves", { count: approved.length })}</h2>
-                <button className="btn-soft px-4 py-2 text-sm" onClick={() => setShowQr((v) => !v)}>
-                  {showQr ? t("hideQr") : t("showQr")}
-                </button>
+        {/* The one thing to do next */}
+        <section className="card p-5 md:p-6">
+          {s.mode === "sync" ? (
+            <>
+              <div className="flex items-baseline justify-between gap-3">
+                <h2 className="font-display text-2xl font-bold">{t(`steps.${s.step}`)}</h2>
+                <p className="shrink-0 text-sm font-semibold text-muted">{t("stepOf", { n: stepAt + 1, total: ceremonySteps.length })}</p>
               </div>
-              {showQr && (
-                <div className="mt-4 flex flex-col items-center gap-3 rounded-3xl bg-cream p-5 sm:flex-row">
-                  <QRCodeSVG value={joinUrl} size={140} bgColor="transparent" fgColor="#3B2A22" />
-                  <div className="text-sm">
-                    <p className="font-semibold">{t("shareLink")}</p>
-                    <p className="mt-1 break-all font-mono text-xs text-muted">{joinUrl}</p>
-                    <button className="btn-soft mt-3 px-3 py-1.5 text-xs" onClick={() => navigator.clipboard?.writeText(joinUrl)}>
-                      <Copy weight="bold" className="h-3.5 w-3.5" />
-                      {t("copy")}
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {waiting.length > 0 && (
-                <div className="mt-5">
-                  <h3 className="font-semibold text-muted">{t("atTheDoor")}</h3>
-                  <ul className="mt-2 space-y-2">
-                    {waiting.map((p) => (
-                      <PersonRow key={p.id} p={p}>
-                        {p.status === "invited" && (
-                          <button className="btn-ghost px-3 py-1.5 text-xs" disabled={pending} onClick={() => act(() => resendInviteAction(code, p.id), t("resent"))}>
-                            {t("resend")}
-                          </button>
-                        )}
-                        <button className="btn-pine px-3 py-1.5 text-xs" disabled={pending || locked} onClick={() => act(() => approveParticipantAction(code, p.id, true))}>
-                          {t("letIn")}
-                        </button>
-                        <button className="btn-ghost px-3 py-1.5 text-xs" disabled={pending || locked} onClick={() => act(() => approveParticipantAction(code, p.id, false))}>
-                          {t("reject")}
-                        </button>
-                      </PersonRow>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              <ul className="mt-5 space-y-2">
-                {approved.map((p) => (
-                  <PersonRow key={p.id} p={p}>
-                    {s.mode === "sync" && (
-                      <button
-                        className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold ${p.isRemote ? "bg-gold/25 text-ink" : "well text-muted"}`}
-                        disabled={pending}
-                        onClick={() => act(() => setRemoteAction(code, p.id, !p.isRemote))}
-                        title={t("remoteHint")}
-                      >
-                        <RemoteIcon className="h-3.5 w-3.5" />
-                        {p.isRemote ? t("remote") : t("inRoom")}
-                      </button>
-                    )}
-                    {p.role !== "host" && !locked && (
-                      <button
-                        className="btn-ghost px-3 py-1.5 text-xs"
-                        disabled={pending}
-                        onClick={() => window.confirm(t("removeConfirm", { name: p.displayName })) && act(() => removeParticipantAction(code, p.id))}
-                      >
-                        {t("remove")}
-                      </button>
-                    )}
-                  </PersonRow>
+              <div className="mt-3 flex gap-1" aria-hidden>
+                {ceremonySteps.map((step, i) => (
+                  <span key={step} className={`h-1.5 flex-1 rounded-full ${i < stepAt ? "bg-pine" : i === stepAt ? "bg-berry" : "bg-ink/10"}`} />
                 ))}
-              </ul>
+              </div>
+              <p className="mt-4 text-muted">{t(`stepHint.${s.step}`)}</p>
+              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+                {upcoming && (
+                  <button className="btn-primary" disabled={pending || (s.step === "lobby" && !!blocked)} onClick={() => act(() => advanceCeremonyAction(code))}>
+                    {s.step === "lobby" ? t("start") : t("next", { step: t(`steps.${upcoming}`) })}
+                  </button>
+                )}
+                {s.step !== "lobby" && (
+                  <button className="text-sm font-semibold text-muted underline-offset-2 hover:text-ink hover:underline" disabled={pending} onClick={() => act(() => advanceCeremonyAction(code, s.step))}>
+                    {t("replay")}
+                  </button>
+                )}
+              </div>
+              {state.revealProgress && s.drawn && (
+                <p className="mt-4 text-sm font-semibold text-pine">
+                  {t("revealProgress", { revealed: state.revealProgress.revealed, total: state.revealProgress.total })}
+                </p>
+              )}
+            </>
+          ) : (
+            <>
+              <h2 className="font-display text-2xl font-bold">{t("asyncTitle")}</h2>
+              <p className="mt-2 text-muted">{t("asyncReady", { ready, total: approved.length })}</p>
+              <div className="mt-3 h-2 overflow-hidden rounded-full bg-ink/10">
+                <div className="h-full rounded-full bg-pine transition-all" style={{ width: `${approved.length ? (ready / approved.length) * 100 : 0}%` }} />
+              </div>
+              {!s.drawn ? (
+                <button
+                  className="btn-primary mt-5"
+                  disabled={pending || !!blocked}
+                  onClick={() => {
+                    if (ready < approved.length && !window.confirm(t("unlockConfirm"))) return;
+                    act(() => unlockDrawAction(code), t("unlocked"));
+                  }}
+                >
+                  {t("unlock")}
+                </button>
+              ) : (
+                <p className="mt-5 font-semibold text-pine">
+                  {t("unlockedProgress", { revealed: state.revealProgress?.revealed ?? 0, total: state.revealProgress?.total ?? 0 })}
+                </p>
+              )}
+            </>
+          )}
 
-              {!locked && <InviteBox pending={pending} onInvite={(emails) => act(() => inviteAction(code, emails), t("invitesSent"))} />}
-            </section>
-          </div>
+          {blocked && (
+            <p className="mt-4 rounded-2xl bg-gold/15 px-4 py-3 text-sm text-ink">
+              {state.feasibility!.tooFew ? t("feasibility.tooFew") : t("feasibility.blocked", { names: state.feasibility!.blockedNames.join(", ") })}
+            </p>
+          )}
+        </section>
 
-          <div className="space-y-6">
+        {/* Everything else, folded away */}
+        <div className="card overflow-hidden p-0">
+          <Disclosure
+            title={t("elvesLabel")}
+            icon={<UsersThree weight="bold" className="h-5 w-5" />}
+            summary={t("elvesSummary", { count: approved.length, ready })}
+          >
+            <ul className="space-y-2">
+              {approved.map((p) => (
+                <PersonRow key={p.id} p={p}>
+                  {s.mode === "sync" && (
+                    <button
+                      className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold ${p.isRemote ? "bg-gold/25 text-ink" : "well text-muted"}`}
+                      disabled={pending}
+                      onClick={() => act(() => setRemoteAction(code, p.id, !p.isRemote))}
+                      title={t("remoteHint")}
+                    >
+                      <RemoteIcon className="h-3.5 w-3.5" />
+                      {p.isRemote ? t("remote") : t("inRoom")}
+                    </button>
+                  )}
+                  {p.role !== "host" && !locked && (
+                    <button
+                      className="grid h-8 w-8 place-items-center rounded-full text-muted hover:bg-ink/5 hover:text-berry"
+                      disabled={pending}
+                      aria-label={t("remove")}
+                      title={t("remove")}
+                      onClick={() => window.confirm(t("removeConfirm", { name: p.displayName })) && act(() => removeParticipantAction(code, p.id))}
+                    >
+                      <Trash weight="bold" className="h-4 w-4" />
+                    </button>
+                  )}
+                </PersonRow>
+              ))}
+            </ul>
+            {!(s.step === "lobby" && !s.drawn) && (
+              <div className="mt-4 flex flex-wrap items-center gap-4 rounded-2xl bg-paper p-4">
+                <QRCodeSVG value={joinUrl} size={96} bgColor="transparent" fgColor="#3B2A22" />
+                <div className="min-w-0 flex-1 text-sm">
+                  <p className="font-semibold">{t("shareLink")}</p>
+                  <p className="mt-1 break-all font-mono text-xs text-muted">{joinUrl}</p>
+                  <button className="btn-soft mt-2 px-3 py-1.5 text-xs" onClick={() => navigator.clipboard?.writeText(joinUrl)}>
+                    <Copy weight="bold" className="h-3.5 w-3.5" />
+                    {t("copy")}
+                  </button>
+                </div>
+              </div>
+            )}
+            {!locked && <InviteBox pending={pending} onInvite={(emails) => act(() => inviteAction(code, emails), t("invitesSent"))} />}
+          </Disclosure>
+
+          <Disclosure
+            title={t("exclusions")}
+            icon={<ArrowsLeftRight weight="bold" className="h-5 w-5" />}
+            summary={rules.length ? t("pairsSummary", { count: rules.length }) : t("pairsNone")}
+          >
             <ExclusionsBox
               state={state}
               disabled={pending || locked}
@@ -260,12 +259,20 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
               onUpdate={(id, g, r, both) => act(() => updateExclusionAction(code, id, g, r, both))}
               onDelete={(id) => act(() => deleteExclusionAction(code, id))}
             />
-            <SettingsBox
-              state={state}
-              disabled={pending}
-              onSave={(patch) => act(() => updateSettingsAction(code, patch), t("settingsSaved"))}
-            />
-          </div>
+          </Disclosure>
+
+          <Disclosure
+            title={t("settings")}
+            icon={<GearSix weight="bold" className="h-5 w-5" />}
+            summary={[when ?? t("noDate"), budget ? t("budgetSummary", { amount: budget }) : t("noBudget")].join(" · ")}
+          >
+            <SettingsBox state={state} disabled={pending} onSave={(patch) => act(() => updateSettingsAction(code, patch), t("settingsSaved"))} />
+            {s.commitment && (
+              <p className="mt-5 break-all text-xs text-muted">
+                {t("fingerprint")} <span className="font-mono">{s.commitment.slice(0, 16)}…</span>
+              </p>
+            )}
+          </Disclosure>
         </div>
       </div>
     </main>
@@ -352,9 +359,8 @@ function ExclusionsBox({
   };
 
   return (
-    <section className="card p-6">
-      <h2 className="font-display text-2xl font-bold">{t("exclusions")}</h2>
-      <p className="mt-1 text-sm text-muted">{t("exclusionsHint")}</p>
+    <div>
+      <p className="text-sm text-muted">{t("exclusionsHint")}</p>
 
       <p className="mt-5 flex min-h-6 items-center gap-2 text-sm font-semibold" aria-live="polite">
         {first ? (
@@ -454,7 +460,7 @@ function ExclusionsBox({
           );
         })}
       </ul>
-    </section>
+    </div>
   );
 }
 
@@ -478,13 +484,13 @@ function SettingsBox({
   const tc = useTranslations("create");
   const s = state.session;
   const when = toLocalInputs(s.scheduledAt);
+  const [more, setMore] = useState(false);
 
   return (
-    <section className="card p-6">
-      <h2 className="font-display text-2xl font-bold">{t("settings")}</h2>
+    <>
       <form
         key={[s.title, s.scheduledAt, s.location, s.onlineUrl, s.budgetAmount, s.currency, s.locale, s.mode, s.drawn].join("|")}
-        className="mt-4 space-y-4"
+        className="space-y-4"
         action={(form) => {
           const date = String(form.get("date") ?? "");
           const time = String(form.get("time") ?? "") || "18:00";
@@ -515,14 +521,6 @@ function SettingsBox({
             <input id="s-time" name="time" type="time" defaultValue={when.time} className="field" />
           </div>
         </div>
-        <div>
-          <label className="label" htmlFor="s-location">{tc("location")}</label>
-          <input id="s-location" name="location" defaultValue={s.location ?? ""} className="field" />
-        </div>
-        <div>
-          <label className="label" htmlFor="s-online">{tc("onlineUrl")}</label>
-          <input id="s-online" name="onlineUrl" type="url" defaultValue={s.onlineUrl ?? ""} className="field" />
-        </div>
         <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
           <div>
             <label className="label" htmlFor="s-budget">{tc("budget")}</label>
@@ -532,6 +530,19 @@ function SettingsBox({
             <label className="label" htmlFor="s-currency">{tc("currency")}</label>
             <Select id="s-currency" name="currency" defaultValue={s.currency} options={currencyOptions} className="field min-w-36" />
           </div>
+        </div>
+        <button type="button" className="flex items-center gap-1.5 text-sm font-semibold text-muted hover:text-ink" aria-expanded={more} onClick={() => setMore((m) => !m)}>
+          <CaretDown weight="bold" className={`h-4 w-4 transition-transform ${more ? "rotate-180" : ""}`} />
+          {more ? t("fewerSettings") : t("moreSettings")}
+        </button>
+        <div className={more ? "space-y-4" : "hidden"}>
+        <div>
+          <label className="label" htmlFor="s-location">{tc("location")}</label>
+          <input id="s-location" name="location" defaultValue={s.location ?? ""} className="field" />
+        </div>
+        <div>
+          <label className="label" htmlFor="s-online">{tc("onlineUrl")}</label>
+          <input id="s-online" name="onlineUrl" type="url" defaultValue={s.onlineUrl ?? ""} className="field" />
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
           <div>
@@ -552,10 +563,11 @@ function SettingsBox({
             />
           </div>
         </div>
+        </div>
         <button className="btn-primary w-full" disabled={disabled}>
           {t("saveSettings")}
         </button>
       </form>
-    </section>
+    </>
   );
 }

@@ -360,7 +360,7 @@
       "copy": "Kopiuj link",
       "copied": "Skopiowano!",
       "screen": "Otwórz duży ekran",
-      "tooFew": "Do losowania potrzeba co najmniej 3 elfów.",
+      "tooFew": "Do losowania potrzeba co najmniej 2 elfów.",
       "more": "Ustawienia, zasady i zaproszenia",
       "myElf": "Stwórz swojego elfa",
       "tvHint": "Na telewizorze albo drugim laptopie wejdź na <b>{url}</b> i wpisz kod ekranu:"
@@ -380,7 +380,17 @@
     "ruleOneWay": "{giver} nie dostanie losu z imieniem {receiver}",
     "mutual": "Nawzajem",
     "oneWay": "W jedną stronę",
-    "flip": "Odwróć kierunek"
+    "flip": "Odwróć kierunek",
+    "stepOf": "Krok {n} z {total}",
+    "elvesLabel": "Elfy",
+    "elvesSummary": "{count, plural, one {# elf} few {# elfy} many {# elfów} other {# elfa}} · gotowe profile: {ready}",
+    "pairsNone": "Brak par – każdy może wylosować każdego",
+    "pairsSummary": "{count, plural, one {# para} few {# pary} many {# par} other {# pary}}",
+    "noDate": "Bez daty",
+    "noBudget": "bez budżetu",
+    "budgetSummary": "budżet {amount}",
+    "moreSettings": "Więcej ustawień",
+    "fewerSettings": "Mniej ustawień"
   },
   "screen": {
     "noAccessTitle": "To jest duży ekran",

@@ -43,7 +43,8 @@ test("live ceremony: create, join, let in, exclusions, draw and reveal", async (
   // The chief lets Ola in.
   await host.reload();
   await host.getByRole("button", { name: "Let in" }).click();
-  await expect(host.getByText("Elves (3)")).toBeVisible();
+  await expect(host.getByRole("button", { name: /^Elves.*3 elves/ })).toBeVisible();
+  await host.getByRole("button", { name: /^Who shouldn’t draw whom/ }).click();
 
   // A two-way rule between Anna and Ola leaves no valid draw for three people.
   const rules = host.locator("section", { hasText: "Who shouldn’t draw whom" });

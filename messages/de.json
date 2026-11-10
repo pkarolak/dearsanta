@@ -360,7 +360,7 @@
       "copy": "Link kopieren",
       "copied": "Kopiert!",
       "screen": "Großen Bildschirm öffnen",
-      "tooFew": "Zum Losen braucht es mindestens 3 Elfen.",
+      "tooFew": "Für die Auslosung braucht es mindestens 2 Wichtel.",
       "more": "Einstellungen, Regeln und Einladungen",
       "myElf": "Deinen Elf gestalten",
       "tvHint": "Geh auf dem Fernseher oder einem zweiten Laptop auf <b>{url}</b> und gib den Bildschirmcode ein:"
@@ -380,7 +380,17 @@
     "ruleOneWay": "{giver} zieht nicht {receiver}",
     "mutual": "Gegenseitig",
     "oneWay": "Nur in eine Richtung",
-    "flip": "Richtung umkehren"
+    "flip": "Richtung umkehren",
+    "stepOf": "Schritt {n} von {total}",
+    "elvesLabel": "Wichtel",
+    "elvesSummary": "{count, plural, one {# Wichtel} other {# Wichtel}} · {ready} bereit",
+    "pairsNone": "Keine Paare – jeder kann jeden ziehen",
+    "pairsSummary": "{count, plural, one {# Paar} other {# Paare}}",
+    "noDate": "Kein Datum",
+    "noBudget": "kein Budget",
+    "budgetSummary": "Budget {amount}",
+    "moreSettings": "Weitere Einstellungen",
+    "fewerSettings": "Weniger Einstellungen"
   },
   "screen": {
     "noAccessTitle": "Das ist der große Bildschirm",

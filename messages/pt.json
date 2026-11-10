@@ -360,7 +360,7 @@
       "copy": "Copiar link",
       "copied": "Copiado!",
       "screen": "Abrir o ecrã grande",
-      "tooFew": "O sorteio precisa de pelo menos 3 elfos.",
+      "tooFew": "O sorteio precisa de pelo menos 2 duendes.",
       "more": "Definições, regras e convites",
       "myElf": "Cria o teu elfo",
       "tvHint": "Na televisão ou noutro portátil, abra <b>{url}</b> e escreva o código do ecrã:"
@@ -380,7 +380,17 @@
     "ruleOneWay": "{giver} não vai tirar {receiver}",
     "mutual": "Mutuamente",
     "oneWay": "Só num sentido",
-    "flip": "Inverter sentido"
+    "flip": "Inverter sentido",
+    "stepOf": "Passo {n} de {total}",
+    "elvesLabel": "Duendes",
+    "elvesSummary": "{count, plural, one {# duende} other {# duendes}} · {ready} prontos",
+    "pairsNone": "Sem pares – qualquer um pode tirar qualquer um",
+    "pairsSummary": "{count, plural, one {# par} other {# pares}}",
+    "noDate": "Sem data",
+    "noBudget": "sem orçamento",
+    "budgetSummary": "orçamento {amount}",
+    "moreSettings": "Mais definições",
+    "fewerSettings": "Menos definições"
   },
   "screen": {
     "noAccessTitle": "Este é o ecrã grande",

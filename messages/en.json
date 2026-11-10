@@ -360,7 +360,7 @@
       "copy": "Copy link",
       "copied": "Copied!",
       "screen": "Open the big screen",
-      "tooFew": "The draw needs at least 3 elves.",
+      "tooFew": "The draw needs at least 2 elves.",
       "more": "Settings, rules and invitations",
       "myElf": "Make your elf",
       "tvHint": "On the TV or a second laptop, go to <b>{url}</b> and type the screen code:"
@@ -380,7 +380,17 @@
     "ruleOneWay": "{giver} won’t draw {receiver}",
     "mutual": "Each other",
     "oneWay": "One way",
-    "flip": "Flip direction"
+    "flip": "Flip direction",
+    "stepOf": "Step {n} of {total}",
+    "elvesLabel": "Elves",
+    "elvesSummary": "{count, plural, one {# elf} other {# elves}} · {ready} ready",
+    "pairsNone": "No pairs – anyone can draw anyone",
+    "pairsSummary": "{count, plural, one {# pair} other {# pairs}}",
+    "noDate": "No date",
+    "noBudget": "no budget",
+    "budgetSummary": "budget {amount}",
+    "moreSettings": "More settings",
+    "fewerSettings": "Fewer settings"
   },
   "screen": {
     "noAccessTitle": "This is the big screen",
