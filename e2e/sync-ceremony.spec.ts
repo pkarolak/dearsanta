@@ -47,19 +47,13 @@ test("live ceremony: create, join, let in, exclusions, draw and reveal", async (
 
   // A two-way rule between Anna and Ola leaves no valid draw for three people.
   const rules = host.locator("section", { hasText: "Who shouldn’t draw whom" });
-  const pick = async (field: string, person: string) => {
-    await rules.getByRole("combobox", { name: field }).click();
-    await host.getByRole("listbox", { name: field }).getByRole("option", { name: person }).click();
-  };
-  await pick("Giver", "Anna");
-  await pick("Receiver", "Ola");
-  await host.getByRole("button", { name: "Add rule" }).click();
+  await rules.getByRole("button", { name: "Anna" }).click();
+  await expect(rules.getByText("Anna and… who else?")).toBeVisible();
+  await rules.getByRole("button", { name: "Ola" }).click();
+  await expect(rules.getByText("Anna and Ola won’t draw each other")).toBeVisible();
   await expect(host.getByText(/the draw is impossible/)).toBeVisible();
-  await host.getByRole("button", { name: "Remove" }).last().click();
-  await host.getByLabel("Both ways").uncheck();
-  await pick("Giver", "Anna");
-  await pick("Receiver", "Ola");
-  await host.getByRole("button", { name: "Add rule" }).click();
+  await rules.getByRole("button", { name: "One way" }).click();
+  await expect(rules.getByText("Anna won’t draw Ola")).toBeVisible();
   await expect(host.getByText(/the draw is impossible/)).toBeHidden();
   await host.screenshot({ path: `${shots}/02-host-panel.png`, fullPage: true });
 

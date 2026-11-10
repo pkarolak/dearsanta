@@ -342,12 +342,8 @@
     "inviteLabel": "Convidar mais pessoas por e-mail",
     "inviteSend": "{count, plural, =0 {Enviar convites} one {Enviar # convite} other {Enviar # convites}}",
     "exclusions": "Quem não tira quem",
-    "exclusionsHint": "Para casais ou para quem já troca presentes de qualquer forma.",
-    "giver": "Oferece",
-    "receiver": "Recebe",
-    "bothWays": "Nos dois sentidos",
-    "addExclusion": "Adicionar regra",
-    "noExclusions": "Sem regras: qualquer pessoa pode tirar qualquer outra (menos a si própria).",
+    "exclusionsHint": "Casais ou irmãos que já trocam presentes? Toque em duas pessoas e o Pai Natal não os junta.",
+    "noExclusions": "Ainda não há pares: qualquer um pode tirar qualquer um (menos a si próprio).",
     "settings": "Definições",
     "saveSettings": "Guardar definições",
     "settingsSaved": "Definições guardadas.",
@@ -376,7 +372,15 @@
       "expires": "O código expira em {time}",
       "failed": "Não foi possível preparar o código. Tente outra vez.",
       "close": "Fechar"
-    }
+    },
+    "pickFirst": "Toque na primeira pessoa do par",
+    "pickSecond": "{name} e… quem mais?",
+    "cancel": "Cancelar",
+    "ruleBoth": "{a} e {b} não se tiram um ao outro",
+    "ruleOneWay": "{giver} não vai tirar {receiver}",
+    "mutual": "Mutuamente",
+    "oneWay": "Só num sentido",
+    "flip": "Inverter sentido"
   },
   "screen": {
     "noAccessTitle": "Este é o ecrã grande",

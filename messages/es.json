@@ -342,12 +342,8 @@
     "inviteLabel": "Invitar a más personas por correo",
     "inviteSend": "{count, plural, =0 {Enviar invitaciones} one {Enviar # invitación} other {Enviar # invitaciones}}",
     "exclusions": "Quién no le toca a quién",
-    "exclusionsHint": "Para parejas o para quienes ya se hacen regalos de todos modos.",
-    "giver": "Regala",
-    "receiver": "Recibe",
-    "bothWays": "En ambos sentidos",
-    "addExclusion": "Añadir regla",
-    "noExclusions": "Sin reglas: a cualquiera le puede tocar cualquiera (menos uno mismo).",
+    "exclusionsHint": "¿Parejas o hermanos que ya se hacen regalos? Toca a dos personas y Papá Noel no los emparejará.",
+    "noExclusions": "Aún no hay parejas: a cualquiera le puede tocar cualquiera (menos uno mismo).",
     "settings": "Ajustes",
     "saveSettings": "Guardar ajustes",
     "settingsSaved": "Ajustes guardados.",
@@ -376,7 +372,15 @@
       "expires": "El código caduca en {time}",
       "failed": "No hemos podido preparar el código. Inténtalo de nuevo.",
       "close": "Cerrar"
-    }
+    },
+    "pickFirst": "Toca a la primera persona de la pareja",
+    "pickSecond": "{name} y… ¿quién más?",
+    "cancel": "Cancelar",
+    "ruleBoth": "{a} y {b} no se tocarán entre sí",
+    "ruleOneWay": "A {giver} no le tocará {receiver}",
+    "mutual": "Mutuamente",
+    "oneWay": "Solo en un sentido",
+    "flip": "Invertir sentido"
   },
   "screen": {
     "noAccessTitle": "Esta es la pantalla grande",

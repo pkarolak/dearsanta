@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ArrowsLeftRight, Clock, Copy, Television, UsersThree } from "@phosphor-icons/react";
+import { ArrowRight, ArrowsClockwise, ArrowsLeftRight, Clock, Copy, Television, Trash, UsersThree } from "@phosphor-icons/react";
 import { useLocale, useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
 import { useState, useTransition } from "react";
@@ -18,6 +18,7 @@ import {
   advanceCeremonyAction,
   approveParticipantAction,
   deleteExclusionAction,
+  updateExclusionAction,
   inviteAction,
   removeParticipantAction,
   resendInviteAction,
@@ -256,6 +257,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
               state={state}
               disabled={pending || locked}
               onAdd={(g, r, both) => act(() => addExclusionAction(code, g, r, both))}
+              onUpdate={(id, g, r, both) => act(() => updateExclusionAction(code, id, g, r, both))}
               onDelete={(id) => act(() => deleteExclusionAction(code, id))}
             />
             <SettingsBox
@@ -319,67 +321,138 @@ function ExclusionsBox({
   state,
   disabled,
   onAdd,
+  onUpdate,
   onDelete,
 }: {
   state: SessionState;
   disabled: boolean;
   onAdd: (giver: string, receiver: string, both: boolean) => void;
+  onUpdate: (id: string, giver: string, receiver: string, both: boolean) => void;
   onDelete: (id: string) => void;
 }) {
   const t = useTranslations("host");
   const people = state.participants.filter((p) => p.status !== "rejected");
-  const [giver, setGiver] = useState("");
-  const [receiver, setReceiver] = useState("");
-  const [both, setBoth] = useState(true);
-  const name = (id: string) => people.find((p) => p.id === id)?.displayName ?? "?";
+  const rules = state.exclusions ?? [];
+  const [first, setFirst] = useState<string | null>(null);
+  const [nudged, setNudged] = useState<string | null>(null);
+  const person = (id: string) => people.find((p) => p.id === id);
+  const name = (id: string) => person(id)?.displayName ?? "?";
+
+  const pick = (id: string) => {
+    if (!first) return setFirst(id);
+    if (first === id) return setFirst(null);
+    const existing = rules.find((r) => (r.giverId === first && r.receiverId === id) || (r.giverId === id && r.receiverId === first));
+    setFirst(null);
+    if (existing) {
+      setNudged(existing.id);
+      setTimeout(() => setNudged(null), 1600);
+      return;
+    }
+    onAdd(first, id, true);
+  };
 
   return (
     <section className="card p-6">
       <h2 className="font-display text-2xl font-bold">{t("exclusions")}</h2>
       <p className="mt-1 text-sm text-muted">{t("exclusionsHint")}</p>
-      <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto_1fr]">
-        <Select value={giver} onChange={setGiver} options={people.map(personOption)} placeholder={t("giver")} disabled={disabled} aria-label={t("giver")} />
-        <span className="grid place-items-center self-center text-muted">{both ? <ArrowsLeftRight weight="bold" className="h-5 w-5" /> : <ArrowRight weight="bold" className="h-5 w-5" />}</span>
-        <Select
-          value={receiver}
-          onChange={setReceiver}
-          options={people.filter((p) => p.id !== giver).map(personOption)}
-          placeholder={t("receiver")}
-          disabled={disabled}
-          aria-label={t("receiver")}
-        />
-      </div>
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-        <label className="flex items-center gap-2 text-sm">
-          <input type="checkbox" checked={both} onChange={(e) => setBoth(e.target.checked)} className="h-4 w-4 accent-berry" />
-          {t("bothWays")}
-        </label>
-        <button
-          className="btn-pine px-4 py-2 text-sm"
-          disabled={disabled || !giver || !receiver || giver === receiver}
-          onClick={() => {
-            onAdd(giver, receiver, both);
-            setGiver("");
-            setReceiver("");
-          }}
-        >
-          {t("addExclusion")}
-        </button>
-      </div>
-      <ul className="mt-4 space-y-2">
-        {(state.exclusions ?? []).length === 0 && <li className="text-sm text-muted">{t("noExclusions")}</li>}
-        {(state.exclusions ?? []).map((ex) => (
-          <li key={ex.id} className="flex items-center justify-between rounded-2xl bg-cream/70 px-4 py-2 text-sm">
-            <span>
-              <strong>{name(ex.giverId)}</strong>{" "}
-              {ex.bidirectional ? <ArrowsLeftRight weight="bold" className="inline h-4 w-4 align-[-3px] text-muted" /> : <ArrowRight weight="bold" className="inline h-4 w-4 align-[-3px] text-muted" />}{" "}
-              <strong>{name(ex.receiverId)}</strong>
-            </span>
-            <button className="btn-ghost px-2 py-1 text-xs" disabled={disabled} onClick={() => onDelete(ex.id)}>
-              {t("remove")}
+
+      <p className="mt-5 flex min-h-6 items-center gap-2 text-sm font-semibold" aria-live="polite">
+        {first ? (
+          <>
+            <span className="text-berry">{t("pickSecond", { name: name(first) })}</span>
+            <button className="text-muted underline underline-offset-2 hover:text-ink" onClick={() => setFirst(null)}>
+              {t("cancel")}
             </button>
-          </li>
-        ))}
+          </>
+        ) : (
+          <span className="text-muted">{t("pickFirst")}</span>
+        )}
+      </p>
+      <ul className="mt-3 flex flex-wrap gap-2">
+        {people.map((p) => {
+          const active = first === p.id;
+          return (
+            <li key={p.id}>
+              <button
+                type="button"
+                disabled={disabled}
+                aria-pressed={active}
+                onClick={() => pick(p.id)}
+                className={`flex items-center gap-2 rounded-full py-1 pl-1 pr-3.5 text-sm font-semibold transition-all disabled:opacity-50 ${
+                  active ? "bg-berry text-snow shadow-[0_6px_16px_-6px_rgb(184_32_44/0.7)] ring-2 ring-berry ring-offset-2 ring-offset-cream" : "bg-paper hover:bg-snow hover:shadow-sm"
+                }`}
+              >
+                <Avatar config={p.avatar} title="" className="h-8 w-8" />
+                {p.displayName}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+
+      <ul className="mt-5 space-y-2">
+        {rules.length === 0 && <li className="rounded-2xl border-2 border-dashed border-ink/10 px-4 py-3 text-sm text-muted">{t("noExclusions")}</li>}
+        {rules.map((ex) => {
+          const giver = person(ex.giverId);
+          const receiver = person(ex.receiverId);
+          return (
+            <li
+              key={ex.id}
+              className={`rounded-2xl bg-paper px-4 py-3 transition-shadow ${nudged === ex.id ? "ring-2 ring-gold" : ""}`}
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex shrink-0 items-center">
+                  {giver && <Avatar config={giver.avatar} title={giver.displayName} className="h-9 w-9 ring-2 ring-paper" />}
+                  <span className="z-10 -mx-1.5 grid h-7 w-7 place-items-center rounded-full bg-cream text-muted ring-2 ring-paper">
+                    {ex.bidirectional ? <ArrowsLeftRight weight="bold" className="h-4 w-4" /> : <ArrowRight weight="bold" className="h-4 w-4" />}
+                  </span>
+                  {receiver && <Avatar config={receiver.avatar} title={receiver.displayName} className="h-9 w-9 ring-2 ring-paper" />}
+                </div>
+                <p className="min-w-0 flex-1 text-sm font-semibold leading-snug">
+                  {ex.bidirectional
+                    ? t("ruleBoth", { a: name(ex.giverId), b: name(ex.receiverId) })
+                    : t("ruleOneWay", { giver: name(ex.giverId), receiver: name(ex.receiverId) })}
+                </p>
+                <button
+                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-muted hover:bg-ink/5 hover:text-berry"
+                  disabled={disabled}
+                  onClick={() => onDelete(ex.id)}
+                  aria-label={t("remove")}
+                  title={t("remove")}
+                >
+                  <Trash weight="bold" className="h-4 w-4" />
+                </button>
+              </div>
+              <div className="mt-2.5 flex flex-wrap items-center gap-2 pl-[5.6rem] max-sm:pl-0">
+                <div className="flex rounded-full bg-cream p-0.5 text-xs font-semibold" role="group">
+                  {[true, false].map((both) => (
+                    <button
+                      key={String(both)}
+                      type="button"
+                      disabled={disabled}
+                      aria-pressed={ex.bidirectional === both}
+                      onClick={() => ex.bidirectional !== both && onUpdate(ex.id, ex.giverId, ex.receiverId, both)}
+                      className={`rounded-full px-3 py-1 transition-colors ${ex.bidirectional === both ? "bg-paper text-ink shadow-sm" : "text-muted hover:text-ink"}`}
+                    >
+                      {both ? t("mutual") : t("oneWay")}
+                    </button>
+                  ))}
+                </div>
+                {!ex.bidirectional && (
+                  <button
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => onUpdate(ex.id, ex.receiverId, ex.giverId, false)}
+                    className="flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold text-muted hover:bg-cream hover:text-ink"
+                  >
+                    <ArrowsClockwise weight="bold" className="h-3.5 w-3.5" />
+                    {t("flip")}
+                  </button>
+                )}
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );
@@ -485,8 +558,4 @@ function SettingsBox({
       </form>
     </section>
   );
-}
-
-function personOption(p: PublicParticipant) {
-  return { value: p.id, label: p.displayName, leading: <Avatar config={p.avatar} title="" className="h-7 w-7 shrink-0" /> };
 }

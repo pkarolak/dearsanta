@@ -341,13 +341,9 @@
     },
     "inviteLabel": "Zaproś kolejne osoby mailem",
     "inviteSend": "{count, plural, =0 {Wyślij zaproszenia} one {Wyślij # zaproszenie} few {Wyślij # zaproszenia} many {Wyślij # zaproszeń} other {Wyślij # zaproszenia}}",
-    "exclusions": "Kto kogo nie losuje",
-    "exclusionsHint": "Dla par albo osób, które i tak wymieniają się prezentami.",
-    "giver": "Daje",
-    "receiver": "Dostaje",
-    "bothWays": "W obie strony",
-    "addExclusion": "Dodaj zasadę",
-    "noExclusions": "Brak zasad: każdy może wylosować każdego (oprócz siebie).",
+    "exclusions": "Kto się nie losuje",
+    "exclusionsHint": "Pary albo rodzeństwo, które i tak kupują sobie prezenty? Kliknij dwie osoby, a Mikołaj ich sobie nie przydzieli.",
+    "noExclusions": "Na razie brak par: każdy może wylosować każdego (oprócz siebie).",
     "settings": "Ustawienia",
     "saveSettings": "Zapisz ustawienia",
     "settingsSaved": "Ustawienia zapisane.",
@@ -376,7 +372,15 @@
       "expires": "Kod wygaśnie za {time}",
       "failed": "Nie udało się przygotować kodu. Spróbuj ponownie.",
       "close": "Zamknij"
-    }
+    },
+    "pickFirst": "Kliknij pierwszą osobę z pary",
+    "pickSecond": "{name} i… kto jeszcze?",
+    "cancel": "Anuluj",
+    "ruleBoth": "{a} i {b} nie wylosują siebie nawzajem",
+    "ruleOneWay": "{giver} nie dostanie losu z imieniem {receiver}",
+    "mutual": "Nawzajem",
+    "oneWay": "W jedną stronę",
+    "flip": "Odwróć kierunek"
   },
   "screen": {
     "noAccessTitle": "To jest duży ekran",

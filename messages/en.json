@@ -342,12 +342,8 @@
     "inviteLabel": "Invite more people by e-mail",
     "inviteSend": "{count, plural, =0 {Send invitations} one {Send # invitation} other {Send # invitations}}",
     "exclusions": "Who shouldn’t draw whom",
-    "exclusionsHint": "For couples, or anyone who already exchanges gifts anyway.",
-    "giver": "Giver",
-    "receiver": "Receiver",
-    "bothWays": "Both ways",
-    "addExclusion": "Add rule",
-    "noExclusions": "No rules yet: anyone can draw anyone (except themselves).",
+    "exclusionsHint": "Couples or siblings who buy each other gifts anyway? Tap two people and Santa won’t pair them up.",
+    "noExclusions": "No pairs yet: anyone can draw anyone (except themselves).",
     "settings": "Settings",
     "saveSettings": "Save settings",
     "settingsSaved": "Settings saved.",
@@ -376,7 +372,15 @@
       "expires": "Code expires in {time}",
       "failed": "Couldn’t prepare the code. Please try again.",
       "close": "Close"
-    }
+    },
+    "pickFirst": "Tap the first person of the pair",
+    "pickSecond": "{name} and… who else?",
+    "cancel": "Cancel",
+    "ruleBoth": "{a} and {b} won’t draw each other",
+    "ruleOneWay": "{giver} won’t draw {receiver}",
+    "mutual": "Each other",
+    "oneWay": "One way",
+    "flip": "Flip direction"
   },
   "screen": {
     "noAccessTitle": "This is the big screen",

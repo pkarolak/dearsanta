@@ -342,12 +342,8 @@
     "inviteLabel": "Weitere Personen per E-Mail einladen",
     "inviteSend": "{count, plural, =0 {Einladungen senden} one {# Einladung senden} other {# Einladungen senden}}",
     "exclusions": "Wer wen nicht zieht",
-    "exclusionsHint": "Für Paare oder alle, die sich sowieso beschenken.",
-    "giver": "Schenkt",
-    "receiver": "Bekommt",
-    "bothWays": "In beide Richtungen",
-    "addExclusion": "Regel hinzufügen",
-    "noExclusions": "Noch keine Regeln: Jeder kann jeden ziehen (außer sich selbst).",
+    "exclusionsHint": "Paare oder Geschwister, die sich sowieso beschenken? Tippe zwei Personen an, dann lost der Weihnachtsmann sie nicht einander zu.",
+    "noExclusions": "Noch keine Paare: Jeder kann jeden ziehen (außer sich selbst).",
     "settings": "Einstellungen",
     "saveSettings": "Einstellungen speichern",
     "settingsSaved": "Einstellungen gespeichert.",
@@ -376,7 +372,15 @@
       "expires": "Code läuft in {time} ab",
       "failed": "Der Code konnte nicht erstellt werden. Bitte versuch es noch einmal.",
       "close": "Schließen"
-    }
+    },
+    "pickFirst": "Tippe die erste Person des Paares an",
+    "pickSecond": "{name} und … wer noch?",
+    "cancel": "Abbrechen",
+    "ruleBoth": "{a} und {b} ziehen sich nicht gegenseitig",
+    "ruleOneWay": "{giver} zieht nicht {receiver}",
+    "mutual": "Gegenseitig",
+    "oneWay": "Nur in eine Richtung",
+    "flip": "Richtung umkehren"
   },
   "screen": {
     "noAccessTitle": "Das ist der große Bildschirm",

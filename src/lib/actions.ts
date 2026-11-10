@@ -334,6 +334,18 @@ export async function deleteExclusionAction(code: string, exclusionId: string) {
   });
 }
 
+/** Turns a rule around or between one way and both ways, by replacing it. */
+export async function updateExclusionAction(code: string, exclusionId: string, giverId: string, receiverId: string, bidirectional: boolean) {
+  return run(async () => {
+    const { session } = await requireHost(code);
+    if (session.drawnAt) throw new ActionError("already_drawn");
+    if (giverId === receiverId) throw new ActionError("invalid");
+    await deleteExclusion(session.id, exclusionId);
+    await addExclusion(session.id, giverId, receiverId, bidirectional);
+    return {};
+  });
+}
+
 /* ---------- the draw ---------- */
 
 async function draw(session: Session) {
