@@ -1,5 +1,6 @@
 "use client";
 
+import { Shuffle } from "@phosphor-icons/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { Avatar } from "./Avatar";
@@ -67,6 +68,7 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
             <Avatar config={avatar} className="h-full w-full" title={name} />
           </div>
           <button type="button" className="btn-soft px-4 py-2 text-sm" onClick={randomize}>
+            <Shuffle weight="bold" className="h-4 w-4" />
             {t("surprise")}
           </button>
         </div>

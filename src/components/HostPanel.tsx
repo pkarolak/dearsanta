@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowRight, ArrowsLeftRight, Copy, Television } from "@phosphor-icons/react";
 import { useLocale, useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
 import { useState, useTransition } from "react";
@@ -73,6 +74,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
           <Link href={`/s/${code}/me`} className="btn-soft px-4 py-2 text-sm">{t("myElf")}</Link>
           {s.mode === "sync" && !(s.step === "lobby" && !s.drawn) && (
             <a href={screenUrl} target="_blank" rel="noreferrer" className="btn-pine px-4 py-2 text-sm">
+              <Television weight="bold" className="h-4 w-4" />
               {t("openScreen")}
             </a>
           )}
@@ -185,6 +187,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
                     <p className="font-semibold">{t("shareLink")}</p>
                     <p className="mt-1 break-all font-mono text-xs text-muted">{joinUrl}</p>
                     <button className="btn-soft mt-3 px-3 py-1.5 text-xs" onClick={() => navigator.clipboard?.writeText(joinUrl)}>
+                      <Copy weight="bold" className="h-3.5 w-3.5" />
                       {t("copy")}
                     </button>
                   </div>
@@ -338,7 +341,7 @@ function ExclusionsBox({
             <option key={p.id} value={p.id}>{p.displayName}</option>
           ))}
         </select>
-        <span className="self-center text-center text-sm font-semibold text-muted">{both ? "⇄" : "→"}</span>
+        <span className="grid place-items-center self-center text-muted">{both ? <ArrowsLeftRight weight="bold" className="h-5 w-5" /> : <ArrowRight weight="bold" className="h-5 w-5" />}</span>
         <select className="field" value={receiver} onChange={(e) => setReceiver(e.target.value)} disabled={disabled} aria-label={t("receiver")}>
           <option value="">{t("receiver")}</option>
           {people.filter((p) => p.id !== giver).map((p) => (
@@ -368,7 +371,9 @@ function ExclusionsBox({
         {(state.exclusions ?? []).map((ex) => (
           <li key={ex.id} className="flex items-center justify-between rounded-2xl bg-cream/70 px-4 py-2 text-sm">
             <span>
-              <strong>{name(ex.giverId)}</strong> {ex.bidirectional ? "⇄" : "→"} <strong>{name(ex.receiverId)}</strong>
+              <strong>{name(ex.giverId)}</strong>{" "}
+              {ex.bidirectional ? <ArrowsLeftRight weight="bold" className="inline h-4 w-4 align-[-3px] text-muted" /> : <ArrowRight weight="bold" className="inline h-4 w-4 align-[-3px] text-muted" />}{" "}
+              <strong>{name(ex.receiverId)}</strong>
             </span>
             <button className="btn-ghost px-2 py-1 text-xs" disabled={disabled} onClick={() => onDelete(ex.id)}>
               {t("remove")}

@@ -1,5 +1,6 @@
 "use client";
 
+import { CaretDown, Check, Globe } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useLocale } from "next-intl";
 import { useEffect, useId, useRef, useState, useTransition, type KeyboardEvent } from "react";
@@ -101,11 +102,9 @@ export function LanguageSwitcher({ tone = "light" }: { tone?: "light" | "dark" }
           dark ? "hover:bg-snow/10" : "ring-1 ring-current/20 hover:ring-current/40"
         } ${open ? (dark ? "bg-snow/15" : "bg-ink/5") : ""}`}
       >
-        <GlobeIcon />
+        <Globe weight="bold" className="h-4 w-4 opacity-80" aria-hidden />
         {localeNames[locale]}
-        <svg viewBox="0 0 12 12" className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden>
-          <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <CaretDown weight="bold" className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
       </button>
 
       {typeof document !== "undefined" &&
@@ -157,18 +156,7 @@ export function LanguageSwitcher({ tone = "light" }: { tone?: "light" | "dark" }
                         {l}
                       </span>
                       <span className="flex-1">{localeNames[l]}</span>
-                      {selected && (
-                        <svg viewBox="0 0 16 16" className="h-4 w-4" aria-hidden>
-                          <path
-                            d="m3.5 8.5 3 3 6-7"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      )}
+                      {selected && <Check weight="bold" className="h-4 w-4" aria-hidden />}
                     </button>
                   );
                 })}
@@ -178,14 +166,5 @@ export function LanguageSwitcher({ tone = "light" }: { tone?: "light" | "dark" }
           document.body,
         )}
     </div>
-  );
-}
-
-function GlobeIcon() {
-  return (
-    <svg viewBox="0 0 20 20" className="h-4 w-4 opacity-80" aria-hidden>
-      <circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M2.5 10h15M10 2.5c2.2 2.2 2.2 12.8 0 15M10 2.5c-2.2 2.2-2.2 12.8 0 15" fill="none" stroke="currentColor" strokeWidth="1.6" />
-    </svg>
   );
 }

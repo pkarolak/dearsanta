@@ -1,5 +1,6 @@
 "use client";
 
+import { Check, ShareNetwork, Television } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
@@ -58,10 +59,12 @@ export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
           <div className="mt-5 flex flex-wrap gap-3">
             {s.mode === "sync" && (
               <a href={screenUrl} target="_blank" rel="noreferrer" className="btn-primary">
+                <Television weight="bold" className="h-5 w-5" />
                 {t("screen")}
               </a>
             )}
             <button className="btn-pine" onClick={share}>
+              {copied ? <Check weight="bold" className="h-5 w-5" /> : <ShareNetwork weight="bold" className="h-5 w-5" />}
               {copied ? t("copied") : t("share")}
             </button>
           </div>

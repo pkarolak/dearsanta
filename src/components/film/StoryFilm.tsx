@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowCounterClockwise, Pause, Play, SkipForward } from "@phosphor-icons/react";
 import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
@@ -265,7 +266,7 @@ export function StoryFilm({ lines, lang }: Props) {
                 className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-snow text-ink hover:bg-cream"
                 aria-label={paused ? t("play") : t("pause")}
               >
-                {paused ? <PlayIcon /> : <PauseIcon />}
+                {paused ? <Play weight="fill" className="h-5 w-5" /> : <Pause weight="fill" className="h-5 w-5" />}
               </button>
               <div className="flex h-11 min-w-0 flex-1 items-center gap-1 px-1.5">
                 {clips.map((c, i) => (
@@ -280,13 +281,15 @@ export function StoryFilm({ lines, lang }: Props) {
                   </button>
                 ))}
               </div>
-              <button onClick={() => seek(lastClip, true)} className="h-11 shrink-0 rounded-full px-3.5 font-semibold text-snow hover:bg-snow/15">
+              <button onClick={() => seek(lastClip, true)} className="flex h-11 shrink-0 items-center gap-1.5 rounded-full px-3.5 font-semibold text-snow hover:bg-snow/15">
                 {t("skip")}
+                <SkipForward weight="fill" className="h-4 w-4" />
               </button>
             </>
           )}
           {done && (
-            <button onClick={() => seek(0)} className="h-11 rounded-full bg-snow px-4 font-semibold text-ink hover:bg-cream">
+            <button onClick={() => seek(0)} className="flex h-11 items-center gap-2 rounded-full bg-snow px-4 font-semibold text-ink hover:bg-cream">
+              <ArrowCounterClockwise weight="bold" className="h-4 w-4" />
               {t("replay")}
             </button>
           )}
@@ -345,18 +348,3 @@ function CallToAction({ shown, title, lead, create, haveCode }: { shown: boolean
   );
 }
 
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
-      <path d="M8 5.5v13l10.5-6.5z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function PauseIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
-      <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor" />
-    </svg>
-  );
-}
