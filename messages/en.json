@@ -12,19 +12,19 @@
     "haveCode": "Got a session code?",
     "codePlaceholder": "CODE",
     "join": "Join",
-    "modesTitle": "One evening, three ways to celebrate",
+    "modesTitle": "Three ways to draw your Secret Santa",
     "modes": {
       "sync": {
-        "title": "Together in one room",
-        "body": "Santa runs the ceremony on the big screen. Everyone joins from their phone with a QR code and gets their match discreetly."
+        "title": "A Secret Santa party, here and now",
+        "body": "Gather everyone in one room and watch it all together on the big screen. The draw still stays secret: each of you gets a private notification on your phone with your match."
       },
       "hybrid": {
-        "title": "Some of you far away",
-        "body": "Elves who can’t be there watch Santa’s broadcast on their own device, next to their elf profile, in sync with the room."
+        "title": "A live draw from anywhere",
+        "body": "Invite everyone, even if you can’t all be in one place. Each of you watches the live show from Santa’s house on your own phone or laptop."
       },
       "async": {
-        "title": "Everyone in their own time",
-        "body": "Invite by e-mail. Elves create profiles whenever they like; when the Elf Chief unlocks the draw, Santa tells each of them in a short personal message."
+        "title": "A draw at your own pace",
+        "body": "Set up the draw and send the invites. Everyone confirms they’re in, then checks in their own time who they’re giving a gift to this year."
       }
     },
     "footer": "Made in Santa’s workshop. Ho ho ho!",
@@ -105,7 +105,7 @@
     "submit": "Create the session",
     "quick": {
       "hostName": "Elf Chief",
-      "heading": "How are you celebrating?",
+      "heading": "How do you want to draw?",
       "lead": "One tap and the workshop is open. Set the rest later, if you ever want to.",
       "starting": "Opening the workshop…",
       "plan": "Prefer to plan everything ahead?",

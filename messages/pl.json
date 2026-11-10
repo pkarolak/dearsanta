@@ -12,19 +12,19 @@
     "haveCode": "Masz kod od organizatora?",
     "codePlaceholder": "KOD",
     "join": "Dołącz",
-    "modesTitle": "Jeden wieczór, trzy sposoby na losowanie",
+    "modesTitle": "Losowanie Secret Santa na trzy sposoby",
     "modes": {
       "sync": {
-        "title": "Razem w jednym pokoju",
-        "body": "Mikołaj prowadzi losowanie na dużym ekranie. Każdy dołącza z telefonu, skanując kod QR, i po cichu sprawdza, kogo wylosował."
+        "title": "Impreza z losowaniem – tu i teraz",
+        "body": "Zbierzcie się w jednym pokoju i oglądajcie wszystko razem na dużym ekranie. Samo losowanie i tak zostaje tajne: każdy dostaje na swój telefon osobne powiadomienie, kogo wylosował."
       },
       "hybrid": {
-        "title": "Część z was jest daleko",
-        "body": "Kto nie może przyjechać, ogląda Mikołaja na żywo na swoim telefonie lub laptopie i losuje razem z resztą."
+        "title": "Zdalne losowanie na żywo",
+        "body": "Zaproś wszystkich, nawet jeśli nie możecie spotkać się w jednym miejscu. Każdy obejrzy na swoim telefonie albo laptopie relację na żywo prosto z domu Świętego Mikołaja."
       },
       "async": {
-        "title": "Każdy w swoim czasie",
-        "body": "Zaproś wszystkich mailem. Każdy dołącza, kiedy mu pasuje, a gdy Naczelnik elfów uruchomi losowanie, Mikołaj wyśle każdemu krótką wiadomość z wynikiem."
+        "title": "Losowanie w swoim tempie",
+        "body": "Przygotuj losowanie i wyślij zaproszenia. Każdy potwierdzi, że wchodzi do zabawy, a potem w wolnej chwili sprawdzi, kogo w tym roku obdarowuje."
       }
     },
     "footer": "Zrobione w warsztacie Mikołaja. Ho, ho, ho!",
@@ -105,7 +105,7 @@
     "submit": "Utwórz sesję",
     "quick": {
       "hostName": "Naczelnik elfów",
-      "heading": "Jak świętujecie?",
+      "heading": "Jak chcecie losować?",
       "lead": "Jedno kliknięcie i warsztat otwarty. Resztę ustawisz później, jeśli w ogóle będzie trzeba.",
       "starting": "Otwieramy warsztat…",
       "plan": "Wolisz zaplanować wszystko z wyprzedzeniem?",

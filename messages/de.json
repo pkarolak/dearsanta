@@ -12,19 +12,19 @@
     "haveCode": "Hast du einen Code?",
     "codePlaceholder": "CODE",
     "join": "Beitreten",
-    "modesTitle": "Ein Abend, drei Arten zu feiern",
+    "modesTitle": "Wichteln auf drei Arten",
     "modes": {
       "sync": {
-        "title": "Gemeinsam in einem Raum",
-        "body": "Der Weihnachtsmann führt auf dem großen Bildschirm durch die Zeremonie. Alle treten per QR-Code mit dem Handy bei und sehen ihr Los diskret."
+        "title": "Wichtelparty – hier und jetzt",
+        "body": "Holt alle in einen Raum und schaut gemeinsam auf den großen Bildschirm. Geheim bleibt die Auslosung trotzdem: Jeder bekommt auf sein Handy eine eigene Nachricht, wen er gezogen hat."
       },
       "hybrid": {
-        "title": "Einige sind weit weg",
-        "body": "Wer nicht dabei sein kann, sieht die Übertragung des Weihnachtsmanns auf dem eigenen Gerät, neben dem Wichtelprofil, zeitgleich mit dem Raum."
+        "title": "Live-Auslosung aus der Ferne",
+        "body": "Lade alle ein, auch wenn ihr euch nicht an einem Ort treffen könnt. Jeder sieht die Live-Übertragung aus dem Haus des Weihnachtsmanns auf dem eigenen Handy oder Laptop."
       },
       "async": {
-        "title": "Jeder, wann er will",
-        "body": "Lade per E-Mail ein. Die Wichtel legen ihre Profile an, wann sie möchten. Sobald der Oberwichtel die Auslosung freigibt, verrät der Weihnachtsmann allen ihr Los in einer kurzen, persönlichen Botschaft."
+        "title": "Auslosung im eigenen Tempo",
+        "body": "Bereite die Auslosung vor und verschick die Einladungen. Jeder sagt zu und schaut dann in Ruhe nach, wen er dieses Jahr beschenken darf."
       }
     },
     "footer": "Gemacht in der Werkstatt des Weihnachtsmanns. Ho, ho, ho!",
@@ -105,7 +105,7 @@
     "submit": "Runde erstellen",
     "quick": {
       "hostName": "Elfenchef",
-      "heading": "Wie feiert ihr?",
+      "heading": "Wie wollt ihr wichteln?",
       "lead": "Ein Klick und die Werkstatt ist offen. Den Rest stellst du später ein, wenn überhaupt.",
       "starting": "Wir öffnen die Werkstatt…",
       "plan": "Lieber alles im Voraus planen?",

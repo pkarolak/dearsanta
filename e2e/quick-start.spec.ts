@@ -9,7 +9,7 @@ test("spontaneous: one tap into the waiting room, guests join with a name and dr
   await host.goto("/en/new");
   await host.waitForTimeout(900);
   await host.screenshot({ path: `${shots}/10-mode-picker.png` });
-  await host.getByRole("button", { name: /Together in one room/ }).click();
+  await host.getByRole("button", { name: /A Secret Santa party/ }).click();
   await host.waitForURL(/\/s\/[A-Z0-9]{6}\/host/);
   const code = host.url().match(/\/s\/([A-Z0-9]{6})\//)![1];
   await expect(host.getByTestId("room-code")).toHaveText(code);

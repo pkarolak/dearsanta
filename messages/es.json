@@ -12,19 +12,19 @@
     "haveCode": "¿Tienes un código?",
     "codePlaceholder": "CÓDIGO",
     "join": "Entrar",
-    "modesTitle": "Una noche, tres maneras de celebrarla",
+    "modesTitle": "El amigo invisible, de tres maneras",
     "modes": {
       "sync": {
-        "title": "Juntos en una sala",
-        "body": "Papá Noel dirige la ceremonia en la pantalla grande. Todos se unen desde el móvil con un código QR y ven su resultado en secreto."
+        "title": "Fiesta con sorteo, aquí y ahora",
+        "body": "Reunid a todos en una sala y vedlo todo juntos en la pantalla grande. Aun así, el sorteo es secreto: cada uno recibe en su móvil un aviso privado con su resultado."
       },
       "hybrid": {
-        "title": "Algunos están lejos",
-        "body": "Quien no pueda venir ve la transmisión de Papá Noel en su propio dispositivo, junto a su perfil de elfo, al mismo tiempo que la sala."
+        "title": "Sorteo a distancia, en directo",
+        "body": "Invita a todos, aunque no podáis veros en el mismo sitio. Cada uno verá en su móvil o portátil la retransmisión en directo desde la casa de Papá Noel."
       },
       "async": {
-        "title": "Cada uno a su ritmo",
-        "body": "Invita por correo. Los elfos crean su perfil cuando quieran y, cuando el Jefe de los elfos desbloquea el sorteo, Papá Noel se lo cuenta a cada uno en un breve mensaje personal."
+        "title": "Sorteo a tu ritmo",
+        "body": "Prepara el sorteo y envía las invitaciones. Cada uno confirma que se apunta y luego, cuando le venga bien, descubre a quién le toca regalar este año."
       }
     },
     "footer": "Hecho en el taller de Papá Noel. ¡Jo, jo, jo!",
@@ -105,7 +105,7 @@
     "submit": "Crear el sorteo",
     "quick": {
       "hostName": "Jefe de los elfos",
-      "heading": "¿Cómo lo celebráis?",
+      "heading": "¿Cómo queréis hacer el sorteo?",
       "lead": "Un toque y el taller está abierto. El resto lo ajustas después, si quieres.",
       "starting": "Abriendo el taller…",
       "plan": "¿Prefieres planearlo todo con antelación?",

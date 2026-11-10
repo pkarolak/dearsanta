@@ -12,19 +12,19 @@
     "haveCode": "Tem um código?",
     "codePlaceholder": "CÓDIGO",
     "join": "Entrar",
-    "modesTitle": "Uma noite, três maneiras de celebrar",
+    "modesTitle": "O amigo secreto, de três maneiras",
     "modes": {
       "sync": {
-        "title": "Juntos na mesma sala",
-        "body": "O Pai Natal conduz a cerimónia no ecrã grande. Todos entram pelo telemóvel com um código QR e veem o resultado em segredo."
+        "title": "Festa com sorteio, aqui e agora",
+        "body": "Juntem-se todos na mesma sala e vejam tudo no ecrã grande. Ainda assim, o sorteio é secreto: cada um recebe no telemóvel um aviso privado com o seu resultado."
       },
       "hybrid": {
-        "title": "Alguns estão longe",
-        "body": "Quem não pode estar presente vê a transmissão do Pai Natal no seu próprio dispositivo, ao lado do perfil de duende, em sincronia com a sala."
+        "title": "Sorteio à distância, em direto",
+        "body": "Convide todos, mesmo que não possam estar no mesmo sítio. Cada um vê no telemóvel ou portátil a transmissão em direto da casa do Pai Natal."
       },
       "async": {
-        "title": "Cada um ao seu ritmo",
-        "body": "Convide por e-mail. Os duendes criam o perfil quando quiserem e, quando o Chefe dos duendes desbloquear o sorteio, o Pai Natal conta a cada um numa breve mensagem pessoal."
+        "title": "Sorteio ao seu ritmo",
+        "body": "Prepare o sorteio e envie os convites. Cada um confirma que entra na brincadeira e depois, quando lhe der jeito, descobre a quem vai dar um presente este ano."
       }
     },
     "footer": "Feito na oficina do Pai Natal. Ho, ho, ho!",
@@ -105,7 +105,7 @@
     "submit": "Criar o sorteio",
     "quick": {
       "hostName": "Chefe dos elfos",
-      "heading": "Como vão celebrar?",
+      "heading": "Como querem fazer o sorteio?",
       "lead": "Um toque e a oficina está aberta. O resto ajustas depois, se quiseres.",
       "starting": "A abrir a oficina…",
       "plan": "Preferes planear tudo com antecedência?",
