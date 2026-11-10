@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { hashToken, signInParticipant, signInProfile } from "@/lib/auth";
-import { getParticipant, getSessionById, updateParticipant, consumeToken } from "@/lib/db/repo";
+import { getParticipant, getSessionById, markDevice, updateParticipant, consumeToken } from "@/lib/db/repo";
 import { toLocale } from "@/lib/i18n-server";
 
 export async function GET(request: Request) {
@@ -31,5 +31,6 @@ export async function GET(request: Request) {
   if (participant.email) await signInProfile(participant.email);
 
   const safeNext = next && next.startsWith(`/s/${session.code}/`) ? next : `/s/${session.code}/me`;
+  if (participant.role === "host" && safeNext.startsWith(`/s/${session.code}/host`)) await markDevice(session.id, "remote");
   return redirectTo(safeNext);
 }

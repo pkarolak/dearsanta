@@ -29,6 +29,7 @@ export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
   const [name, setName] = useState("");
   const shortUrl = joinUrl.replace(/^https?:\/\//, "");
   const tvUrl = `${shortUrl.split("/")[0]}/tv`;
+  const onScreen = s.mode === "sync" && !!s.screenConnected;
 
   const share = async () => {
     if (navigator.share) {
@@ -44,7 +45,8 @@ export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
     <section className="relative overflow-hidden rounded-felt bg-[linear-gradient(180deg,#141d40,#0d1a42_60%,#1c0c0b)] p-6 text-snow md:p-10">
       <StringLights swags={4} perSwag={6} sag={22} className="opacity-90" />
       <Snowfall count={24} />
-      <div className="relative grid items-center gap-8 pt-6 md:grid-cols-[auto_1fr] md:gap-12">
+      <div className={`relative grid items-center gap-8 pt-6 md:gap-12 ${onScreen ? "" : "md:grid-cols-[auto_1fr]"}`}>
+        {!onScreen && (
         <div className="mx-auto flex flex-col items-center">
           <div className="rounded-[1.6rem] bg-paper p-4 shadow-[0_30px_70px_-20px_rgb(0_0_0/0.7),0_0_60px_-10px_rgb(255_200_110/0.35)]">
             <QRCodeSVG value={joinUrl} size={232} bgColor="transparent" fgColor="#2b1810" className="h-[min(232px,62vw)] w-[min(232px,62vw)]" />
@@ -54,13 +56,27 @@ export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
           </p>
           <p className="mt-1 font-mono text-sm text-snow/60">{shortUrl.replace(/\/join\/.*/, "")}</p>
         </div>
+        )}
 
         <div>
           <h2 className="glow-text font-display text-4xl font-black leading-[1.02] md:text-5xl">{t("title")}</h2>
-          <p className="mt-3 max-w-lg text-lg text-snow/85">{s.mode === "async" ? t("leadAsync") : t("lead")}</p>
+          {onScreen ? (
+            <p className="mt-3 max-w-lg text-lg text-snow/85">
+              {t.rich("leadRemote", {
+                code: s.code,
+                b: (chunks) => (
+                  <strong className="font-display tracking-[0.14em] text-gold" data-testid="room-code">
+                    {chunks}
+                  </strong>
+                ),
+              })}
+            </p>
+          ) : (
+            <p className="mt-3 max-w-lg text-lg text-snow/85">{s.mode === "async" ? t("leadAsync") : t("lead")}</p>
+          )}
           <div className="mt-5 flex flex-wrap gap-3">
             {s.mode === "sync" && (
-              <a href={screenUrl} target="_blank" rel="noreferrer" className="btn-primary">
+              <a href={screenUrl} target="_blank" rel="noreferrer" className={onScreen ? "btn-ghost text-snow hover:bg-snow/10" : "btn-primary"}>
                 <Television weight="bold" className="h-5 w-5" />
                 {t("screen")}
               </a>
@@ -69,9 +85,9 @@ export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
               {copied ? <Check weight="bold" className="h-5 w-5" /> : <ShareNetwork weight="bold" className="h-5 w-5" />}
               {copied ? t("copied") : t("share")}
             </button>
-            <PhoneHandoff code={s.code} className="btn-ghost text-snow hover:bg-snow/10 max-sm:hidden" />
+            {!s.remotePaired && <PhoneHandoff code={s.code} className="btn-ghost text-snow hover:bg-snow/10 max-sm:hidden" />}
           </div>
-          {s.mode === "sync" && s.screenCode && (
+          {s.mode === "sync" && !onScreen && s.screenCode && (
             <div className="mt-4 flex max-w-lg flex-wrap items-center gap-x-4 gap-y-2 rounded-[1.25rem] bg-snow/10 px-4 py-3">
               <p className="min-w-0 flex-1 text-sm text-snow/80">{t.rich("tvHint", { url: tvUrl, b: (chunks) => <strong className="text-snow">{chunks}</strong> })}</p>
               <p className="font-display text-3xl font-black tracking-[0.12em] text-gold" data-testid="screen-code">

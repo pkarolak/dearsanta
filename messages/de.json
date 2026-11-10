@@ -111,13 +111,16 @@
       "plan": "Lieber alles im Voraus planen?",
       "planLink": "Das ganze Formular mit Datum, Budget und Einladungen",
       "together": {
-        "body": "Alle an einem Tisch. QR-Code auf dem Bildschirm, gleich wird gelost."
+        "body": "Alle an einem Tisch. QR-Code auf dem Bildschirm, gleich wird gelost.",
+        "needs": "Großer Bildschirm + dein Handy"
       },
       "remote": {
-        "body": "Jemand ist weit weg und schaut den Weihnachtsmann auf dem eigenen Gerät."
+        "body": "Jemand ist weit weg und schaut den Weihnachtsmann auf dem eigenen Gerät.",
+        "needs": "Jeder auf seinem Gerät"
       },
       "ownTime": {
-        "body": "Schick der Familie einen Link. Jeder macht mit, wann er will, dann gibst du die Auslosung frei."
+        "body": "Schick der Familie einen Link. Jeder macht mit, wann er will, dann gibst du die Auslosung frei.",
+        "needs": "Ein Handy reicht"
       },
       "title": "Unser Wichteln"
     }
@@ -363,12 +366,13 @@
       "tooFew": "Für die Auslosung braucht es mindestens 2 Wichtel.",
       "more": "Einstellungen, Regeln und Einladungen",
       "myElf": "Deinen Elf gestalten",
-      "tvHint": "Geh auf dem Fernseher oder einem zweiten Laptop auf <b>{url}</b> und gib den Bildschirmcode ein:"
+      "tvHint": "Geh auf dem Fernseher oder einem zweiten Laptop auf <b>{url}</b> und gib den Bildschirmcode ein:",
+      "leadRemote": "Die Gäste scannen den Code auf dem großen Bildschirm. Sitzungscode: <b>{code}</b>"
     },
     "phone": {
       "button": "Aufs Handy holen",
       "title": "Weiter auf dem Handy",
-      "body": "Scanne den Code mit deinem Handy. Dort bist du dann als du angemeldet: Gestalte deinen Wichtel und sieh bei der Auslosung, wen du gezogen hast. Dieser Computer funktioniert weiter wie bisher.",
+      "body": "Scanne den Code mit dem Handy. Es wird deine Fernbedienung: Steuere von dort die Zeremonie und sieh heimlich dein Los.",
       "expires": "Code läuft in {time} ab",
       "failed": "Der Code konnte nicht erstellt werden. Bitte versuch es noch einmal.",
       "close": "Schließen"
@@ -390,7 +394,29 @@
     "noBudget": "kein Budget",
     "budgetSummary": "Budget {amount}",
     "moreSettings": "Weitere Einstellungen",
-    "fewerSettings": "Weniger Einstellungen"
+    "fewerSettings": "Weniger Einstellungen",
+    "devices": {
+      "title": "Mach zwei Geräte bereit",
+      "lead": "Die Zeremonie läuft auf einem großen Bildschirm, den alle sehen. Du steuerst sie vom Handy – nur dort siehst du, wen du gezogen hast.",
+      "screenTitle": "Großer Bildschirm",
+      "screenBody": "Ein Fernseher oder Laptop. Er zeigt den Gästen den Code zum Mitmachen und danach die ganze Zeremonie mit dem Weihnachtsmann.",
+      "phoneTitle": "Dein Handy",
+      "phoneBody": "Deine Fernbedienung. Von hier geht es Schritt für Schritt weiter, und du siehst heimlich dein Los.",
+      "connected": "Verbunden",
+      "notYet": "Noch nicht",
+      "where": "Auf welchem Gerät bist du gerade?",
+      "hereScreen": "Computer oder TV",
+      "herePhone": "Handy",
+      "scanTitle": "Scanne diesen Code mit dem Handy",
+      "scanBody": "Dein Handy wird zur Fernbedienung, dieser Bildschirm zur Bühne.",
+      "phoneDone": "Handy verbunden! Gleich wird dieser Bildschirm zur Bühne.",
+      "openStage": "Bühne jetzt öffnen",
+      "tvTitle": "Großen Bildschirm einschalten",
+      "tvBody": "Öffne auf dem Fernseher oder Laptop <b>{url}</b> und gib den Code ein:",
+      "tvDone": "Großer Bildschirm verbunden!",
+      "toRemote": "Zur Fernbedienung",
+      "skip": "Ich habe nur ein Gerät"
+    }
   },
   "screen": {
     "noAccessTitle": "Das ist der große Bildschirm",

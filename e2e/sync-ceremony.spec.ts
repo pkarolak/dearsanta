@@ -25,6 +25,7 @@ test("live ceremony: create, join, let in, exclusions, draw and reveal", async (
   await host.getByRole("button", { name: "Create the session" }).click();
   await host.waitForURL(/\/s\/[A-Z0-9]{6}\/host/);
   const code = host.url().match(/\/s\/([A-Z0-9]{6})\//)![1];
+  await host.getByRole("button", { name: "I only have one device" }).click();
 
   // Ola scans the QR code and knocks.
   await guest.goto(`/en/join/${code}`);

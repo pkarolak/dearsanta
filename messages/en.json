@@ -111,13 +111,16 @@
       "plan": "Prefer to plan everything ahead?",
       "planLink": "The full form with date, budget and invitations",
       "together": {
-        "body": "Everyone around one table. QR code on the screen, the draw in a moment."
+        "body": "Everyone around one table. QR code on the screen, the draw in a moment.",
+        "needs": "Big screen + your phone"
       },
       "remote": {
-        "body": "Someone joins from afar and watches Santa's stream on their own device."
+        "body": "Someone joins from afar and watches Santa's stream on their own device.",
+        "needs": "Everyone on their own device"
       },
       "ownTime": {
-        "body": "Send the family a link. Everyone joins when they like, then you unlock the draw."
+        "body": "Send the family a link. Everyone joins when they like, then you unlock the draw.",
+        "needs": "Just a phone"
       },
       "title": "Our Secret Santa"
     }
@@ -363,12 +366,13 @@
       "tooFew": "The draw needs at least 2 elves.",
       "more": "Settings, rules and invitations",
       "myElf": "Make your elf",
-      "tvHint": "On the TV or a second laptop, go to <b>{url}</b> and type the screen code:"
+      "tvHint": "On the TV or a second laptop, go to <b>{url}</b> and type the screen code:",
+      "leadRemote": "Guests scan the code on the big screen. Session code: <b>{code}</b>"
     },
     "phone": {
       "button": "Take it to my phone",
       "title": "Carry on from your phone",
-      "body": "Scan the code with your phone. It signs you in as you: make your elf there and see who you drew when the time comes. This computer keeps working as before.",
+      "body": "Scan the code with your phone. It becomes your remote: run the ceremony from there and check your match in secret.",
       "expires": "Code expires in {time}",
       "failed": "Couldn’t prepare the code. Please try again.",
       "close": "Close"
@@ -390,7 +394,29 @@
     "noBudget": "no budget",
     "budgetSummary": "budget {amount}",
     "moreSettings": "More settings",
-    "fewerSettings": "Fewer settings"
+    "fewerSettings": "Fewer settings",
+    "devices": {
+      "title": "Get two devices ready",
+      "lead": "The ceremony plays on a big screen everyone can see. You run it from your phone – the only place you’ll see who you drew.",
+      "screenTitle": "Big screen",
+      "screenBody": "A TV or a laptop. It shows guests the code to join, then the whole ceremony with Santa.",
+      "phoneTitle": "Your phone",
+      "phoneBody": "Your remote. Move the ceremony along from here and check your match in secret.",
+      "connected": "Connected",
+      "notYet": "Not yet",
+      "where": "What are you on right now?",
+      "hereScreen": "Computer or TV",
+      "herePhone": "Phone",
+      "scanTitle": "Scan this code with your phone",
+      "scanBody": "Your phone becomes the remote and this screen becomes the stage.",
+      "phoneDone": "Phone connected! This screen turns into the stage in a moment.",
+      "openStage": "Open the stage now",
+      "tvTitle": "Switch on the big screen",
+      "tvBody": "On the TV or laptop, go to <b>{url}</b> and type the code:",
+      "tvDone": "Big screen connected!",
+      "toRemote": "Go to the remote",
+      "skip": "I only have one device"
+    }
   },
   "screen": {
     "noAccessTitle": "This is the big screen",

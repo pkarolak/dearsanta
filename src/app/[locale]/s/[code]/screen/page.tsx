@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ScreenView } from "@/components/ScreenView";
 import { getViewer } from "@/lib/auth";
-import { getSessionByCode } from "@/lib/db/repo";
+import { getSessionByCode, markDevice } from "@/lib/db/repo";
 import { buildState } from "@/lib/state";
 import { requestOrigin } from "@/lib/urls";
 
@@ -27,6 +27,7 @@ export default async function ScreenPage({ params, searchParams }: PageProps<"/[
     );
   }
 
+  if (!session.screenSeenAt) await markDevice(session.id, "screen");
   const origin = await requestOrigin();
   const state = await buildState(session, { ...viewer, isScreen: true }, locale);
   return (

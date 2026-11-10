@@ -8,18 +8,16 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { phoneLinkAction } from "@/lib/actions";
 
-/** Shows a QR code the Elf Chief scans to carry on from their phone, as the same elf. */
-export function PhoneHandoff({ code, className = "btn-soft" }: { code: string; className?: string }) {
+/** A short-lived QR code that signs the Elf Chief in on their phone and opens the host panel there. */
+export function PhoneLinkQr({ code, size = 196 }: { code: string; size?: number }) {
   const t = useTranslations("host.phone");
   const locale = useLocale();
-  const [open, setOpen] = useState(false);
   const [link, setLink] = useState<{ url: string; expiresAt: number } | null>(null);
   const [now, setNow] = useState(() => Date.now());
   const [failed, setFailed] = useState(false);
   const expired = !!link && now >= link.expiresAt;
 
   useEffect(() => {
-    if (!open) return;
     if (!link || expired) {
       let live = true;
       void phoneLinkAction(code, locale).then((res) => {
@@ -35,7 +33,34 @@ export function PhoneHandoff({ code, className = "btn-soft" }: { code: string; c
     }
     const tick = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(tick);
-  }, [open, link, expired, code, locale]);
+  }, [link, expired, code, locale]);
+
+  const left = link ? Math.max(0, Math.ceil((link.expiresAt - now) / 1000)) : 0;
+  const time = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`;
+
+  return (
+    <div className="flex flex-col items-center">
+      <div
+        className="grid place-items-center rounded-[1.25rem] bg-cream p-3"
+        style={{ width: size + 24, height: size + 24 }}
+        data-url={link && !expired ? link.url : undefined}
+        data-testid="phone-qr"
+      >
+        {link && !expired ? (
+          <QRCodeSVG value={link.url} size={size} bgColor="transparent" fgColor="#2b1810" />
+        ) : (
+          <span className="text-sm text-muted">{failed ? t("failed") : "…"}</span>
+        )}
+      </div>
+      {link && !expired && <p className="mt-3 text-sm font-semibold text-muted">{t("expires", { time })}</p>}
+    </div>
+  );
+}
+
+/** Shows a QR code the Elf Chief scans to carry on from their phone, as the same elf. */
+export function PhoneHandoff({ code, className = "btn-soft" }: { code: string; className?: string }) {
+  const t = useTranslations("host.phone");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -44,19 +69,12 @@ export function PhoneHandoff({ code, className = "btn-soft" }: { code: string; c
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const left = link ? Math.max(0, Math.ceil((link.expiresAt - now) / 1000)) : 0;
-  const time = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`;
-
   return (
     <>
       <button
         type="button"
         className={className}
-        onClick={() => {
-          setNow(Date.now());
-          setFailed(false);
-          setOpen(true);
-        }}
+        onClick={() => setOpen(true)}
       >
         <DeviceMobile weight="bold" className="h-5 w-5" />
         {t("button")}
@@ -95,14 +113,9 @@ export function PhoneHandoff({ code, className = "btn-soft" }: { code: string; c
                     {t("title")}
                   </h2>
                   <p className="mt-2 text-muted">{t("body")}</p>
-                  <div className="mx-auto mt-5 grid h-[220px] w-[220px] place-items-center rounded-[1.25rem] bg-cream p-3" data-url={link && !expired ? link.url : undefined} data-testid="phone-qr">
-                    {link && !expired ? (
-                      <QRCodeSVG value={link.url} size={196} bgColor="transparent" fgColor="#2b1810" />
-                    ) : (
-                      <span className="text-sm text-muted">{failed ? t("failed") : "…"}</span>
-                    )}
+                  <div className="mt-5">
+                    <PhoneLinkQr code={code} />
                   </div>
-                  {link && !expired && <p className="mt-3 text-sm font-semibold text-muted">{t("expires", { time })}</p>}
                 </motion.div>
               </motion.div>
             )}

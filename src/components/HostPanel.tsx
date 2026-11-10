@@ -3,12 +3,14 @@
 import { ArrowRight, ArrowsClockwise, CaretDown, ArrowsLeftRight, Clock, Copy, DoorOpen, GearSix, Television, Trash, UsersThree } from "@phosphor-icons/react";
 import { useLocale, useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Avatar } from "./Avatar";
 import { currencies, currencyOptions, parseEmails } from "./CreateSessionForm";
 import { localeOptions } from "./LanguageSwitcher";
 import { Select } from "./Select";
+import { DeviceSetup, markDevicesReady, useDevicesReady } from "./DeviceSetup";
 import { Disclosure } from "./Disclosure";
+import { RevealCard } from "./RevealCard";
 import { PageBand } from "./PageBand";
 import { WaitingRoom } from "./WaitingRoom";
 import { RemoteIcon } from "./icons";
@@ -21,6 +23,7 @@ import {
   deleteExclusionAction,
   updateExclusionAction,
   inviteAction,
+  markRevealedAction,
   removeParticipantAction,
   resendInviteAction,
   setRemoteAction,
@@ -41,6 +44,15 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
   const { state, refresh } = useSessionState(code, locale, { initial });
   const [pending, start] = useTransition();
   const [message, setMessage] = useState<{ kind: "error" | "ok"; text: string } | null>(null);
+  const devicesReady = useDevicesReady(code);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has("remote")) return;
+    markDevicesReady(code);
+    url.searchParams.delete("remote");
+    window.history.replaceState(null, "", url);
+  }, [code]);
 
   if (!state) return null;
   const s = state.session;
@@ -67,6 +79,8 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
   const budget = s.budgetAmount ? new Intl.NumberFormat(locale, { style: "currency", currency: s.currency, maximumFractionDigits: 0 }).format(s.budgetAmount) : null;
   const when = s.scheduledAt ? new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(s.scheduledAt)) : null;
   const blocked = state.feasibility && !locked && !state.feasibility.ok;
+  const inLobby = s.step === "lobby" && !s.drawn;
+  const pairing = s.mode === "sync" && inLobby && !(s.screenConnected && s.remotePaired);
 
   return (
     <main className="felt-texture min-h-dvh pb-20">
@@ -89,12 +103,26 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
           )}
         </div>
       </PageBand>
-      {s.step === "lobby" && !s.drawn && (
+      {pairing && devicesReady === null ? null : pairing && !devicesReady ? (
+        <div className="mx-auto max-w-6xl px-5 py-6">
+          <DeviceSetup state={state} screenUrl={screenUrl} />
+        </div>
+      ) : (
+        <>
+      {inLobby && (
         <div className="mx-auto max-w-6xl px-5 pt-6">
           <WaitingRoom state={state} joinUrl={joinUrl} screenUrl={screenUrl} onChanged={refresh} />
         </div>
       )}
       <div className="mx-auto max-w-3xl space-y-5 px-5 py-6">
+        {s.mode === "sync" && state.assignment && (
+          <RevealCard
+            receiver={state.assignment.receiver}
+            budget={budget}
+            initiallyRevealed={state.assignment.revealed}
+            onReveal={() => void markRevealedAction(code)}
+          />
+        )}
 
         {message && (
           <p
@@ -275,6 +303,8 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
           </Disclosure>
         </div>
       </div>
+        </>
+      )}
     </main>
   );
 }

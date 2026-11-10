@@ -111,13 +111,16 @@
       "plan": "Preferes planear tudo com antecedência?",
       "planLink": "O formulário completo com data, orçamento e convites",
       "together": {
-        "body": "Todos à mesma mesa. Código QR no ecrã e o sorteio daqui a pouco."
+        "body": "Todos à mesma mesa. Código QR no ecrã e o sorteio daqui a pouco.",
+        "needs": "Ecrã grande + o teu telemóvel"
       },
       "remote": {
-        "body": "Alguém junta-se de longe e vê a transmissão do Pai Natal no seu dispositivo."
+        "body": "Alguém junta-se de longe e vê a transmissão do Pai Natal no seu dispositivo.",
+        "needs": "Cada um no seu dispositivo"
       },
       "ownTime": {
-        "body": "Envia um link à família. Cada um junta-se quando quiser e depois desbloqueias o sorteio."
+        "body": "Envia um link à família. Cada um junta-se quando quiser e depois desbloqueias o sorteio.",
+        "needs": "Basta o telemóvel"
       },
       "title": "O nosso amigo secreto"
     }
@@ -363,12 +366,13 @@
       "tooFew": "O sorteio precisa de pelo menos 2 duendes.",
       "more": "Definições, regras e convites",
       "myElf": "Cria o teu elfo",
-      "tvHint": "Na televisão ou noutro portátil, abra <b>{url}</b> e escreva o código do ecrã:"
+      "tvHint": "Na televisão ou noutro portátil, abra <b>{url}</b> e escreva o código do ecrã:",
+      "leadRemote": "Os convidados leem o código no ecrã grande. Código da sessão: <b>{code}</b>"
     },
     "phone": {
       "button": "Levar para o telemóvel",
       "title": "Continue no telemóvel",
-      "body": "Leia o código com o telemóvel. Entra como você: crie lá o seu duende e veja quem lhe saiu quando chegar a hora. Este computador continua a funcionar como antes.",
+      "body": "Lê o código com o telemóvel. Passa a ser o teu comando: conduz a cerimónia a partir daí e vê em segredo quem te saiu.",
       "expires": "O código expira em {time}",
       "failed": "Não foi possível preparar o código. Tente outra vez.",
       "close": "Fechar"
@@ -390,7 +394,29 @@
     "noBudget": "sem orçamento",
     "budgetSummary": "orçamento {amount}",
     "moreSettings": "Mais definições",
-    "fewerSettings": "Menos definições"
+    "fewerSettings": "Menos definições",
+    "devices": {
+      "title": "Prepara dois dispositivos",
+      "lead": "A cerimónia passa num ecrã grande que todos veem. Tu conduzes a partir do telemóvel – o único sítio onde vês quem te saiu.",
+      "screenTitle": "Ecrã grande",
+      "screenBody": "Uma TV ou um portátil. Mostra aos convidados o código para entrar e depois toda a cerimónia com o Pai Natal.",
+      "phoneTitle": "O teu telemóvel",
+      "phoneBody": "O teu comando. Daqui avanças a cerimónia e vês em segredo quem te saiu.",
+      "connected": "Ligado",
+      "notYet": "Ainda não",
+      "where": "Onde estás agora?",
+      "hereScreen": "Computador ou TV",
+      "herePhone": "Telemóvel",
+      "scanTitle": "Lê este código com o telemóvel",
+      "scanBody": "O telemóvel passa a ser o comando e este ecrã, o palco.",
+      "phoneDone": "Telemóvel ligado! Este ecrã vai tornar-se o palco daqui a nada.",
+      "openStage": "Abrir o palco agora",
+      "tvTitle": "Liga o ecrã grande",
+      "tvBody": "Na TV ou no portátil, vai a <b>{url}</b> e escreve o código:",
+      "tvDone": "Ecrã grande ligado!",
+      "toRemote": "Ir para o comando",
+      "skip": "Só tenho um dispositivo"
+    }
   },
   "screen": {
     "noAccessTitle": "Este é o ecrã grande",

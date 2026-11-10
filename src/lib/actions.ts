@@ -472,7 +472,7 @@ export async function phoneLinkAction(code: string, locale: string) {
   return run(async () => {
     const { session, host } = await requireHost(code);
     const token = await createParticipantToken(host, 1000 * 60 * 10);
-    const params = new URLSearchParams({ token, locale: toLocale(locale), next: `/s/${session.code}/me` });
+    const params = new URLSearchParams({ token, locale: toLocale(locale), next: `/s/${session.code}/host?remote=1` });
     return { url: `${await requestOrigin()}/api/auth/link?${params}`, expiresAt: Date.now() + 1000 * 60 * 10 };
   });
 }

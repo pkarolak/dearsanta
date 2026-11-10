@@ -29,6 +29,8 @@ export type Session = {
   drawnAt: Date | null;
   /** Spontaneous sessions let people in as soon as they knock. */
   autoAdmit: boolean;
+  screenSeenAt: Date | null;
+  remotePairedAt: Date | null;
   version: number;
 };
 
@@ -77,6 +79,8 @@ function mapSession(r: any): Session {
     drawCommitment: r.draw_commitment,
     drawnAt: toDate(r.drawn_at),
     autoAdmit: !!r.auto_admit,
+    screenSeenAt: toDate(r.screen_seen_at),
+    remotePairedAt: toDate(r.remote_paired_at),
     version: Number(r.version),
   };
 }
@@ -218,6 +222,12 @@ export async function updateSession(id: string, patch: SessionPatch) {
 
 export async function bumpVersion(sessionId: string, tx?: Queryable) {
   await (tx ?? (await db())).query("update sessions set version = version + 1 where id = $1", [sessionId]);
+}
+
+/** Records that one of the Elf Chief's devices joined, so the other one can move on by itself. */
+export async function markDevice(sessionId: string, device: "screen" | "remote") {
+  const column = device === "screen" ? "screen_seen_at" : "remote_paired_at";
+  await (await db()).query(`update sessions set ${column} = now(), version = version + 1 where id = $1 and ${column} is null`, [sessionId]);
 }
 
 export async function setCeremonyStep(sessionId: string, step: CeremonyStep, status?: SessionStatus) {

@@ -111,13 +111,16 @@
       "plan": "¿Prefieres planearlo todo con antelación?",
       "planLink": "El formulario completo con fecha, presupuesto e invitaciones",
       "together": {
-        "body": "Todos en la misma mesa. Código QR en la pantalla y el sorteo en un momento."
+        "body": "Todos en la misma mesa. Código QR en la pantalla y el sorteo en un momento.",
+        "needs": "Pantalla grande + tu móvil"
       },
       "remote": {
-        "body": "Alguien se une desde lejos y ve la transmisión de Papá Noel en su dispositivo."
+        "body": "Alguien se une desde lejos y ve la transmisión de Papá Noel en su dispositivo.",
+        "needs": "Cada uno en su dispositivo"
       },
       "ownTime": {
-        "body": "Envía un enlace a la familia. Cada uno se une cuando quiera y luego desbloqueas el sorteo."
+        "body": "Envía un enlace a la familia. Cada uno se une cuando quiera y luego desbloqueas el sorteo.",
+        "needs": "Basta con el móvil"
       },
       "title": "Nuestro amigo invisible"
     }
@@ -363,12 +366,13 @@
       "tooFew": "El sorteo necesita al menos 2 elfos.",
       "more": "Ajustes, reglas e invitaciones",
       "myElf": "Crea tu elfo",
-      "tvHint": "En la tele o en otro portátil, entra en <b>{url}</b> y escribe el código de pantalla:"
+      "tvHint": "En la tele o en otro portátil, entra en <b>{url}</b> y escribe el código de pantalla:",
+      "leadRemote": "Los invitados escanean el código de la pantalla grande. Código de la sesión: <b>{code}</b>"
     },
     "phone": {
       "button": "Llevarlo a mi móvil",
       "title": "Sigue desde tu móvil",
-      "body": "Escanea el código con el móvil. Entrarás como tú: crea allí tu elfo y descubre a quién te ha tocado cuando llegue el momento. Este ordenador sigue funcionando igual.",
+      "body": "Escanea el código con el móvil. Será tu mando: dirige la ceremonia desde ahí y mira en secreto a quién te ha tocado.",
       "expires": "El código caduca en {time}",
       "failed": "No hemos podido preparar el código. Inténtalo de nuevo.",
       "close": "Cerrar"
@@ -390,7 +394,29 @@
     "noBudget": "sin presupuesto",
     "budgetSummary": "presupuesto {amount}",
     "moreSettings": "Más ajustes",
-    "fewerSettings": "Menos ajustes"
+    "fewerSettings": "Menos ajustes",
+    "devices": {
+      "title": "Prepara dos dispositivos",
+      "lead": "La ceremonia se ve en una pantalla grande para todos. Tú la diriges desde el móvil, el único sitio donde verás a quién te ha tocado.",
+      "screenTitle": "Pantalla grande",
+      "screenBody": "Una tele o un portátil. Muestra a los invitados el código para unirse y luego toda la ceremonia con Papá Noel.",
+      "phoneTitle": "Tu móvil",
+      "phoneBody": "Tu mando. Desde aquí avanzas la ceremonia y miras en secreto a quién te ha tocado.",
+      "connected": "Conectado",
+      "notYet": "Todavía no",
+      "where": "¿Dónde estás ahora?",
+      "hereScreen": "Ordenador o tele",
+      "herePhone": "Móvil",
+      "scanTitle": "Escanea este código con el móvil",
+      "scanBody": "El móvil será tu mando y esta pantalla, el escenario.",
+      "phoneDone": "¡Móvil conectado! Esta pantalla se convierte en el escenario en un momento.",
+      "openStage": "Abrir el escenario ya",
+      "tvTitle": "Enciende la pantalla grande",
+      "tvBody": "En la tele o el portátil, entra en <b>{url}</b> y escribe el código:",
+      "tvDone": "¡Pantalla grande conectada!",
+      "toRemote": "Ir al mando",
+      "skip": "Solo tengo un dispositivo"
+    }
   },
   "screen": {
     "noAccessTitle": "Esta es la pantalla grande",

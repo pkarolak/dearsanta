@@ -46,6 +46,8 @@ export type SessionState = {
     commitment: string | null;
     screenKey?: string;
     screenCode?: string;
+    screenConnected?: boolean;
+    remotePaired?: boolean;
   };
   participants: PublicParticipant[];
   exclusions?: { id: string; giverId: string; receiverId: string; bidirectional: boolean }[];
@@ -134,7 +136,12 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
       stepStartedAt: session.stepStartedAt.getTime(),
       drawn: !!session.drawnAt,
       commitment: session.drawCommitment,
-      ...(viewer.isHost ? { screenKey: session.screenKey, screenCode: session.screenCode } : {}),
+      ...(viewer.isHost ? {
+            screenKey: session.screenKey,
+            screenCode: session.screenCode,
+            screenConnected: !!session.screenSeenAt,
+            remotePaired: !!session.remotePairedAt,
+          } : {}),
     },
     participants: visible.map((p) => toPublic(p, viewer.isHost)),
     exclusions: viewer.isHost ? exclusions : undefined,

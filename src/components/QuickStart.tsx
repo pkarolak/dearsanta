@@ -1,5 +1,6 @@
 "use client";
 
+import { DeviceMobile, Devices, Television } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
@@ -9,9 +10,9 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { quickStartAction } from "@/lib/actions";
 
 const kinds = [
-  { kind: "together", picture: "sync" },
-  { kind: "remote", picture: "hybrid" },
-  { kind: "ownTime", picture: "async" },
+  { kind: "together", picture: "sync", needs: [Television, DeviceMobile] },
+  { kind: "remote", picture: "hybrid", needs: [Devices] },
+  { kind: "ownTime", picture: "async", needs: [DeviceMobile] },
 ] as const;
 
 /** The only question before the workshop opens: how are you celebrating? */
@@ -46,7 +47,7 @@ export function QuickStart() {
         <p className="mt-4 max-w-xl text-lg text-snow/85">{t("lead")}</p>
 
         <ul className="mt-10 grid gap-5 md:grid-cols-3">
-          {kinds.map(({ kind, picture }, i) => {
+          {kinds.map(({ kind, picture, needs }, i) => {
             const busy = pending && chosen === kind;
             return (
               <motion.li
@@ -71,6 +72,12 @@ export function QuickStart() {
                   </span>
                   <span className="mt-4 block font-display text-2xl font-bold text-snow group-hover:text-gold">{th(`${picture}.title`)}</span>
                   <span className="mt-1 block text-snow/75">{t(`${kind}.body`)}</span>
+                  <span className="mt-3 inline-flex items-center gap-2 rounded-full bg-snow/10 px-3 py-1.5 text-sm font-semibold text-snow/90 ring-1 ring-snow/15">
+                    {needs.map((Icon, n) => (
+                      <Icon key={n} weight="bold" className="h-4 w-4 text-gold" />
+                    ))}
+                    {t(`${kind}.needs`)}
+                  </span>
                 </button>
               </motion.li>
             );

@@ -111,13 +111,16 @@
       "plan": "Wolisz zaplanować wszystko z wyprzedzeniem?",
       "planLink": "Pełny formularz z datą, budżetem i zaproszeniami",
       "together": {
-        "body": "Wszyscy przy jednym stole. Kod QR na ekranie, losowanie za chwilę."
+        "body": "Wszyscy przy jednym stole. Kod QR na ekranie, losowanie za chwilę.",
+        "needs": "Duży ekran + Twój telefon"
       },
       "remote": {
-        "body": "Ktoś dołącza z daleka i ogląda Mikołaja na żywo na swoim telefonie lub laptopie."
+        "body": "Ktoś dołącza z daleka i ogląda Mikołaja na żywo na swoim telefonie lub laptopie.",
+        "needs": "Każdy na swoim urządzeniu"
       },
       "ownTime": {
-        "body": "Wyślij link rodzinie. Każdy dołączy, kiedy mu pasuje, a Ty uruchomisz losowanie."
+        "body": "Wyślij link rodzinie. Każdy dołączy, kiedy mu pasuje, a Ty uruchomisz losowanie.",
+        "needs": "Wystarczy telefon"
       },
       "title": "Nasz Secret Santa"
     }
@@ -363,12 +366,13 @@
       "tooFew": "Do losowania potrzeba co najmniej 2 elfów.",
       "more": "Ustawienia, zasady i zaproszenia",
       "myElf": "Stwórz swojego elfa",
-      "tvHint": "Na telewizorze albo drugim laptopie wejdź na <b>{url}</b> i wpisz kod ekranu:"
+      "tvHint": "Na telewizorze albo drugim laptopie wejdź na <b>{url}</b> i wpisz kod ekranu:",
+      "leadRemote": "Goście skanują kod z dużego ekranu. Kod sesji: <b>{code}</b>"
     },
     "phone": {
       "button": "Weź sesję na telefon",
       "title": "Przejdź na telefon",
-      "body": "Zeskanuj kod telefonem. Zalogujesz się tam jako Ty: stworzysz swojego elfa, a podczas losowania sprawdzisz, kogo wylosowałeś. Ten komputer dalej działa jak wcześniej.",
+      "body": "Zeskanuj kod telefonem. Telefon stanie się Twoim pilotem: poprowadzisz z niego ceremonię i w tajemnicy sprawdzisz, kogo wylosowałeś.",
       "expires": "Kod wygaśnie za {time}",
       "failed": "Nie udało się przygotować kodu. Spróbuj ponownie.",
       "close": "Zamknij"
@@ -390,7 +394,29 @@
     "noBudget": "bez budżetu",
     "budgetSummary": "budżet {amount}",
     "moreSettings": "Więcej ustawień",
-    "fewerSettings": "Mniej ustawień"
+    "fewerSettings": "Mniej ustawień",
+    "devices": {
+      "title": "Przygotuj dwa urządzenia",
+      "lead": "Ceremonia leci na dużym ekranie, który widzą wszyscy. Ty prowadzisz ją z telefonu – i tylko tam zobaczysz, kogo wylosowałeś.",
+      "screenTitle": "Duży ekran",
+      "screenBody": "Telewizor albo laptop. Pokaże gościom kod do dołączenia, a potem całą ceremonię z Mikołajem.",
+      "phoneTitle": "Twój telefon",
+      "phoneBody": "Twój pilot. Stąd ruszasz kolejne kroki i w tajemnicy sprawdzasz swój los.",
+      "connected": "Połączony",
+      "notYet": "Jeszcze nie",
+      "where": "Na czym teraz jesteś?",
+      "hereScreen": "Komputer lub TV",
+      "herePhone": "Telefon",
+      "scanTitle": "Zeskanuj ten kod telefonem",
+      "scanBody": "Telefon stanie się Twoim pilotem, a ten ekran – sceną ceremonii.",
+      "phoneDone": "Telefon połączony! Ten ekran zaraz zamieni się w scenę.",
+      "openStage": "Otwórz scenę teraz",
+      "tvTitle": "Włącz duży ekran",
+      "tvBody": "Na telewizorze albo laptopie wejdź na <b>{url}</b> i wpisz kod:",
+      "tvDone": "Duży ekran połączony!",
+      "toRemote": "Przejdź do pilota",
+      "skip": "Mam tylko jedno urządzenie"
+    }
   },
   "screen": {
     "noAccessTitle": "To jest duży ekran",
