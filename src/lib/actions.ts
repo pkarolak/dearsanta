@@ -485,3 +485,12 @@ export async function openScreenAction(screenCode: string) {
     return { path: `/s/${session.code}/screen?k=${session.screenKey}` };
   });
 }
+
+/** Checks a typed session code before leaving the page, so a typo gets a friendly message instead of a 404. */
+export async function findSessionAction(code: string) {
+  return run(async () => {
+    const session = await getSessionByCode(z.string().trim().length(6).parse(code));
+    if (!session) throw new ActionError("not_found");
+    return { path: `/join/${session.code}` };
+  });
+}

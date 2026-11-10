@@ -35,7 +35,13 @@
     "languagesTitle": "Er spricht deine Sprache",
     "languagesBody": "Die ganze Show, samt Stimme des Weihnachtsmanns, in fünf Sprachen. Wähl deine.",
     "finaleTitle": "Vorhang auf fürs Wichteln",
-    "finaleBody": "In einer Minute eingerichtet. Alle anderen kommen per Code oder QR-Scan dazu."
+    "finaleBody": "In einer Minute eingerichtet. Alle anderen kommen per Code oder QR-Scan dazu.",
+    "joinOpen": "Beitreten",
+    "joinTitle": "Einer Runde beitreten",
+    "joinHint": "Gib den 6-stelligen Code vom Organisator ein oder füge deinen Einladungslink ein.",
+    "codeLabel": "Code der Runde",
+    "codeNotFound": "Diesen Code kennen wir nicht. Frag beim Organisator nach.",
+    "createShort": "Erstellen"
   },
   "film": {
     "label": "Ein kleines Märchen vom Weihnachtsmann, der Hilfe braucht",

@@ -3,9 +3,10 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { JoinButton } from "../JoinButton";
 import { Link } from "@/i18n/navigation";
 
-/** Keeps the header's create button pinned top-right once the header has scrolled away. */
+/** Keeps the header's join and create buttons pinned top-right once the header has scrolled away. */
 export function FloatingCta() {
   const t = useTranslations("home");
   const [headerGone, setHeaderGone] = useState(false);
@@ -28,9 +29,11 @@ export function FloatingCta() {
           exit={{ y: -16, opacity: 0 }}
           transition={{ type: "spring", stiffness: 320, damping: 26 }}
         >
-          <div className="pointer-events-auto rounded-full bg-ink/50 p-1 ring-1 ring-snow/15 backdrop-blur-md">
+          <div className="pointer-events-auto flex items-center gap-1 rounded-full bg-ink/50 p-1 ring-1 ring-snow/15 backdrop-blur-md">
+            <JoinButton />
             <Link href="/new" className="btn-primary whitespace-nowrap px-4 py-2 text-sm md:px-5 md:text-base">
-              {t("create")}
+              <span className="sm:hidden">{t("createShort")}</span>
+              <span className="max-sm:hidden">{t("create")}</span>
             </Link>
           </div>
         </motion.div>

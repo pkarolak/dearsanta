@@ -35,7 +35,13 @@
     "languagesTitle": "Papá Noel habla tu idioma",
     "languagesBody": "Todo el espectáculo, con la voz de Papá Noel incluida, en cinco idiomas. Elige el tuyo.",
     "finaleTitle": "¡Que se abra el telón!",
-    "finaleBody": "Lo preparas en un minuto. Los demás se unen con un código o escaneando el QR."
+    "finaleBody": "Lo preparas en un minuto. Los demás se unen con un código o escaneando el QR.",
+    "joinOpen": "Unirme",
+    "joinTitle": "Únete a una sesión",
+    "joinHint": "Escribe el código de 6 caracteres del organizador o pega tu enlace de invitación.",
+    "codeLabel": "Código de la sesión",
+    "codeNotFound": "No conocemos ese código. Compruébalo con el organizador.",
+    "createShort": "Crear"
   },
   "film": {
     "label": "Un pequeño cuento de Papá Noel, que necesita vuestra ayuda",

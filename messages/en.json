@@ -35,7 +35,13 @@
     "languagesTitle": "Santa speaks your language",
     "languagesBody": "The whole show, Santa’s voice included, in five languages. Pick yours.",
     "finaleTitle": "Ready for curtain up?",
-    "finaleBody": "Set it up in a minute. Everyone else joins with a code or a quick scan of the QR."
+    "finaleBody": "Set it up in a minute. Everyone else joins with a code or a quick scan of the QR.",
+    "joinOpen": "Join",
+    "joinTitle": "Join a session",
+    "joinHint": "Type the 6-character code from the organiser, or paste your invite link.",
+    "codeLabel": "Session code",
+    "codeNotFound": "We don’t know that code. Check it with the organiser.",
+    "createShort": "Create"
   },
   "film": {
     "label": "A little tale of Santa, who needs your help",

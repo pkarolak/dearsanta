@@ -13,7 +13,7 @@ export const localeOptions = locales.map((l) => ({
   leading: (selected: boolean) => <OptionBadge active={selected}>{l.toUpperCase()}</OptionBadge>,
 }));
 
-export function LanguageSwitcher({ tone = "light" }: { tone?: "light" | "dark" }) {
+export function LanguageSwitcher({ tone = "light", compact = false }: { tone?: "light" | "dark"; compact?: boolean }) {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
@@ -36,7 +36,7 @@ export function LanguageSwitcher({ tone = "light" }: { tone?: "light" | "dark" }
       renderTrigger={(selected, open) => (
         <>
           <Globe weight="bold" className="h-4 w-4 opacity-80" aria-hidden />
-          {selected?.label}
+          <span className={compact ? "max-sm:sr-only" : undefined}>{selected?.label}</span>
           <CaretDown weight="bold" className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
         </>
       )}

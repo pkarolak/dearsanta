@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { JoinButton } from "./JoinButton";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { SnowflakeIcon } from "./icons";
 
@@ -17,10 +18,12 @@ export function SiteHeader({ tone = "light", cta = false }: { tone?: "light" | "
         <Link href="/me" className={`whitespace-nowrap rounded-full px-3 py-1.5 hover:bg-current/10 ${cta ? "hidden md:block" : ""}`}>
           {t("mySessions")}
         </Link>
-        <LanguageSwitcher tone={tone} />
+        <LanguageSwitcher tone={tone} compact={cta} />
+        {cta && <JoinButton tone={tone} />}
         {cta && (
           <Link href="/new" className="btn-primary whitespace-nowrap px-4 py-2 text-sm md:px-5 md:text-base" data-header-cta>
-            {th("create")}
+            <span className="sm:hidden">{th("createShort")}</span>
+            <span className="max-sm:hidden">{th("create")}</span>
           </Link>
         )}
       </nav>
