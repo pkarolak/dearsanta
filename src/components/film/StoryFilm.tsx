@@ -230,7 +230,7 @@ export function StoryFilm({ lines, lang }: Props) {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/45 via-transparent to-ink/55" />
 
       <div className="absolute inset-x-0 top-0 z-30">
-        <SiteHeader tone="dark" />
+        <SiteHeader tone="dark" cta={!done} />
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-[6.5rem] z-20 flex justify-center px-5 md:bottom-28" aria-live="polite">
@@ -328,7 +328,7 @@ function CallToAction({ shown, title, lead, create, haveCode }: { shown: boolean
         <div className="relative rounded-[1.3rem] bg-paper p-5 md:p-8">
           <h1 className="font-display text-[2rem] font-black leading-[0.95] tracking-[-0.025em] text-berry md:text-[clamp(2.4rem,3.3vw,3.7rem)]">{title}</h1>
           <p className="mt-3 text-base leading-relaxed text-ink md:mt-4 md:text-lg">{lead}</p>
-          <Link href="/new" className="btn-primary mt-5 w-full text-lg sm:w-auto md:mt-6">
+          <Link href="/new" className="btn-primary mt-5 w-full text-lg sm:w-auto md:mt-6" data-cta>
             {create}
           </Link>
           <div className="mt-5 rounded-[1rem] bg-cream p-4 md:mt-6">

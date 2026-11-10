@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { FloatingCta } from "@/components/landing/FloatingCta";
 import { FinaleScene } from "@/components/landing/FinaleScene";
 import { LandingMotion } from "@/components/landing/LandingMotion";
 import { LanguagesScene } from "@/components/landing/LanguagesScene";
@@ -33,6 +34,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         <ModesScene />
         <LanguagesScene />
         <FinaleScene />
+        <FloatingCta />
       </LandingMotion>
     </main>
   );
