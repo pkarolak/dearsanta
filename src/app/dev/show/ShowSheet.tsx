@@ -69,19 +69,18 @@ export function ShowSheet({ step, count, level }: { step: string | null; count: 
         </Reindeer>
       </section>
       <section data-testid="avatar-matrix" className="grid grid-cols-10 gap-2">
-        {avatarOptions.hairStyle.flatMap((hairStyle, si) =>
+        {avatarOptions.hair.flatMap((hair, si) =>
           avatarOptions.hat.flatMap((hat, hi) =>
             [avatarOptions.skin[4], avatarOptions.skin[0]].map((skin, k) => (
               <Avatar
-                key={`${hairStyle}-${hat}-${k}`}
+                key={`${hair}-${hat}-${k}`}
                 config={{
                   ...defaultAvatar,
                   skin,
-                  hairStyle,
+                  hair,
                   hat,
-                  hairColor: avatarOptions.hairColor[(si + hi) % 6],
-                  glasses: (si + hi + k) % 2 ? "round" : "none",
-                  scarf: avatarOptions.scarf[(si + hi + k) % 5],
+                  facial: avatarOptions.facial[(si + hi + k) % 4],
+                  glasses: (si + hi + k) % 3 ? "none" : "round",
                   sweater: avatarOptions.sweater[(hi + k) % 5],
                   background: avatarOptions.background[si % 5],
                 }}

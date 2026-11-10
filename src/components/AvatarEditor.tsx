@@ -15,8 +15,8 @@ type Props = {
   onSaved?: () => void;
 };
 
-const colorKeys = ["skin", "hairColor", "sweater", "scarf", "background"] as const;
-const choiceKeys = ["hairStyle", "hat", "glasses"] as const;
+const colorKeys = ["skin", "sweater", "background"] as const;
+const choiceKeys = ["facial", "hat", "glasses"] as const;
 
 export function AvatarEditor({ code, initialName, initialAvatar, completed, onSaved }: Props) {
   const t = useTranslations("elf");
@@ -47,13 +47,13 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
   const randomize = () => {
     const r = <T,>(items: readonly T[]) => items[Math.floor(Math.random() * items.length)];
     setSaved(false);
+    const hair = r(avatarOptions.hair);
     setAvatar({
       skin: r(avatarOptions.skin),
-      hairStyle: r(avatarOptions.hairStyle),
-      hairColor: r(avatarOptions.hairColor),
+      hair,
+      facial: Math.random() < 0.35 ? r(avatarOptions.facial) : "none",
       hat: r(avatarOptions.hat),
-      scarf: r(avatarOptions.scarf),
-      glasses: r(avatarOptions.glasses),
+      glasses: Math.random() < 0.25 ? "round" : "none",
       sweater: r(avatarOptions.sweater),
       background: r(avatarOptions.background),
       blush: Math.random() > 0.3,
@@ -86,6 +86,24 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
               }}
             />
           </div>
+          <div>
+            <span className="label">{t("options.hair")}</span>
+            <div className="grid grid-cols-5 gap-2 sm:grid-cols-8">
+              {avatarOptions.hair.map((hair) => (
+                <button
+                  type="button"
+                  key={hair}
+                  onClick={() => set("hair", hair)}
+                  aria-label={t(`hair.${hair}`)}
+                  title={t(`hair.${hair}`)}
+                  aria-pressed={avatar.hair === hair}
+                  className={`rounded-full transition ${avatar.hair === hair ? "ring-[3px] ring-pine ring-offset-2 ring-offset-paper" : "hover:scale-105"}`}
+                >
+                  <Avatar config={{ ...avatar, hair, facial: "none", hat: "none", glasses: "none" }} className="w-full" />
+                </button>
+              ))}
+            </div>
+          </div>
           {choiceKeys.map((key) => (
             <div key={key}>
               <span className="label">{t(`options.${key}`)}</span>
@@ -116,12 +134,11 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
                       type="button"
                       key={value}
                       onClick={() => set(key, value as never)}
-                      aria-label={value === "none" ? t("values.none") : value}
+                      aria-label={value}
                       aria-pressed={avatar[key] === value}
                       className={`h-8 w-8 rounded-full transition ${avatar[key] === value ? "ring-2 ring-ink ring-offset-2 ring-offset-paper" : "hover:scale-110"}`}
                       style={{
-                        background:
-                          value === "none" ? "repeating-linear-gradient(45deg,#eee,#eee 4px,#ddd 4px,#ddd 8px)" : value,
+                        background: value,
                         boxShadow: "inset -3px -3px 6px rgba(0,0,0,.15), inset 2px 2px 4px rgba(255,255,255,.5)",
                       }}
                     />

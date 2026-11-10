@@ -48,22 +48,21 @@ async function edit(name, image, prompt) {
 const lashes = "three thick curved black felt eyelashes on top of each eye";
 // Ids match src/lib/avatar.ts.
 export const looks = {
-  waves: `Give the puppet long wavy chestnut-brown yarn hair with a side parting, falling over the shoulders, ${lashes}, and soft rosy pink felt lips around the open mouth.`,
+  waves: `Give the puppet long wavy chestnut-brown yarn hair with a side parting, falling over the shoulders, ${lashes}, and a subtle thin rosy pink felt lip line on the edge of the open mouth.`,
   braids: `Give the puppet golden blonde yarn hair in two long thick plaits hanging in front of the shoulders, tied with small red ribbons, ${lashes}, and light freckles on the cheeks.`,
   bob: `Give the puppet a sleek glossy black yarn bob cut at chin length with a short straight fringe, ${lashes}, and small gold stud earrings.`,
   puffs: `Give the puppet dark brown tightly curled yarn hair in two big round afro puffs on top of the head, ${lashes}, and small gold hoop earrings.`,
-  ponytail: `Give the puppet bright copper-ginger yarn hair pulled into a high bouncy ponytail, with a few loose strands framing the face, ${lashes}, and freckles across the nose.`,
+  ponytail: `Give the puppet smooth thick bright copper-ginger yarn hair neatly combed back into a high full ponytail tied with a green band, the ponytail falling behind one shoulder, no loose strands, ${lashes}, and freckles across the nose.`,
   granny: `Make the puppet a sweet grandmother: short soft silver-white curly yarn hair in a neat perm, ${lashes}, small pearl earrings and a few gentle smile lines.`,
   pixie: `Give the puppet a short choppy pastel-pink yarn pixie cut, ${lashes}, and a tiny silver nose stud.`,
-  bun: `Give the puppet dark brown yarn hair pulled up into a big messy round bun on top of the head with a few loose strands, ${lashes}, and soft rosy pink felt lips.`,
-  beard: "Give the puppet short neat dark brown yarn hair and a full thick dark brown yarn beard along the jaw and chin around the open mouth, with a moustache, and thick dark eyebrows.",
-  moustache: "Give the puppet black yarn hair slicked back with a sharp side parting, a big curly black handlebar moustache above the open mouth, and thick black eyebrows.",
-  stubble: "Give the puppet messy tousled golden blond yarn hair, short light blond stubble on the jaw and chin, and thick blond eyebrows.",
-  grandpa: "Make the puppet a jolly grandfather: bald on top with tufts of white yarn hair above the ears, a big bushy white yarn beard and moustache around the open mouth, and bushy white eyebrows.",
-  curls: "Give the puppet short tight black curly yarn hair, a short neat black goatee on the chin under the open mouth, and thick black eyebrows.",
-  buzz: "Give the puppet a very short dark buzz cut of fine yarn fuzz, thick dark eyebrows, and a strong broad square jaw.",
-  quiff: "Give the puppet bright ginger yarn hair styled up into a tall quiff, a short ginger yarn beard and moustache around the open mouth, and ginger eyebrows.",
-  manbun: "Give the puppet long dark brown yarn hair tied back into a small man bun at the back of the head, a short boxed dark brown yarn beard and moustache, and thick dark eyebrows.",
+  bun: `Give the puppet smooth thick dark brown yarn hair neatly pulled up into a big round tidy bun on top of the head, no loose strands, ${lashes}, and small gold stud earrings.`,
+  short: "Give the puppet short neat dark brown yarn hair and thick dark eyebrows. Clean-shaven: no beard, no moustache.",
+  slick: "Give the puppet black yarn hair slicked back with a sharp side parting and thick black eyebrows. Clean-shaven: no beard, no moustache.",
+  tousled: "Give the puppet messy tousled golden blond yarn hair and thick blond eyebrows. Clean-shaven: no beard, no moustache.",
+  grandpa: "Give the puppet two fluffy white yarn hair puffs on the sides of the head above the ears, and fluffy white yarn eyebrows. The crown of the head stays plain felt.",
+  curls: "Give the puppet short tight black curly yarn hair and thick black eyebrows. Clean-shaven: no beard, no moustache.",
+  quiff: "Give the puppet bright ginger yarn hair brushed up high at the front, and ginger yarn eyebrows. No facial hair.",
+  manbun: "Give the puppet dark brown yarn hair combed back neatly and tied into a small round man bun on top of the head, with no hair hanging down, and thick dark eyebrows. Clean-shaven: no beard, no moustache.",
 };
 
 // Index 1 is the master's own felt colour.
@@ -128,4 +127,37 @@ if (stage === "hats")
         })),
       ),
     ),
+  );
+// The content checker keeps refusing a hairless grandfather from scratch; shaving the bearded one goes through.
+if (stage === "shave")
+  await run([{ name: name("grandpa", 1), from: `${out}/old/grandpa-1-none.png`, prompt: "Remove the white beard and moustache completely so the felt chin and cheeks show around the open mouth. Keep the white hair tufts above the ears and the bushy white eyebrows." }]);
+
+// Facial hair is a layer: drawn once per hairstyle in its hair colour on the skin-1 portrait, then cut out by build-elves.mjs.
+export const hairColour = {
+  waves: "chestnut brown", braids: "golden blonde", bob: "black", puffs: "dark brown", ponytail: "copper ginger", granny: "silver white",
+  pixie: "pastel pink", bun: "dark brown", short: "dark brown", slick: "black", tousled: "golden blond", grandpa: "white",
+  curls: "black", quiff: "bright ginger", manbun: "dark brown",
+};
+const facial = {
+  moustache: (c) => `a big curly ${c} yarn handlebar moustache above the open mouth`,
+  goatee: (c) => `a short neat ${c} yarn goatee on the chin under the open mouth`,
+  beard: (c) => `a full thick ${c} yarn beard along the jaw and chin around the open mouth, joined to a ${c} yarn moustache`,
+};
+if (stage === "beards")
+  await run(
+    ids.flatMap((id) =>
+      Object.entries(facial).map(([kind, d]) => ({
+        name: `${id}-1-${kind}`,
+        from: f(name(id, 1)),
+        prompt: `Give the puppet ${d(hairColour[id])}. The mouth stays wide open and fully visible. Keep the hair, eyelashes, earrings and skin exactly as they are.`,
+      })),
+    ),
+  );
+if (stage === "glasses")
+  await run(
+    ids.map((id) => ({
+      name: `${id}-1-glasses`,
+      from: f(name(id, 1)),
+      prompt: "Put a pair of large round thin dark-brown wire glasses on the puppet, centred over the eyes, the arms going back to the ears. Keep the hair, eyelashes, earrings and skin exactly as they are.",
+    })),
   );

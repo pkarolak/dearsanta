@@ -43,12 +43,12 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   // Every tweak shows up for the room before she saves anything.
   await guest.getByRole("button", { name: "Antlers" }).click();
   await expect(phone.getByText("2 elves inside")).toBeVisible({ timeout: 10_000 });
-  await expect(phone.locator('[aria-label="Ola"] img[src*="hat-"][src*="antlers"]')).toBeVisible({ timeout: 10_000 });
+  await expect(phone.locator('[aria-label="Ola"] img[src*="-antlers.webp"]')).toBeVisible({ timeout: 10_000 });
   await expect(laptop.getByText("Ola").first()).toBeVisible();
 
   // Trying on a new hat puts her in the big screen's spotlight.
   await guest.getByRole("button", { name: "Santa hat" }).click();
-  await expect(laptop.locator('[aria-label="Ola"] img[src*="santa"]').first()).toBeVisible({ timeout: 10_000 });
+  await expect(laptop.locator('[aria-label="Ola"] img[src*="-santa.webp"]').first()).toBeVisible({ timeout: 10_000 });
   await laptop.waitForTimeout(700);
   await laptop.screenshot({ path: `${shots}/14-screen-spotlight.png` });
 
@@ -62,7 +62,7 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   await phone.getByRole("link", { name: "Make your elf" }).click();
   await phone.waitForURL(new RegExp(`/s/${code}/me`));
   await phone.getByRole("button", { name: "Elf hat" }).click();
-  await expect(laptop.locator('[aria-label="Anna"] img[src*="hat-"][src*="elf"]').first()).toBeVisible({ timeout: 10_000 });
+  await expect(laptop.locator('[aria-label="Anna"] img[src*="-elf.webp"]').first()).toBeVisible({ timeout: 10_000 });
 });
 
 test("party on a phone: the TV opens the stage with the short code, then the phone is the remote", async ({ browser }) => {
