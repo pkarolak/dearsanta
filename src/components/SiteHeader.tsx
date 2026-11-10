@@ -17,7 +17,7 @@ export function SiteHeader({ tone = "light", cta = false }: { tone?: "light" | "
         <Link href="/me" className={`whitespace-nowrap rounded-full px-3 py-1.5 hover:bg-current/10 ${cta ? "hidden md:block" : ""}`}>
           {t("mySessions")}
         </Link>
-        <LanguageSwitcher className={tone === "dark" ? "[&_select]:ring-0 [&_select]:hover:bg-snow/10" : ""} />
+        <LanguageSwitcher tone={tone} />
         {cta && (
           <Link href="/new" className="btn-primary whitespace-nowrap px-4 py-2 text-sm md:hidden">
             {th("create")}
