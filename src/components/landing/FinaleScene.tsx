@@ -68,7 +68,7 @@ export function FinaleScene() {
               <div className="relative rounded-[1.3rem] bg-paper p-7 text-center md:p-10">
                 <h2 className="font-display text-4xl font-black leading-[0.95] tracking-[-0.025em] text-berry md:text-[4.2rem]">{t("finaleTitle")}</h2>
                 <p className="mx-auto mt-4 max-w-sm text-lg leading-relaxed text-ink">{t("finaleBody")}</p>
-                <Link href="/new" className="btn-primary mt-7 text-lg" data-cta>
+                <Link href="/new" className="btn-primary mt-7 text-lg">
                   {t("create")}
                 </Link>
                 <div className="mx-auto mt-7 flex max-w-sm flex-col items-center rounded-[1rem] bg-cream p-4 text-left">
@@ -91,7 +91,7 @@ export function FinaleScene() {
             <p className="font-display text-lg">{t("footer")}</p>
             <nav className="flex items-center gap-5 font-semibold">
               <Link href="/me" className="hover:text-snow">{tn("mySessions")}</Link>
-              <Link href="/new" className="btn-primary" data-cta>
+              <Link href="/new" className="btn-primary">
                 {t("create")}
               </Link>
             </nav>

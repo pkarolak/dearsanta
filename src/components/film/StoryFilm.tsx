@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { JoinCodeForm } from "../JoinCodeForm";
 import { SiteHeader } from "../SiteHeader";
-import { GiftIcon, SpeakerIcon } from "../icons";
+import { SpeakerIcon } from "../icons";
 import { clipSrc, clips, readingMs, type LineKey } from "./script";
 import { Link } from "@/i18n/navigation";
 import { workshopAudio, type VoiceLine } from "@/lib/audio/engine";
@@ -230,7 +230,7 @@ export function StoryFilm({ lines, lang }: Props) {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/55 via-transparent via-45% to-ink/75" />
 
       <div className="absolute inset-x-0 top-0 z-30">
-        <SiteHeader tone="dark" cta={!done} />
+        <SiteHeader tone="dark" cta />
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-[5.5rem] z-20 flex justify-center px-5 md:bottom-28" aria-live="polite">
@@ -255,25 +255,6 @@ export function StoryFilm({ lines, lang }: Props) {
       <div
         className={`pointer-events-none absolute z-40 flex items-end gap-3 px-3 md:px-6 ${done ? "right-0 top-[4.25rem] md:top-auto md:bottom-6" : "inset-x-0 bottom-4 md:bottom-6"}`}
       >
-        <AnimatePresence>
-          {!done && (
-            <motion.div
-              className="pointer-events-auto hidden md:block"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 12 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Link
-                href="/new"
-                className="btn-primary whitespace-nowrap px-7 py-3.5 text-lg shadow-[0_12px_30px_-10px_rgb(0_0_0/0.7),inset_0_-3px_0_rgb(0_0_0/0.18)] ring-2 ring-gold/70"
-              >
-                <GiftIcon className="h-5 w-5" />
-                {th("create")}
-              </Link>
-            </motion.div>
-          )}
-        </AnimatePresence>
         <div
           className={`pointer-events-auto flex items-center gap-1.5 rounded-full bg-ink/60 p-1.5 shadow-[0_12px_30px_-12px_rgb(0_0_0/0.8)] ring-1 ring-snow/15 backdrop-blur-md ${done ? "" : "min-w-0 flex-1 md:ml-auto md:max-w-xl"}`}
         >
@@ -351,7 +332,7 @@ function CallToAction({ shown, title, lead, create, haveCode }: { shown: boolean
         <div className="relative rounded-[1.3rem] bg-paper p-5 md:p-8">
           <h1 className="font-display text-[2rem] font-black leading-[0.95] tracking-[-0.025em] text-berry md:text-[clamp(2.4rem,3.3vw,3.7rem)]">{title}</h1>
           <p className="mt-3 text-base leading-relaxed text-ink md:mt-4 md:text-lg">{lead}</p>
-          <Link href="/new" className="btn-primary mt-5 w-full text-lg sm:w-auto md:mt-6" data-cta>
+          <Link href="/new" className="btn-primary mt-5 w-full text-lg sm:w-auto md:mt-6">
             {create}
           </Link>
           <div className="mt-5 rounded-[1rem] bg-cream p-4 md:mt-6">

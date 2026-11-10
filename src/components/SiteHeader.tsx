@@ -19,7 +19,7 @@ export function SiteHeader({ tone = "light", cta = false }: { tone?: "light" | "
         </Link>
         <LanguageSwitcher tone={tone} />
         {cta && (
-          <Link href="/new" className="btn-primary whitespace-nowrap px-4 py-2 text-sm md:hidden">
+          <Link href="/new" className="btn-primary whitespace-nowrap px-4 py-2 text-sm md:px-5 md:text-base" data-header-cta>
             {th("create")}
           </Link>
         )}
