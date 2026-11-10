@@ -7,35 +7,35 @@
     "mySessions": "Moje sesje"
   },
   "home": {
-    "title": "Zamień losowanie w przedstawienie",
+    "title": "Zamień losowanie w świąteczne przedstawienie",
     "create": "Stwórz Secret Santa",
-    "haveCode": "Masz kod sesji?",
+    "haveCode": "Masz kod od organizatora?",
     "codePlaceholder": "KOD",
     "join": "Dołącz",
-    "modesTitle": "Jeden wieczór, trzy sposoby świętowania",
+    "modesTitle": "Jeden wieczór, trzy sposoby na losowanie",
     "modes": {
       "sync": {
         "title": "Razem w jednym pokoju",
-        "body": "Mikołaj prowadzi ceremonię na dużym ekranie. Każdy dołącza z telefonu przez kod QR i dyskretnie poznaje swoją osobę."
+        "body": "Mikołaj prowadzi losowanie na dużym ekranie. Każdy dołącza z telefonu, skanując kod QR, i po cichu sprawdza, kogo wylosował."
       },
       "hybrid": {
-        "title": "Część z was daleko",
-        "body": "Elfy, które nie mogą przyjść, oglądają transmisję Mikołaja na swoim urządzeniu, obok profilu elfa, równo z resztą pokoju."
+        "title": "Część z was jest daleko",
+        "body": "Kto nie może przyjechać, ogląda Mikołaja na żywo na swoim telefonie lub laptopie i losuje razem z resztą."
       },
       "async": {
         "title": "Każdy w swoim czasie",
-        "body": "Zaproś mailem. Elfy tworzą profile, kiedy chcą, a gdy Naczelnik elfów odblokuje losowanie, Mikołaj każdemu przekaże wynik w krótkiej, osobistej wiadomości."
+        "body": "Zaproś wszystkich mailem. Każdy dołącza, kiedy mu pasuje, a gdy Naczelnik elfów uruchomi losowanie, Mikołaj wyśle każdemu krótką wiadomość z wynikiem."
       }
     },
     "footer": "Zrobione w warsztacie Mikołaja. Ho, ho, ho!",
-    "heroLead": "Mikołaj poprowadzi wasze losowanie, uczciwie rozlosuje imiona i każdemu szepnie wynik na jego telefon.",
-    "matchTitle": "Twój wynik w twojej dłoni",
-    "matchBody": "Przytrzymaj skarpetę, żeby ją rozpakować. Imię widzisz tylko ty, więc nikt nie podejrzy. Spróbuj tutaj.",
+    "heroLead": "Mikołaj poprowadzi wasze losowanie i każdemu szepnie wynik prosto na telefon.",
+    "matchTitle": "Sprawdź, kogo wylosowałeś",
+    "matchBody": "Przytrzymaj skarpetę, żeby ją otworzyć. Imię zobaczysz tylko ty, więc nikt nie podejrzy. Spróbuj tutaj!",
     "matchHello": "Cześć, Tomek!",
-    "languagesTitle": "Mikołaj mówi w twoim języku",
-    "languagesBody": "Całe przedstawienie, razem z głosem Mikołaja, w pięciu językach. Wybierz swój.",
+    "languagesTitle": "Mikołaj mówi twoim językiem",
+    "languagesBody": "Całe przedstawienie, łącznie z głosem Mikołaja, jest dostępne w pięciu językach. Wybierz swój.",
     "finaleTitle": "Kurtyna w górę!",
-    "finaleBody": "Przygotujesz wszystko w minutę. Reszta dołącza kodem albo skanując QR."
+    "finaleBody": "Wszystko przygotujesz w minutę. Pozostali dołączą, wpisując kod albo skanując QR."
   },
   "film": {
     "label": "Bajka o Mikołaju, który potrzebuje pomocy",
@@ -106,7 +106,7 @@
     "quick": {
       "hostName": "Naczelnik elfów",
       "heading": "Jak świętujecie?",
-      "lead": "Jedno kliknięcie i warsztat otwarty. Resztę ustawisz później, jeśli w ogóle zechcesz.",
+      "lead": "Jedno kliknięcie i warsztat otwarty. Resztę ustawisz później, jeśli w ogóle będzie trzeba.",
       "starting": "Otwieramy warsztat…",
       "plan": "Wolisz zaplanować wszystko z wyprzedzeniem?",
       "planLink": "Pełny formularz z datą, budżetem i zaproszeniami",
@@ -114,10 +114,10 @@
         "body": "Wszyscy przy jednym stole. Kod QR na ekranie, losowanie za chwilę."
       },
       "remote": {
-        "body": "Ktoś dołącza z daleka i ogląda transmisję Mikołaja na swoim urządzeniu."
+        "body": "Ktoś dołącza z daleka i ogląda Mikołaja na żywo na swoim telefonie lub laptopie."
       },
       "ownTime": {
-        "body": "Wyślij link rodzinie. Każdy dołączy, kiedy zechce, a Ty odblokujesz losowanie."
+        "body": "Wyślij link rodzinie. Każdy dołączy, kiedy mu pasuje, a Ty uruchomisz losowanie."
       },
       "title": "Nasz Secret Santa"
     }
@@ -149,7 +149,7 @@
     "checkEmailTitle": "Sprawdź skrzynkę",
     "checkEmailBody": "Już jesteś w tej sesji. Wysłaliśmy Ci link, żeby kontynuować na tym urządzeniu.",
     "emailOptional": "Twój e-mail (opcjonalnie)",
-    "emailHintOptional": "Dostaniesz pamiątkowy mail z wynikiem i wrócisz do sesji z innego urządzenia."
+    "emailHintOptional": "Dostaniesz pamiątkowego maila z wynikiem i wrócisz do sesji z innego urządzenia."
   },
   "login": {
     "heading": "Twoje sesje",
@@ -230,7 +230,7 @@
     "youGiveTo": "W tym roku robisz prezent dla",
     "budget": "Budżet do {budget}",
     "hide": "Ukryj",
-    "hold": "Przytrzymaj, żeby rozpakować",
+    "hold": "Przytrzymaj, żeby otworzyć",
     "holdHint": "Zasłoń ekran przed ciekawskimi.",
     "again": "Posłuchaj jeszcze raz",
     "back": "Wróć do elfa",
@@ -354,17 +354,17 @@
     "fullscreen": "Pełny ekran",
     "room": {
       "title": "Warsztat otwarty!",
-      "lead": "Zeskanujcie kod telefonem albo wejdźcie na stronę i wpiszcie kod.",
-      "leadAsync": "Wyślij ten link rodzinie – każdy dołączy, kiedy zechce.",
+      "lead": "Zeskanujcie kod QR telefonem albo wejdźcie na stronę i wpiszcie kod.",
+      "leadAsync": "Wyślij ten link rodzinie – każdy dołączy, kiedy mu pasuje.",
       "waiting": "Czekamy na pierwsze elfy…",
-      "inside": "{count, plural, one {# elf w środku} few {# elfy w środku} many {# elfów w środku} other {# elfa w środku}}",
+      "inside": "{count, plural, one {# elf już jest} few {# elfy już są} many {# elfów już jest} other {# elfa już jest}}",
       "yourName": "A Ty, jak masz na imię?",
       "saveName": "Zapisz",
       "share": "Udostępnij link",
       "copy": "Kopiuj link",
       "copied": "Skopiowano!",
       "screen": "Otwórz duży ekran",
-      "screenHint": "Podłącz telewizor albo laptop: wszyscy zobaczą, jak powstają elfy.",
+      "screenHint": "Podłącz telewizor albo laptop – wszyscy zobaczą, jak powstają elfy.",
       "tooFew": "Do losowania potrzeba co najmniej 3 elfów.",
       "more": "Ustawienia, zasady i zaproszenia",
       "myElf": "Stwórz swojego elfa"
