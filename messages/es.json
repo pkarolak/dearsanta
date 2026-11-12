@@ -246,7 +246,8 @@
       "curls": "Rizos cortos",
       "quiff": "Tupé pelirrojo",
       "manbun": "Moño masculino"
-    }
+    },
+    "hatMissing": "Un gorro tachado no encaja con este peinado y este tono de piel. Cambia uno de los dos para ponértelo."
   },
   "reveal": {
     "eyebrow": "Alto secreto",

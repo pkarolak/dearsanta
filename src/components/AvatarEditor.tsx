@@ -3,7 +3,7 @@
 import { Shuffle } from "@phosphor-icons/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useTransition } from "react";
-import { Avatar } from "./Avatar";
+import { Avatar, hasHat } from "./Avatar";
 import { avatarOptions, type AvatarConfig } from "@/lib/avatar";
 import { previewProfileAction, saveProfileAction } from "@/lib/actions";
 
@@ -23,7 +23,7 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
   const te = useTranslations("errors");
   const locale = useLocale();
   const [name, setName] = useState(initialName);
-  const [avatar, setAvatar] = useState<AvatarConfig>(initialAvatar);
+  const [avatar, setAvatar] = useState<AvatarConfig>(() => (hasHat(initialAvatar) ? initialAvatar : { ...initialAvatar, hat: "none" }));
   const [pending, start] = useTransition();
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -41,18 +41,22 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
 
   const set = <K extends keyof AvatarConfig>(key: K, value: AvatarConfig[K]) => {
     setSaved(false);
-    setAvatar((a) => ({ ...a, [key]: value }));
+    setAvatar((a) => {
+      const next = { ...a, [key]: value };
+      return hasHat(next) ? next : { ...next, hat: "none" };
+    });
   };
 
   const randomize = () => {
     const r = <T,>(items: readonly T[]) => items[Math.floor(Math.random() * items.length)];
     setSaved(false);
     const hair = r(avatarOptions.hair);
+    const skin = r(avatarOptions.skin);
     setAvatar({
-      skin: r(avatarOptions.skin),
+      skin,
       hair,
       facial: Math.random() < 0.35 ? r(avatarOptions.facial) : "none",
-      hat: r(avatarOptions.hat),
+      hat: r(avatarOptions.hat.filter((hat) => hasHat({ hair, skin, hat }))),
       glasses: Math.random() < 0.25 ? "round" : "none",
       sweater: r(avatarOptions.sweater),
       background: r(avatarOptions.background),
@@ -108,20 +112,28 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
             <div key={key}>
               <span className="label">{t(`options.${key}`)}</span>
               <div className="flex flex-wrap gap-2">
-                {avatarOptions[key].map((value) => (
-                  <button
-                    type="button"
-                    key={value}
-                    onClick={() => set(key, value as never)}
-                    aria-pressed={avatar[key] === value}
-                    className={`rounded-full px-3.5 py-1.5 text-sm font-semibold transition ${
-                      avatar[key] === value ? "bg-pine text-white shadow" : "well text-ink/80 hover:text-ink"
-                    }`}
-                  >
-                    {t(`values.${value}`)}
-                  </button>
-                ))}
+                {avatarOptions[key].map((value) => {
+                  const missing = key === "hat" && !hasHat({ ...avatar, hat: value as AvatarConfig["hat"] });
+                  return (
+                    <button
+                      type="button"
+                      key={value}
+                      onClick={() => set(key, value as never)}
+                      disabled={missing}
+                      title={missing ? t("hatMissing") : undefined}
+                      aria-pressed={avatar[key] === value}
+                      className={`rounded-full px-3.5 py-1.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 disabled:line-through ${
+                        avatar[key] === value ? "bg-pine text-white shadow" : "well text-ink/80 enabled:hover:text-ink"
+                      }`}
+                    >
+                      {t(`values.${value}`)}
+                    </button>
+                  );
+                })}
               </div>
+              {key === "hat" && avatarOptions.hat.some((hat) => !hasHat({ ...avatar, hat })) && (
+                <p className="mt-1.5 text-xs text-muted">{t("hatMissing")}</p>
+              )}
             </div>
           ))}
           <div className="grid gap-4 sm:grid-cols-2">

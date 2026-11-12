@@ -33,6 +33,11 @@ function fit(layer: string, portrait: string): CSSProperties | undefined {
   };
 }
 
+/** A few hairstyle, skin and hat combinations have no finished portrait; those show the elf without a hat. */
+export function hasHat(c: Pick<AvatarConfig, "hair" | "skin" | "hat">) {
+  return c.hat === "none" || Boolean(eyes[`${c.hair}-${Math.max(0, avatarOptions.skin.indexOf(c.skin))}-${c.hat}`]);
+}
+
 /**
  * An elf as a felt puppet, like the people in the film. Every hairstyle, skin and hat is a finished portrait;
  * the sweater colour is multiplied onto its bleached knit, and facial hair and glasses are fitted to the eyes

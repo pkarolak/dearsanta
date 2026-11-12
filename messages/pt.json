@@ -246,7 +246,8 @@
       "curls": "Caracóis curtos",
       "quiff": "Topete ruivo",
       "manbun": "Coque masculino"
-    }
+    },
+    "hatMissing": "Um gorro riscado não combina com este penteado e este tom de pele. Mude um dos dois para o usar."
   },
   "reveal": {
     "eyebrow": "Ultrassecreto",

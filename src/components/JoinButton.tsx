@@ -27,7 +27,8 @@ export function JoinButton({ tone = "dark" }: { tone?: "light" | "dark" }) {
     // and follows the button every frame, since the film scales its header while scrolling.
     let frame = 0;
     const follow = () => {
-      const r = button.current!.getBoundingClientRect();
+      if (!button.current) return;
+      const r = button.current.getBoundingClientRect();
       const next = { top: Math.round(r.bottom + 8), right: Math.round(window.innerWidth - r.right), wide: window.innerWidth >= 768 };
       setPlace((p) => (p && p.top === next.top && p.right === next.right && p.wide === next.wide ? p : next));
       frame = requestAnimationFrame(follow);

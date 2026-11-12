@@ -246,7 +246,8 @@
       "curls": "Short curls",
       "quiff": "Ginger quiff",
       "manbun": "Man bun"
-    }
+    },
+    "hatMissing": "A crossed-out hat doesn’t fit this hairstyle with this skin tone. Change either one to wear it."
   },
   "reveal": {
     "eyebrow": "Top secret",

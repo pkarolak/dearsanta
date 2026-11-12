@@ -246,7 +246,8 @@
       "curls": "Krótkie loki",
       "quiff": "Rudy czub",
       "manbun": "Męski kok"
-    }
+    },
+    "hatMissing": "Przekreślona czapka nie pasuje do tej fryzury przy tej karnacji. Zmień jedno lub drugie, żeby ją założyć."
   },
   "reveal": {
     "eyebrow": "Ściśle tajne",
