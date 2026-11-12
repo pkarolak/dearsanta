@@ -241,7 +241,12 @@
     "hatMissing": "A crossed-out hat doesn’t fit this hairstyle with this skin tone. Change either one to wear it.",
     "whereTitle": "Where are you watching from?",
     "inRoomHint": "I’ll watch the big screen with everyone.",
-    "remoteHint": "Santa live, voice and subtitles, right here on my device."
+    "remoteHint": "Santa live, voice and subtitles, right here on my device.",
+    "matchSoonTitle": "Your match opens here",
+    "matchSoonLobby": "Once the Elf Chief starts the ceremony and Santa draws the names, your stocking appears right here.",
+    "matchSoonLive": "Santa is about to draw. When he tells you to look in your stocking, hold it here.",
+    "lateTitle": "The draw happened without you",
+    "lateBody": "Santa drew the names before you joined. Let the Elf Chief know."
   },
   "reveal": {
     "eyebrow": "Top secret",

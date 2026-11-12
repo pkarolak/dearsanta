@@ -241,7 +241,12 @@
     "hatMissing": "Un gorro tachado no encaja con este peinado y este tono de piel. Cambia uno de los dos para ponértelo.",
     "whereTitle": "¿Desde dónde lo ves?",
     "inRoomHint": "Veo la pantalla grande con todos.",
-    "remoteHint": "Papá Noel en directo, con voz y subtítulos, aquí en mi dispositivo."
+    "remoteHint": "Papá Noel en directo, con voz y subtítulos, aquí en mi dispositivo.",
+    "matchSoonTitle": "Aquí abrirás tu resultado",
+    "matchSoonLobby": "Cuando el jefe de los elfos empiece la ceremonia y Papá Noel saque los nombres, tu calcetín aparecerá justo aquí.",
+    "matchSoonLive": "Papá Noel está a punto de sortear. Cuando diga que miréis el calcetín, mantenlo pulsado aquí.",
+    "lateTitle": "El sorteo se hizo sin ti",
+    "lateBody": "Papá Noel sacó los nombres antes de que te unieras. Avisa al jefe de los elfos."
   },
   "reveal": {
     "eyebrow": "Alto secreto",

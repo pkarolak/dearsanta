@@ -1,6 +1,7 @@
 "use client";
 
 import { Broadcast, Television } from "@phosphor-icons/react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
 import { Avatar } from "./Avatar";
@@ -80,9 +81,26 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
         </div>
       ))}
 
+      {s.mode === "sync" && !state.assignment && (
+        <section className={`card flex items-center gap-4 p-5 ${s.drawn ? "" : "border-2 border-dashed border-pine/30"}`}>
+          <Image
+            src="/show/stocking.webp"
+            alt=""
+            width={420}
+            height={899}
+            unoptimized
+            className={`w-12 shrink-0 ${s.drawn ? "opacity-40 grayscale" : "animate-sway"}`}
+          />
+          <div>
+            <h2 className="font-display text-xl font-bold">{s.drawn ? t("lateTitle") : t("matchSoonTitle")}</h2>
+            <p className="mt-1 text-sm text-muted">{s.drawn ? t("lateBody") : ceremonyRunning ? t("matchSoonLive") : t("matchSoonLobby")}</p>
+          </div>
+        </section>
+      )}
+
       {s.mode === "sync" && s.step === "farewell" && <FestiveLinks />}
 
-      {s.mode === "sync" && !state.assignment && (
+      {s.mode === "sync" && !state.assignment && !s.drawn && (
         <section className="card p-5">
           <h2 className="font-display text-xl font-bold">{t("whereTitle")}</h2>
           <div className="mt-3 grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label={t("whereTitle")}>

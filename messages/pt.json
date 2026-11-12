@@ -241,7 +241,12 @@
     "hatMissing": "Um gorro riscado não combina com este penteado e este tom de pele. Mude um dos dois para o usar.",
     "whereTitle": "De onde estás a ver?",
     "inRoomHint": "Vejo o ecrã grande com todos.",
-    "remoteHint": "O Pai Natal ao vivo, com voz e legendas, aqui no meu dispositivo."
+    "remoteHint": "O Pai Natal ao vivo, com voz e legendas, aqui no meu dispositivo.",
+    "matchSoonTitle": "É aqui que abres o teu resultado",
+    "matchSoonLobby": "Quando o chefe dos elfos começar a cerimónia e o Pai Natal sortear os nomes, a tua meia aparece aqui.",
+    "matchSoonLive": "O Pai Natal está quase a sortear. Quando ele disser para espreitarem as meias, mantém-na premida aqui.",
+    "lateTitle": "O sorteio foi feito sem ti",
+    "lateBody": "O Pai Natal sorteou os nomes antes de entrares. Avisa o chefe dos elfos."
   },
   "reveal": {
     "eyebrow": "Ultrassecreto",

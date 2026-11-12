@@ -241,7 +241,12 @@
     "hatMissing": "Przekreślona czapka nie pasuje do tej fryzury przy tej karnacji. Zmień jedno lub drugie, żeby ją założyć.",
     "whereTitle": "Gdzie oglądasz ceremonię?",
     "inRoomHint": "Patrzę na duży ekran razem z innymi.",
-    "remoteHint": "Mikołaj z głosem i napisami na żywo tutaj, na moim urządzeniu."
+    "remoteHint": "Mikołaj z głosem i napisami na żywo tutaj, na moim urządzeniu.",
+    "matchSoonTitle": "Tu otworzysz swój wynik",
+    "matchSoonLobby": "Gdy Naczelnik elfów rozpocznie ceremonię i Mikołaj wylosuje imiona, w tym miejscu pojawi się Twoja skarpeta.",
+    "matchSoonLive": "Mikołaj zaraz losuje. Kiedy powie, żeby zajrzeć do skarpet, przytrzymaj ją tutaj.",
+    "lateTitle": "Losowanie odbyło się bez Ciebie",
+    "lateBody": "Mikołaj rozlosował imiona przed Twoim dołączeniem. Daj znać Naczelnikowi elfów."
   },
   "reveal": {
     "eyebrow": "Ściśle tajne",
