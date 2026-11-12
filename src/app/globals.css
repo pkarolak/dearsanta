@@ -62,6 +62,9 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* The gradient only paints inside the box, so tight leading would cut off descenders; extend it without moving anything. */
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
   filter: drop-shadow(0 2px 0 rgb(90 45 0 / 0.45)) drop-shadow(0 0 22px rgb(242 185 53 / 0.35));
 }
 @utility glow-text {

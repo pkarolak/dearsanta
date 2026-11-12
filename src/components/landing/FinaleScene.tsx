@@ -97,7 +97,7 @@ export function FinaleScene() {
             </nav>
           </div>
           <motion.p
-            className="foil mt-10 whitespace-nowrap pb-[0.12em] font-display text-[15.5vw] font-black leading-[0.85] tracking-[-0.045em] md:text-[min(15.5vw,15rem)]"
+            className="foil mt-10 whitespace-nowrap font-display text-[15.5vw] font-black leading-[0.85] tracking-[-0.045em] md:text-[min(15.5vw,15rem)]"
             initial={{ y: "35%", opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}
