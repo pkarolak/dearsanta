@@ -140,14 +140,17 @@ export function FortuneWheel({
 
   return (
     <div className={`@container absolute aspect-square ${className}`}>
-      {/* the stand */}
+      {/* the stand: a turned brass post on a round foot, resting on the floor */}
+      <div aria-hidden className="absolute left-[10%] top-[106%] h-[13%] w-[80%] rounded-[50%] bg-[radial-gradient(closest-side,rgb(20_6_4/0.55),rgb(20_6_4/0.25)_60%,transparent)]" />
       <div
         aria-hidden
-        className="absolute left-[34%] top-[70%] h-[40%] w-[32%] bg-[linear-gradient(90deg,#7a4a12,#d9a53c_30%,#fff0b8_48%,#d9a53c_62%,#6a3c0c)] [clip-path:polygon(36%_0,64%_0,100%_100%,0_100%)]"
+        className="absolute left-[41%] top-[86%] h-[24%] w-[18%] bg-[linear-gradient(90deg,#5e3a0e,#b9862a_22%,#fff0b8_46%,#d9a53c_60%,#7a4a12_88%,#4a2c08)] [clip-path:polygon(28%_0,72%_0,82%_100%,18%_100%)]"
       />
+      <div aria-hidden className="absolute left-[38%] top-[96%] h-[4%] w-[24%] rounded-[50%] bg-[linear-gradient(90deg,#6a400e,#e9bf5a_45%,#fff0b8_52%,#a8721c)] shadow-[0_0.6cqw_0.8cqw_rgb(0_0_0/0.35)]" />
+      <div aria-hidden className="absolute left-[22%] top-[105.5%] h-[9%] w-[56%] rounded-[50%] bg-[linear-gradient(90deg,#4a2c08,#a8721c_25%,#e2b04a_50%,#a8721c_75%,#4a2c08)]" />
       <div
         aria-hidden
-        className="absolute left-[20%] top-[106%] h-[8%] w-[60%] rounded-[2.5cqw] bg-[linear-gradient(180deg,#fff0b8,#d9a53c_40%,#8f5f18)] shadow-[0_2.5cqw_4cqw_rgb(0_0_0/0.5),inset_0_-0.8cqw_0_rgb(0_0_0/0.25)]"
+        className="absolute left-[22%] top-[103%] h-[9%] w-[56%] rounded-[50%] bg-[radial-gradient(ellipse_at_42%_35%,#fff3c4,#e2b04a_45%,#9a6518_100%)] shadow-[inset_0_-0.6cqw_1cqw_rgb(90_50_0/0.45)]"
       />
 
       {/* rim with marquee bulbs */}

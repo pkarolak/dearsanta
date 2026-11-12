@@ -246,7 +246,8 @@
     "matchSoonLobby": "Cuando el jefe de los elfos empiece la ceremonia y Papá Noel saque los nombres, tu calcetín aparecerá justo aquí.",
     "matchSoonLive": "Papá Noel está a punto de sortear. Cuando diga que miréis el calcetín, mantenlo pulsado aquí.",
     "lateTitle": "El sorteo se hizo sin ti",
-    "lateBody": "Papá Noel sacó los nombres antes de que te unieras. Avisa al jefe de los elfos."
+    "lateBody": "Papá Noel sacó los nombres antes de que te unieras. Avisa al jefe de los elfos.",
+    "matchSoonDrawn": "¡Papá Noel ya ha sorteado! Tu calcetín se abrirá aquí en cuanto él lo diga."
   },
   "reveal": {
     "eyebrow": "Alto secreto",

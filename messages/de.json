@@ -246,7 +246,8 @@
     "matchSoonLobby": "Sobald der Elfenchef die Zeremonie startet und der Weihnachtsmann die Namen zieht, erscheint dein Strumpf genau hier.",
     "matchSoonLive": "Gleich wird gelost. Wenn der Weihnachtsmann sagt, ihr sollt in eure Strümpfe schauen, halte ihn hier gedrückt.",
     "lateTitle": "Die Auslosung lief ohne dich",
-    "lateBody": "Der Weihnachtsmann hat die Namen gezogen, bevor du beigetreten bist. Sag dem Elfenchef Bescheid."
+    "lateBody": "Der Weihnachtsmann hat die Namen gezogen, bevor du beigetreten bist. Sag dem Elfenchef Bescheid.",
+    "matchSoonDrawn": "Der Weihnachtsmann hat gelost! Dein Strumpf öffnet sich hier, sobald er es sagt."
   },
   "reveal": {
     "eyebrow": "Streng geheim",

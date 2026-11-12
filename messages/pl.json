@@ -246,7 +246,8 @@
     "matchSoonLobby": "Gdy Naczelnik elfów rozpocznie ceremonię i Mikołaj wylosuje imiona, w tym miejscu pojawi się Twoja skarpeta.",
     "matchSoonLive": "Mikołaj zaraz losuje. Kiedy powie, żeby zajrzeć do skarpet, przytrzymaj ją tutaj.",
     "lateTitle": "Losowanie odbyło się bez Ciebie",
-    "lateBody": "Mikołaj rozlosował imiona przed Twoim dołączeniem. Daj znać Naczelnikowi elfów."
+    "lateBody": "Mikołaj rozlosował imiona przed Twoim dołączeniem. Daj znać Naczelnikowi elfów.",
+    "matchSoonDrawn": "Mikołaj już wylosował! Skarpeta otworzy się tutaj, gdy powie, żeby do niej zajrzeć."
   },
   "reveal": {
     "eyebrow": "Ściśle tajne",

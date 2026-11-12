@@ -54,7 +54,8 @@ export type SessionState = {
   exclusions?: { id: string; giverId: string; receiverId: string; bidirectional: boolean }[];
   feasibility?: { ok: boolean; blockedNames: string[]; tooFew: boolean };
   revealProgress?: { total: number; revealed: number };
-  viewer: (PublicParticipant & { emailVerified: boolean; email: string | null }) | null;
+  /** `inDraw`: whether the draw that already happened gave this person someone to surprise. */
+  viewer: (PublicParticipant & { emailVerified: boolean; email: string | null; inDraw: boolean }) | null;
   isHost: boolean;
   isScreen: boolean;
   assignment: { receiver: { displayName: string; avatar: AvatarConfig }; revealed: boolean } | null;
@@ -86,9 +87,11 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
   let assignment: SessionState["assignment"] = null;
   const me = viewer.participant;
   const mayReveal = session.mode === "async" ? !!session.drawnAt : !!session.drawnAt && isRevealOpen(session.ceremonyStep);
-  if (me && me.status === "approved" && mayReveal) {
+  let inDraw = false;
+  if (me && me.status === "approved" && session.drawnAt) {
     const a = await getAssignmentForGiver(session.id, me.id);
-    if (a) assignment = { receiver: { displayName: a.receiver.displayName, avatar: a.receiver.avatar }, revealed: !!a.revealedAt };
+    inDraw = !!a;
+    if (a && mayReveal) assignment = { receiver: { displayName: a.receiver.displayName, avatar: a.receiver.avatar }, revealed: !!a.revealedAt };
   }
 
   let feasibility: SessionState["feasibility"];
@@ -152,7 +155,7 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
     exclusions: viewer.isHost ? exclusions : undefined,
     feasibility,
     revealProgress: viewer.isHost || viewer.isScreen ? await countRevealed(session.id) : undefined,
-    viewer: me ? { ...toPublic(me, true), email: me.email, emailVerified: me.emailVerified } : null,
+    viewer: me ? { ...toPublic(me, true), email: me.email, emailVerified: me.emailVerified, inDraw } : null,
     isHost: viewer.isHost,
     isScreen: viewer.isScreen,
     assignment,

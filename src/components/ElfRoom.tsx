@@ -48,6 +48,7 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
   }
 
   const isRemote = me.isRemote && s.mode === "sync";
+  const late = s.drawn && !me.inDraw;
   const ceremonyRunning = s.mode === "sync" && s.step !== "lobby";
   const setRemote = (remote: boolean) =>
     remote !== me.isRemote &&
@@ -82,25 +83,25 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
       ))}
 
       {s.mode === "sync" && !state.assignment && (
-        <section className={`card flex items-center gap-4 p-5 ${s.drawn ? "" : "border-2 border-dashed border-pine/30"}`}>
+        <section className={`card flex items-center gap-4 p-5 ${late ? "" : "border-2 border-dashed border-pine/30"}`}>
           <Image
             src="/show/stocking.webp"
             alt=""
             width={420}
             height={899}
             unoptimized
-            className={`w-12 shrink-0 ${s.drawn ? "opacity-40 grayscale" : "animate-sway"}`}
+            className={`w-12 shrink-0 ${late ? "opacity-40 grayscale" : "animate-sway"}`}
           />
           <div>
-            <h2 className="font-display text-xl font-bold">{s.drawn ? t("lateTitle") : t("matchSoonTitle")}</h2>
-            <p className="mt-1 text-sm text-muted">{s.drawn ? t("lateBody") : ceremonyRunning ? t("matchSoonLive") : t("matchSoonLobby")}</p>
+            <h2 className="font-display text-xl font-bold">{late ? t("lateTitle") : t("matchSoonTitle")}</h2>
+            <p className="mt-1 text-sm text-muted">{late ? t("lateBody") : s.drawn ? t("matchSoonDrawn") : ceremonyRunning ? t("matchSoonLive") : t("matchSoonLobby")}</p>
           </div>
         </section>
       )}
 
       {s.mode === "sync" && s.step === "farewell" && <FestiveLinks />}
 
-      {s.mode === "sync" && !state.assignment && !s.drawn && (
+      {s.mode === "sync" && !state.assignment && !late && (
         <section className="card p-5">
           <h2 className="font-display text-xl font-bold">{t("whereTitle")}</h2>
           <div className="mt-3 grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label={t("whereTitle")}>

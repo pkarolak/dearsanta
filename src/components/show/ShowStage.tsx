@@ -94,18 +94,19 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
     <>
       <Image src="/show/set-living-room.webp" alt="" fill priority unoptimized sizes="100vw" className="object-cover" />
 
-      <motion.div className="absolute top-[23%] w-[34%]" initial={false} animate={{ left: drawing ? "43%" : "31%" }} transition={glide}>
+      {/* Santa stays in his armchair for the whole show; the wheel comes to him. */}
+      <div className="absolute left-[31%] top-[23%] w-[34%]">
         <Santa talking={talking} level={level} />
-      </motion.div>
-      <motion.div className="absolute bottom-[-2%] w-[54%]" initial={false} animate={{ left: drawing ? "33%" : "21%" }} transition={glide}>
+      </div>
+      <div className="absolute bottom-[-2%] left-[21%] w-[54%]">
         <Image src="/show/presents.webp" alt="" width={1280} height={470} unoptimized className="h-auto w-full" />
-      </motion.div>
+      </div>
 
       <AnimatePresence>
         {showReindeer && (
           <motion.div
             key="reindeer"
-            className="absolute left-[68%] top-[13%] w-[29%]"
+            className="absolute left-[68%] top-[22%] w-[29%]"
             initial={{ x: "70%", rotate: 8 }}
             animate={{ x: 0, rotate: 0 }}
             exit={{ x: "80%", rotate: 8 }}
@@ -125,32 +126,23 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
                 {card}
               </div>
             </div>
-            <Image
-              src="/show/presents.webp"
-              alt=""
-              width={1280}
-              height={470}
-              unoptimized
-              className="absolute -bottom-[30%] -left-[10%] w-[125%] max-w-none -scale-x-100"
-            />
           </motion.div>
         )}
       </AnimatePresence>
 
-      <AnimatePresence>{step === "elves" && <Elves key="elves" className="left-[0%] top-[54%] w-[25%]" />}</AnimatePresence>
-
       <motion.div
         className="absolute aspect-square"
         initial={false}
-        animate={drawing ? { left: "4%", top: "9%", width: "37%" } : { left: "1.5%", top: "17%", width: "29%" }}
+        animate={drawing ? { left: "1.5%", top: "10%", width: "34%" } : { left: "1.5%", top: "17%", width: "29%" }}
         transition={glide}
       >
         <FortuneWheel elves={elves} celebrate={step === "elves"} draw={drawing ? (draw ?? "stopped") : undefined} remoteLabel={remoteLabel} className="inset-0" />
       </motion.div>
 
       <AnimatePresence>
+        {step === "elves" && <Elves key="elves" className="left-[73%] top-[38%] w-[23%]" />}
         {step === "farewell" && (
-          <Elves key="farewell" className={farewellExtras ? "left-[0%] top-[50%] w-[19%]" : "left-[75%] top-[50%] w-[25%]"} />
+          <Elves key="farewell" className={farewellExtras ? "left-[0%] top-[46%] w-[19%]" : "left-[73%] top-[38%] w-[23%]"} />
         )}
       </AnimatePresence>
 
@@ -172,7 +164,7 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
         {step === "farewell" && stageText && (
           <motion.div
             key="farewell-banner"
-            className="stitched absolute left-[38%] top-[7%] w-[44%] rounded-[1.4cqw] bg-berry px-[2cqw] py-[1.1cqw] text-center"
+            className="absolute left-[38%] top-[7%] w-[44%] rounded-[1.4cqw] bg-berry px-[2cqw] py-[1.1cqw] text-center shadow-[0_1.2cqw_2.4cqw_-0.6cqw_rgb(0_0_0/0.5)] outline-[0.16cqw] outline-offset-[-0.6cqw] outline-dashed outline-snow/75"
             initial={{ y: "-60%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 140, damping: 12, delay: 0.6 }}

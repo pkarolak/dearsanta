@@ -246,7 +246,8 @@
     "matchSoonLobby": "Once the Elf Chief starts the ceremony and Santa draws the names, your stocking appears right here.",
     "matchSoonLive": "Santa is about to draw. When he tells you to look in your stocking, hold it here.",
     "lateTitle": "The draw happened without you",
-    "lateBody": "Santa drew the names before you joined. Let the Elf Chief know."
+    "lateBody": "Santa drew the names before you joined. Let the Elf Chief know.",
+    "matchSoonDrawn": "Santa has drawn the names! Your stocking opens here as soon as he says so."
   },
   "reveal": {
     "eyebrow": "Top secret",

@@ -25,9 +25,9 @@ export function PageBand({
           {children}
         </div>
         <div className="pointer-events-none absolute -bottom-2 right-0 w-[38%] max-w-[17rem] md:right-5">
-          {cast === "santa" && <SantaPuppet className="w-full translate-y-[42%]" />}
+          {cast === "santa" && <SantaPuppet className="w-full translate-y-[30%]" />}
           {cast === "reindeer" && <Reindeer className="relative! w-full translate-y-[44%]" />}
-          {cast === "elves" && <Cast who="elves" className="relative! w-full translate-y-[30%]" />}
+          {cast === "elves" && <Cast who="elves" className="relative! ml-auto w-[80%] -translate-y-[6%]" />}
         </div>
       </div>
     </section>
