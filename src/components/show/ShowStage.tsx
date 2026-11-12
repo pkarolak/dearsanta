@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import layout from "./layout.json";
 import { SantaPuppet } from "./SantaPuppet";
+import { ElfPuppets } from "./ElfPuppets";
 import { FortuneWheel, type WheelDraw } from "./FortuneWheel";
 import { useMouth } from "../useVoice";
 import type { AvatarConfig } from "@/lib/avatar";
@@ -136,12 +137,7 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {step === "elves" && <Elves key="elves" className="left-[0%] top-[54%] w-[25%]" />}
-        {step === "farewell" && (
-          <Elves key="farewell" className={farewellExtras ? "left-[1%] top-[56%] w-[21%]" : "left-[75%] top-[50%] w-[25%]"} />
-        )}
-      </AnimatePresence>
+      <AnimatePresence>{step === "elves" && <Elves key="elves" className="left-[0%] top-[54%] w-[25%]" />}</AnimatePresence>
 
       <motion.div
         className="absolute aspect-square"
@@ -151,6 +147,12 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
       >
         <FortuneWheel elves={elves} celebrate={step === "elves"} draw={drawing ? (draw ?? "stopped") : undefined} remoteLabel={remoteLabel} className="inset-0" />
       </motion.div>
+
+      <AnimatePresence>
+        {step === "farewell" && (
+          <Elves key="farewell" className={farewellExtras ? "left-[0%] top-[50%] w-[19%]" : "left-[75%] top-[50%] w-[25%]"} />
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {step === "reveal" && stageText && (
@@ -221,12 +223,7 @@ function Elves({ className }: { className: string }) {
       exit={{ y: "80%", opacity: 0 }}
       transition={{ type: "spring", stiffness: 120, damping: 16 }}
     >
-      <motion.div
-        animate={{ y: ["0%", "-3%", "0%"] }}
-        transition={{ duration: 0.9, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-      >
-        <Image src="/show/elves.webp" alt="" width={807} height={944} unoptimized className="h-auto w-full" />
-      </motion.div>
+      <ElfPuppets />
     </motion.div>
   );
 }
