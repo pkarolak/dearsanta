@@ -2,10 +2,17 @@
 
 import { Star } from "@phosphor-icons/react";
 import { animate, AnimatePresence, motion, useMotionValue, useTransform, type MotionValue } from "motion/react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Avatar } from "../Avatar";
 import { RemoteIcon } from "../icons";
 import type { StageElf } from "./ShowStage";
+
+/** During the draw the wheel spins ever faster, then freezes over with a stocking on it, like the one on every phone. */
+export type WheelDraw = "spinning" | "frozen";
+
+const topSpeed = 1500;
+const crystals = 14;
 
 const wedgeColours = ["#9e1b26", "#1d5a3a", "#c8952e"];
 const bulbs = 24;
@@ -28,9 +35,24 @@ const colourOf = (i: number, n: number) => (n % 2 && i === n - 1 && n > 1 ? wedg
  * Santa's wheel of fortune in the living room. Every elf who joins takes a wedge; whoever just walked in
  * or changed their look is spun round to the pointer, so the whole room sees them.
  */
-export function FortuneWheel({ elves, celebrate, remoteLabel, className = "" }: { elves: StageElf[]; celebrate?: boolean; remoteLabel?: string; className?: string }) {
+export function FortuneWheel({
+  elves,
+  celebrate,
+  draw,
+  remoteLabel,
+  className = "",
+}: {
+  elves: StageElf[];
+  celebrate?: boolean;
+  draw?: WheelDraw;
+  remoteLabel?: string;
+  className?: string;
+}) {
   const rotation = useMotionValue(0);
   const upright = useTransform(rotation, (v) => -v);
+  const speed = useMotionValue(0);
+  const blur = useTransform(speed, [0, topSpeed], ["blur(0px)", "blur(2.5px)"]);
+  const frozen = draw === "frozen";
   const [seen, setSeen] = useState(elves);
   const [star, setStar] = useState<{ id: string; n: number } | null>(null);
   const spinning = useRef<ReturnType<typeof animate> | null>(null);
@@ -39,7 +61,7 @@ export function FortuneWheel({ elves, celebrate, remoteLabel, className = "" }: 
     const before = new Map(seen.map((e) => [e.id, looksOf(e)]));
     const changed = elves.find((e) => before.get(e.id) !== looksOf(e));
     setSeen(elves);
-    if (changed) setStar((s) => ({ id: changed.id, n: (s?.n ?? 0) + 1 }));
+    if (changed && !draw) setStar((s) => ({ id: changed.id, n: (s?.n ?? 0) + 1 }));
   }
 
   const n = elves.length;
@@ -62,6 +84,36 @@ export function FortuneWheel({ elves, celebrate, remoteLabel, className = "" }: 
     spinning.current?.stop();
     spinning.current = animate(rotation, rotation.get() + 720, { duration: 3.2, ease: [0.3, 0.1, 0.1, 1] });
   }, [celebrate, rotation]);
+
+  // Spinning: faster and faster until the names blur.
+  useEffect(() => {
+    if (draw !== "spinning") return;
+    spinning.current?.stop();
+    let frame = 0;
+    const start = performance.now();
+    let last = start;
+    const tick = (now: number) => {
+      const t = (now - start) / 1000;
+      const v = Math.min(topSpeed, 40 + 70 * t ** 1.8);
+      speed.set(v);
+      rotation.set(rotation.get() + (v * (now - last)) / 1000);
+      last = now;
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [draw, rotation, speed]);
+
+  // Frozen: the ice grabs the wheel and it stops within a moment.
+  useEffect(() => {
+    if (!frozen) return;
+    const v = speed.get();
+    if (v <= 0) return;
+    spinning.current?.stop();
+    spinning.current = animate(rotation, rotation.get() + v * 0.3, { duration: 0.6, ease: [0.2, 0.8, 0.3, 1] });
+    const slowing = animate(speed, 0, { duration: 0.6 });
+    return () => slowing.stop();
+  }, [frozen, rotation, speed]);
 
   const ring = 29.5;
   const size = n ? Math.min(25, ((2 * Math.PI * ring) / n) * 0.8) : 0;
@@ -96,7 +148,7 @@ export function FortuneWheel({ elves, celebrate, remoteLabel, className = "" }: 
       </div>
 
       {/* the turning face */}
-      <motion.div className="absolute inset-[7%] rounded-full shadow-[inset_0_0_3cqw_rgb(0_0_0/0.55)]" style={{ rotate: rotation }}>
+      <motion.div className="absolute inset-[7%] rounded-full shadow-[inset_0_0_3cqw_rgb(0_0_0/0.55)]" style={{ rotate: rotation, filter: blur }}>
         <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full rounded-full" aria-hidden>
           <defs>
             <radialGradient id="wheel-shade" cx="50%" cy="50%" r="50%">
@@ -140,6 +192,23 @@ export function FortuneWheel({ elves, celebrate, remoteLabel, className = "" }: 
       <div className="absolute left-1/2 top-1/2 grid h-[15%] w-[15%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[radial-gradient(circle_at_35%_30%,#fff3c4,#e2b04a_45%,#8f5f18)] shadow-[0_1cqw_2.5cqw_rgb(0_0_0/0.5),inset_0_0_0_0.5cqw_rgb(255_240_190/0.6)]">
         <Star weight="fill" className="h-[55%] w-[55%] text-berry drop-shadow-[0_0.3cqw_0.3cqw_rgb(0_0_0/0.3)]" />
       </div>
+
+      <AnimatePresence>
+        {frozen && <Frost key="frost" />}
+        {frozen && (
+          <motion.div
+            key="stocking"
+            className="absolute left-1/2 top-1/2 z-10 h-[66%] w-[66%] -translate-x-1/2 -translate-y-1/2"
+            initial={{ scale: 0, rotate: -25, opacity: 0 }}
+            animate={{ scale: 1, rotate: 0, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 170, damping: 11, delay: 1 }}
+          >
+            <div className="absolute inset-[8%] rounded-full bg-[radial-gradient(closest-side,rgb(255_236_170/0.95),rgb(255_214_120/0.55)_55%,transparent)]" />
+            <Image src="/show/stocking.webp" alt="" fill unoptimized sizes="20vw" className="animate-sway object-contain drop-shadow-[0_1.5cqw_2cqw_rgb(0_0_0/0.45)]" />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* pointer */}
       <motion.div
@@ -218,6 +287,38 @@ function WheelSeat({
           </p>
         )}
       </motion.div>
+    </motion.div>
+  );
+}
+
+/** Ice creeping over the wheel from the rim inwards. */
+function Frost() {
+  return (
+    <motion.div className="pointer-events-none absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5, delay: 0.35 }}>
+      <div className="absolute inset-0 rounded-full bg-[rgb(205_232_255/0.4)] mix-blend-screen" />
+      <div className="absolute inset-[7%] rounded-full bg-[radial-gradient(circle,rgb(235_248_255/0.25)_0,rgb(200_230_250/0.5)_62%,rgb(245_252_255/0.88)_100%)] shadow-[inset_0_0_4cqw_rgb(255_255_255/0.85)] backdrop-blur-[0.5cqw] backdrop-saturate-50" />
+      <svg viewBox="0 0 200 200" className="absolute inset-[7%] h-[86%] w-[86%]" aria-hidden>
+        {Array.from({ length: crystals }, (_, i) => {
+          const a = (i / crystals) * 2 * Math.PI;
+          const at = (r: number, da = 0) => `${fix(100 + r * Math.cos(a + da))} ${fix(100 + r * Math.sin(a + da))}`;
+          const reach = 46 + (i % 3) * 9;
+          const d = `M${at(100)}L${at(100 - reach)}M${at(84)}L${at(70, 0.14)}M${at(84)}L${at(70, -0.14)}M${at(68)}L${at(58, 0.12)}M${at(68)}L${at(58, -0.12)}`;
+          return (
+            <motion.path
+              key={i}
+              d={d}
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="1.3"
+              strokeLinecap="round"
+              opacity={0.85}
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.7, delay: 0.35 + (i % 4) * 0.06, ease: "easeOut" }}
+            />
+          );
+        })}
+      </svg>
     </motion.div>
   );
 }

@@ -15,8 +15,8 @@ export function ScreenView({ code, screenKey, initial, joinUrl }: Props) {
   const locale = useLocale();
   const t = useTranslations("host");
   const te = useTranslations("errors");
-  const { state, serverToLocal, refresh } = useSessionState(code, locale, { screenKey, initial });
   const sound = useSoundGate();
+  const { state, serverToLocal, refresh } = useSessionState(code, locale, { screenKey, initial, voice: sound.enabled });
   const [pending, start] = useTransition();
   const [error, setError] = useState<string | null>(null);
   if (!state) return null;

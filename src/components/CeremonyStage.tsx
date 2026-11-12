@@ -2,8 +2,9 @@
 
 import { useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
+import { useEffect, useState } from "react";
 import { ShowFrame, ShowStage } from "./show/ShowStage";
-import { useMouth, useVoice } from "./useVoice";
+import { useVoice } from "./useVoice";
 import type { SessionState } from "@/lib/state";
 
 type Props = {
@@ -18,13 +19,27 @@ type Props = {
   controls?: React.ReactNode;
 };
 
-/** Santa's show as every device sees it: the living room while elves gather, the stage for the draw. */
+/** Without Santa's voice to follow, the wheel spins this long before it freezes. */
+const silentSpinMs = 8000;
+/** The draw's lines: the wheel speeds up through the first two and freezes on the third ("Done!"). */
+const freezeOnLine = 2;
+
+/** Santa's show as every device sees it, all in his workshop. */
 export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, compact, className = "", controls }: Props) {
   const t = useTranslations("stage");
   const th = useTranslations("host");
   const step = state.session.step;
-  const { current } = useVoice(state.script, serverToLocal(state.session.stepStartedAt), audible, locale);
-  const level = useMouth(!!current);
+  const startedAt = state.session.stepStartedAt;
+  const { current, index } = useVoice(state.script, `${step}@${startedAt}`, serverToLocal(startedAt), audible, locale);
+  const [silentFreeze, setSilentFreeze] = useState<number | null>(null);
+  useEffect(() => {
+    if (step !== "draw") return;
+    const left = silentSpinMs - (Date.now() - serverToLocal(startedAt));
+    const timer = setTimeout(() => setSilentFreeze(startedAt), Math.max(0, left));
+    return () => clearTimeout(timer);
+  }, [step, startedAt, serverToLocal]);
+  const voiced = audible && !!state.script?.length;
+  const frozen = step !== "draw" || (voiced ? index >= freezeOnLine : silentFreeze === startedAt);
   const elves = state.participants.filter((p) => p.status === "approved");
   const budget =
     state.session.budgetAmount !== null
@@ -73,7 +88,8 @@ export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, 
         title={state.session.title}
         stepLabel={step === "lobby" ? t("elvesReady", { count: elves.length }) : t(`steps.${step}`)}
         elves={elves}
-        level={level}
+        talking={!!current}
+        draw={frozen ? "frozen" : "spinning"}
         subtitle={current ? { id: current.id, text: current.text } : null}
         compact={compact}
         card={card}

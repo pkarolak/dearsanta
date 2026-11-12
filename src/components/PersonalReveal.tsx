@@ -36,7 +36,7 @@ export function PersonalReveal({ code, title, receiver, budget, script }: Props)
     setPhaseStart(Date.now());
     if (next === "after") void markRevealedAction(code);
   };
-  const { current } = useVoice(lines, phaseStart, phase === "before" || phase === "after", locale, () =>
+  const { current } = useVoice(lines, `${phase}@${phaseStart}`, phaseStart, phase === "before" || phase === "after", locale, () =>
     go(phase === "before" ? "after" : "done"),
   );
   const level = useMouth(!!current);

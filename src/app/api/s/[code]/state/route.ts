@@ -19,6 +19,6 @@ export async function GET(request: Request, { params }: { params: Promise<{ code
     if (Date.now() - last > 20_000) await updateParticipant(viewer.participant, { lastSeenAt: new Date() }, last === 0);
   }
 
-  const state = await buildState(session, viewer, toLocale(url.searchParams.get("locale")));
+  const state = await buildState(session, viewer, toLocale(url.searchParams.get("locale")), { warmVoice: url.searchParams.has("voice") });
   return NextResponse.json(state, { headers: { "cache-control": "no-store" } });
 }

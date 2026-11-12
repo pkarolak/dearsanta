@@ -19,7 +19,7 @@ const sampleLines: Record<CeremonyStep, string> = {
   farewell: "Merry Christmas, my dear elves!",
 };
 
-export function ShowSheet({ step, count, level }: { step: string | null; count: number; level: number }) {
+export function ShowSheet({ step, count, level, draw }: { step: string | null; count: number; level: number; draw?: "spinning" | "frozen" }) {
   const elves = names.slice(0, count).map((displayName, i) => ({
     id: String(i),
     displayName,
@@ -34,6 +34,7 @@ export function ShowSheet({ step, count, level }: { step: string | null; count: 
       stepLabel={s}
       elves={elves}
       level={level}
+      draw={draw}
       subtitle={{ id: s, text: sampleLines[s] }}
       card={
         s === "lobby" ? (

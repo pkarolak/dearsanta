@@ -18,8 +18,8 @@ import { useSessionState } from "@/lib/useSessionState";
 export function ElfRoom({ code, initial }: { code: string; initial: SessionState }) {
   const locale = useLocale();
   const t = useTranslations("elf");
-  const { state, serverToLocal, refresh } = useSessionState(code, locale, { initial });
   const sound = useSoundGate();
+  const { state, serverToLocal, refresh } = useSessionState(code, locale, { initial, voice: sound.enabled });
   const [pending, start] = useTransition();
   if (!state) return null;
 

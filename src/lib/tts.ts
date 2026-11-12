@@ -92,3 +92,17 @@ export async function audioForHash(hash: string) {
     return null;
   }
 }
+
+const warming = new Set<string>();
+
+/** Synthesizes lines in the background, so the audio is ready by the time a device asks for it. */
+export function warmLines(urls: (string | null)[]) {
+  for (const url of urls) {
+    const hash = url?.split("/").pop();
+    if (!hash || warming.has(hash)) continue;
+    warming.add(hash);
+    void audioForHash(hash)
+      .catch(() => null)
+      .finally(() => warming.delete(hash));
+  }
+}

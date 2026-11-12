@@ -2,13 +2,16 @@ import { NextResponse } from "next/server";
 import { hashToken, signInParticipant, signInProfile } from "@/lib/auth";
 import { getParticipant, getSessionById, markDevice, updateParticipant, consumeToken } from "@/lib/db/repo";
 import { toLocale } from "@/lib/i18n-server";
+import { requestOrigin } from "@/lib/urls";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const locale = toLocale(url.searchParams.get("locale"));
   const raw = url.searchParams.get("token") ?? "";
   const next = url.searchParams.get("next");
-  const redirectTo = (path: string) => NextResponse.redirect(new URL(`/${locale}${path}`, url.origin));
+  // The address the browser used: behind `next dev -H 0.0.0.0`, request.url would say 0.0.0.0.
+  const origin = await requestOrigin();
+  const redirectTo = (path: string) => NextResponse.redirect(new URL(`/${locale}${path}`, origin));
 
   const token = raw ? await consumeToken(hashToken(raw)) : null;
   if (!token) return redirectTo("/login?expired=1");

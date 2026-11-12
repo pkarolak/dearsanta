@@ -1,7 +1,7 @@
 import type { AvatarConfig } from "@/lib/avatar";
 import type { Viewer } from "@/lib/auth";
 import { buildStepScript, type ScriptLine } from "@/lib/ceremony/script";
-import { isRevealOpen, type CeremonyStep } from "@/lib/ceremony/steps";
+import { isRevealOpen, nextStep, type CeremonyStep } from "@/lib/ceremony/steps";
 import {
   countRevealed,
   getAssignmentForGiver,
@@ -10,6 +10,7 @@ import {
   type ParticipantStatus,
   type Session,
 } from "@/lib/db/repo";
+import { warmLines } from "@/lib/tts";
 import { checkFeasibility } from "@/lib/draw";
 
 export type PublicParticipant = {
@@ -62,7 +63,7 @@ export type SessionState = {
 
 const ONLINE_WINDOW_MS = 45_000;
 
-export async function buildState(session: Session, viewer: Viewer, locale: string): Promise<SessionState> {
+export async function buildState(session: Session, viewer: Viewer, locale: string, { warmVoice = false } = {}): Promise<SessionState> {
   const participants = await listParticipants(session.id);
   const exclusions = await listExclusions(session.id);
   const approved = participants.filter((p) => p.status === "approved");
@@ -104,17 +105,21 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
 
   // The voice script is only needed by devices that play the ceremony: the big screen and remote elves.
   const plays = viewer.isScreen || (me?.isRemote && session.mode === "sync") || (viewer.isHost && session.mode === "sync");
-  const script =
-    plays && session.mode === "sync"
-      ? await buildStepScript(session.ceremonyStep, {
-          locale,
-          title: session.title,
-          names: approved.map((p) => p.displayName),
-          remoteNames: approved.filter((p) => p.isRemote).map((p) => p.displayName),
-          hasExclusions: exclusions.length > 0,
-          budget: session.budgetAmount ? { amount: session.budgetAmount, currency: session.currency } : null,
-        })
-      : null;
+  const scriptContext = {
+    locale,
+    title: session.title,
+    names: approved.map((p) => p.displayName),
+    remoteNames: approved.filter((p) => p.isRemote).map((p) => p.displayName),
+    hasExclusions: exclusions.length > 0,
+    budget: session.budgetAmount ? { amount: session.budgetAmount, currency: session.currency } : null,
+  };
+  const script = plays && session.mode === "sync" ? await buildStepScript(session.ceremonyStep, scriptContext) : null;
+  if (script && warmVoice) {
+    warmLines(script.map((l) => l.audioUrl));
+    // Santa's next chapter is synthesized ahead, so his first line there isn't late.
+    const upcoming = nextStep(session.ceremonyStep);
+    if (upcoming) void buildStepScript(upcoming, scriptContext).then((lines) => warmLines(lines.map((l) => l.audioUrl)));
+  }
 
   return {
     serverNow: now,

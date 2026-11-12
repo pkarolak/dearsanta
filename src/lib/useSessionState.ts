@@ -3,18 +3,27 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { SessionState } from "@/lib/state";
 
-type Options = { screenKey?: string | null; initial?: SessionState | null };
+type Options = {
+  screenKey?: string | null;
+  initial?: SessionState | null;
+  /** This device plays Santa's voice, so the server should get his next lines ready. */
+  voice?: boolean;
+};
 
 /**
  * Keeps a session's state fresh: an SSE stream announces version bumps and the state is refetched.
  * A slow poll is the safety net for networks that break event streams.
  */
-export function useSessionState(code: string, locale: string, { screenKey, initial }: Options = {}) {
+export function useSessionState(code: string, locale: string, { screenKey, initial, voice = false }: Options = {}) {
   const [state, setState] = useState<SessionState | null>(initial ?? null);
   const [error, setError] = useState<string | null>(null);
   const clockOffset = useRef(0);
   const inflight = useRef<Promise<void> | null>(null);
   const again = useRef(false);
+  const voiceRef = useRef(voice);
+  useEffect(() => {
+    voiceRef.current = voice;
+  }, [voice]);
 
   const refresh = useCallback(() => {
     if (inflight.current) {
@@ -24,6 +33,7 @@ export function useSessionState(code: string, locale: string, { screenKey, initi
     const fetchOnce = async () => {
       const params = new URLSearchParams({ locale });
       if (screenKey) params.set("screen", screenKey);
+      if (voiceRef.current) params.set("voice", "1");
       try {
         const res = await fetch(`/api/s/${code}/state?${params}`, { cache: "no-store" });
         if (!res.ok) {
