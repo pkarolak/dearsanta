@@ -267,15 +267,6 @@
     "unmute": "Ton an"
   },
   "stage": {
-    "steps": {
-      "lobby": "Ankommen",
-      "welcome": "Begrüßung",
-      "elves": "Die Wichtel",
-      "rules": "Die Regeln",
-      "draw": "Die Auslosung",
-      "reveal": "Die Enthüllung",
-      "farewell": "Abschied"
-    },
     "scanToJoin": "Scannen und in die Werkstatt kommen",
     "orEnterCode": "oder die Seite öffnen und den Code eingeben",
     "elvesReady": "{count, plural, =0 {Wir warten auf den ersten Wichtel…} one {# Wichtel ist da} other {# Wichtel sind da}}",

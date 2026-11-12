@@ -267,15 +267,6 @@
     "unmute": "Włącz dźwięk"
   },
   "stage": {
-    "steps": {
-      "lobby": "Zbiórka",
-      "welcome": "Powitanie",
-      "elves": "Elfy",
-      "rules": "Zasady",
-      "draw": "Losowanie",
-      "reveal": "Odsłonięcie",
-      "farewell": "Pożegnanie"
-    },
     "scanToJoin": "Zeskanuj, by wejść do warsztatu Mikołaja",
     "orEnterCode": "albo otwórz stronę i wpisz kod",
     "elvesReady": "{count, plural, =0 {Czekamy na pierwszego elfa…} one {Jest już # elf} few {Są już # elfy} many {Jest już # elfów} other {Jest już # elfa}}",

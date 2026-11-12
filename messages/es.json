@@ -267,15 +267,6 @@
     "unmute": "Activar sonido"
   },
   "stage": {
-    "steps": {
-      "lobby": "Llegada",
-      "welcome": "Bienvenida",
-      "elves": "Los elfos",
-      "rules": "Las reglas",
-      "draw": "El sorteo",
-      "reveal": "La revelación",
-      "farewell": "Despedida"
-    },
     "scanToJoin": "Escanea para entrar al taller de Papá Noel",
     "orEnterCode": "o abre la web y escribe el código",
     "elvesReady": "{count, plural, =0 {Esperando al primer elfo…} one {Ya hay # elfo} other {Ya hay # elfos}}",

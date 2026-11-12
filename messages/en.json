@@ -267,15 +267,6 @@
     "unmute": "Unmute"
   },
   "stage": {
-    "steps": {
-      "lobby": "Gathering",
-      "welcome": "Welcome",
-      "elves": "The elves",
-      "rules": "The rules",
-      "draw": "The draw",
-      "reveal": "The reveal",
-      "farewell": "Farewell"
-    },
     "scanToJoin": "Scan to join Santa’s workshop",
     "orEnterCode": "or open the site and enter the code",
     "elvesReady": "{count, plural, =0 {Waiting for the first elf…} one {# elf is here} other {# elves are here}}",

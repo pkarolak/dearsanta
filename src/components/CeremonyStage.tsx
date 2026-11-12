@@ -86,7 +86,7 @@ export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, 
       <ShowStage
         step={step}
         title={state.session.title}
-        stepLabel={step === "lobby" ? t("elvesReady", { count: elves.length }) : t(`steps.${step}`)}
+        stepLabel={step === "lobby" ? t("elvesReady", { count: elves.length }) : undefined}
         elves={elves}
         talking={!!current}
         draw={stopped ? "stopped" : "spinning"}

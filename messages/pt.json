@@ -267,15 +267,6 @@
     "unmute": "Ligar som"
   },
   "stage": {
-    "steps": {
-      "lobby": "Chegada",
-      "welcome": "Boas-vindas",
-      "elves": "Os duendes",
-      "rules": "As regras",
-      "draw": "O sorteio",
-      "reveal": "A revelação",
-      "farewell": "Despedida"
-    },
     "scanToJoin": "Leia o código para entrar na oficina do Pai Natal",
     "orEnterCode": "ou abra o site e escreva o código",
     "elvesReady": "{count, plural, =0 {À espera do primeiro duende…} one {Já cá está # duende} other {Já cá estão # duendes}}",

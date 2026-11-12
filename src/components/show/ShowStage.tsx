@@ -14,7 +14,8 @@ export type StageElf = { id: string; displayName: string; avatar: AvatarConfig; 
 type Props = {
   step: CeremonyStep;
   title: string;
-  stepLabel: string;
+  /** A note after the title, e.g. how many elves have gathered. */
+  stepLabel?: string;
   elves: StageElf[];
   /** Santa is speaking: his mouth follows the voice. */
   talking?: boolean;
@@ -51,7 +52,8 @@ export function ShowStage(props: Props) {
 
       <div className={`absolute inset-x-0 top-0 z-20 flex items-start justify-between gap-[1cqw] ${compact ? "p-[2.5cqw]" : "p-[1.6cqw]"}`}>
         <p className={`rounded-full bg-snow px-[1.4em] py-[0.5em] font-display font-semibold text-ink ${compact ? "text-[2.6cqw]" : "text-[1.25cqw]"}`}>
-          {title} <span className="font-sans font-medium text-muted">· {stepLabel}</span>
+          {title}
+          {stepLabel && <span className="font-sans font-medium text-muted"> · {stepLabel}</span>}
         </p>
         {controls}
       </div>
