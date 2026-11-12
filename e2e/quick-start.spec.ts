@@ -10,8 +10,8 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   await laptop.goto("/en/new");
   await laptop.waitForTimeout(900);
   await laptop.screenshot({ path: `${shots}/10-mode-picker.png` });
-  await expect(laptop.getByText("Big screen + your phone")).toBeVisible();
-  await laptop.getByRole("button", { name: /A Secret Santa party/ }).click();
+  await expect(laptop.getByText("Big screen or your own devices")).toBeVisible();
+  await laptop.getByRole("button", { name: /A live draw, together/ }).click();
   await laptop.waitForURL(/\/s\/[A-Z0-9]{6}\/host/);
   const code = laptop.url().match(/\/s\/([A-Z0-9]{6})\//)![1];
 
@@ -70,7 +70,7 @@ test("party on a phone: the TV opens the stage with the short code, then the pho
   const tv = await (await browser.newContext({ viewport: { width: 1280, height: 720 } })).newPage();
 
   await phone.goto("/en/new");
-  await phone.getByRole("button", { name: /A Secret Santa party/ }).click();
+  await phone.getByRole("button", { name: /A live draw, together/ }).click();
   await phone.waitForURL(/\/s\/[A-Z0-9]{6}\/host/);
   const code = phone.url().match(/\/s\/([A-Z0-9]{6})\//)![1];
   await phone.getByRole("radio", { name: "Phone" }).click();

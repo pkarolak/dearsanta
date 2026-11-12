@@ -12,15 +12,11 @@
     "haveCode": "Tem um código?",
     "codePlaceholder": "CÓDIGO",
     "join": "Entrar",
-    "modesTitle": "O amigo secreto, de três maneiras",
+    "modesTitle": "O amigo secreto, de duas maneiras",
     "modes": {
       "sync": {
-        "title": "Festa com sorteio, aqui e agora",
-        "body": "Juntem-se todos na mesma sala e vejam tudo no ecrã grande. Ainda assim, o sorteio é secreto: cada um recebe no telemóvel um aviso privado com o seu resultado."
-      },
-      "hybrid": {
-        "title": "Sorteio à distância, em direto",
-        "body": "Convide todos, mesmo que não possam estar no mesmo sítio. Cada um vê no telemóvel ou portátil a transmissão em direto da casa do Pai Natal."
+        "title": "Sorteio ao vivo, juntos ou à distância",
+        "body": "O Pai Natal faz o sorteio ao vivo. Quem está na sala vê no ecrã grande, e quem está longe vê o mesmo espetáculo no telemóvel ou portátil. O resultado continua secreto: cada um só vê quem lhe calhou."
       },
       "async": {
         "title": "Sorteio ao seu ritmo",
@@ -118,12 +114,8 @@
       "plan": "Preferes planear tudo com antecedência?",
       "planLink": "O formulário completo com data, orçamento e convites",
       "together": {
-        "body": "Todos à mesma mesa. Código QR no ecrã e o sorteio daqui a pouco.",
-        "needs": "Ecrã grande + o teu telemóvel"
-      },
-      "remote": {
-        "body": "Alguém junta-se de longe e vê a transmissão do Pai Natal no seu dispositivo.",
-        "needs": "Cada um no seu dispositivo"
+        "body": "O Pai Natal sorteia ao vivo. A sala vê o ecrã grande; quem está longe, o seu telemóvel ou portátil.",
+        "needs": "Ecrã grande ou os vossos dispositivos"
       },
       "ownTime": {
         "body": "Envia um link à família. Cada um junta-se quando quiser e depois desbloqueias o sorteio.",

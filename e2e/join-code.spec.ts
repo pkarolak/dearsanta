@@ -5,7 +5,7 @@ const shots = "e2e/screens";
 test("a guest lands on the home page and joins with the code from the organiser", async ({ browser }) => {
   const host = await (await browser.newContext({ viewport: { width: 1280, height: 900 } })).newPage();
   await host.goto("/en/new");
-  await host.getByRole("button", { name: /A Secret Santa party/ }).click();
+  await host.getByRole("button", { name: /A live draw, together/ }).click();
   await host.waitForURL(/\/s\/[A-Z0-9]{6}\/host/);
   const code = host.url().match(/\/s\/([A-Z0-9]{6})\//)![1];
 

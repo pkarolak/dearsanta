@@ -12,15 +12,11 @@
     "haveCode": "Hast du einen Code?",
     "codePlaceholder": "CODE",
     "join": "Beitreten",
-    "modesTitle": "Wichteln auf drei Arten",
+    "modesTitle": "Wichteln auf zwei Arten",
     "modes": {
       "sync": {
-        "title": "Wichtelparty – hier und jetzt",
-        "body": "Holt alle in einen Raum und schaut gemeinsam auf den großen Bildschirm. Geheim bleibt die Auslosung trotzdem: Jeder bekommt auf sein Handy eine eigene Nachricht, wen er gezogen hat."
-      },
-      "hybrid": {
-        "title": "Live-Auslosung aus der Ferne",
-        "body": "Lade alle ein, auch wenn ihr euch nicht an einem Ort treffen könnt. Jeder sieht die Live-Übertragung aus dem Haus des Weihnachtsmanns auf dem eigenen Handy oder Laptop."
+        "title": "Live-Auslosung – zusammen oder aus der Ferne",
+        "body": "Der Weihnachtsmann lost live aus. Wer im Raum ist, schaut auf dem großen Bildschirm zu, wer weit weg ist, sieht dieselbe Show auf dem eigenen Handy oder Laptop. Das Ergebnis bleibt trotzdem geheim: Jeder sieht nur, wen er selbst gezogen hat."
       },
       "async": {
         "title": "Auslosung im eigenen Tempo",
@@ -118,12 +114,8 @@
       "plan": "Lieber alles im Voraus planen?",
       "planLink": "Das ganze Formular mit Datum, Budget und Einladungen",
       "together": {
-        "body": "Alle an einem Tisch. QR-Code auf dem Bildschirm, gleich wird gelost.",
-        "needs": "Großer Bildschirm + dein Handy"
-      },
-      "remote": {
-        "body": "Jemand ist weit weg und schaut den Weihnachtsmann auf dem eigenen Gerät.",
-        "needs": "Jeder auf seinem Gerät"
+        "body": "Der Weihnachtsmann lost live. Der Raum schaut auf den großen Bildschirm, wer weit weg ist, aufs eigene Handy oder den Laptop.",
+        "needs": "Großer Bildschirm oder eigene Geräte"
       },
       "ownTime": {
         "body": "Schick der Familie einen Link. Jeder macht mit, wann er will, dann gibst du die Auslosung frei.",

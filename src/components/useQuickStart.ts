@@ -5,7 +5,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { quickStartAction } from "@/lib/actions";
 
-export type QuickKind = "together" | "remote" | "ownTime";
+export type QuickKind = "together" | "ownTime";
 
 /** One click opens a ready workshop for the chosen way of celebrating and takes the Elf Chief to it. */
 export function useQuickStart() {

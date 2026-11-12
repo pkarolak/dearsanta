@@ -12,15 +12,11 @@
     "haveCode": "Got a session code?",
     "codePlaceholder": "CODE",
     "join": "Join",
-    "modesTitle": "Three ways to draw your Secret Santa",
+    "modesTitle": "Two ways to draw your Secret Santa",
     "modes": {
       "sync": {
-        "title": "A Secret Santa party, here and now",
-        "body": "Gather everyone in one room and watch it all together on the big screen. The draw still stays secret: each of you gets a private notification on your phone with your match."
-      },
-      "hybrid": {
-        "title": "A live draw from anywhere",
-        "body": "Invite everyone, even if you can’t all be in one place. Each of you watches the live show from Santa’s house on your own phone or laptop."
+        "title": "A live draw, together or from afar",
+        "body": "Santa runs the draw live. Whoever’s in the room watches on the big screen, and whoever’s far away watches the same show on their phone or laptop. The result still stays secret: each of you only sees your own match."
       },
       "async": {
         "title": "A draw at your own pace",
@@ -118,12 +114,8 @@
       "plan": "Prefer to plan everything ahead?",
       "planLink": "The full form with date, budget and invitations",
       "together": {
-        "body": "Everyone around one table. QR code on the screen, the draw in a moment.",
-        "needs": "Big screen + your phone"
-      },
-      "remote": {
-        "body": "Someone joins from afar and watches Santa's stream on their own device.",
-        "needs": "Everyone on their own device"
+        "body": "Santa draws live. The room watches the big screen, anyone far away watches on their own phone or laptop.",
+        "needs": "Big screen or your own devices"
       },
       "ownTime": {
         "body": "Send the family a link. Everyone joins when they like, then you unlock the draw.",

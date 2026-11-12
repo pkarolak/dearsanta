@@ -9,8 +9,7 @@ import { useQuickStart } from "./useQuickStart";
 import { Link } from "@/i18n/navigation";
 
 const kinds = [
-  { kind: "together", picture: "sync", needs: [Television, DeviceMobile] },
-  { kind: "remote", picture: "hybrid", needs: [Devices] },
+  { kind: "together", picture: "sync", needs: [Television, Devices] },
   { kind: "ownTime", picture: "async", needs: [DeviceMobile] },
 ] as const;
 
@@ -23,11 +22,11 @@ export function QuickStart() {
   return (
     <div className="relative">
       <StringLights swags={5} perSwag={6} sag={26} className="opacity-90" />
-      <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-24 md:pt-28">
+      <div className="relative mx-auto max-w-5xl px-5 pb-16 pt-24 md:pt-28">
         <h1 className="foil font-display text-4xl font-black leading-[1.02] tracking-[-0.025em] md:text-6xl">{t("heading")}</h1>
         <p className="mt-4 max-w-xl text-lg text-snow/85">{t("lead")}</p>
 
-        <ul className="mt-10 grid gap-5 md:grid-cols-3">
+        <ul className="mt-10 grid gap-5 md:grid-cols-2 md:gap-8">
           {kinds.map(({ kind, picture, needs }, i) => {
             const busy = pending && chosen === kind;
             return (

@@ -12,15 +12,11 @@
     "haveCode": "Masz kod od organizatora?",
     "codePlaceholder": "KOD",
     "join": "Dołącz",
-    "modesTitle": "Losowanie Secret Santa na trzy sposoby",
+    "modesTitle": "Losowanie Secret Santa na dwa sposoby",
     "modes": {
       "sync": {
-        "title": "Impreza z losowaniem – tu i teraz",
-        "body": "Zbierzcie się w jednym pokoju i oglądajcie wszystko razem na dużym ekranie. Samo losowanie i tak zostaje tajne: każdy dostaje na swój telefon osobne powiadomienie, kogo wylosował."
-      },
-      "hybrid": {
-        "title": "Zdalne losowanie na żywo",
-        "body": "Zaproś wszystkich, nawet jeśli nie możecie spotkać się w jednym miejscu. Każdy obejrzy na swoim telefonie albo laptopie relację na żywo prosto z domu Świętego Mikołaja."
+        "title": "Losowanie na żywo – razem albo na odległość",
+        "body": "Mikołaj prowadzi losowanie na żywo. Kto jest w pokoju, ogląda je na dużym ekranie, a kto jest daleko – na swoim telefonie albo laptopie. Wynik i tak zostaje tajny: każdy widzi tylko, kogo sam wylosował."
       },
       "async": {
         "title": "Losowanie w swoim tempie",
@@ -118,12 +114,8 @@
       "plan": "Wolisz zaplanować wszystko z wyprzedzeniem?",
       "planLink": "Pełny formularz z datą, budżetem i zaproszeniami",
       "together": {
-        "body": "Wszyscy przy jednym stole. Kod QR na ekranie, losowanie za chwilę.",
-        "needs": "Duży ekran + Twój telefon"
-      },
-      "remote": {
-        "body": "Ktoś dołącza z daleka i ogląda Mikołaja na żywo na swoim telefonie lub laptopie.",
-        "needs": "Każdy na swoim urządzeniu"
+        "body": "Mikołaj losuje na żywo. Kto jest w pokoju, patrzy na duży ekran, a kto daleko – na swój telefon lub laptop.",
+        "needs": "Duży ekran albo własne urządzenia"
       },
       "ownTime": {
         "body": "Wyślij link rodzinie. Każdy dołączy, kiedy mu pasuje, a Ty uruchomisz losowanie.",

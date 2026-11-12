@@ -12,15 +12,11 @@
     "haveCode": "¿Tienes un código?",
     "codePlaceholder": "CÓDIGO",
     "join": "Entrar",
-    "modesTitle": "El amigo invisible, de tres maneras",
+    "modesTitle": "El amigo invisible, de dos maneras",
     "modes": {
       "sync": {
-        "title": "Fiesta con sorteo, aquí y ahora",
-        "body": "Reunid a todos en una sala y vedlo todo juntos en la pantalla grande. Aun así, el sorteo es secreto: cada uno recibe en su móvil un aviso privado con su resultado."
-      },
-      "hybrid": {
-        "title": "Sorteo a distancia, en directo",
-        "body": "Invita a todos, aunque no podáis veros en el mismo sitio. Cada uno verá en su móvil o portátil la retransmisión en directo desde la casa de Papá Noel."
+        "title": "Sorteo en directo, juntos o a distancia",
+        "body": "Papá Noel hace el sorteo en directo. Quien está en la sala lo ve en la pantalla grande, y quien está lejos ve el mismo espectáculo en su móvil o portátil. El resultado sigue siendo secreto: cada uno solo ve a quién le ha tocado."
       },
       "async": {
         "title": "Sorteo a tu ritmo",
@@ -118,12 +114,8 @@
       "plan": "¿Prefieres planearlo todo con antelación?",
       "planLink": "El formulario completo con fecha, presupuesto e invitaciones",
       "together": {
-        "body": "Todos en la misma mesa. Código QR en la pantalla y el sorteo en un momento.",
-        "needs": "Pantalla grande + tu móvil"
-      },
-      "remote": {
-        "body": "Alguien se une desde lejos y ve la transmisión de Papá Noel en su dispositivo.",
-        "needs": "Cada uno en su dispositivo"
+        "body": "Papá Noel sortea en directo. La sala mira la pantalla grande; quien está lejos, su móvil o portátil.",
+        "needs": "Pantalla grande o tus propios dispositivos"
       },
       "ownTime": {
         "body": "Envía un enlace a la familia. Cada uno se une cuando quiera y luego desbloqueas el sorteo.",

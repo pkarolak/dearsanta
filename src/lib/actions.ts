@@ -128,7 +128,7 @@ export async function createSessionAction(input: z.input<typeof createSchema>) {
   });
 }
 
-const quickModes = { together: "sync", remote: "sync", ownTime: "async" } as const;
+const quickModes = { together: "sync", ownTime: "async" } as const;
 const localCurrency: Record<string, z.infer<typeof currency>> = { pl: "PLN", en: "GBP", de: "EUR", es: "EUR", pt: "EUR" };
 
 /**
@@ -137,7 +137,7 @@ const localCurrency: Record<string, z.infer<typeof currency>> = { pl: "PLN", en:
  */
 export async function quickStartAction(input: { kind: keyof typeof quickModes; locale: string; timezone: string }) {
   return run(async () => {
-    const kind = z.enum(["together", "remote", "ownTime"]).parse(input.kind);
+    const kind = z.enum(["together", "ownTime"]).parse(input.kind);
     const locale = toLocale(input.locale);
     const t = translatorFor(locale, "create");
     const { session, host } = await createSession({
