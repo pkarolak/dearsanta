@@ -34,7 +34,7 @@ export function LanguagesScene() {
   return (
     <section
       ref={ref}
-      className="relative z-10 overflow-hidden rounded-t-[2.5rem] bg-[#3a0d10] text-snow shadow-[0_-30px_60px_-10px_rgb(0_0_0/0.6)] md:rounded-t-[4rem]"
+      className="relative z-10 overflow-hidden bg-[#3a0d10] text-snow"
     >
       <motion.div className="absolute -inset-y-[12%] inset-x-0" style={{ y: room }}>
         <Image src="/home/study.webp" alt="" fill unoptimized sizes="100vw" className="object-cover object-[70%_60%]" />
