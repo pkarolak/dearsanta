@@ -187,9 +187,7 @@
     "hostPanel": "Painel do Chefe",
     "drawDone": "O Pai Natal sorteou os nomes!",
     "watchReveal": "Ver a mensagem do Pai Natal",
-    "remoteOn": "Está a participar à distância: a transmissão do Pai Natal toca aqui mesmo.",
     "watchScreen": "A cerimónia começou. Olhe para o ecrã grande!",
-    "inRoom": "Está na sala com todos.",
     "imHere": "Estou na sala",
     "notInRoom": "Não estou na sala",
     "asyncWaiting": "O seu duende está pronto. Escrevemos-lhe quando o Chefe desbloquear o sorteio.",
@@ -240,7 +238,10 @@
       "quiff": "Topete ruivo",
       "manbun": "Coque masculino"
     },
-    "hatMissing": "Um gorro riscado não combina com este penteado e este tom de pele. Mude um dos dois para o usar."
+    "hatMissing": "Um gorro riscado não combina com este penteado e este tom de pele. Mude um dos dois para o usar.",
+    "whereTitle": "De onde estás a ver?",
+    "inRoomHint": "Vejo o ecrã grande com todos.",
+    "remoteHint": "O Pai Natal ao vivo, com voz e legendas, aqui no meu dispositivo."
   },
   "reveal": {
     "eyebrow": "Ultrassecreto",

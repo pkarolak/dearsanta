@@ -15,6 +15,29 @@ const MUSIC_LEVEL = 0.22;
  * a music box playing public-domain carols, sleigh bells, workshop hammers and a crackling fire.
  * Santa's voice plays from generated audio, or falls back to the browser's speech synthesis.
  */
+/** 50 ms of silent 8-bit WAV, played in the unlocking tap. */
+function silentWav() {
+  const samples = 400;
+  const bytes = new Uint8Array(44 + samples).fill(128);
+  const view = new DataView(bytes.buffer);
+  const text = (at: number, s: string) => [...s].forEach((c, i) => view.setUint8(at + i, c.charCodeAt(0)));
+  text(0, "RIFF");
+  view.setUint32(4, 36 + samples, true);
+  text(8, "WAVEfmt ");
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true);
+  view.setUint32(24, 8000, true);
+  view.setUint32(28, 8000, true);
+  view.setUint16(32, 1, true);
+  view.setUint16(34, 8, true);
+  text(36, "data");
+  view.setUint32(40, samples, true);
+  return bytes;
+}
+const silence = () => `data:audio/wav;base64,${btoa(String.fromCharCode(...silentWav()))}`;
+const readingMs = (text: string) => Math.max(1800, text.length * 55);
+
 class WorkshopAudio {
   private ctx: AudioContext | null = null;
   private master!: GainNode;
@@ -29,6 +52,8 @@ class WorkshopAudio {
   private fakeLevel = 0;
   private audioCache = new Map<string, Promise<string | null>>();
   private currentAudio: HTMLAudioElement | null = null;
+  /** One element for every line: iOS lets an element play later only if a tap started it once. */
+  private voiceEl: HTMLAudioElement | null = null;
   private speakToken = 0;
   muted = false;
 
@@ -37,6 +62,10 @@ class WorkshopAudio {
   }
 
   async unlock() {
+    this.unlockVoice();
+    // Safari: play through the ring/silent switch like a video would.
+    const session = (navigator as unknown as { audioSession?: { type: string } }).audioSession;
+    if (session) session.type = "playback";
     if (!this.ctx) {
       const Ctx = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       this.ctx = new Ctx();
@@ -49,10 +78,20 @@ class WorkshopAudio {
       this.analyser.fftSize = 512;
       this.voice.connect(this.analyser);
       this.noise = this.makeNoise();
+      if (this.voiceEl) this.ctx.createMediaElementSource(this.voiceEl).connect(this.voice);
     }
     if (this.ctx.state !== "running") await this.ctx.resume();
     // iOS only allows speech synthesis after a gesture-initiated utterance.
     if ("speechSynthesis" in window) speechSynthesis.speak(new SpeechSynthesisUtterance(""));
+  }
+
+  /** Must run synchronously inside the tap that turns the sound on. */
+  private unlockVoice() {
+    if (this.voiceEl) return;
+    const el = new Audio(silence());
+    el.preload = "auto";
+    el.play().catch(() => {});
+    this.voiceEl = el;
   }
 
   setMuted(muted: boolean) {
@@ -542,13 +581,17 @@ class WorkshopAudio {
   /** Speaks a line and resolves when it has finished (or was interrupted). */
   async speak(line: VoiceLine, lang: string, startAt = 0): Promise<void> {
     const token = ++this.speakToken;
+    const started = Date.now();
     if (line.cue) this.cue(line.cue);
     const src = await this.prefetch(line.audioUrl);
     if (token !== this.speakToken) return;
     this.duck(true);
     try {
-      if (src && this.ctx) await this.playAudio(src, token, startAt);
+      if (src && this.ctx && this.voiceEl) await this.playAudio(src, token, startAt);
       else await this.speakSynth(line.text, lang, token);
+      // A refused play or a speech engine that errors out at once must not flash the subtitle by.
+      const left = startAt > 0 ? 0 : readingMs(line.text) * 0.8 - (Date.now() - started);
+      if (left > 0 && token === this.speakToken) await new Promise((r) => setTimeout(r, left));
     } finally {
       if (token === this.speakToken) this.duck(false);
     }
@@ -556,22 +599,32 @@ class WorkshopAudio {
 
   private playAudio(src: string, token: number, startAt: number) {
     return new Promise<void>((resolve) => {
-      const audio = new Audio(src);
-      audio.muted = this.muted;
-      this.currentAudio = audio;
-      const node = this.ctx!.createMediaElementSource(audio);
-      node.connect(this.voice);
+      const audio = this.voiceEl!;
+      let settled = false;
+      const cleanup = () => {
+        audio.removeEventListener("ended", done);
+        audio.removeEventListener("error", done);
+        audio.removeEventListener("pause", paused);
+        audio.removeEventListener("loadedmetadata", seek);
+      };
       const done = () => {
-        node.disconnect();
+        if (settled) return;
+        settled = true;
+        cleanup();
         if (this.currentAudio === audio) this.currentAudio = null;
         resolve();
       };
+      const paused = () => token !== this.speakToken && done();
+      const seek = () => {
+        if (startAt > 0 && startAt < audio.duration) audio.currentTime = startAt;
+      };
       audio.addEventListener("ended", done);
       audio.addEventListener("error", done);
-      audio.addEventListener("pause", () => token !== this.speakToken && done());
-      audio.addEventListener("loadedmetadata", () => {
-        if (startAt > 0 && startAt < audio.duration) audio.currentTime = startAt;
-      });
+      audio.addEventListener("pause", paused);
+      audio.addEventListener("loadedmetadata", seek);
+      audio.muted = this.muted;
+      audio.src = src;
+      this.currentAudio = audio;
       audio.play().catch(done);
     });
   }
@@ -580,7 +633,7 @@ class WorkshopAudio {
     return new Promise<void>((resolve) => {
       if (!("speechSynthesis" in window) || this.muted) {
         // Still give the subtitles time to be read.
-        setTimeout(resolve, Math.max(1800, text.length * 55));
+        setTimeout(resolve, readingMs(text));
         return;
       }
       const utterance = new SpeechSynthesisUtterance(text);

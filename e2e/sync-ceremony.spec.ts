@@ -38,7 +38,7 @@ test("live ceremony: create, join, let in, exclusions, draw and reveal", async (
   const inviteLink = await linkFromInbox(invited, invitedEmail);
   await invited.goto(inviteLink);
   await expect(invited.getByRole("heading", { name: /Hello, tom/i })).toBeVisible();
-  await invited.getByRole("button", { name: "I’m not in the room" }).click();
+  await invited.getByRole("radio", { name: /I’m not in the room/ }).click();
   await expect(invited.getByRole("button", { name: /Light the fireplace/ })).toBeVisible();
 
   // The chief lets Ola in.

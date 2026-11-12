@@ -187,9 +187,7 @@
     "hostPanel": "Panel del Jefe",
     "drawDone": "¡Papá Noel ha sorteado los nombres!",
     "watchReveal": "Ver el mensaje de Papá Noel",
-    "remoteOn": "Te unes desde lejos: la transmisión de Papá Noel suena aquí mismo.",
     "watchScreen": "La ceremonia ha empezado. ¡Mira la pantalla grande!",
-    "inRoom": "Estás en la sala con todos.",
     "imHere": "Estoy en la sala",
     "notInRoom": "No estoy en la sala",
     "asyncWaiting": "Tu elfo está listo. Te escribiremos cuando el Jefe desbloquee el sorteo.",
@@ -240,7 +238,10 @@
       "quiff": "Tupé pelirrojo",
       "manbun": "Moño masculino"
     },
-    "hatMissing": "Un gorro tachado no encaja con este peinado y este tono de piel. Cambia uno de los dos para ponértelo."
+    "hatMissing": "Un gorro tachado no encaja con este peinado y este tono de piel. Cambia uno de los dos para ponértelo.",
+    "whereTitle": "¿Desde dónde lo ves?",
+    "inRoomHint": "Veo la pantalla grande con todos.",
+    "remoteHint": "Papá Noel en directo, con voz y subtítulos, aquí en mi dispositivo."
   },
   "reveal": {
     "eyebrow": "Alto secreto",

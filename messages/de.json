@@ -187,9 +187,7 @@
     "hostPanel": "Oberwichtel-Pult",
     "drawDone": "Der Weihnachtsmann hat die Namen gezogen!",
     "watchReveal": "Botschaft des Weihnachtsmanns ansehen",
-    "remoteOn": "Du bist aus der Ferne dabei: Die Übertragung läuft genau hier.",
     "watchScreen": "Die Zeremonie läuft. Schau auf den großen Bildschirm!",
-    "inRoom": "Du bist mit allen im Raum.",
     "imHere": "Ich bin im Raum",
     "notInRoom": "Ich bin nicht im Raum",
     "asyncWaiting": "Dein Wichtel ist fertig. Wir schreiben dir, sobald der Oberwichtel die Auslosung freigibt.",
@@ -240,7 +238,10 @@
       "quiff": "Rote Tolle",
       "manbun": "Männerdutt"
     },
-    "hatMissing": "Eine durchgestrichene Mütze passt nicht zu dieser Frisur mit diesem Hautton. Ändere eins davon, um sie aufzusetzen."
+    "hatMissing": "Eine durchgestrichene Mütze passt nicht zu dieser Frisur mit diesem Hautton. Ändere eins davon, um sie aufzusetzen.",
+    "whereTitle": "Wo schaust du zu?",
+    "inRoomHint": "Ich schaue mit allen auf den großen Bildschirm.",
+    "remoteHint": "Der Weihnachtsmann live mit Stimme und Untertiteln, hier auf meinem Gerät."
   },
   "reveal": {
     "eyebrow": "Streng geheim",

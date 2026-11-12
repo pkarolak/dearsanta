@@ -1,5 +1,6 @@
 "use client";
 
+import { Broadcast, Television } from "@phosphor-icons/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
 import { Avatar } from "./Avatar";
@@ -47,9 +48,10 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
 
   const isRemote = me.isRemote && s.mode === "sync";
   const ceremonyRunning = s.mode === "sync" && s.step !== "lobby";
-  const toggleRemote = () =>
+  const setRemote = (remote: boolean) =>
+    remote !== me.isRemote &&
     start(async () => {
-      await setRemoteAction(code, me.id, !me.isRemote);
+      await setRemoteAction(code, me.id, remote);
       await refresh();
     });
 
@@ -81,12 +83,35 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
       {s.mode === "sync" && s.step === "farewell" && <FestiveLinks />}
 
       {s.mode === "sync" && !state.assignment && (
-        <div className="well flex flex-wrap items-center justify-between gap-3 px-5 py-4">
-          <p className="text-sm">{isRemote ? t("remoteOn") : ceremonyRunning ? t("watchScreen") : t("inRoom")}</p>
-          <button className="btn-soft px-4 py-2 text-sm" onClick={toggleRemote} disabled={pending}>
-            {me.isRemote ? t("imHere") : t("notInRoom")}
-          </button>
-        </div>
+        <section className="card p-5">
+          <h2 className="font-display text-xl font-bold">{t("whereTitle")}</h2>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label={t("whereTitle")}>
+            {[
+              { remote: false, Icon: Television, label: t("imHere"), hint: ceremonyRunning ? t("watchScreen") : t("inRoomHint") },
+              { remote: true, Icon: Broadcast, label: t("notInRoom"), hint: t("remoteHint") },
+            ].map(({ remote, Icon, label, hint }) => {
+              const on = me.isRemote === remote;
+              return (
+                <button
+                  key={label}
+                  role="radio"
+                  aria-checked={on}
+                  onClick={() => setRemote(remote)}
+                  disabled={pending}
+                  className={`flex items-start gap-3 rounded-2xl p-4 text-left ring-2 transition ${
+                    on ? "bg-pine text-snow ring-pine" : "bg-snow text-ink ring-ink/10 hover:ring-pine/50"
+                  }`}
+                >
+                  <Icon weight={on ? "fill" : "bold"} className={`mt-0.5 h-7 w-7 shrink-0 ${on ? "text-gold" : "text-pine"}`} />
+                  <span>
+                    <span className="block font-semibold">{label}</span>
+                    <span className={`mt-0.5 block text-sm ${on ? "text-snow/85" : "text-muted"}`}>{hint}</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
       )}
 
       {s.mode === "async" && !s.drawn && me.profileComplete && (

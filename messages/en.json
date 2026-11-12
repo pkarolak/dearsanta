@@ -187,9 +187,7 @@
     "hostPanel": "Elf Chief panel",
     "drawDone": "Santa has drawn the names!",
     "watchReveal": "Watch Santa’s reveal",
-    "remoteOn": "You are joining from afar: Santa’s broadcast plays right here.",
     "watchScreen": "The ceremony has started. Watch the big screen!",
-    "inRoom": "You are in the room with everyone.",
     "imHere": "I’m in the room",
     "notInRoom": "I’m not in the room",
     "asyncWaiting": "Your elf is ready. We’ll e-mail you when the Elf Chief unlocks the draw.",
@@ -240,7 +238,10 @@
       "quiff": "Ginger quiff",
       "manbun": "Man bun"
     },
-    "hatMissing": "A crossed-out hat doesn’t fit this hairstyle with this skin tone. Change either one to wear it."
+    "hatMissing": "A crossed-out hat doesn’t fit this hairstyle with this skin tone. Change either one to wear it.",
+    "whereTitle": "Where are you watching from?",
+    "inRoomHint": "I’ll watch the big screen with everyone.",
+    "remoteHint": "Santa live, voice and subtitles, right here on my device."
   },
   "reveal": {
     "eyebrow": "Top secret",

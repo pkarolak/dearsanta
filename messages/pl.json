@@ -187,11 +187,9 @@
     "hostPanel": "Panel Naczelnika",
     "drawDone": "Mikołaj rozlosował imiona!",
     "watchReveal": "Zobacz, co mówi Mikołaj",
-    "remoteOn": "Dołączasz z daleka – transmisja Mikołaja gra właśnie tutaj.",
     "watchScreen": "Ceremonia trwa. Patrz na duży ekran!",
-    "inRoom": "Jesteś w pokoju razem z innymi.",
     "imHere": "Jestem w pokoju",
-    "notInRoom": "Nie ma mnie w pokoju",
+    "notInRoom": "Jestem daleko",
     "asyncWaiting": "Twój elf jest gotowy. Napiszemy, gdy Naczelnik odblokuje losowanie.",
     "yourElf": "Twój elf",
     "createElf": "Stwórz swojego elfa",
@@ -240,7 +238,10 @@
       "quiff": "Rudy czub",
       "manbun": "Męski kok"
     },
-    "hatMissing": "Przekreślona czapka nie pasuje do tej fryzury przy tej karnacji. Zmień jedno lub drugie, żeby ją założyć."
+    "hatMissing": "Przekreślona czapka nie pasuje do tej fryzury przy tej karnacji. Zmień jedno lub drugie, żeby ją założyć.",
+    "whereTitle": "Gdzie oglądasz ceremonię?",
+    "inRoomHint": "Patrzę na duży ekran razem z innymi.",
+    "remoteHint": "Mikołaj z głosem i napisami na żywo tutaj, na moim urządzeniu."
   },
   "reveal": {
     "eyebrow": "Ściśle tajne",
