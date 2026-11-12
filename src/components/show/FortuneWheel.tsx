@@ -8,11 +8,13 @@ import { Avatar } from "../Avatar";
 import { RemoteIcon } from "../icons";
 import type { StageElf } from "./ShowStage";
 
-/** During the draw the wheel spins ever faster, then freezes over with a stocking on it, like the one on every phone. */
-export type WheelDraw = "spinning" | "frozen";
+/**
+ * The draw on the wheel: it spins ever faster while the wedges, faces and names melt into a stocking
+ * (the one on every phone), then it slows down and stops with the stocking upright.
+ */
+export type WheelDraw = "spinning" | "stopped";
 
 const topSpeed = 1500;
-const crystals = 14;
 
 const wedgeColours = ["#9e1b26", "#1d5a3a", "#c8952e"];
 const bulbs = 24;
@@ -52,7 +54,12 @@ export function FortuneWheel({
   const upright = useTransform(rotation, (v) => -v);
   const speed = useMotionValue(0);
   const blur = useTransform(speed, [0, topSpeed], ["blur(0px)", "blur(2.5px)"]);
-  const frozen = draw === "frozen";
+  // 0 shows the elves' wedges, 1 the stocking; it only ever moves forward.
+  const swap = useMotionValue(draw === "stopped" ? 1 : 0);
+  const unswapped = useTransform(swap, (v) => 1 - v);
+  const stockingScale = useTransform(swap, [0, 1], [0.35, 1]);
+  const [landed, setLanded] = useState(0);
+  const stopped = draw === "stopped";
   const [seen, setSeen] = useState(elves);
   const [star, setStar] = useState<{ id: string; n: number } | null>(null);
   const spinning = useRef<ReturnType<typeof animate> | null>(null);
@@ -96,24 +103,35 @@ export function FortuneWheel({
       const t = (now - start) / 1000;
       const v = Math.min(topSpeed, 40 + 70 * t ** 1.8);
       speed.set(v);
+      swap.set(Math.max(swap.get(), Math.min(1, Math.max(0, (v - 700) / 600))));
       rotation.set(rotation.get() + (v * (now - last)) / 1000);
       last = now;
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [draw, rotation, speed]);
+  }, [draw, rotation, speed, swap]);
 
-  // Frozen: the ice grabs the wheel and it stops within a moment.
+  // Stopping: an ease-out that starts at the current speed and lands on a full turn, so the stocking ends upright.
   useEffect(() => {
-    if (!frozen) return;
+    if (!stopped) return;
     const v = speed.get();
-    if (v <= 0) return;
+    const from = rotation.get();
     spinning.current?.stop();
-    spinning.current = animate(rotation, rotation.get() + v * 0.3, { duration: 0.6, ease: [0.2, 0.8, 0.3, 1] });
-    const slowing = animate(speed, 0, { duration: 0.6 });
+    if (v <= 0) {
+      swap.set(1);
+      rotation.set(Math.round(from / 360) * 360);
+      return;
+    }
+    const target = Math.ceil((from + v * 1.3) / 360) * 360;
+    // A cubic ease-out starts three times faster than its average, which keeps the speed continuous.
+    const duration = (3 * (target - from)) / v;
+    const ease = [0.33, 1, 0.68, 1] as const;
+    animate(swap, 1, { duration: 0.6 });
+    spinning.current = animate(rotation, target, { duration, ease, onComplete: () => setLanded((n) => n + 1) });
+    const slowing = animate(speed, 0, { duration, ease });
     return () => slowing.stop();
-  }, [frozen, rotation, speed]);
+  }, [stopped, rotation, speed, swap]);
 
   const ring = 29.5;
   const size = n ? Math.min(25, ((2 * Math.PI * ring) / n) * 0.8) : 0;
@@ -149,6 +167,7 @@ export function FortuneWheel({
 
       {/* the turning face */}
       <motion.div className="absolute inset-[7%] rounded-full shadow-[inset_0_0_3cqw_rgb(0_0_0/0.55)]" style={{ rotate: rotation, filter: blur }}>
+        <motion.div className="absolute inset-0" style={{ opacity: unswapped }}>
         <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full rounded-full" aria-hidden>
           <defs>
             <radialGradient id="wheel-shade" cx="50%" cy="50%" r="50%">
@@ -186,36 +205,45 @@ export function FortuneWheel({
             />
           );
         })}
+        </motion.div>
+
+        {draw && (
+          <motion.div className="absolute inset-0" style={{ opacity: swap }} aria-hidden>
+            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_42%,#d63c46,#a81d29_52%,#5e0b12)]" />
+            <div className="absolute inset-[5%] rounded-full border-[0.7cqw] border-dashed border-[#f3d27a]/70" />
+            {Array.from({ length: 12 }, (_, i) => {
+              const a = (i / 12) * 2 * Math.PI;
+              return (
+                <Star
+                  key={i}
+                  weight="fill"
+                  className="absolute h-[5%] w-[5%] -translate-x-1/2 -translate-y-1/2 text-[#f3d27a]"
+                  style={{ left: `${fix(50 + 39 * Math.sin(a))}%`, top: `${fix(50 - 39 * Math.cos(a))}%` }}
+                />
+              );
+            })}
+            <div className="absolute inset-[18%] rounded-full bg-[radial-gradient(closest-side,rgb(255_236_170/0.9),rgb(255_214_120/0.35)_60%,transparent)]" />
+            <motion.div className="absolute left-[25%] top-[11%] h-[78%] w-[50%]" style={{ scale: stockingScale }}>
+              <Image src="/show/stocking.webp" alt="" fill unoptimized sizes="20vw" className="object-contain drop-shadow-[0_1.5cqw_2cqw_rgb(0_0_0/0.5)]" />
+            </motion.div>
+          </motion.div>
+        )}
       </motion.div>
 
       {/* hub */}
-      <div className="absolute left-1/2 top-1/2 grid h-[15%] w-[15%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[radial-gradient(circle_at_35%_30%,#fff3c4,#e2b04a_45%,#8f5f18)] shadow-[0_1cqw_2.5cqw_rgb(0_0_0/0.5),inset_0_0_0_0.5cqw_rgb(255_240_190/0.6)]">
+      <motion.div
+        style={{ opacity: unswapped }}
+        className="absolute left-1/2 top-1/2 grid h-[15%] w-[15%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[radial-gradient(circle_at_35%_30%,#fff3c4,#e2b04a_45%,#8f5f18)] shadow-[0_1cqw_2.5cqw_rgb(0_0_0/0.5),inset_0_0_0_0.5cqw_rgb(255_240_190/0.6)]">
         <Star weight="fill" className="h-[55%] w-[55%] text-berry drop-shadow-[0_0.3cqw_0.3cqw_rgb(0_0_0/0.3)]" />
-      </div>
-
-      <AnimatePresence>
-        {frozen && <Frost key="frost" />}
-        {frozen && (
-          <motion.div
-            key="stocking"
-            className="absolute left-1/2 top-1/2 z-10 h-[66%] w-[66%] -translate-x-1/2 -translate-y-1/2"
-            initial={{ scale: 0, rotate: -25, opacity: 0 }}
-            animate={{ scale: 1, rotate: 0, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 170, damping: 11, delay: 1 }}
-          >
-            <div className="absolute inset-[8%] rounded-full bg-[radial-gradient(closest-side,rgb(255_236_170/0.95),rgb(255_214_120/0.55)_55%,transparent)]" />
-            <Image src="/show/stocking.webp" alt="" fill unoptimized sizes="20vw" className="animate-sway object-contain drop-shadow-[0_1.5cqw_2cqw_rgb(0_0_0/0.45)]" />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      </motion.div>
 
       {/* pointer */}
       <motion.div
         aria-hidden
         className="absolute left-1/2 top-[-4%] h-[14%] w-[10%] -translate-x-1/2 origin-top"
-        animate={starred ? { rotate: [0, -14, 10, -6, 0] } : { rotate: 0 }}
-        transition={{ duration: 2.4, ease: "easeOut" }}
+        key={`pointer-${landed}`}
+        animate={starred || landed ? { rotate: [0, -14, 10, -6, 0] } : { rotate: 0 }}
+        transition={{ duration: starred ? 2.4 : 0.9, ease: "easeOut" }}
       >
         <div className="absolute inset-0 bg-[linear-gradient(180deg,#fff0b8,#d9a53c_55%,#8f5f18)] drop-shadow-[0_1cqw_1cqw_rgb(0_0_0/0.5)] [clip-path:polygon(0_0,100%_0,50%_100%)]" />
         <div className="absolute left-1/2 top-[14%] h-[34%] w-[48%] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_35%_30%,#ff9aa2,#b8202c_55%,#5c0c12)]" />
@@ -291,34 +319,3 @@ function WheelSeat({
   );
 }
 
-/** Ice creeping over the wheel from the rim inwards. */
-function Frost() {
-  return (
-    <motion.div className="pointer-events-none absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5, delay: 0.35 }}>
-      <div className="absolute inset-0 rounded-full bg-[rgb(205_232_255/0.4)] mix-blend-screen" />
-      <div className="absolute inset-[7%] rounded-full bg-[radial-gradient(circle,rgb(235_248_255/0.25)_0,rgb(200_230_250/0.5)_62%,rgb(245_252_255/0.88)_100%)] shadow-[inset_0_0_4cqw_rgb(255_255_255/0.85)] backdrop-blur-[0.5cqw] backdrop-saturate-50" />
-      <svg viewBox="0 0 200 200" className="absolute inset-[7%] h-[86%] w-[86%]" aria-hidden>
-        {Array.from({ length: crystals }, (_, i) => {
-          const a = (i / crystals) * 2 * Math.PI;
-          const at = (r: number, da = 0) => `${fix(100 + r * Math.cos(a + da))} ${fix(100 + r * Math.sin(a + da))}`;
-          const reach = 46 + (i % 3) * 9;
-          const d = `M${at(100)}L${at(100 - reach)}M${at(84)}L${at(70, 0.14)}M${at(84)}L${at(70, -0.14)}M${at(68)}L${at(58, 0.12)}M${at(68)}L${at(58, -0.12)}`;
-          return (
-            <motion.path
-              key={i}
-              d={d}
-              fill="none"
-              stroke="#ffffff"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-              opacity={0.85}
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.7, delay: 0.35 + (i % 4) * 0.06, ease: "easeOut" }}
-            />
-          );
-        })}
-      </svg>
-    </motion.div>
-  );
-}

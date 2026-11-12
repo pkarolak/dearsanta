@@ -19,10 +19,10 @@ type Props = {
   controls?: React.ReactNode;
 };
 
-/** Without Santa's voice to follow, the wheel spins this long before it freezes. */
+/** Without Santa's voice to follow, the wheel spins this long before it slows down. */
 const silentSpinMs = 8000;
-/** The draw's lines: the wheel speeds up through the first two and freezes on the third ("Done!"). */
-const freezeOnLine = 2;
+/** The draw's lines: the wheel speeds up through the first two and slows to a stop on the third ("Done!"). */
+const stopOnLine = 2;
 
 /** Santa's show as every device sees it, all in his workshop. */
 export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, compact, className = "", controls }: Props) {
@@ -31,15 +31,15 @@ export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, 
   const step = state.session.step;
   const startedAt = state.session.stepStartedAt;
   const { current, index } = useVoice(state.script, `${step}@${startedAt}`, serverToLocal(startedAt), audible, locale);
-  const [silentFreeze, setSilentFreeze] = useState<number | null>(null);
+  const [silentStop, setSilentStop] = useState<number | null>(null);
   useEffect(() => {
     if (step !== "draw") return;
     const left = silentSpinMs - (Date.now() - serverToLocal(startedAt));
-    const timer = setTimeout(() => setSilentFreeze(startedAt), Math.max(0, left));
+    const timer = setTimeout(() => setSilentStop(startedAt), Math.max(0, left));
     return () => clearTimeout(timer);
   }, [step, startedAt, serverToLocal]);
   const voiced = audible && !!state.script?.length;
-  const frozen = step !== "draw" || (voiced ? index >= freezeOnLine : silentFreeze === startedAt);
+  const stopped = step !== "draw" || (voiced ? index >= stopOnLine : silentStop === startedAt);
   const elves = state.participants.filter((p) => p.status === "approved");
   const budget =
     state.session.budgetAmount !== null
@@ -89,7 +89,7 @@ export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, 
         stepLabel={step === "lobby" ? t("elvesReady", { count: elves.length }) : t(`steps.${step}`)}
         elves={elves}
         talking={!!current}
-        draw={frozen ? "frozen" : "spinning"}
+        draw={stopped ? "stopped" : "spinning"}
         subtitle={current ? { id: current.id, text: current.text } : null}
         compact={compact}
         card={card}

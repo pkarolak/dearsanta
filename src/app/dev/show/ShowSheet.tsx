@@ -1,6 +1,7 @@
 "use client";
 
 import { QRCodeSVG } from "qrcode.react";
+import { useEffect, useState } from "react";
 import { Avatar } from "@/components/Avatar";
 import { ShowFrame, ShowStage } from "@/components/show/ShowStage";
 import { Reindeer } from "@/components/show/Vignette";
@@ -19,7 +20,15 @@ const sampleLines: Record<CeremonyStep, string> = {
   farewell: "Merry Christmas, my dear elves!",
 };
 
-export function ShowSheet({ step, count, level, draw }: { step: string | null; count: number; level: number; draw?: "spinning" | "frozen" }) {
+export function ShowSheet({ step, count, level, draw: wanted }: { step: string | null; count: number; level: number; draw?: "spinning" | "stopped" | "sequence" }) {
+  // "sequence" plays the whole draw: seven seconds of spinning, then the stop.
+  const [stoppedNow, setStoppedNow] = useState(false);
+  useEffect(() => {
+    if (wanted !== "sequence") return;
+    const timer = setTimeout(() => setStoppedNow(true), 7000);
+    return () => clearTimeout(timer);
+  }, [wanted]);
+  const draw = wanted === "sequence" ? (stoppedNow ? "stopped" : "spinning") : wanted;
   const elves = names.slice(0, count).map((displayName, i) => ({
     id: String(i),
     displayName,

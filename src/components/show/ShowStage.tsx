@@ -143,7 +143,7 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
         animate={drawing ? { left: "4%", top: "9%", width: "37%" } : { left: "1.5%", top: "17%", width: "29%" }}
         transition={glide}
       >
-        <FortuneWheel elves={elves} celebrate={step === "elves"} draw={drawing ? (draw ?? "frozen") : undefined} remoteLabel={remoteLabel} className="inset-0" />
+        <FortuneWheel elves={elves} celebrate={step === "elves"} draw={drawing ? (draw ?? "stopped") : undefined} remoteLabel={remoteLabel} className="inset-0" />
       </motion.div>
 
       <AnimatePresence>

@@ -10,7 +10,7 @@ export default async function DevShowPage({ searchParams }: PageProps<"/dev/show
       step={typeof step === "string" ? step : null}
       count={typeof n === "string" ? Number(n) : 5}
       level={typeof level === "string" ? Number(level) : 0}
-      draw={draw === "spinning" ? "spinning" : undefined}
+      draw={draw === "spinning" || draw === "sequence" ? draw : undefined}
     />
   );
 }
