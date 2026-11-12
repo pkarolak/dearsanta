@@ -7,7 +7,6 @@ export type VoiceLine = { id: string; text: string; audioUrl: string | null; cue
 export type FilmSfx =
   | "bells" | "whoosh" | "steps" | "giggle" | "sneeze" | "creak" | "clank" | "sputter" | "pop" | "sparkle" | "tick" | "splat" | "fanfare";
 
-const SPEECH_LANG: Record<string, string> = { pl: "pl-PL", en: "en-GB", de: "de-DE", es: "es-ES", pt: "pt-PT" };
 const MUSIC_LEVEL = 0.22;
 
 /**
@@ -38,6 +37,21 @@ function silentWav() {
 const silence = () => `data:audio/wav;base64,${btoa(String.fromCharCode(...silentWav()))}`;
 const readingMs = (text: string) => Math.max(1800, text.length * 55);
 
+/** The server may still be recording a line (a few seconds) or briefly unreachable, so try again a few times. */
+async function fetchRecording(url: string) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt) await new Promise((r) => setTimeout(r, 800 * attempt));
+    try {
+      const res = await fetch(url);
+      if (res.status === 200) return URL.createObjectURL(await res.blob());
+      if (res.status !== 204 && res.status < 500) return null;
+    } catch {
+      // Network hiccup: retry.
+    }
+  }
+  return null;
+}
+
 class WorkshopAudio {
   private ctx: AudioContext | null = null;
   private master!: GainNode;
@@ -49,7 +63,6 @@ class WorkshopAudio {
   private timers: ReturnType<typeof setTimeout>[] = [];
   private ambienceOn = false;
   private noise: AudioBuffer | null = null;
-  private fakeLevel = 0;
   private audioCache = new Map<string, Promise<string | null>>();
   private currentAudio: HTMLAudioElement | null = null;
   /** One element for every line: iOS lets an element play later only if a tap started it once. */
@@ -81,8 +94,6 @@ class WorkshopAudio {
       if (this.voiceEl) this.ctx.createMediaElementSource(this.voiceEl).connect(this.voice);
     }
     if (this.ctx.state !== "running") await this.ctx.resume();
-    // iOS only allows speech synthesis after a gesture-initiated utterance.
-    if ("speechSynthesis" in window) speechSynthesis.speak(new SpeechSynthesisUtterance(""));
   }
 
   /** Must run synchronously inside the tap that turns the sound on. */
@@ -98,7 +109,6 @@ class WorkshopAudio {
     this.muted = muted;
     if (this.ctx) this.master.gain.setTargetAtTime(muted ? 0 : 1, this.ctx.currentTime, 0.05);
     if (this.currentAudio) this.currentAudio.muted = muted;
-    if (muted && "speechSynthesis" in window) speechSynthesis.cancel();
   }
 
   private gain(value: number) {
@@ -546,22 +556,21 @@ class WorkshopAudio {
 
   /* ---------- Santa's voice ---------- */
 
-  /** Fetches generated audio ahead of time. Resolves to an object URL, or null to use speech synthesis. */
+  /** Fetches Santa's recording ahead of time. Resolves to an object URL, or null if there is none. */
   prefetch(url: string | null) {
     if (!url) return Promise.resolve(null);
     let cached = this.audioCache.get(url);
     if (!cached) {
-      cached = fetch(url)
-        .then(async (res) => (res.status === 200 ? URL.createObjectURL(await res.blob()) : null))
-        .catch(() => null);
+      cached = fetchRecording(url);
       this.audioCache.set(url, cached);
+      // A dropped connection or a server restart shouldn't silence this line for the rest of the visit.
+      void cached.then((src) => src ?? this.audioCache.delete(url));
     }
     return cached;
   }
 
   /** Current loudness of Santa's voice, 0..1, for lip sync. */
   level() {
-    if (this.fakeLevel > 0) return this.fakeLevel;
     if (!this.ctx || !this.currentAudio) return 0;
     this.analyser.getByteTimeDomainData(this.levelData);
     let sum = 0;
@@ -573,13 +582,11 @@ class WorkshopAudio {
     this.speakToken++;
     this.currentAudio?.pause();
     this.currentAudio = null;
-    this.fakeLevel = 0;
-    if ("speechSynthesis" in window) speechSynthesis.cancel();
     this.duck(false);
   }
 
   /** Speaks a line and resolves when it has finished (or was interrupted). */
-  async speak(line: VoiceLine, lang: string, startAt = 0): Promise<void> {
+  async speak(line: VoiceLine, startAt = 0): Promise<void> {
     const token = ++this.speakToken;
     const started = Date.now();
     if (line.cue) this.cue(line.cue);
@@ -587,9 +594,9 @@ class WorkshopAudio {
     if (token !== this.speakToken) return;
     this.duck(true);
     try {
+      // Without Santa's recording the line stays silent: a robotic stand-in voice would break the show.
       if (src && this.ctx && this.voiceEl) await this.playAudio(src, token, startAt);
-      else await this.speakSynth(line.text, lang, token);
-      // A refused play or a speech engine that errors out at once must not flash the subtitle by.
+      // A refused or missing recording must not flash the subtitle by.
       const left = startAt > 0 ? 0 : readingMs(line.text) * 0.8 - (Date.now() - started);
       if (left > 0 && token === this.speakToken) await new Promise((r) => setTimeout(r, left));
     } finally {
@@ -626,44 +633,6 @@ class WorkshopAudio {
       audio.src = src;
       this.currentAudio = audio;
       audio.play().catch(done);
-    });
-  }
-
-  private speakSynth(text: string, lang: string, token: number) {
-    return new Promise<void>((resolve) => {
-      if (!("speechSynthesis" in window) || this.muted) {
-        // Still give the subtitles time to be read.
-        setTimeout(resolve, readingMs(text));
-        return;
-      }
-      const utterance = new SpeechSynthesisUtterance(text);
-      const bcp = SPEECH_LANG[lang] ?? lang;
-      utterance.lang = bcp;
-      const voices = speechSynthesis.getVoices().filter((v) => v.lang.startsWith(bcp.slice(0, 2)));
-      const preferred =
-        voices.find((v) => /male|daniel|jorge|markus|google uk english male|krzysztof|reed|grandpa/i.test(v.name)) ??
-        voices.find((v) => v.localService) ??
-        voices[0];
-      if (preferred) utterance.voice = preferred;
-      utterance.pitch = 0.75;
-      utterance.rate = 0.92;
-      let wobble: ReturnType<typeof setInterval> | null = null;
-      const finish = () => {
-        if (wobble) clearInterval(wobble);
-        this.fakeLevel = 0;
-        resolve();
-      };
-      utterance.onstart = () => {
-        wobble = setInterval(() => {
-          if (token !== this.speakToken) return finish();
-          this.fakeLevel = 0.25 + Math.abs(Math.sin(Date.now() / 90)) * 0.6 * Math.random();
-        }, 70);
-      };
-      utterance.onend = finish;
-      utterance.onerror = finish;
-      speechSynthesis.speak(utterance);
-      // Some browsers never fire onend; never hang the ceremony.
-      setTimeout(finish, Math.max(4000, text.length * 120));
     });
   }
 }

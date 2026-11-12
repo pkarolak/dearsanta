@@ -50,7 +50,7 @@ export function useVoice(
         // The newest wording of the line, in case a name changed while Santa was talking.
         const line = linesRef.current?.[i] ?? script[i];
         setPlaying({ chapter, index: i });
-        await audio.speak(line, lang, elapsed > 1.5 ? elapsed : 0);
+        await audio.speak(line, elapsed > 1.5 ? elapsed : 0);
         elapsed = 0;
         if (!cancelled) await pause(500);
       }

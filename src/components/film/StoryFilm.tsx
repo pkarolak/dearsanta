@@ -10,7 +10,7 @@ import { clipSrc, clips, readingMs, type LineKey } from "./script";
 import { Link } from "@/i18n/navigation";
 import { workshopAudio, type VoiceLine } from "@/lib/audio/engine";
 
-type Props = { lines: Record<LineKey, VoiceLine>; lang: string };
+type Props = { lines: Record<LineKey, VoiceLine> };
 
 const lastClip = clips.length - 1;
 const portrait = "(max-aspect-ratio: 4/5)";
@@ -31,7 +31,7 @@ function useTall() {
  * The landing page's opening: a puppet film that plays by itself, silent with subtitles,
  * until the viewer turns the sound on. It ends on the call to action, with the last clip looping behind it.
  */
-export function StoryFilm({ lines, lang }: Props) {
+export function StoryFilm({ lines }: Props) {
   const t = useTranslations("film");
   const th = useTranslations("home");
   const reduced = useReducedMotion();
@@ -98,7 +98,7 @@ export function StoryFilm({ lines, lang }: Props) {
     const say = (l: VoiceLine) => {
       talking = true;
       setLine(l);
-      const spoken = soundRef.current ? audio.speak(l, lang) : Promise.resolve();
+      const spoken = soundRef.current ? audio.speak(l) : Promise.resolve();
       const read = new Promise<void>((r) => timers.push(setTimeout(r, readingMs(l.text))));
       voice = Promise.all([spoken, read]).then(() => {
         talking = false;

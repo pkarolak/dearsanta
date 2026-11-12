@@ -30,7 +30,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
     <main className="bg-wall">
       <SiteHeader tone="dark" cta />
       <LandingMotion>
-        <StoryFilm lines={lines} lang={locale} />
+        <StoryFilm lines={lines} />
         <MatchScene />
         <ModesScene />
         <LanguagesScene />
