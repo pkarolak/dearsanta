@@ -41,7 +41,8 @@
     "joinHint": "Wpisz 6-znakowy kod od organizatora albo wklej link z zaproszenia.",
     "codeLabel": "Kod sesji",
     "codeNotFound": "Nie znamy takiego kodu. Sprawdź go u organizatora.",
-    "createShort": "Stwórz"
+    "createShort": "Stwórz",
+    "modesStart": "Zacznij"
   },
   "film": {
     "label": "Bajka o Mikołaju, który potrzebuje pomocy",

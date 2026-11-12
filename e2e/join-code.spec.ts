@@ -45,3 +45,11 @@ test("a guest lands on the home page and joins with the code from the organiser"
   await guest.screenshot({ path: `${shots}/18-hat-missing.png` });
   expect(errors).toEqual([]);
 });
+
+test("each way to draw on the home page starts that kind of session", async ({ page }) => {
+  await page.goto("/en");
+  const card = page.getByRole("button", { name: /A draw at your own pace/ });
+  await expect(card).toContainText("Start");
+  await card.click();
+  await page.waitForURL(/\/s\/[A-Z0-9]{6}\/host/);
+});

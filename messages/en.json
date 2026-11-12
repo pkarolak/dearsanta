@@ -41,7 +41,8 @@
     "joinHint": "Type the 6-character code from the organiser, or paste your invite link.",
     "codeLabel": "Session code",
     "codeNotFound": "We don’t know that code. Check it with the organiser.",
-    "createShort": "Create"
+    "createShort": "Create",
+    "modesStart": "Start"
   },
   "film": {
     "label": "A little tale of Santa, who needs your help",

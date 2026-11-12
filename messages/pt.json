@@ -41,7 +41,8 @@
     "joinHint": "Escreva o código de 6 caracteres do organizador ou cole o link do convite.",
     "codeLabel": "Código da sessão",
     "codeNotFound": "Não conhecemos esse código. Confirme com o organizador.",
-    "createShort": "Criar"
+    "createShort": "Criar",
+    "modesStart": "Começar"
   },
   "film": {
     "label": "Um pequeno conto do Pai Natal, que precisa da vossa ajuda",

@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowRight, DeviceMobile, Devices, Television } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -8,11 +9,19 @@ import { SantaPuppet } from "../show/SantaPuppet";
 import { Cast, Reindeer, Vignette } from "../show/Vignette";
 import { StringLights } from "./Atmosphere";
 import { useDepth, useSceneScroll } from "./useDepth";
+import { useQuickStart, type QuickKind } from "../useQuickStart";
 
 const modes = ["sync", "hybrid", "async"] as const;
+const starts: Record<(typeof modes)[number], { kind: QuickKind; needs: (typeof Television)[] }> = {
+  sync: { kind: "together", needs: [Television, DeviceMobile] },
+  hybrid: { kind: "remote", needs: [Devices] },
+  async: { kind: "ownTime", needs: [DeviceMobile] },
+};
 
 export function ModesScene() {
   const t = useTranslations("home");
+  const tq = useTranslations("create.quick");
+  const { pick, pending, chosen, error } = useQuickStart();
   const ref = useRef<HTMLElement>(null);
   const scene = useSceneScroll(ref);
   const drop = useDepth(scene, [0.05, 0.3], [-110, 0]);
@@ -35,23 +44,61 @@ export function ModesScene() {
           {t("modesTitle")}
         </h2>
         <ul className="mt-12 grid gap-12 md:mt-16 md:grid-cols-3 md:gap-8 lg:gap-10">
-          {modes.map((m, i) => (
-            <motion.li key={m} style={{ y: rise[i] }}>
-              <motion.div
-                className="gilt relative aspect-[4/3] overflow-hidden rounded-felt"
-                initial={{ opacity: 0, rotate: i === 1 ? 0 : i ? 5 : -5, scale: 0.9 }}
-                whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ type: "spring", stiffness: 90, damping: 12, delay: i * 0.12 }}
-                style={{ transformOrigin: "50% -20%" }}
-              >
-                <ModePicture mode={m} />
-              </motion.div>
-              <h3 className="mt-6 font-display text-2xl font-bold leading-tight md:mt-7 md:text-[1.7rem]">{t(`modes.${m}.title`)}</h3>
-              <p className="mt-3 text-base leading-relaxed text-snow/80 md:text-lg">{t(`modes.${m}.body`)}</p>
-            </motion.li>
-          ))}
+          {modes.map((m, i) => {
+            const { kind, needs } = starts[m];
+            const busy = pending && chosen === kind;
+            return (
+              <motion.li key={m} style={{ y: rise[i] }} animate={{ opacity: chosen && chosen !== kind ? 0.45 : 1 }}>
+                <button
+                  type="button"
+                  onClick={() => pick(kind)}
+                  disabled={pending}
+                  aria-busy={busy}
+                  className="group block w-full text-left focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-gold disabled:cursor-wait"
+                >
+                  <span className="block transition-transform duration-300 group-hover:-translate-y-1.5 group-hover:rotate-[-0.6deg] group-disabled:translate-y-0 group-disabled:rotate-0">
+                  <motion.span
+                    className="gilt relative block aspect-[4/3] overflow-hidden rounded-felt"
+                    initial={{ opacity: 0, rotate: i === 1 ? 0 : i ? 5 : -5, scale: 0.9 }}
+                    whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ type: "spring", stiffness: 90, damping: 12, delay: i * 0.12 }}
+                    style={{ transformOrigin: "50% -20%" }}
+                  >
+                    <ModePicture mode={m} />
+                    {busy && (
+                      <span className="absolute inset-0 grid place-items-center bg-ink/55 font-display text-2xl font-bold text-snow">
+                        <span className="animate-pulse">{tq("starting")}</span>
+                      </span>
+                    )}
+                  </motion.span>
+                  </span>
+                  <span className="mt-6 block font-display text-2xl font-bold leading-tight group-hover:text-gold md:mt-7 md:text-[1.7rem]">
+                    {t(`modes.${m}.title`)}
+                  </span>
+                  <span className="mt-3 block text-base leading-relaxed text-snow/80 md:text-lg">{t(`modes.${m}.body`)}</span>
+                  <span className="mt-5 flex flex-wrap items-center gap-3">
+                    <span className="btn-primary px-5 py-2.5 text-base group-hover:bg-berry-dark">
+                      {t("modesStart")}
+                      <ArrowRight weight="bold" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                    <span className="inline-flex items-center gap-2 rounded-full bg-snow/10 px-3 py-1.5 text-sm font-semibold text-snow/90 ring-1 ring-snow/15">
+                      {needs.map((Icon, n) => (
+                        <Icon key={n} weight="bold" className="h-4 w-4 text-gold" />
+                      ))}
+                      {tq(`${kind}.needs`)}
+                    </span>
+                  </span>
+                </button>
+              </motion.li>
+            );
+          })}
         </ul>
+        {error && (
+          <p role="alert" className="mx-auto mt-8 max-w-xl rounded-2xl bg-berry/30 px-4 py-3 text-center text-snow">
+            {error}
+          </p>
+        )}
       </div>
     </section>
   );

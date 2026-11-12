@@ -41,7 +41,8 @@
     "joinHint": "Gib den 6-stelligen Code vom Organisator ein oder füge deinen Einladungslink ein.",
     "codeLabel": "Code der Runde",
     "codeNotFound": "Diesen Code kennen wir nicht. Frag beim Organisator nach.",
-    "createShort": "Erstellen"
+    "createShort": "Erstellen",
+    "modesStart": "Loslegen"
   },
   "film": {
     "label": "Ein kleines Märchen vom Weihnachtsmann, der Hilfe braucht",

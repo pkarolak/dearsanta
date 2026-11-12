@@ -2,12 +2,11 @@
 
 import { DeviceMobile, Devices, Television } from "@phosphor-icons/react";
 import { motion } from "motion/react";
-import { useLocale, useTranslations } from "next-intl";
-import { useState, useTransition } from "react";
+import { useTranslations } from "next-intl";
 import { StringLights } from "./landing/Atmosphere";
 import { ModePicture } from "./landing/ModesScene";
-import { Link, useRouter } from "@/i18n/navigation";
-import { quickStartAction } from "@/lib/actions";
+import { useQuickStart } from "./useQuickStart";
+import { Link } from "@/i18n/navigation";
 
 const kinds = [
   { kind: "together", picture: "sync", needs: [Television, DeviceMobile] },
@@ -19,25 +18,7 @@ const kinds = [
 export function QuickStart() {
   const t = useTranslations("create.quick");
   const th = useTranslations("home.modes");
-  const te = useTranslations("errors");
-  const locale = useLocale();
-  const router = useRouter();
-  const [pending, start] = useTransition();
-  const [chosen, setChosen] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  const pick = (kind: (typeof kinds)[number]["kind"]) => {
-    setChosen(kind);
-    setError(null);
-    start(async () => {
-      const result = await quickStartAction({ kind, locale, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone });
-      if (result.ok) router.push(`/s/${result.code}/host`);
-      else {
-        setChosen(null);
-        setError(te.has(result.error) ? te(result.error) : te("unknown"));
-      }
-    });
-  };
+  const { pick, pending, chosen, error } = useQuickStart();
 
   return (
     <div className="relative">
