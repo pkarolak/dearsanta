@@ -540,5 +540,10 @@
     "label": "Código de pantalla",
     "open": "Abrir la pantalla",
     "notFound": "No conocemos ese código. Revisa las cifras e inténtalo de nuevo."
+  },
+  "farewell": {
+    "title": "Para el resto de la noche",
+    "listen": "{by} · Spotify",
+    "watch": "Chimenea · YouTube"
   }
 }

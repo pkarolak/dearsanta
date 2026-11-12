@@ -540,5 +540,10 @@
     "label": "Código do ecrã",
     "open": "Abrir o ecrã",
     "notFound": "Não conhecemos esse código. Verifique os dígitos e tente outra vez."
+  },
+  "farewell": {
+    "title": "Para o resto da noite",
+    "listen": "{by} · Spotify",
+    "watch": "Lareira · YouTube"
   }
 }

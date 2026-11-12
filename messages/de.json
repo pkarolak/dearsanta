@@ -540,5 +540,10 @@
     "label": "Bildschirmcode",
     "open": "Bildschirm öffnen",
     "notFound": "Diesen Code kennen wir nicht. Prüf die Ziffern und versuch es noch einmal."
+  },
+  "farewell": {
+    "title": "Für den restlichen Abend",
+    "listen": "{by} · Spotify",
+    "watch": "Kaminfeuer · YouTube"
   }
 }

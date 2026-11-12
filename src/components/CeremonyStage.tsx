@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
+import { FestiveLinks } from "./FestiveLinks";
 import { ShowFrame, ShowStage } from "./show/ShowStage";
 import { useVoice } from "./useVoice";
 import type { SessionState } from "@/lib/state";
@@ -96,6 +97,7 @@ export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, 
         stageText={stageText}
         remoteLabel={th("remote")}
         controls={controls}
+        farewellExtras={compact ? undefined : <FestiveLinks variant="stage" />}
       />
     </ShowFrame>
   );

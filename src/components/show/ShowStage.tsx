@@ -30,6 +30,8 @@ type Props = {
   /** The words on the reveal card or the farewell banner. */
   stageText?: { title: string; detail?: string };
   remoteLabel?: string;
+  /** Shown beside Santa when he says goodbye, e.g. music for the rest of the evening. */
+  farewellExtras?: React.ReactNode;
   /** Controls in the top-right corner, e.g. the host's "next chapter" button. */
   controls?: React.ReactNode;
 };
@@ -83,7 +85,7 @@ export function ShowStage(props: Props) {
 const glide = { type: "spring", stiffness: 70, damping: 18 } as const;
 
 /** The whole ceremony happens in Santa's workshop; for the draw the wheel steps forward and Santa makes room. */
-function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageText, compact }: Props) {
+function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageText, compact, farewellExtras }: Props) {
   const showReindeer = (step === "lobby" || step === "rules") && card;
   const drawing = step === "draw" || step === "reveal" || step === "farewell";
 
@@ -136,7 +138,9 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
 
       <AnimatePresence>
         {step === "elves" && <Elves key="elves" className="left-[0%] top-[54%] w-[25%]" />}
-        {step === "farewell" && <Elves key="farewell" className="left-[75%] top-[50%] w-[25%]" />}
+        {step === "farewell" && (
+          <Elves key="farewell" className={farewellExtras ? "left-[1%] top-[56%] w-[21%]" : "left-[75%] top-[50%] w-[25%]"} />
+        )}
       </AnimatePresence>
 
       <motion.div
@@ -176,6 +180,16 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
         )}
       </AnimatePresence>
 
+      {step === "farewell" && farewellExtras && (
+        <motion.div
+          className="absolute left-[75%] top-[19%] z-10 w-[23%]"
+          initial={{ x: "40%", opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 120, damping: 16, delay: 1.2 }}
+        >
+          {farewellExtras}
+        </motion.div>
+      )}
       {step === "farewell" && <Confetti count={compact ? 18 : 42} />}
     </>
   );

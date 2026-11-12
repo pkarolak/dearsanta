@@ -10,6 +10,7 @@ import { localeOptions } from "./LanguageSwitcher";
 import { Select } from "./Select";
 import { DeviceSetup, markDevicesReady, useDevicesReady } from "./DeviceSetup";
 import { Disclosure } from "./Disclosure";
+import { FestiveLinks } from "./FestiveLinks";
 import { RevealCard } from "./RevealCard";
 import { PageBand } from "./PageBand";
 import { WaitingRoom } from "./WaitingRoom";
@@ -123,6 +124,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
             onReveal={() => void markRevealedAction(code)}
           />
         )}
+        {s.mode === "sync" && s.step === "farewell" && <FestiveLinks />}
 
         {message && (
           <p

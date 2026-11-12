@@ -540,5 +540,10 @@
     "label": "Kod ekranu",
     "open": "Otwórz ekran",
     "notFound": "Nie znamy takiego kodu. Sprawdź cyfry i spróbuj jeszcze raz."
+  },
+  "farewell": {
+    "title": "Na resztę wieczoru",
+    "listen": "{by} · Spotify",
+    "watch": "Kominek · YouTube"
   }
 }

@@ -3,6 +3,7 @@
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
 import { Avatar } from "@/components/Avatar";
+import { FestiveLinks } from "@/components/FestiveLinks";
 import { ShowFrame, ShowStage } from "@/components/show/ShowStage";
 import { Reindeer } from "@/components/show/Vignette";
 import { avatarOptions, defaultAvatar, seededAvatar } from "@/lib/avatar";
@@ -44,6 +45,7 @@ export function ShowSheet({ step, count, level, draw: wanted }: { step: string |
       elves={elves}
       level={level}
       draw={draw}
+      farewellExtras={<FestiveLinks variant="stage" />}
       subtitle={{ id: s, text: sampleLines[s] }}
       card={
         s === "lobby" ? (

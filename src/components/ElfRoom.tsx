@@ -5,6 +5,7 @@ import { useTransition } from "react";
 import { Avatar } from "./Avatar";
 import { AvatarEditor } from "./AvatarEditor";
 import { CeremonyStage } from "./CeremonyStage";
+import { FestiveLinks } from "./FestiveLinks";
 import { RevealCard } from "./RevealCard";
 import { PageBand } from "./PageBand";
 import { SantaPuppet } from "./show/SantaPuppet";
@@ -76,6 +77,8 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
           <Link href={`/s/${code}/reveal`} className="btn-primary mt-4">{t("watchReveal")}</Link>
         </div>
       ))}
+
+      {s.mode === "sync" && s.step === "farewell" && <FestiveLinks />}
 
       {s.mode === "sync" && !state.assignment && (
         <div className="well flex flex-wrap items-center justify-between gap-3 px-5 py-4">

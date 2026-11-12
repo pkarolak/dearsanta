@@ -540,5 +540,10 @@
     "label": "Screen code",
     "open": "Open the screen",
     "notFound": "We don’t know that code. Check the digits and try again."
+  },
+  "farewell": {
+    "title": "For the rest of the evening",
+    "listen": "{by} · Spotify",
+    "watch": "Fireplace · YouTube"
   }
 }
