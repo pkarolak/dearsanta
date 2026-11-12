@@ -5,7 +5,6 @@ import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useReduce
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { JoinCodeForm } from "../JoinCodeForm";
-import { SiteHeader } from "../SiteHeader";
 import { SpeakerIcon } from "../icons";
 import { clipSrc, clips, readingMs, type LineKey } from "./script";
 import { Link } from "@/i18n/navigation";
@@ -230,11 +229,7 @@ export function StoryFilm({ lines, lang }: Props) {
       </AnimatePresence>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/55 via-transparent via-45% to-ink/75" />
 
-      <div className="absolute inset-x-0 top-0 z-30">
-        <SiteHeader tone="dark" cta />
-      </div>
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-[5.5rem] z-20 flex justify-center px-5 md:bottom-28" aria-live="polite">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[5.75rem] z-20 flex justify-center px-5 md:bottom-28" aria-live="polite">
         <AnimatePresence mode="wait">
           {line && !done && (
             <motion.p
@@ -254,12 +249,21 @@ export function StoryFilm({ lines, lang }: Props) {
       <CallToAction shown={done} title={th("title")} lead={th("heroLead")} create={th("create")} haveCode={th("haveCode")} />
 
       <div
-        className={`pointer-events-none absolute z-40 flex items-end gap-3 px-3 md:px-6 ${done ? "right-0 top-[4.25rem] md:top-auto md:bottom-6" : "inset-x-0 bottom-4 md:bottom-6"}`}
+        className={`pointer-events-none absolute z-40 flex px-4 ${
+          done ? "right-0 top-[4.5rem] md:bottom-6 md:right-2 md:top-auto" : "inset-x-0 bottom-4 justify-center md:bottom-6"
+        }`}
       >
         <div
-          className={`pointer-events-auto flex items-center gap-1.5 rounded-full bg-ink/60 p-1.5 shadow-[0_12px_30px_-12px_rgb(0_0_0/0.8)] ring-1 ring-snow/15 backdrop-blur-md ${done ? "" : "min-w-0 flex-1 md:ml-auto md:max-w-xl"}`}
+          className={`pointer-events-auto flex h-14 items-center gap-1 rounded-full bg-ink/55 p-1.5 text-sm font-semibold text-snow shadow-[0_12px_30px_-12px_rgb(0_0_0/0.8)] ring-1 ring-snow/15 backdrop-blur-md ${
+            done ? "" : "w-full max-w-2xl"
+          }`}
         >
-          {!done && (
+          {done ? (
+            <button onClick={() => seek(0)} className="flex h-11 items-center gap-2 rounded-full px-4 hover:bg-snow/15">
+              <ArrowCounterClockwise weight="bold" className="h-4 w-4" />
+              {t("replay")}
+            </button>
+          ) : (
             <>
               <button
                 onClick={() => setPaused(!paused)}
@@ -268,7 +272,7 @@ export function StoryFilm({ lines, lang }: Props) {
               >
                 {paused ? <Play weight="fill" className="h-5 w-5" /> : <Pause weight="fill" className="h-5 w-5" />}
               </button>
-              <div className="flex h-11 min-w-0 flex-1 items-center gap-1 px-1.5">
+              <div className="flex h-11 min-w-0 flex-1 items-center gap-1 px-3">
                 {clips.map((c, i) => (
                   <button
                     key={c.id}
@@ -281,26 +285,23 @@ export function StoryFilm({ lines, lang }: Props) {
                   </button>
                 ))}
               </div>
-              <button onClick={() => seek(lastClip, true)} className="flex h-11 shrink-0 items-center gap-1.5 rounded-full px-3.5 font-semibold text-snow hover:bg-snow/15">
+              <button onClick={() => seek(lastClip, true)} className="flex h-11 shrink-0 items-center gap-1.5 rounded-full px-3.5 hover:bg-snow/15">
                 {t("skip")}
                 <SkipForward weight="fill" className="h-4 w-4" />
               </button>
             </>
           )}
-          {done && (
-            <button onClick={() => seek(0)} className="flex h-11 items-center gap-2 rounded-full bg-snow px-4 font-semibold text-ink hover:bg-cream">
-              <ArrowCounterClockwise weight="bold" className="h-4 w-4" />
-              {t("replay")}
-            </button>
-          )}
+          <span aria-hidden className="mx-0.5 h-6 w-px shrink-0 bg-snow/20" />
           <button
             onClick={toggleSound}
-            className={`flex h-11 shrink-0 items-center gap-2 rounded-full font-semibold ${sound ? "w-11 justify-center bg-snow/15 text-snow hover:bg-snow/25" : "animate-nudge bg-berry px-4 text-snow hover:bg-berry-dark"}`}
+            className={`flex h-11 shrink-0 items-center justify-center gap-2 rounded-full ${
+              sound ? "w-11 hover:bg-snow/15" : "animate-nudge bg-berry px-4 hover:bg-berry-dark max-sm:w-11 max-sm:px-0"
+            }`}
             aria-label={sound ? t("soundOff") : t("soundOn")}
             aria-pressed={sound}
           >
             <SpeakerIcon muted={!sound} className="h-5 w-5" />
-            {!sound && <span className="hidden sm:inline">{t("soundOn")}</span>}
+            {!sound && <span className="max-sm:hidden">{t("soundOn")}</span>}
           </button>
         </div>
       </div>

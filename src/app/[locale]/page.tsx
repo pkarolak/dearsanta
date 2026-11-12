@@ -1,5 +1,4 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { FloatingCta } from "@/components/landing/FloatingCta";
 import { FinaleScene } from "@/components/landing/FinaleScene";
 import { LandingMotion } from "@/components/landing/LandingMotion";
 import { LanguagesScene } from "@/components/landing/LanguagesScene";
@@ -7,6 +6,7 @@ import { MatchScene } from "@/components/landing/MatchScene";
 import { ModesScene } from "@/components/landing/ModesScene";
 import { lineKeys, type LineKey } from "@/components/film/script";
 import { StoryFilm } from "@/components/film/StoryFilm";
+import { SiteHeader } from "@/components/SiteHeader";
 import type { VoiceLine } from "@/lib/audio/engine";
 import { prepareLine } from "@/lib/tts";
 
@@ -28,13 +28,13 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
 
   return (
     <main className="bg-wall">
+      <SiteHeader tone="dark" cta />
       <LandingMotion>
         <StoryFilm lines={lines} lang={locale} />
         <MatchScene />
         <ModesScene />
         <LanguagesScene />
         <FinaleScene />
-        <FloatingCta />
       </LandingMotion>
     </main>
   );

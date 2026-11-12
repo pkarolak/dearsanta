@@ -30,7 +30,7 @@ export function LanguageSwitcher({ tone = "light", compact = false }: { tone?: "
       align="end"
       minWidth={208}
       beak
-      className={`flex items-center gap-1.5 whitespace-nowrap rounded-full py-1.5 pl-3 pr-2.5 text-sm font-semibold transition-colors disabled:opacity-60 aria-expanded:bg-current/10 ${
+      className={`flex h-9 items-center gap-1.5 whitespace-nowrap rounded-full pl-3 pr-2.5 text-sm font-semibold transition-colors disabled:opacity-60 aria-expanded:bg-current/10 ${
         dark ? "hover:bg-snow/10" : "ring-1 ring-current/20 hover:ring-current/40"
       }`}
       renderTrigger={(selected, open) => (

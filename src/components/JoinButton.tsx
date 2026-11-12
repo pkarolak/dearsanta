@@ -51,7 +51,7 @@ export function JoinButton({ tone = "dark" }: { tone?: "light" | "dark" }) {
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-controls="join-panel"
-        className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-bold ring-1 md:text-base ${
+        className={`flex h-9 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-sm font-semibold ring-1 ${
           tone === "dark" ? "bg-snow/15 text-snow ring-snow/30 hover:bg-snow/25" : "bg-ink/5 text-ink ring-ink/15 hover:bg-ink/10"
         }`}
       >
