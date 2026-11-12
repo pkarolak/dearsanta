@@ -30,7 +30,7 @@ export function ShowSheet({ step, count, level, draw: wanted }: { step: string |
     return () => clearTimeout(timer);
   }, [wanted]);
   const draw = wanted === "sequence" ? (stoppedNow ? "stopped" : "spinning") : wanted;
-  const elves = names.slice(0, count).map((displayName, i) => ({
+  const elves = Array.from({ length: count }, (_, i) => names[i] ?? `Elf ${i + 1}`).map((displayName, i) => ({
     id: String(i),
     displayName,
     avatar: seededAvatar(displayName),

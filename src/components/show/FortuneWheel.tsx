@@ -200,8 +200,8 @@ export function FortuneWheel({
               named={named}
               isStar={isStar}
               remoteLabel={remoteLabel}
-              left={n === 1 ? 50 : fix(50 + (ring / 0.86) * Math.sin(a))}
-              top={n === 1 ? 50 : fix(50 - (ring / 0.86) * Math.cos(a))}
+              left={fix(50 + (ring / 0.86) * Math.sin(a))}
+              top={fix(50 - (ring / 0.86) * Math.cos(a))}
             />
           );
         })}
