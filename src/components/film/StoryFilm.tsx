@@ -2,6 +2,7 @@
 
 import { ArrowCounterClockwise, Pause, Play, SkipForward } from "@phosphor-icons/react";
 import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { JoinCodeForm } from "../JoinCodeForm";
@@ -13,6 +14,11 @@ import { workshopAudio, type VoiceLine } from "@/lib/audio/engine";
 type Props = { lines: Record<LineKey, VoiceLine> };
 
 const lastClip = clips.length - 1;
+/** A beat on the closed curtain before it opens. */
+const CURTAIN_WAIT_MS = 700;
+/** Opens even if the first clip is slow to load, rather than keep the page behind a curtain. */
+const CURTAIN_MAX_WAIT_MS = 4000;
+const CURTAIN_OPEN_S = 1.9;
 const portrait = "(max-aspect-ratio: 4/5)";
 
 function useTall() {
@@ -28,8 +34,9 @@ function useTall() {
 }
 
 /**
- * The landing page's opening: a puppet film that plays by itself, silent with subtitles,
- * until the viewer turns the sound on. It ends on the call to action, with the last clip looping behind it.
+ * The landing page's opening: a curtain opens on a puppet film, which starts once the curtain is out of
+ * the way. Santa speaks if the browser allows sound before a tap, otherwise from the viewer's first click.
+ * It ends on the call to action, with the last clip looping behind it.
  */
 export function StoryFilm({ lines }: Props) {
   const t = useTranslations("film");
@@ -47,6 +54,11 @@ export function StoryFilm({ lines }: Props) {
   const [ended, setEnded] = useState(false);
   const [line, setLine] = useState<VoiceLine | null>(null);
   const progress = useMotionValue(0);
+  const [waited, setWaited] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [curtainOpen, setCurtainOpen] = useState(false);
+  const opening = waited && loaded;
+  const soundAsked = useRef(false);
   // Scrolling on, the film sinks back and dims while the next scene slides up over it.
   const { scrollYProgress: leaving } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const sink = useTransform(leaving, [0, 1], ["0%", reduced ? "0%" : "55%"]);
@@ -54,7 +66,7 @@ export function StoryFilm({ lines }: Props) {
   // Sinking keeps the film in the viewport, so it counts as gone once the next scene covers most of it.
   const [covered, setCovered] = useState(false);
   useMotionValueEvent(leaving, "change", (v) => setCovered(v > 0.6));
-  const active = !paused && visible && !covered;
+  const active = !paused && visible && !covered && (curtainOpen || !!reduced);
   const soundRef = useRef(sound);
   useEffect(() => {
     soundRef.current = sound;
@@ -80,6 +92,48 @@ export function StoryFilm({ lines }: Props) {
   useEffect(() => {
     Object.values(lines).forEach((l) => workshopAudio().prefetch(l.audioUrl));
   }, [lines]);
+
+  // The first clip often loads before the page hydrates, so its readiness is read off the element too.
+  useEffect(() => {
+    const v = video.current;
+    const onReady = () => setLoaded(true);
+    v?.addEventListener("canplay", onReady);
+    const wait = setTimeout(() => {
+      setWaited(true);
+      if (v && v.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) onReady();
+    }, CURTAIN_WAIT_MS);
+    const giveUp = setTimeout(onReady, CURTAIN_MAX_WAIT_MS);
+    return () => {
+      v?.removeEventListener("canplay", onReady);
+      clearTimeout(wait);
+      clearTimeout(giveUp);
+    };
+  }, []);
+
+  // Sound from the start where the browser allows it; elsewhere the first click or key turns it on.
+  useEffect(() => {
+    let gone = false;
+    const audio = workshopAudio();
+    void audio.tryUnlock().then((ok) => {
+      if (!ok || gone || soundAsked.current) return;
+      soundAsked.current = true;
+      audio.setMuted(false);
+      setSound(true);
+    });
+    const onFirstGesture = (e: Event) => {
+      stop();
+      if (soundAsked.current || (e.target as Element | null)?.closest?.("[data-sound-toggle]")) return;
+      soundAsked.current = true;
+      void soundOn().then((ok) => ok && setSound(true));
+    };
+    const events = ["click", "keydown", "touchend"] as const;
+    const stop = () => events.forEach((name) => window.removeEventListener(name, onFirstGesture, true));
+    events.forEach((name) => window.addEventListener(name, onFirstGesture, true));
+    return () => {
+      gone = true;
+      stop();
+    };
+  }, []);
 
   // Plays the current clip, firing its cues on time, and moves on once it and its narration are done.
   useEffect(() => {
@@ -154,22 +208,17 @@ export function StoryFilm({ lines }: Props) {
   useEffect(() => () => workshopAudio().stopScore(), []);
 
   const toggleSound = async () => {
-    const audio = workshopAudio();
+    soundAsked.current = true;
     if (sound) {
+      const audio = workshopAudio();
       audio.stopVoice();
       audio.setMuted(true);
       setSound(false);
       return;
     }
-    try {
-      await audio.unlock();
-    } catch {
-      return;
-    }
-    audio.setMuted(false);
-    audio.effect("bells");
-    setSound(true);
+    if (await soundOn()) setSound(true);
   };
+
 
   const seek = (to: number, end = false) => {
     setPaused(false);
@@ -249,7 +298,7 @@ export function StoryFilm({ lines }: Props) {
       <CallToAction shown={done} title={th("title")} lead={th("heroLead")} create={th("create")} haveCode={th("haveCode")} />
 
       <div
-        className={`pointer-events-none absolute z-40 flex px-4 ${
+        className={`pointer-events-none absolute z-40 flex px-4 transition-opacity duration-500 ${curtainOpen || reduced ? "" : "opacity-0"} ${
           done ? "right-0 top-[4.5rem] md:bottom-6 md:right-2 md:top-auto" : "inset-x-0 bottom-4 justify-center md:bottom-6"
         }`}
       >
@@ -293,6 +342,7 @@ export function StoryFilm({ lines }: Props) {
           )}
           <span aria-hidden className="mx-0.5 h-6 w-px shrink-0 bg-snow/20" />
           <button
+            data-sound-toggle
             onClick={toggleSound}
             className={`flex h-11 shrink-0 items-center justify-center gap-2 rounded-full ${
               sound ? "w-11 hover:bg-snow/15" : "animate-nudge bg-berry px-4 hover:bg-berry-dark max-sm:w-11 max-sm:px-0"
@@ -305,9 +355,44 @@ export function StoryFilm({ lines }: Props) {
           </button>
         </div>
       </div>
+      {!curtainOpen && !reduced && (
+        <div className="pointer-events-none absolute inset-0 z-[45]" aria-hidden>
+          {[0, 1].map((side) => (
+            <motion.div
+              key={side}
+              className="absolute top-0 h-full w-[52%]"
+              style={{ [side ? "right" : "left"]: 0 }}
+              initial={false}
+              animate={{ x: opening ? (side ? "100%" : "-100%") : "0%" }}
+              transition={{ duration: CURTAIN_OPEN_S, ease: [0.55, 0, 0.25, 1] }}
+              onAnimationComplete={() => opening && setCurtainOpen(true)}
+            >
+              <Image src="/show/curtain.webp" alt="" fill priority unoptimized sizes="52vw" className="object-cover" style={{ transform: side ? "scaleX(-1)" : undefined }} />
+            </motion.div>
+          ))}
+          <motion.div
+            className="absolute inset-x-0 top-0 h-[22%] bg-gradient-to-b from-[#1c0c0b] to-transparent"
+            animate={{ opacity: opening ? 0 : 1 }}
+            transition={{ duration: CURTAIN_OPEN_S }}
+          />
+        </div>
+      )}
       <motion.div className="pointer-events-none absolute inset-0 z-50 bg-ink" style={{ opacity: dim }} />
     </motion.section>
   );
+}
+
+/** Must start inside the viewer's click: iOS only lets Santa speak if a tap started the sound. */
+async function soundOn() {
+  const audio = workshopAudio();
+  try {
+    await audio.unlock();
+  } catch {
+    return false;
+  }
+  audio.setMuted(false);
+  audio.effect("bells");
+  return true;
 }
 
 function Segment({ index, clip, progress }: { index: number; clip: number; progress: MotionValue<number> }) {

@@ -84,6 +84,24 @@ class WorkshopAudio {
 
   async unlock() {
     this.unlockVoice();
+    this.ensureContext();
+    if (this.ctx!.state !== "running") await this.ctx!.resume();
+  }
+
+  /**
+   * Turns the sound on without a tap, where the browser already allows it (Chrome does for sites the
+   * viewer often plays sound on). Gives up quickly elsewhere: until a tap, `resume` just never settles.
+   */
+  async tryUnlock(timeoutMs = 400) {
+    this.ensureContext();
+    const ctx = this.ctx!;
+    if (ctx.state !== "running") await Promise.race([ctx.resume().catch(() => {}), new Promise((r) => setTimeout(r, timeoutMs))]);
+    if (ctx.state !== "running") return false;
+    this.unlockVoice();
+    return true;
+  }
+
+  private ensureContext() {
     // Safari: play through the ring/silent switch like a video would.
     const session = (navigator as unknown as { audioSession?: { type: string } }).audioSession;
     if (session) session.type = "playback";
@@ -105,7 +123,6 @@ class WorkshopAudio {
         if (document.visibilityState === "visible" && this.ctx && this.ctx.state !== "running") void this.ctx.resume().catch(() => {});
       });
     }
-    if (this.ctx.state !== "running") await this.ctx.resume();
   }
 
   /** Must run synchronously inside the tap that turns the sound on. */
@@ -115,6 +132,7 @@ class WorkshopAudio {
     el.preload = "auto";
     el.play().catch(() => {});
     this.voiceEl = el;
+    if (this.ctx) this.ctx.createMediaElementSource(el).connect(this.voice);
   }
 
   setMuted(muted: boolean) {
