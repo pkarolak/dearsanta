@@ -406,7 +406,13 @@
       "more": "Definições, regras e convites",
       "myElf": "Cria o teu elfo",
       "tvHint": "Na televisão ou noutro portátil, abra <b>{url}</b> e escreva o código do ecrã:",
-      "leadRemote": "Os convidados leem o código no ecrã grande. Código da sessão: <b>{code}</b>"
+      "leadRemote": "Os convidados leem o código no ecrã grande. Código da sessão: <b>{code}</b>",
+      "hostRole": "Estás a conduzir a cerimónia",
+      "screenTitle": "O ecrã grande",
+      "youPlay": "Também entras no sorteio",
+      "youPlayHint": "Como Chefe dos elfos participas como qualquer outro elfo.",
+      "changeElf": "Mudar o teu elfo",
+      "screenOn": "Ligado"
     },
     "phone": {
       "button": "Levar para o telemóvel",

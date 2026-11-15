@@ -406,7 +406,13 @@
       "more": "Ajustes, reglas e invitaciones",
       "myElf": "Crea tu elfo",
       "tvHint": "En la tele o en otro portátil, entra en <b>{url}</b> y escribe el código de pantalla:",
-      "leadRemote": "Los invitados escanean el código de la pantalla grande. Código de la sesión: <b>{code}</b>"
+      "leadRemote": "Los invitados escanean el código de la pantalla grande. Código de la sesión: <b>{code}</b>",
+      "hostRole": "Diriges la ceremonia",
+      "screenTitle": "La pantalla grande",
+      "youPlay": "Tú también participas",
+      "youPlayHint": "Como Jefe de los elfos juegas como cualquier otro elfo.",
+      "changeElf": "Cambiar tu elfo",
+      "screenOn": "Conectada"
     },
     "phone": {
       "button": "Llevarlo a mi móvil",

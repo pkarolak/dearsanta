@@ -406,7 +406,13 @@
       "more": "Ustawienia, zasady i zaproszenia",
       "myElf": "Stwórz swojego elfa",
       "tvHint": "Na telewizorze albo drugim laptopie wejdź na <b>{url}</b> i wpisz kod ekranu:",
-      "leadRemote": "Goście skanują kod z dużego ekranu. Kod sesji: <b>{code}</b>"
+      "leadRemote": "Goście skanują kod z dużego ekranu. Kod sesji: <b>{code}</b>",
+      "hostRole": "Prowadzisz ceremonię",
+      "screenTitle": "Duży ekran",
+      "youPlay": "Ty też losujesz",
+      "youPlayHint": "Jako Naczelnik elfów bierzesz udział w zabawie jak każdy inny elf.",
+      "changeElf": "Zmień wygląd elfa",
+      "screenOn": "Połączony"
     },
     "phone": {
       "button": "Weź sesję na telefon",

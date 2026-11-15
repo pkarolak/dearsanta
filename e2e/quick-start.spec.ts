@@ -61,7 +61,8 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   await phone.screenshot({ path: `${shots}/11-remote.png`, fullPage: true });
   await guest.screenshot({ path: `${shots}/12-guest-dressing.png` });
   await laptop.screenshot({ path: `${shots}/13-screen-lobby-live.png` });
-  await phone.getByRole("link", { name: "Make your elf" }).click();
+  // Naming themselves already made the chief an elf, so the card now offers to change its look.
+  await phone.getByRole("link", { name: "Change your elf" }).click();
   await phone.waitForURL(new RegExp(`/s/${code}/me`));
   await phone.getByRole("button", { name: "Change look" }).click();
   await phone.getByRole("tab", { name: "Hat" }).click();

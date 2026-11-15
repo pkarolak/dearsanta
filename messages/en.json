@@ -406,7 +406,13 @@
       "more": "Settings, rules and invitations",
       "myElf": "Make your elf",
       "tvHint": "On the TV or a second laptop, go to <b>{url}</b> and type the screen code:",
-      "leadRemote": "Guests scan the code on the big screen. Session code: <b>{code}</b>"
+      "leadRemote": "Guests scan the code on the big screen. Session code: <b>{code}</b>",
+      "hostRole": "You’re running the show",
+      "screenTitle": "The big screen",
+      "youPlay": "You’re in the draw too",
+      "youPlayHint": "As the Elf Chief you play along like every other elf.",
+      "changeElf": "Change your elf",
+      "screenOn": "Connected"
     },
     "phone": {
       "button": "Take it to my phone",

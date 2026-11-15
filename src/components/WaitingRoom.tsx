@@ -12,21 +12,17 @@ import { Link } from "@/i18n/navigation";
 import { saveProfileAction } from "@/lib/actions";
 import type { SessionState } from "@/lib/state";
 
-type Props = { state: SessionState; joinUrl: string; screenUrl: string; onChanged: () => void };
+type Props = { state: SessionState; joinUrl: string; screenUrl: string };
 
 /**
  * Where a spontaneous Secret Santa begins: the code to scan, and every elf popping in as they join,
  * their looks changing live while they dress up on their phones.
  */
-export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
+export function WaitingRoom({ state, joinUrl, screenUrl }: Props) {
   const t = useTranslations("host.room");
-  const locale = useLocale();
   const s = state.session;
-  const me = state.viewer;
   const elves = state.participants.filter((p) => p.status === "approved");
   const [copied, setCopied] = useState(false);
-  const [pending, start] = useTransition();
-  const [name, setName] = useState("");
   const shortUrl = joinUrl.replace(/^https?:\/\//, "");
   const tvUrl = `${shortUrl.split("/")[0]}/tv`;
   const onScreen = s.mode === "sync" && !!s.screenConnected;
@@ -59,7 +55,8 @@ export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
         )}
 
         <div>
-          <h2 className="glow-text font-display text-4xl font-black leading-[1.02] md:text-5xl">{t("title")}</h2>
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">{t("hostRole")}</p>
+          <h2 className="glow-text mt-1 font-display text-4xl font-black leading-[1.02] md:text-5xl">{t("title")}</h2>
           {onScreen ? (
             <p className="mt-3 max-w-lg text-lg text-snow/85">
               {t.rich("leadRemote", {
@@ -74,25 +71,37 @@ export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
           ) : (
             <p className="mt-3 max-w-lg text-lg text-snow/85">{s.mode === "async" ? t("leadAsync") : t("lead")}</p>
           )}
-          <div className="mt-5 flex flex-wrap gap-3">
-            {s.mode === "sync" && (
-              <a href={screenUrl} target="_blank" rel="noreferrer" className={onScreen ? "btn-ghost text-snow hover:bg-snow/10" : "btn-primary"}>
-                <Television weight="bold" className="h-5 w-5" />
-                {t("screen")}
-              </a>
-            )}
-            <button className="btn-pine" onClick={share}>
-              {copied ? <Check weight="bold" className="h-5 w-5" /> : <ShareNetwork weight="bold" className="h-5 w-5" />}
-              {copied ? t("copied") : t("share")}
-            </button>
-            {!s.remotePaired && <PhoneHandoff code={s.code} className="btn-ghost text-snow hover:bg-snow/10 max-sm:hidden" />}
-          </div>
-          {s.mode === "sync" && !onScreen && s.screenCode && (
-            <div className="mt-4 flex max-w-lg flex-wrap items-center gap-x-4 gap-y-2 rounded-[1.25rem] bg-snow/10 px-4 py-3">
-              <p className="min-w-0 flex-1 text-sm text-snow/80">{t.rich("tvHint", { url: tvUrl, b: (chunks) => <strong className="text-snow">{chunks}</strong> })}</p>
-              <p className="font-display text-3xl font-black tracking-[0.12em] text-gold" data-testid="screen-code">
-                {s.screenCode.replace(/(\d{3})(\d{3})/, "$1 $2")}
+          <button className="btn-pine mt-5" onClick={share}>
+            {copied ? <Check weight="bold" className="h-5 w-5" /> : <ShareNetwork weight="bold" className="h-5 w-5" />}
+            {copied ? t("copied") : t("share")}
+          </button>
+
+          {s.mode === "sync" && (
+            <div className="mt-6 max-w-lg rounded-[1.25rem] bg-snow/10 p-4">
+              <p className="flex items-center gap-2 font-semibold">
+                <Television weight="bold" className="h-5 w-5 text-gold" />
+                {t("screenTitle")}
+                {onScreen && (
+                  <span className="ml-auto flex items-center gap-1 rounded-full bg-pine px-2.5 py-0.5 text-xs font-semibold">
+                    <Check weight="bold" className="h-3.5 w-3.5" />
+                    {t("screenOn")}
+                  </span>
+                )}
               </p>
+              {!onScreen && s.screenCode && (
+                <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+                  <p className="min-w-0 flex-1 text-sm text-snow/80">{t.rich("tvHint", { url: tvUrl, b: (chunks) => <strong className="text-snow">{chunks}</strong> })}</p>
+                  <p className="font-display text-3xl font-black tracking-[0.12em] text-gold" data-testid="screen-code">
+                    {s.screenCode.replace(/(\d{3})(\d{3})/, "$1 $2")}
+                  </p>
+                </div>
+              )}
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <a href={screenUrl} target="_blank" rel="noreferrer" className={onScreen ? "btn-ghost px-4 py-2 text-sm text-snow hover:bg-snow/10" : "btn-primary px-4 py-2 text-sm"}>
+                  {t("screen")}
+                </a>
+                {!s.remotePaired && <PhoneHandoff code={s.code} className="btn-ghost px-4 py-2 text-sm text-snow hover:bg-snow/10 max-sm:hidden" />}
+              </div>
             </div>
           )}
 
@@ -118,42 +127,58 @@ export function WaitingRoom({ state, joinUrl, screenUrl, onChanged }: Props) {
             </ul>
           </div>
 
-          {me && (
-            <div className="mt-7 flex flex-wrap items-end gap-3 rounded-[1.25rem] bg-snow/10 p-4">
-              <form
-                className="flex min-w-0 flex-1 flex-wrap items-end gap-2"
-                action={() =>
-                  start(async () => {
-                    if (!name.trim()) return;
-                    await saveProfileAction(s.code, { displayName: name.trim(), avatar: me.avatar }, locale);
-                    setName("");
-                    onChanged();
-                  })
-                }
-              >
-                <label className="w-full text-sm font-semibold text-snow/80" htmlFor="host-name">
-                  {t("yourName")}
-                </label>
-                <input
-                  id="host-name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder={me.displayName}
-                  maxLength={40}
-                  className="field min-w-0 flex-1"
-                  autoComplete="given-name"
-                />
-                <button className="btn-soft" disabled={pending || !name.trim()}>
-                  {t("saveName")}
-                </button>
-              </form>
-              <Link href={`/s/${s.code}/me`} className="btn-ghost text-snow hover:bg-snow/10">
-                {t("myElf")}
-              </Link>
-            </div>
-          )}
         </div>
       </div>
+    </section>
+  );
+}
+
+/** The Elf Chief draws too: their own name and elf, kept apart from running the show. */
+export function HostElfCard({ state, onChanged }: { state: SessionState; onChanged: () => void }) {
+  const t = useTranslations("host.room");
+  const locale = useLocale();
+  const me = state.viewer;
+  const [pending, start] = useTransition();
+  const [name, setName] = useState("");
+  if (!me) return null;
+
+  return (
+    <section className="card flex flex-wrap items-center gap-4 p-5 md:p-6">
+      <Avatar config={me.avatar} title={me.displayName} className="h-16 w-16 shrink-0" />
+      <form
+        className="min-w-0 flex-1"
+        action={() =>
+          start(async () => {
+            if (!name.trim()) return;
+            await saveProfileAction(state.session.code, { displayName: name.trim(), avatar: me.avatar }, locale);
+            setName("");
+            onChanged();
+          })
+        }
+      >
+        <label className="font-display text-xl font-bold" htmlFor="host-name">
+          {t("youPlay")}
+        </label>
+        <p className="text-sm text-muted">{t("youPlayHint")}</p>
+        <div className="mt-3 flex gap-2">
+          <input
+            id="host-name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder={me.displayName}
+            aria-label={t("yourName")}
+            maxLength={40}
+            className="field min-w-0 flex-1"
+            autoComplete="given-name"
+          />
+          <button className="btn-soft" disabled={pending || !name.trim()}>
+            {t("saveName")}
+          </button>
+        </div>
+      </form>
+      <Link href={`/s/${state.session.code}/me`} className="btn-pine max-sm:w-full">
+        {me.profileComplete ? t("changeElf") : t("myElf")}
+      </Link>
     </section>
   );
 }

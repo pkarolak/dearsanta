@@ -13,7 +13,7 @@ import { Disclosure } from "./Disclosure";
 import { FestiveLinks } from "./FestiveLinks";
 import { RevealCard } from "./RevealCard";
 import { PageBand } from "./PageBand";
-import { WaitingRoom } from "./WaitingRoom";
+import { HostElfCard, WaitingRoom } from "./WaitingRoom";
 import { RemoteIcon } from "./icons";
 import { PhoneHandoff } from "./PhoneHandoff";
 import { Link } from "@/i18n/navigation";
@@ -98,7 +98,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
         }
       >
         <div className="mt-5 flex flex-wrap items-center gap-2">
-          <Link href={`/s/${code}/me`} className="btn-soft px-4 py-2 text-sm">{t("myElf")}</Link>
+          {!inLobby && <Link href={`/s/${code}/me`} className="btn-soft px-4 py-2 text-sm">{t("myElf")}</Link>}
           {!(s.step === "lobby" && !s.drawn) && <PhoneHandoff code={code} className="btn-soft px-4 py-2 text-sm max-sm:hidden" />}
           {s.mode === "sync" && !(s.step === "lobby" && !s.drawn) && (
             <a href={screenUrl} target="_blank" rel="noreferrer" className="btn-pine px-4 py-2 text-sm">
@@ -116,7 +116,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
         <>
       {inLobby && (
         <div className="mx-auto max-w-6xl px-5 pt-6">
-          <WaitingRoom state={state} joinUrl={joinUrl} screenUrl={screenUrl} onChanged={refresh} />
+          <WaitingRoom state={state} joinUrl={joinUrl} screenUrl={screenUrl} />
         </div>
       )}
       <div className="mx-auto max-w-3xl space-y-5 px-5 py-6">
@@ -323,6 +323,8 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
             )}
           </Disclosure>
         </div>
+
+        {inLobby && <HostElfCard state={state} onChanged={refresh} />}
       </div>
         </>
       )}

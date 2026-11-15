@@ -406,7 +406,13 @@
       "more": "Einstellungen, Regeln und Einladungen",
       "myElf": "Deinen Elf gestalten",
       "tvHint": "Geh auf dem Fernseher oder einem zweiten Laptop auf <b>{url}</b> und gib den Bildschirmcode ein:",
-      "leadRemote": "Die Gäste scannen den Code auf dem großen Bildschirm. Sitzungscode: <b>{code}</b>"
+      "leadRemote": "Die Gäste scannen den Code auf dem großen Bildschirm. Sitzungscode: <b>{code}</b>",
+      "hostRole": "Du leitest die Zeremonie",
+      "screenTitle": "Der große Bildschirm",
+      "youPlay": "Du wichtelst auch mit",
+      "youPlayHint": "Als Oberwichtel machst du mit wie jeder andere Wichtel.",
+      "changeElf": "Deinen Elf ändern",
+      "screenOn": "Verbunden"
     },
     "phone": {
       "button": "Aufs Handy holen",
