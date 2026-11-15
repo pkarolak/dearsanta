@@ -13,7 +13,8 @@ export const localeOptions = locales.map((l) => ({
   leading: (selected: boolean) => <OptionBadge active={selected}>{l.toUpperCase()}</OptionBadge>,
 }));
 
-export function LanguageSwitcher({ tone = "light", compact = false }: { tone?: "light" | "dark"; compact?: boolean }) {
+/** `short` shows the language code ("PL") instead of its name, for tight bars. */
+export function LanguageSwitcher({ tone = "light", short = false }: { tone?: "light" | "dark"; short?: boolean }) {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
@@ -31,12 +32,12 @@ export function LanguageSwitcher({ tone = "light", compact = false }: { tone?: "
       minWidth={208}
       beak
       className={`flex h-9 items-center gap-1.5 whitespace-nowrap rounded-full pl-3 pr-2.5 text-sm font-semibold transition-colors disabled:opacity-60 aria-expanded:bg-current/10 ${
-        dark ? "hover:bg-snow/10" : "ring-1 ring-current/20 hover:ring-current/40"
+        dark ? "text-snow/85 hover:bg-snow/10 hover:text-snow" : "ring-1 ring-current/20 hover:ring-current/40"
       }`}
       renderTrigger={(selected, open) => (
         <>
           <Globe weight="bold" className="h-4 w-4 opacity-80" aria-hidden />
-          <span className={compact ? "max-sm:sr-only" : undefined}>{selected?.label}</span>
+          <span className={short ? "tracking-wide" : undefined}>{short ? locale.toUpperCase() : selected?.label}</span>
           <CaretDown weight="bold" className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
         </>
       )}

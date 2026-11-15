@@ -51,8 +51,8 @@ export function JoinButton({ tone = "dark" }: { tone?: "light" | "dark" }) {
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-controls="join-panel"
-        className={`flex h-9 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-sm font-semibold ring-1 ${
-          tone === "dark" ? "bg-snow/15 text-snow ring-snow/30 hover:bg-snow/25" : "bg-ink/5 text-ink ring-ink/15 hover:bg-ink/10"
+        className={`flex h-9 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-sm font-semibold transition-colors ${
+          tone === "dark" ? "text-snow/85 hover:bg-snow/10 hover:text-snow aria-expanded:bg-snow/10 aria-expanded:text-snow" : "text-ink hover:bg-ink/5"
         }`}
       >
         <SignIn weight="bold" className="h-4 w-4" />
