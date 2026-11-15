@@ -107,8 +107,8 @@ export function ModePicture({ mode }: { mode: (typeof modes)[number] }) {
   if (mode === "sync")
     return (
       <Vignette set="stage" focus="50% 40%" className="absolute! inset-0 rounded-none">
-        <SantaPuppet className="absolute left-[31%] top-[14%] w-[38%]" />
-        <Cast who="presents" className="-bottom-[6%] left-[20%] w-[60%]" />
+        <SantaPuppet className="absolute left-[30%] top-[15%] w-[40%]" />
+        <Cast who="presents" className="-bottom-[4%] left-[8%] w-[84%]" />
       </Vignette>
     );
   return (
