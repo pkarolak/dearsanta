@@ -25,7 +25,27 @@ export function FinaleScene() {
 
   return (
     <>
-      <section ref={ref} className="relative h-svh min-h-[40rem] overflow-hidden bg-wall [container-type:size]">
+      <section className="relative overflow-hidden bg-[linear-gradient(180deg,#101a3c,#0b1230)] px-5 pb-[max(3rem,5vw)] pt-20 text-snow md:px-8">
+        <Stars count={50} />
+        <Aurora className="-top-[20%]" />
+        <StringLights swags={6} perSwag={6} sag={22} />
+        <Snowfall count={30} />
+        <div className="relative mx-auto max-w-7xl">
+          <p className="font-display text-lg text-snow/85">{t("footer")}</p>
+          <motion.p
+            className="foil mt-8 whitespace-nowrap pr-[0.1em] font-display text-[calc((100vw-2.5rem)/7.6)] font-black leading-[0.85] tracking-[-0.045em] md:text-[min(calc((100vw-4rem)/6.9),11.5rem)]"
+            initial={{ y: "35%", opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.9, ease: [0.2, 0.7, 0.2, 1] }}
+            aria-hidden
+          >
+            {brand.name}
+          </motion.p>
+        </div>
+      </section>
+
+      <footer ref={ref} className="relative h-svh min-h-[40rem] overflow-hidden bg-wall [container-type:size]">
         <CoverStage set="stage">
           <div className="absolute left-[21%] top-[6.5%] h-[13%] w-[58%] animate-bulbs rounded-full bg-gold/10 mix-blend-screen" />
           <Image src="/show/presents.webp" alt="" width={1280} height={470} unoptimized className="absolute bottom-[2%] left-[30%] w-[40%]" />
@@ -45,7 +65,7 @@ export function FinaleScene() {
             />
           </motion.div>
         ))}
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[22%] bg-gradient-to-b from-[#1c0c0b] to-transparent" />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[22%] bg-gradient-to-b from-[#0b1230] to-transparent" />
 
         <motion.div
           className="absolute bottom-0 left-1/2 w-[min(22rem,62vw)] -translate-x-1/2"
@@ -80,34 +100,17 @@ export function FinaleScene() {
             </div>
           </motion.div>
         </div>
-      </section>
-
-      <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#101a3c,#0b1230)] px-5 pb-[max(2.5rem,4.5vw)] pt-20 text-snow md:px-8">
-        <Stars count={50} />
-        <Aurora className="-top-[20%]" />
-        <StringLights swags={6} perSwag={6} sag={22} />
-        <Snowfall count={30} />
-        <div className="relative mx-auto max-w-7xl">
-          <div className="flex flex-wrap items-center justify-between gap-4 text-snow/85">
-            <p className="font-display text-lg">{t("footer")}</p>
-            <nav className="flex flex-wrap items-center gap-x-5 gap-y-3 whitespace-nowrap font-semibold">
+        {/* The page ends on the stage, so the footer's links ride along its bottom edge. */}
+        <div className="absolute inset-x-0 bottom-0 z-20 bg-ink/70 px-5 py-3 text-sm text-snow/85 backdrop-blur-md md:px-8">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-1">
+            <p>
+              © {new Date().getFullYear()} {brand.name}
+            </p>
+            <nav className="flex items-center gap-5 font-semibold">
               <Link href="/me" className="hover:text-snow">{tn("mySessions")}</Link>
               <a href={`mailto:${brand.contact}`} className="hover:text-snow">{t("contact")}</a>
-              <Link href="/new" className="btn-primary">
-                {t("create")}
-              </Link>
             </nav>
           </div>
-          <motion.p
-            className="foil mt-10 whitespace-nowrap pr-[0.1em] font-display text-[calc((100vw-2.5rem)/7.6)] font-black leading-[0.85] tracking-[-0.045em] md:text-[min(calc((100vw-4rem)/6.9),11.5rem)]"
-            initial={{ y: "35%", opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.9, ease: [0.2, 0.7, 0.2, 1] }}
-            aria-hidden
-          >
-            {brand.name}
-          </motion.p>
         </div>
       </footer>
     </>
