@@ -15,8 +15,8 @@ export function SiteHeader({ fixed = false }: { fixed?: boolean }) {
 
   return (
     <header className={`${fixed ? "fixed inset-x-0 top-0 z-50" : "relative z-30"} px-3 pt-3 text-snow md:px-5 md:pt-4`}>
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 rounded-full bg-ink/55 py-1.5 pl-4 pr-1.5 shadow-[0_12px_34px_-14px_rgb(0_0_0/0.65)] ring-1 ring-snow/12 backdrop-blur-xl md:pl-5">
-        <Link href="/" className="-ml-2 flex h-9 items-center gap-2.5 whitespace-nowrap font-display text-lg font-bold md:-ml-3">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 rounded-full bg-ink/55 p-1.5 shadow-[0_12px_34px_-14px_rgb(0_0_0/0.65)] ring-1 ring-snow/12 backdrop-blur-xl">
+        <Link href="/" className="flex h-9 items-center gap-3 whitespace-nowrap rounded-full pr-2 font-display text-lg font-bold tracking-[0.01em] transition-opacity hover:opacity-90">
           <BrandMark className="h-9 w-9" />
           <span className="max-sm:sr-only">{brand.name}</span>
         </Link>
