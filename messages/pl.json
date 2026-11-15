@@ -597,9 +597,8 @@
   },
   "remote": {
     "heading": "Losowanie w pełni zdalne",
-    "lead": "Cztery krótkie pytania i warsztat gotowy. Wszystko zmienisz później w panelu Naczelnika.",
+    "lead": "Pięć krótkich pytań i warsztat gotowy. Swojego elfa stworzysz potem w panelu, jak każdy uczestnik.",
     "nameTitle": "Jak nazwiemy zabawę?",
-    "hostName": "A Ty, jak masz na imię?",
     "budgetTitle": "Ile może kosztować prezent?",
     "budgetHint": "Zostaw puste, jeśli nie chcecie limitu.",
     "invitesTitle": "Kogo zapraszasz?",
@@ -611,6 +610,22 @@
     "how2": "Kiedy wszyscy potwierdzą udział, uruchamiasz losowanie jednym kliknięciem.",
     "how3": "Każdy dostaje e-mail i w dogodnej chwili odkrywa, komu robi prezent.",
     "skip": "Pomiń",
-    "open": "Otwórz warsztat"
+    "open": "Otwórz warsztat",
+    "contextTitle": "Z kim się bawicie?",
+    "contextLead": "Dopasujemy podpowiedzi do Waszej zabawy.",
+    "contexts": {
+      "family": "Rodzina",
+      "friends": "Znajomi",
+      "work": "Praca",
+      "school": "Klasa lub szkoła",
+      "other": "Coś innego"
+    },
+    "suggestions": {
+      "family": "Rodzinne święta {year}",
+      "friends": "Mikołajki ze znajomymi",
+      "work": "Mikołajki w pracy",
+      "school": "Mikołajki w klasie"
+    },
+    "nameHint": "Tę nazwę zobaczą goście w zaproszeniu i na swoim telefonie."
   }
 }

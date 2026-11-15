@@ -57,5 +57,5 @@ test("each way to draw on the home page starts that kind of session", async ({ p
   await card.click();
   // A remote draw asks a few questions first, in a step-by-step wizard.
   await page.waitForURL(/\/new\/remote/);
-  await expect(page.getByRole("heading", { name: "What shall we call it?" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Who are you celebrating with?" })).toBeVisible();
 });

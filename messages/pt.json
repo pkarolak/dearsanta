@@ -597,9 +597,8 @@
   },
   "remote": {
     "heading": "Um sorteio totalmente à distância",
-    "lead": "Quatro perguntas rápidas e a oficina fica pronta. Podes mudar tudo depois no painel do Chefe dos elfos.",
+    "lead": "Cinco perguntas rápidas e a oficina fica pronta. O teu próprio elfo crias depois no painel, como toda a gente.",
     "nameTitle": "Como vamos chamar o jogo?",
-    "hostName": "E tu, como te chamas?",
     "budgetTitle": "Quanto pode custar o presente?",
     "budgetHint": "Deixa vazio se não quiserem limite.",
     "invitesTitle": "Quem vais convidar?",
@@ -611,6 +610,22 @@
     "how2": "Quando todos confirmarem, lanças o sorteio com um clique.",
     "how3": "Cada um recebe um e-mail e descobre a quem faz a surpresa quando lhe der jeito.",
     "skip": "Saltar",
-    "open": "Abrir a oficina"
+    "open": "Abrir a oficina",
+    "contextTitle": "Com quem vão festejar?",
+    "contextLead": "Vamos adaptar as sugestões à vossa festa.",
+    "contexts": {
+      "family": "Família",
+      "friends": "Amigos",
+      "work": "Trabalho",
+      "school": "Turma ou escola",
+      "other": "Outra coisa"
+    },
+    "suggestions": {
+      "family": "Natal em família {year}",
+      "friends": "Amigo secreto com amigos",
+      "work": "Amigo secreto no trabalho",
+      "school": "Amigo secreto da turma"
+    },
+    "nameHint": "Os convidados vão ver este nome no convite e no telemóvel."
   }
 }

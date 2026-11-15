@@ -10,11 +10,13 @@ test("a teacher runs the draw without taking part in it", async ({ browser }) =>
 
   // The fully remote draw is set up step by step.
   await host.goto("/pl/new/remote");
+  await host.getByRole("button", { name: "Klasa lub szkoła" }).click();
+  await expect(host.locator("#rw-title")).toHaveValue("Mikołajki w klasie");
   await host.fill("#rw-title", "Klasa 3b");
-  await host.fill("#rw-host", "Pani Ania");
   await host.getByRole("button", { name: "Dalej" }).click();
   await host.fill("#rw-budget", "30");
-  await host.getByRole("checkbox", { name: /Biorę udział w losowaniu/ }).uncheck();
+  // A class draw assumes the teacher only runs it.
+  await expect(host.getByRole("checkbox", { name: /Biorę udział w losowaniu/ })).not.toBeChecked();
   await host.getByRole("button", { name: "Dalej" }).click();
   await host.fill("#rw-invites", elves.join(", "));
   await expect(host.getByText("Wyślemy 2 zaproszenia")).toBeVisible();

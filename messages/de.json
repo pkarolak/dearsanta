@@ -597,9 +597,8 @@
   },
   "remote": {
     "heading": "Wichteln komplett aus der Ferne",
-    "lead": "Vier kurze Fragen und die Werkstatt ist bereit. Alles lässt sich später im Panel des Oberwichtels ändern.",
+    "lead": "Fünf kurze Fragen und die Werkstatt ist bereit. Deinen eigenen Wichtel gestaltest du danach im Panel, wie alle anderen.",
     "nameTitle": "Wie soll die Runde heißen?",
-    "hostName": "Und du, wie heißt du?",
     "budgetTitle": "Wie viel darf ein Geschenk kosten?",
     "budgetHint": "Leer lassen, wenn ihr kein Limit wollt.",
     "invitesTitle": "Wen lädst du ein?",
@@ -611,6 +610,22 @@
     "how2": "Sobald alle zugesagt haben, startest du die Auslosung mit einem Klick.",
     "how3": "Alle bekommen eine E-Mail und erfahren, wann es ihnen passt, wen sie beschenken.",
     "skip": "Überspringen",
-    "open": "Werkstatt öffnen"
+    "open": "Werkstatt öffnen",
+    "contextTitle": "Mit wem feiert ihr?",
+    "contextLead": "Wir passen die Vorschläge an eure Runde an.",
+    "contexts": {
+      "family": "Familie",
+      "friends": "Freunde",
+      "work": "Arbeit",
+      "school": "Klasse oder Schule",
+      "other": "Etwas anderes"
+    },
+    "suggestions": {
+      "family": "Familienweihnacht {year}",
+      "friends": "Wichteln mit Freunden",
+      "work": "Wichteln im Büro",
+      "school": "Klassenwichteln"
+    },
+    "nameHint": "Diesen Namen sehen die Gäste in der Einladung und auf ihrem Handy."
   }
 }

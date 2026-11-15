@@ -597,9 +597,8 @@
   },
   "remote": {
     "heading": "Un sorteo totalmente a distancia",
-    "lead": "Cuatro preguntas rápidas y el taller está listo. Podrás cambiarlo todo después en el panel del Jefe de los elfos.",
+    "lead": "Cinco preguntas rápidas y el taller está listo. Tu propio elfo lo crearás después en el panel, como todos.",
     "nameTitle": "¿Cómo llamamos al juego?",
-    "hostName": "¿Y tú, cómo te llamas?",
     "budgetTitle": "¿Cuánto puede costar el regalo?",
     "budgetHint": "Déjalo vacío si no queréis límite.",
     "invitesTitle": "¿A quién invitas?",
@@ -611,6 +610,22 @@
     "how2": "Cuando todos confirmen, lanzas el sorteo con un clic.",
     "how3": "Cada uno recibe un correo y descubre a quién sorprende cuando le venga bien.",
     "skip": "Saltar",
-    "open": "Abrir el taller"
+    "open": "Abrir el taller",
+    "contextTitle": "¿Con quién lo celebráis?",
+    "contextLead": "Adaptaremos las sugerencias a vuestra fiesta.",
+    "contexts": {
+      "family": "Familia",
+      "friends": "Amigos",
+      "work": "Trabajo",
+      "school": "Clase o colegio",
+      "other": "Otra cosa"
+    },
+    "suggestions": {
+      "family": "Navidad en familia {year}",
+      "friends": "Amigo invisible con amigos",
+      "work": "Amigo invisible en el trabajo",
+      "school": "Amigo invisible de la clase"
+    },
+    "nameHint": "Los invitados verán este nombre en la invitación y en su móvil."
   }
 }
