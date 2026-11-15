@@ -56,7 +56,7 @@ export async function sendInvites(session: Session, host: Participant | undefine
           t("invite.body", { host: host?.displayName ?? "Santa", title: session.title }),
           session.mode === "async" ? t("invite.bodyAsync") : t("invite.bodySync"),
         ],
-        note: note ? { from: t("invite.noteFrom", { host: host?.displayName ?? "Santa" }), text: note } : undefined,
+        note: note ? { label: t("invite.noteLabel"), signature: host?.displayName ?? "Santa", text: note } : undefined,
         details: sessionDetails(session, host),
         cta: { label: t("invite.cta"), href: link },
         links,

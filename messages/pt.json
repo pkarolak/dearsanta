@@ -513,7 +513,7 @@
       "cta": "Criar o meu perfil de duende",
       "google": "Adicionar ao Google Calendar",
       "ics": "Adicionar ao Apple / Outlook",
-      "noteFrom": "Uma mensagem de {host}:"
+      "noteLabel": "Umas palavras com o teu convite"
     },
     "host": {
       "subject": "O seu amigo secreto «{title}» está pronto",

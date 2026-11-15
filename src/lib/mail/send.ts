@@ -1,6 +1,8 @@
 import { render } from "@react-email/render";
 import { Resend } from "resend";
-import { ChristmasEmail, type ChristmasEmailProps } from "./ChristmasEmail";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { ChristmasEmail, santaInline, type ChristmasEmailProps } from "./ChristmasEmail";
 import { logMail } from "@/lib/db/repo";
 import { brand } from "@/lib/brand";
 
@@ -28,11 +30,15 @@ export function devInboxEnabled() {
 export async function sendMails(all: OutgoingMail[]) {
   const mails = all.filter((m): m is OutgoingMail & { to: string } => !!m.to);
   if (!mails.length) return;
+  const resendClient = client();
+  const santaSrc = resendClient ? `cid:${santaInline.contentId}` : undefined;
   const rendered = await Promise.all(
-    mails.map(async (m) => ({ ...m, html: await render(ChristmasEmail(m.email)), text: await render(ChristmasEmail(m.email), { plainText: true }) })),
+    mails.map(async (m) => {
+      const email = { ...m.email, santaSrc };
+      return { ...m, html: await render(ChristmasEmail(email)), text: await render(ChristmasEmail(email), { plainText: true }) };
+    }),
   );
 
-  const resendClient = client();
   if (!resendClient) {
     for (const m of rendered) {
       await logMail(m.to, m.subject, m.html);
@@ -42,17 +48,12 @@ export async function sendMails(all: OutgoingMail[]) {
   }
 
   const from = process.env.MAIL_FROM ?? `${brand.name} <onboarding@resend.dev>`;
-  const withAttachments = rendered.filter((m) => m.attachments?.length);
-  const plain = rendered.filter((m) => !m.attachments?.length);
+  const santa = { filename: santaInline.filename, content: await readFile(path.join(process.cwd(), santaInline.path)), contentId: santaInline.contentId };
 
-  // The batch endpoint does not accept attachments, so those go one by one.
-  for (let i = 0; i < plain.length; i += 100) {
-    const { error } = await resendClient.batch.send(
-      plain.slice(i, i + 100).map((m) => ({ from, replyTo: brand.contact, to: m.to, subject: m.subject, html: m.html, text: m.text })),
-    );
-    if (error) console.error("[mail] batch failed", error);
-  }
-  for (const m of withAttachments) {
+  // Inline pictures are attachments, which the batch endpoint does not take, so mails go one by one,
+  // paced under Resend's free-plan limit of two requests a second.
+  for (const [i, m] of rendered.entries()) {
+    if (i > 0) await new Promise((r) => setTimeout(r, 600));
     const { error } = await resendClient.emails.send({
       from,
       replyTo: brand.contact,
@@ -60,11 +61,14 @@ export async function sendMails(all: OutgoingMail[]) {
       subject: m.subject,
       html: m.html,
       text: m.text,
-      attachments: m.attachments!.map((a) => ({
-        filename: a.filename,
-        content: Buffer.from(a.content).toString("base64"),
-        contentType: a.contentType,
-      })),
+      attachments: [
+        santa,
+        ...(m.attachments ?? []).map((a) => ({
+          filename: a.filename,
+          content: Buffer.from(a.content).toString("base64"),
+          contentType: a.contentType,
+        })),
+      ],
     });
     if (error) console.error("[mail] send failed", m.to, error);
   }

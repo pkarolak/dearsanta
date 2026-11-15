@@ -513,7 +513,7 @@
       "cta": "Wichtelprofil erstellen",
       "google": "Zu Google Kalender hinzufügen",
       "ics": "Zu Apple / Outlook hinzufügen",
-      "noteFrom": "Eine Nachricht von {host}:"
+      "noteLabel": "Ein paar Worte zur Einladung"
     },
     "host": {
       "subject": "Dein Wichteln „{title}“ ist bereit",

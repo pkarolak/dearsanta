@@ -20,14 +20,19 @@ export type ChristmasEmailProps = {
   preview: string;
   heading: string;
   paragraphs: string[];
-  /** A personal message from the Elf Chief, shown as a quote. */
-  note?: { from: string; text: string };
+  /** A personal message from the Elf Chief, shown as a signed gift tag. */
+  note?: { label: string; signature: string; text: string };
   highlight?: { label: string; value: string; note?: string };
   details?: { label: string; value: string }[];
   cta?: { label: string; href: string };
   links?: { label: string; href: string }[];
   footer: string;
+  /** Where the header picture comes from: a public URL, or `cid:…` for an inline attachment. */
+  santaSrc?: string;
 };
+
+/** The header picture travels inside the mail, so it shows even while the app runs on a local network. */
+export const santaInline = { contentId: "santa", path: "public/show/santa-email.png", filename: "santa.png" } as const;
 
 const colors = {
   snow: "#FFF9F0",
@@ -38,7 +43,8 @@ const colors = {
   green: "#1D5A3A",
   ink: "#2B1810",
   muted: "#6F5547",
-  gold: "#F2B935",
+  gold: "#E0A82E",
+  goldLine: "#E3C27A",
 };
 
 const serif = "Georgia, 'Times New Roman', serif";
@@ -63,7 +69,7 @@ export function ChristmasEmail(props: ChristmasEmailProps) {
               {brand.name}
             </Text>
             <Img
-              src={`${appUrl()}/show/santa-email.png`}
+              src={props.santaSrc ?? `${appUrl()}/show/santa-email.png`}
               width="180"
               height="150"
               alt="Santa"
@@ -92,10 +98,36 @@ export function ChristmasEmail(props: ChristmasEmailProps) {
             ))}
 
             {props.note && (
-              <Section style={{ backgroundColor: colors.cream, borderLeft: `4px solid ${colors.gold}`, borderRadius: 14, padding: "16px 20px", margin: "18px 0" }}>
-                <Text style={{ color: colors.muted, fontSize: 13, fontWeight: 700, margin: 0 }}>{props.note.from}</Text>
-                <Text style={{ color: colors.ink, fontFamily: serif, fontSize: 17, fontStyle: "italic", lineHeight: "26px", margin: "6px 0 0", whiteSpace: "pre-line" }}>
+              <Section
+                style={{
+                  backgroundColor: colors.snow,
+                  border: `1.5px dashed ${colors.goldLine}`,
+                  borderRadius: 20,
+                  padding: "8px 28px 22px",
+                  margin: "24px 0",
+                  textAlign: "center",
+                }}
+              >
+                <Text style={{ color: colors.gold, fontFamily: serif, fontSize: 64, lineHeight: "64px", margin: "0 0 -18px" }}>
+                  “
+                </Text>
+                <Text
+                  style={{
+                    color: colors.red,
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    margin: "0 0 10px",
+                  }}
+                >
+                  {props.note.label}
+                </Text>
+                <Text style={{ color: colors.ink, fontFamily: serif, fontSize: 19, fontStyle: "italic", lineHeight: "29px", margin: 0, whiteSpace: "pre-line" }}>
                   {props.note.text}
+                </Text>
+                <Text style={{ color: colors.muted, fontFamily: serif, fontSize: 16, fontWeight: 700, margin: "14px 0 0" }}>
+                  — {props.note.signature}
                 </Text>
               </Section>
             )}
