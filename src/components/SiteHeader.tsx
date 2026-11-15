@@ -22,10 +22,10 @@ export function SiteHeader({ fixed = false }: { fixed?: boolean }) {
         <nav className="flex items-center gap-0.5 text-sm font-semibold">
           <LanguageSwitcher tone="dark" short />
           <span className="mx-1.5 h-5 w-px bg-snow/20 max-sm:hidden" aria-hidden />
-          <JoinButton tone="dark" />
-          <Link href="/new" className="btn-primary ml-1 h-9 whitespace-nowrap px-4 py-0 text-sm">
+          <Link href="/new" className="btn-primary mr-1 h-9 whitespace-nowrap px-4 py-0 text-sm">
             {t("create")}
           </Link>
+          <JoinButton tone="dark" />
         </nav>
       </div>
     </header>
