@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
 import { SantaPuppet } from "./SantaPuppet";
 import { ElfPuppets } from "./ElfPuppets";
 import { FortuneWheel, type WheelDraw } from "./FortuneWheel";
@@ -69,24 +70,65 @@ export function ShowStage(props: Props) {
       </div>
 
       <div className="absolute inset-x-0 bottom-0 z-20" aria-live="polite">
-        <AnimatePresence mode="wait">
-          {subtitle && (
-            <motion.p
-              key={subtitle.id}
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className={`bg-berry text-center font-display font-semibold leading-snug text-snow ${
-                compact ? "px-[4cqw] py-[1.6cqw] text-[3.4cqw]" : "px-[8cqw] py-[1.1cqw] text-[2.2cqw]"
-              }`}
-            >
-              {subtitle.text}
-            </motion.p>
-          )}
-        </AnimatePresence>
+        <SubtitleBar line={subtitle} compact={compact} />
       </div>
     </>
+  );
+}
+
+/** How long the bar stays up after Santa falls silent, so it doesn't drop between two lines of one speech. */
+const subtitleHoldMs = 2500;
+
+/** Santa's subtitles on a berry bar that stays put while he talks; only the words change, and the bar grows or shrinks with them. */
+function SubtitleBar({ line, compact }: { line: Props["subtitle"]; compact?: boolean }) {
+  const [held, setHeld] = useState(line);
+  if (line && (line.id !== held?.id || line.text !== held.text)) setHeld(line);
+  useEffect(() => {
+    if (line) return;
+    const id = setTimeout(() => setHeld(null), subtitleHoldMs);
+    return () => clearTimeout(id);
+  }, [line]);
+
+  const [height, setHeight] = useState<number | "auto">("auto");
+  const measure = useCallback((el: HTMLDivElement | null) => {
+    if (!el) return;
+    const ro = new ResizeObserver(() => setHeight(el.offsetHeight));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {held && (
+        <motion.div
+          key="bar"
+          initial={{ y: "100%" }}
+          animate={{ y: 0, height }}
+          exit={{ y: "100%" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="overflow-hidden bg-berry"
+        >
+          <div
+            ref={measure}
+            className={`text-center font-display font-semibold leading-snug text-snow ${
+              compact ? "px-[4cqw] py-[1.6cqw] text-[3.4cqw]" : "px-[8cqw] py-[1.1cqw] text-[2.2cqw]"
+            }`}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.p
+                key={held.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                {held.text}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
