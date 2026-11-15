@@ -38,10 +38,10 @@ export function WaitingRoom({ state, joinUrl, screenUrl }: Props) {
   };
 
   return (
-    <section className="relative overflow-hidden rounded-felt bg-[linear-gradient(180deg,#141d40,#0d1a42_60%,#1c0c0b)] p-6 text-snow md:p-10">
+    <section className="@container relative overflow-hidden rounded-felt bg-[linear-gradient(180deg,#141d40,#0d1a42_60%,#1c0c0b)] p-6 text-snow md:p-10">
       <StringLights swags={4} perSwag={6} sag={22} className="opacity-90" />
       <Snowfall count={24} />
-      <div className={`relative grid items-center gap-8 pt-6 md:gap-12 ${onScreen ? "" : "md:grid-cols-[auto_1fr]"}`}>
+      <div className={`relative grid items-center gap-8 pt-6 md:gap-12 ${onScreen ? "" : "@2xl:grid-cols-[auto_1fr]"}`}>
         {!onScreen && (
         <div className="mx-auto flex flex-col items-center">
           <div className="rounded-[1.6rem] bg-paper p-4 shadow-[0_30px_70px_-20px_rgb(0_0_0/0.7),0_0_60px_-10px_rgb(255_200_110/0.35)]">
@@ -160,10 +160,18 @@ export function HostElfCard({ state, onChanged }: { state: SessionState; onChang
   }
 
   return (
-    <section className="card flex flex-wrap items-center gap-4 p-5 md:p-6">
-      <Avatar config={me.avatar} title={me.displayName} className="h-16 w-16 shrink-0" />
+    <section className="card p-5 md:p-6">
+      <div className="flex items-center gap-4">
+        <Avatar config={me.avatar} title={me.displayName} className="h-14 w-14 shrink-0" />
+        <div className="min-w-0">
+          <label className="font-display text-xl font-bold" htmlFor="host-name">
+            {t("youPlay")}
+          </label>
+          <p className="text-sm text-muted">{t("youPlayHint")}</p>
+        </div>
+      </div>
       <form
-        className="min-w-0 flex-1"
+        className="mt-4 flex gap-2"
         action={() =>
           start(async () => {
             if (!name.trim()) return;
@@ -173,27 +181,21 @@ export function HostElfCard({ state, onChanged }: { state: SessionState; onChang
           })
         }
       >
-        <label className="font-display text-xl font-bold" htmlFor="host-name">
-          {t("youPlay")}
-        </label>
-        <p className="text-sm text-muted">{t("youPlayHint")}</p>
-        <div className="mt-3 flex gap-2">
-          <input
-            id="host-name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder={me.displayName}
-            aria-label={t("yourName")}
-            maxLength={40}
-            className="field min-w-0 flex-1"
-            autoComplete="given-name"
-          />
-          <button className="btn-soft" disabled={pending || !name.trim()}>
-            {t("saveName")}
-          </button>
-        </div>
+        <input
+          id="host-name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder={me.displayName}
+          aria-label={t("yourName")}
+          maxLength={40}
+          className="field min-w-0 flex-1"
+          autoComplete="given-name"
+        />
+        <button className="btn-soft" disabled={pending || !name.trim()}>
+          {t("saveName")}
+        </button>
       </form>
-      <Link href={`/s/${state.session.code}/me`} className="btn-pine max-sm:w-full">
+      <Link href={`/s/${state.session.code}/me`} className="btn-pine mt-3 w-full">
         {me.profileComplete ? t("changeElf") : t("myElf")}
       </Link>
     </section>

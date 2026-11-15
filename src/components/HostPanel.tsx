@@ -115,12 +115,14 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
         </div>
       ) : (
         <>
+      {/* In the lobby the joining instructions take two thirds on the right; on narrow screens they come first. */}
+      <div className={inLobby ? "mx-auto grid max-w-7xl gap-5 px-5 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-start" : ""}>
       {inLobby && (
-        <div className="mx-auto max-w-6xl px-5 pt-6">
+        <div className="min-w-0 lg:sticky lg:top-4 lg:order-2">
           <WaitingRoom state={state} joinUrl={joinUrl} screenUrl={screenUrl} />
         </div>
       )}
-      <div className="mx-auto max-w-3xl space-y-5 px-5 py-6">
+      <div className={inLobby ? "min-w-0 space-y-5 lg:order-1" : "mx-auto max-w-3xl space-y-5 px-5 py-6"}>
         {s.mode === "sync" && state.assignment && (
           <RevealCard
             receiver={state.assignment.receiver}
@@ -326,6 +328,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
         </div>
 
         {inLobby && <HostElfCard state={state} onChanged={refresh} />}
+      </div>
       </div>
         </>
       )}
