@@ -7,6 +7,7 @@ import { FestiveLinks } from "./FestiveLinks";
 import { BudgetBoard, JoinBoard } from "./show/BoardCards";
 import { ShowFrame, ShowStage } from "./show/ShowStage";
 import { useVoice } from "./useVoice";
+import { chapterSeconds } from "@/lib/audio/timing";
 import type { SessionState } from "@/lib/state";
 
 type Props = {
@@ -43,6 +44,15 @@ export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, 
     return () => clearTimeout(timer);
   }, [step, startedAt, serverToLocal]);
   const voiced = audible && !!state.script?.length;
+  // A device without Santa's voice closes the curtain when his goodbye would have ended.
+  const goodbyeMs = (state.script ? chapterSeconds(state.script) : 0) * 1000 + 800;
+  const [silentClose, setSilentClose] = useState<number | null>(null);
+  useEffect(() => {
+    if (step !== "farewell") return;
+    const timer = setTimeout(() => setSilentClose(startedAt), Math.max(0, goodbyeMs - (Date.now() - serverToLocal(startedAt))));
+    return () => clearTimeout(timer);
+  }, [step, startedAt, serverToLocal, goodbyeMs]);
+  const closed = step === "farewell" && (voiced ? index >= state.script!.length : silentClose === startedAt);
   const stopped = step !== "draw" || (voiced ? index >= stopOnLine : silentStop === startedAt);
   const elves = state.participants.filter((p) => p.status === "approved");
   const budget =
@@ -53,7 +63,7 @@ export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, 
       : null;
 
   let card: React.ReactNode = null;
-  if (step === "lobby" && joinUrl) {
+  if ((step === "lobby" || step === "welcome") && joinUrl) {
     card = <JoinBoard url={joinUrl} code={state.session.code} title={t("scanToJoin")} hint={t("orEnterCode")} />;
   } else if (step === "rules") {
     card = <BudgetBoard label={t("budgetLabel")} budget={budget ?? t("noBudget")} note={t("ruleSecret")} />;
@@ -85,6 +95,7 @@ export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, 
         stageText={stageText}
         remoteLabel={th("remote")}
         controls={controls}
+        closed={closed}
         farewellExtras={compact ? undefined : <FestiveLinks variant="stage" />}
       />
     </ShowFrame>

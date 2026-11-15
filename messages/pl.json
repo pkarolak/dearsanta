@@ -332,11 +332,11 @@
     },
     "stepHint": {
       "lobby": "Otwórz duży ekran i pozwól wszystkim zeskanować kod QR. Zacznij, gdy cała drużyna będzie w środku.",
-      "welcome": "Mikołaj wita wszystkich.",
-      "elves": "Mikołaj poznaje każdego elfa.",
-      "rules": "Mikołaj tłumaczy zasady i budżet. Następny rozdział to losowanie – potem nikt już nie dołączy.",
-      "draw": "Imiona są rozlosowane i ostateczne. Dalej każdy zobaczy wynik na swoim urządzeniu.",
-      "reveal": "Wszyscy rozpakowują swoje wyniki. Każdy elf dostał też maila.",
+      "welcome": "Mikołaj wita wszystkich i pyta, czy drużyna jest w komplecie. Spóźnialscy mogą jeszcze zeskanować kod.",
+      "elves": "Mikołaj poznaje każdego elfa i sam przechodzi do zasad.",
+      "rules": "Mikołaj tłumaczy zasady i budżet, a potem pyta, czy losujemy. Po losowaniu nikt już nie dołączy.",
+      "draw": "Koło się kręci, a wynik jest ostateczny. Mikołaj sam przejdzie do odsłonięcia.",
+      "reveal": "Wszyscy rozpakowują swoje wyniki, a każdy elf dostał też maila. Gdy wszyscy skończą, Mikołaj sam się pożegna.",
       "farewell": "To już koniec. Wesołych Świąt!"
     },
     "start": "Rozpocznij ceremonię",
@@ -456,7 +456,13 @@
       "toRemote": "Przejdź do pilota",
       "skip": "Mam tylko jedno urządzenie"
     },
-    "santaSpeaking": "Mikołaj mówi… {seconds} s"
+    "santaSpeaking": "Mikołaj mówi… {seconds} s",
+    "answer": {
+      "welcome": "Tak, możemy zaczynać",
+      "rules": "Losujemy!"
+    },
+    "continue": "Dalej",
+    "santaLeads": "Mikołaj sam przejdzie dalej"
   },
   "screen": {
     "noAccessTitle": "To jest duży ekran",
@@ -538,6 +544,7 @@
     "welcome1": "Ho, ho, ho! Dobry wieczór, moi drodzy!",
     "welcome2": "To ja, Święty Mikołaj. Dziś mój warsztat należy do was. Moi pomocnicy posprzątali, upiekli dla was ciasteczka i podgrzali kakao.",
     "welcome3": "Widzę tu {count, plural, one {jednego nowego elfa} few {# nowe elfy} many {# nowych elfów} other {# nowego elfa}}.",
+    "welcomeAsk": "Czy jesteśmy już wszyscy?",
     "elves1": "Pozwólcie, że dobrze wam się przyjrzę.",
     "elvesNames": "{names}.",
     "elves2": "Co za wspaniała drużyna! Każde z was jest w tym roku na mojej liście grzecznych.",
@@ -548,6 +555,7 @@
     "rulesBudget": "Prezent ma kosztować nie więcej niż {budget}. Liczy się dobry pomysł, polot i odrobina brokatu.",
     "rulesNoBudget": "Nie ustaliliśmy ograniczenia na to, ile ma kosztować prezent, ale pamiętajcie – najlepsze prezenty płyną prosto z serca. Liczy się dobry pomysł, polot i odrobina brokatu.",
     "rules2": "I najważniejsze: zachowajcie wynik w tajemnicy!",
+    "rulesAsk": "Gotowi na losowanie?",
     "draw1": "Elfy, na stanowiska! Niech zacznie się wielkie losowanie!",
     "draw2": "Imiona wirują, dzwoneczki dzwonią, koło fortuny przejmuje wielka skarpeta…",
     "draw3": "Gotowe! Każde imię znalazło swojego elfa.",

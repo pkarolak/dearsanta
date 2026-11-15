@@ -35,6 +35,8 @@ type Props = {
   farewellExtras?: React.ReactNode;
   /** Controls in the top-right corner, e.g. the host's "next chapter" button. */
   controls?: React.ReactNode;
+  /** Santa has said goodbye: the curtain closes over the workshop for the farewell banner. */
+  closed?: boolean;
 };
 
 /** Letterboxes a 16:9 show into whatever box it is given; everything inside is sized in container units. */
@@ -47,14 +49,19 @@ export function ShowFrame({ children, className = "" }: { children: React.ReactN
 }
 
 export function ShowStage(props: Props) {
-  const { title, stepLabel, subtitle, compact, controls } = props;
+  const { title, stepLabel, subtitle, compact, controls, closed, stageText, farewellExtras } = props;
 
   return (
     <>
       <Workshop {...props} />
+      <AnimatePresence>
+        {closed && <FinalCurtain key="curtain" title={stageText?.title} extras={farewellExtras} compact={compact} />}
+      </AnimatePresence>
 
       <div className={`absolute inset-x-0 top-0 z-20 flex items-start justify-between gap-[1cqw] ${compact ? "p-[2.5cqw]" : "p-[1.6cqw]"}`}>
-        <p className={`rounded-full bg-snow px-[1.4em] py-[0.5em] font-display font-semibold text-ink ${compact ? "text-[2.6cqw]" : "text-[1.25cqw]"}`}>
+        <p
+          className={`rounded-full bg-snow px-[1.4em] py-[0.5em] font-display font-semibold text-ink transition-opacity duration-700 ${compact ? "text-[2.6cqw]" : "text-[1.25cqw]"} ${closed ? "opacity-0" : ""}`}
+        >
           {title}
           {stepLabel && <span className="font-sans font-medium text-muted"> · {stepLabel}</span>}
         </p>
@@ -86,9 +93,9 @@ export function ShowStage(props: Props) {
 const glide = { type: "spring", stiffness: 70, damping: 18 } as const;
 
 /** The whole ceremony happens in Santa's workshop; for the draw the wheel steps forward and Santa makes room. */
-function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageText, compact, farewellExtras }: Props) {
+function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageText }: Props) {
   const calm = useReducedMotion();
-  const showReindeer = (step === "lobby" || step === "rules") && card;
+  const showReindeer = (step === "lobby" || step === "welcome" || step === "rules") && card;
   const drawing = step === "draw" || step === "reveal" || step === "farewell";
 
   return (
@@ -137,7 +144,7 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
       <AnimatePresence>
         {step === "elves" && <Elves key="elves" className="left-[73%] top-[38%] w-[23%]" />}
         {step === "farewell" && (
-          <Elves key="farewell" className={farewellExtras ? "left-[0%] top-[46%] w-[19%]" : "left-[73%] top-[38%] w-[23%]"} />
+          <Elves key="farewell" className="left-[73%] top-[38%] w-[23%]" />
         )}
       </AnimatePresence>
 
@@ -156,31 +163,61 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
             {stageText.detail && <p className="mt-[0.5cqw] text-[1.15cqw] text-muted">{stageText.detail}</p>}
           </motion.div>
         )}
-        {step === "farewell" && stageText && (
-          <motion.div
-            key="farewell-banner"
-            className="absolute left-[38%] top-[7%] w-[44%] rounded-[1.4cqw] bg-berry px-[2cqw] py-[1.1cqw] text-center shadow-[0_1.2cqw_2.4cqw_-0.6cqw_rgb(0_0_0/0.5)] outline-[0.16cqw] outline-offset-[-0.6cqw] outline-dashed outline-snow/75"
-            initial={{ y: "-60%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 140, damping: 12, delay: 0.6 }}
-          >
-            <p className="font-display text-[3.6cqw] font-black leading-none text-snow">{stageText.title}</p>
-          </motion.div>
-        )}
       </AnimatePresence>
 
-      {step === "farewell" && farewellExtras && (
+    </>
+  );
+}
+
+/** The show's last picture: the curtain closes, the greeting drops in from above and the music waits below it. */
+function FinalCurtain({ title, extras, compact }: { title?: string; extras?: React.ReactNode; compact?: boolean }) {
+  const calm = useReducedMotion();
+  const closing = calm ? 0 : 2.2;
+  return (
+    <motion.div className="absolute inset-0 z-[15]" exit={{ opacity: 0 }}>
+      {[0, 1].map((side) => (
         <motion.div
-          className="absolute left-[75%] top-[19%] z-10 w-[23%]"
-          initial={{ x: "40%", opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 120, damping: 16, delay: 1.2 }}
+          key={side}
+          className="absolute top-0 h-full w-[52%]"
+          style={{ [side ? "right" : "left"]: 0 }}
+          initial={{ x: side ? "100%" : "-100%" }}
+          animate={{ x: 0 }}
+          transition={{ duration: closing, ease: [0.45, 0, 0.2, 1] }}
         >
-          {farewellExtras}
+          <Image src="/show/curtain.webp" alt="" fill unoptimized sizes="50vw" className="object-cover" style={{ transform: side ? "scaleX(-1)" : undefined }} />
+        </motion.div>
+      ))}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[18%] bg-gradient-to-b from-[#1c0c0b]/85 to-transparent" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-[2.2cqw] pb-[2cqw]">
+        {title && (
+          <motion.div
+            className={`rounded-[1.4cqw] bg-berry text-center shadow-[0_1.6cqw_3cqw_-0.6cqw_rgb(0_0_0/0.6)] outline-[0.16cqw] outline-offset-[-0.6cqw] outline-dashed outline-snow/75 ${
+              compact ? "px-[4cqw] py-[2cqw]" : "px-[3cqw] py-[1.4cqw]"
+            }`}
+            initial={{ y: "-60cqh" }}
+            animate={{ y: 0 }}
+            transition={{ type: "spring", stiffness: 110, damping: 12, delay: closing + 0.2 }}
+          >
+            <p className={`font-display font-black leading-none text-snow ${compact ? "text-[8cqw]" : "text-[5.4cqw]"}`}>{title}</p>
+          </motion.div>
+        )}
+        {extras && (
+          <motion.div
+            className="w-[34cqw]"
+            initial={{ y: "12%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 120, damping: 18, delay: closing + 1 }}
+          >
+            {extras}
+          </motion.div>
+        )}
+      </div>
+      {!calm && (
+        <motion.div className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: closing + 0.4 }}>
+          <Confetti count={compact ? 18 : 42} />
         </motion.div>
       )}
-      {step === "farewell" && <Confetti count={compact ? 18 : 42} />}
-    </>
+    </motion.div>
   );
 }
 

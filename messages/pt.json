@@ -332,11 +332,11 @@
     },
     "stepHint": {
       "lobby": "Abra o ecrã grande e deixe todos lerem o código QR. Comece quando a equipa estiver completa.",
-      "welcome": "O Pai Natal cumprimenta todos.",
-      "elves": "O Pai Natal conhece cada duende.",
-      "rules": "O Pai Natal explica as regras e o orçamento. O próximo capítulo é o sorteio; depois disso ninguém pode entrar.",
-      "draw": "Os nomes estão sorteados e fixos. A seguir, cada um vê o resultado no seu dispositivo.",
-      "reveal": "Todos estão a abrir o resultado. Cada duende recebeu também um e-mail.",
+      "welcome": "O Pai Natal dá as boas-vindas e pergunta se a equipa está completa. Quem chegar tarde ainda pode ler o código.",
+      "elves": "O Pai Natal conhece cada elfo e passa sozinho às regras.",
+      "rules": "O Pai Natal explica as regras e o orçamento e depois pergunta se sorteamos. Depois do sorteio ninguém pode entrar.",
+      "draw": "A roda gira e o resultado é definitivo. O Pai Natal passa sozinho à revelação.",
+      "reveal": "Todos desembrulham o seu resultado e cada elfo recebeu também um e-mail. Quando todos terminarem, o Pai Natal despede-se sozinho.",
       "farewell": "E pronto. Feliz Natal!"
     },
     "start": "Começar a cerimónia",
@@ -456,7 +456,13 @@
       "toRemote": "Ir para o comando",
       "skip": "Só tenho um dispositivo"
     },
-    "santaSpeaking": "O Pai Natal está a falar… {seconds} s"
+    "santaSpeaking": "O Pai Natal está a falar… {seconds} s",
+    "answer": {
+      "welcome": "Sim, podemos começar",
+      "rules": "Vamos sortear!"
+    },
+    "continue": "Continuar",
+    "santaLeads": "O Pai Natal continua sozinho"
   },
   "screen": {
     "noAccessTitle": "Este é o ecrã grande",
@@ -538,6 +544,7 @@
     "welcome1": "Ho, ho, ho! Boa noite, meus queridos amigos!",
     "welcome2": "Sou eu, o Pai Natal. Esta noite a minha oficina é toda vossa. Os meus ajudantes arrumaram tudo, fizeram-vos bolachas e aqueceram o chocolate quente.",
     "welcome3": "Vejo aqui {count, plural, one {um elfo novo} other {# elfos novos}}.",
+    "welcomeAsk": "Já estamos todos?",
     "elves1": "Deixem-me olhar bem para todos vocês.",
     "elvesNames": "{names}.",
     "elves2": "Que equipa esplêndida! Este ano estão todos na minha lista dos bem-comportados.",
@@ -548,6 +555,7 @@
     "rulesBudget": "O presente não deve custar mais de {budget}. O que conta é uma boa ideia, um pouco de graça e uma pitada de purpurina.",
     "rulesNoBudget": "Não definimos um limite para o presente, mas lembrem-se: os melhores presentes vêm do coração. O que conta é uma boa ideia, um pouco de graça e uma pitada de purpurina.",
     "rules2": "E o mais importante: guardem o resultado em segredo!",
+    "rulesAsk": "Prontos para o sorteio?",
     "draw1": "Duendes, aos vossos lugares! Que comece o grande sorteio!",
     "draw2": "Os nomes giram, os sininhos tocam e a grande meia toma conta da roda da sorte…",
     "draw3": "Pronto! Cada nome encontrou o seu duende.",

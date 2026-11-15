@@ -47,7 +47,8 @@ export function ShowSheet({ step, count, level, draw: wanted }: { step: string |
       level={level}
       draw={draw}
       farewellExtras={<FestiveLinks variant="stage" />}
-      subtitle={{ id: s, text: sampleLines[s] }}
+      subtitle={s === "farewell" ? null : { id: s, text: sampleLines[s] }}
+      closed={s === "farewell"}
       card={
         s === "lobby" ? (
           <JoinBoard url="http://localhost:3000/en/join/YWXVT8" code="YWXVT8" title="Scan to join Santa’s workshop" hint="or open the site and enter the code" />

@@ -4,13 +4,15 @@ Popraw tekst w liniach zaczynających się od `>` i daj znać, a przeniosę zmia
 
 **Zmienne** w nawiasach klamrowych (np. `{title}`) aplikacja podmienia sama. Możesz je przestawiać w zdaniu, ale nie zmieniaj ich nazw.
 
-Każda linijka to osobne nagranie i osobny napis na ekranie, z krótką pauzą po nim. Krótsze zdania brzmią naturalniej i łatwiej je przeczytać z napisów.
+W częściach 1–4, 6 i 7 każde zdanie jest osobnym napisem na ekranie i osobnym nagraniem, z krótką pauzą po nim. Kwestie losowania (część 5) zostają w całości, bo koło staje na trzeciej z nich.
+
+**Przebieg:** po kliknięciu „Rozpocznij ceremonię” Mikołaj mówi części 1 i 2, a na końcu pyta `welcomeAsk`. Na ekranie i u Naczelnika pojawia się przycisk „Tak, możemy zaczynać”. Części 3 i 4 lecą jedna po drugiej, zakończone pytaniem `rulesAsk` i przyciskiem „Losujemy!”. Części 5 i 6 też lecą same. Część 7 zaczyna się, gdy wszyscy rozpakują prezenty (Naczelnik ma też przycisk „Dalej”). Po ostatnim słowie Mikołaja zasuwa się kurtyna, zjeżdża napis „Wesołych Świąt!” i pojawiają się playlisty.
 
 ---
 
-## 1. Zbiórka (lobby)
+## 1. Zbiórka
 
-_Zanim Naczelnik elfów rozpocznie ceremonię. Na tablicy renifera jest kod QR._
+_Zaraz po starcie ceremonii. Na tablicy renifera nadal jest kod QR, więc spóźnialscy mogą dołączyć._
 
 - **`lobby1`**
   > Ho, ho, ho! Wchodźcie, wchodźcie i ogrzejcie dłonie przy kominku. Zeskanujcie kod, żeby dołączyć do mojego warsztatu.
@@ -27,6 +29,9 @@ _Zanim Naczelnik elfów rozpocznie ceremonię. Na tablicy renifera jest kod QR._
   > Widzę tu {count, plural, one {jednego nowego elfa} few {# nowe elfy} many {# nowych elfów} other {# nowego elfa}}.
   
   ℹ️ `{title}` to nazwa sesji, `{count}` to liczba elfów. Część `{count, plural, …}` odmienia „elf” przez liczby: one = 1, few = 2–4, many = 5+, other = ułamki. Popraw same słowa w środku, a `#` zostaw, bo to miejsce na liczbę.
+
+- **`welcomeAsk`** — _pytanie: czeka na „Tak, możemy zaczynać”_
+  > Czy jesteśmy już wszyscy?
 
 ## 3. Elfy
 
@@ -72,6 +77,9 @@ _Na tablicy renifera jest budżet._
 - **`rules2`**
   > I najważniejsze: zachowajcie wynik w tajemnicy!
 
+- **`rulesAsk`** — _pytanie: czeka na „Losujemy!”_
+  > Gotowi na losowanie?
+
 ## 5. Losowanie
 
 _Koło się kręci. Na trzeciej kwestii zwalnia i staje._
@@ -99,7 +107,7 @@ _Każdy rozpakowuje prezent na swoim telefonie._
 
 ## 7. Pożegnanie
 
-_Na ekranie są linki do świątecznej muzyki._
+_Po ostatniej kwestii zasuwa się kurtyna, zjeżdża napis „Wesołych Świąt!” i pojawiają się linki do świątecznej muzyki._
 
 - **`farewell1`**
   > To koniec losowania, ale niech nie opuszcza was świąteczna atmosfera. Przygotowaliśmy dla was kilka list świątecznych przebojów do posłuchania.

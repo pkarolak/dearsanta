@@ -1,4 +1,4 @@
-import { listFrame, nameTakes } from "@/lib/ceremony/script";
+import { listFrame, nameTakes, splitSentences } from "@/lib/ceremony/script";
 import { toLocale, translatorFor } from "@/lib/i18n-server";
 import en from "../../../../messages/en.json";
 import { recordLines, ttsProvider } from "@/lib/tts";
@@ -17,7 +17,11 @@ export async function POST(req: Request) {
   const t = translatorFor(locale, "ceremony");
   for (const key of Object.keys(en.ceremony) as (keyof typeof en.ceremony)[]) {
     const raw = t.raw(key) as string;
-    if (!raw.includes("{")) texts.add(t(key));
+    if (raw.includes("{")) continue;
+    // The draw and the personal message are said whole, the rest of the ceremony sentence by sentence.
+    const whole = /^(draw|personal)/.test(key) || key === "rulesNoBudget";
+    if (whole) texts.add(t(key));
+    if (!/^(draw|personal)/.test(key)) for (const piece of splitSentences(t(key))) texts.add(piece);
   }
   for (const key of ["elvesNames", "elvesRemote"] as const) {
     const { before, after } = listFrame(locale, key);

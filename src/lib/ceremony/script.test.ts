@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { listFrame, nameTakes, spokenName } from "./script";
+import { listFrame, nameTakes, splitSentences, spokenName } from "./script";
 
 describe("pre-recorded names", () => {
   it("keeps one spelling per name", () => {
@@ -17,5 +17,21 @@ describe("pre-recorded names", () => {
       before: "I serdeczne pozdrowienia dla tych, którzy są z nami z daleka:",
       after: "Świąteczna magia działa na każdą odległość.",
     });
+  });
+});
+
+describe("captions", () => {
+  it("gives every sentence its own caption", () => {
+    expect(splitSentences("Ho, ho, ho! Dobry wieczór, moi drodzy! To ja, Święty Mikołaj.")).toEqual([
+      "Ho, ho, ho!",
+      "Dobry wieczór, moi drodzy!",
+      "To ja, Święty Mikołaj.",
+    ]);
+    expect(splitSentences("Ya está. ¿Listos para el sorteo?")).toEqual(["Ya está.", "¿Listos para el sorteo?"]);
+  });
+
+  it("keeps a trailing ellipsis and a mid-sentence colon in one caption", () => {
+    expect(splitSentences("Koło fortuny przejmuje wielka skarpeta…")).toEqual(["Koło fortuny przejmuje wielka skarpeta…"]);
+    expect(splitSentences("I najważniejsze: zachowajcie wynik w tajemnicy!")).toHaveLength(1);
   });
 });

@@ -54,16 +54,24 @@ export function listFrame(locale: string, key: "elvesNames" | "elvesRemote") {
   return { before: before.trim(), after: after.replace(/^[\s.,!]+/, "").trim() };
 }
 
-/** Texts of the list line spoken piece by piece, in order. */
+/** One caption per sentence: long subtitles are hard to read from across the room. */
+export function splitSentences(text: string) {
+  return text
+    .split(/(?<=[.!?…])\s+(?=[\p{Lu}¡¿„"«])/u)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+/** Texts of the list line spoken piece by piece, in order, without the words after the names. */
 function listTakes(locale: string, key: "elvesNames" | "elvesRemote", names: string[]) {
-  const { before, after } = listFrame(locale, key);
+  const { before } = listFrame(locale, key);
   const takes = names.map((n, i) => {
     const t = nameTakes(locale, n);
     if (names.length === 1) return t.solo;
     if (i < names.length - 1) return t.mid;
     return names.length === 2 ? t.last2 : t.last;
   });
-  return [before, ...takes, after].filter(Boolean);
+  return [before, ...takes].filter(Boolean);
 }
 
 /** Recordings for a list line, but only if every piece is already recorded: then it plays offline. */
@@ -85,12 +93,14 @@ function budgetText(ctx: Context) {
 function draftsFor(step: CeremonyStep, ctx: Context): Draft[] {
   switch (step) {
     case "lobby":
-      return [{ key: "lobby1" }];
+      return [];
     case "welcome":
       return [
-        { key: "welcome1", cue: "laugh" },
+        { key: "lobby1", cue: "laugh" },
+        { key: "welcome1" },
         { key: "welcome2" },
         { key: "welcome3", vars: { title: ctx.title, count: ctx.names.length } },
+        { key: "welcomeAsk" },
       ];
     case "elves":
       return [
@@ -107,6 +117,7 @@ function draftsFor(step: CeremonyStep, ctx: Context): Draft[] {
         { key: ctx.hasExclusions ? "rulesExclusions" : "rulesNoSelf" },
         ctx.budget ? { key: "rulesBudget", vars: { budget: budgetText(ctx) } } : { key: "rulesNoBudget" },
         { key: "rules2" },
+        { key: "rulesAsk" },
       ];
     case "draw":
       return [{ key: "draw1", cue: "bells" }, { key: "draw2", cue: "drumroll" }, { key: "draw3", cue: "chime" }];
@@ -117,14 +128,26 @@ function draftsFor(step: CeremonyStep, ctx: Context): Draft[] {
   }
 }
 
-async function materialize(locale: string, drafts: Draft[], prefix: string): Promise<ScriptLine[]> {
+type Piece = { text: string; parts?: string[] | null; cue?: ScriptLine["cue"] };
+
+/** A draft as captions: a list line keeps the names together and says the words after them on their own. */
+async function piecesOf(locale: string, d: Draft, split: boolean): Promise<Piece[]> {
   const t = translatorFor(locale, "ceremony");
+  const text = t(d.key as Parameters<typeof t>[0], d.vars as never);
+  if (d.key === "elvesNames" || d.key === "elvesRemote") {
+    const { after } = listFrame(locale, d.key);
+    const head = after && text.endsWith(after) ? text.slice(0, -after.length).trim() : text;
+    return [{ text: head, parts: await recordedParts(locale, d), cue: d.cue }, ...(head !== text ? [{ text: after }] : [])];
+  }
+  return (split ? splitSentences(text) : [text]).map((piece, i) => ({ text: piece, cue: i === 0 ? d.cue : undefined }));
+}
+
+async function materialize(locale: string, drafts: Draft[], prefix: string, split = false): Promise<ScriptLine[]> {
+  const pieces = (await Promise.all(drafts.map((d) => piecesOf(locale, d, split)))).flat();
   const lines: ScriptLine[] = await Promise.all(
-    drafts.map(async (d, i) => {
-      const text = t(d.key as Parameters<typeof t>[0], d.vars as never);
-      const parts = await recordedParts(locale, d);
-      if (parts) return { id: `${prefix}-${i}`, text, audioUrl: null, parts, cue: d.cue };
-      return { id: `${prefix}-${i}`, text, audioUrl: await prepareLine(text, toLocale(locale)), cue: d.cue };
+    pieces.map(async ({ text, parts, cue }, i) => {
+      if (parts) return { id: `${prefix}-${i}`, text, audioUrl: null, parts, cue };
+      return { id: `${prefix}-${i}`, text, audioUrl: await prepareLine(text, toLocale(locale)), cue };
     }),
   );
   const seconds = await recordedSeconds(lines.flatMap((l) => l.parts ?? (l.audioUrl ? [l.audioUrl] : [])));
@@ -136,7 +159,8 @@ async function materialize(locale: string, drafts: Draft[], prefix: string): Pro
 }
 
 export function buildStepScript(step: CeremonyStep, ctx: Context) {
-  return materialize(ctx.locale, draftsFor(step, ctx), step);
+  // The draw keeps its three lines whole: the wheel stops on the third.
+  return materialize(ctx.locale, draftsFor(step, ctx), step, step !== "draw");
 }
 
 /** The short personal ceremony for async sessions, split around the moment of the reveal. */

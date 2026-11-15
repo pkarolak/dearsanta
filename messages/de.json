@@ -332,11 +332,11 @@
     },
     "stepHint": {
       "lobby": "Öffne den großen Bildschirm und lass alle den QR-Code scannen. Starte, wenn das ganze Team da ist.",
-      "welcome": "Der Weihnachtsmann begrüßt alle.",
-      "elves": "Der Weihnachtsmann lernt jeden Wichtel kennen.",
-      "rules": "Der Weihnachtsmann erklärt Regeln und Budget. Im nächsten Kapitel wird gelost – danach kann niemand mehr beitreten.",
-      "draw": "Die Namen sind gezogen und stehen fest. Als Nächstes sieht jeder sein Los auf dem eigenen Gerät.",
-      "reveal": "Alle packen ihr Los aus. Jeder Wichtel hat auch eine E-Mail bekommen.",
+      "welcome": "Der Weihnachtsmann begrüßt alle und fragt, ob das Team vollständig ist. Nachzügler können den Code noch scannen.",
+      "elves": "Der Weihnachtsmann lernt jeden Wichtel kennen und geht von selbst zu den Regeln über.",
+      "rules": "Der Weihnachtsmann erklärt die Regeln und das Budget und fragt dann, ob ausgelost wird. Nach der Auslosung kann niemand mehr beitreten.",
+      "draw": "Das Rad dreht sich, das Ergebnis ist endgültig. Der Weihnachtsmann geht von selbst zur Enthüllung über.",
+      "reveal": "Alle packen ihr Ergebnis aus, und jeder Wichtel hat auch eine E-Mail bekommen. Wenn alle fertig sind, verabschiedet sich der Weihnachtsmann von selbst.",
       "farewell": "Das war’s. Frohe Weihnachten!"
     },
     "start": "Zeremonie starten",
@@ -456,7 +456,13 @@
       "toRemote": "Zur Fernbedienung",
       "skip": "Ich habe nur ein Gerät"
     },
-    "santaSpeaking": "Der Weihnachtsmann spricht… {seconds} s"
+    "santaSpeaking": "Der Weihnachtsmann spricht… {seconds} s",
+    "answer": {
+      "welcome": "Ja, wir können anfangen",
+      "rules": "Auslosen!"
+    },
+    "continue": "Weiter",
+    "santaLeads": "Der Weihnachtsmann macht von selbst weiter"
   },
   "screen": {
     "noAccessTitle": "Das ist der große Bildschirm",
@@ -538,6 +544,7 @@
     "welcome1": "Ho, ho, ho! Guten Abend, meine Lieben!",
     "welcome2": "Ich bin es, der Weihnachtsmann. Heute gehört meine Werkstatt euch. Meine Helfer haben aufgeräumt, Plätzchen für euch gebacken und den Kakao gewärmt.",
     "welcome3": "Ich sehe hier {count, plural, one {einen neuen Elf} other {# neue Elfen}}.",
+    "welcomeAsk": "Sind wir schon alle da?",
     "elves1": "Lasst mich euch alle einmal gut ansehen.",
     "elvesNames": "{names}.",
     "elves2": "Was für ein großartiges Team! Ihr steht dieses Jahr alle auf meiner Liste der Braven.",
@@ -548,6 +555,7 @@
     "rulesBudget": "Das Geschenk soll nicht mehr als {budget} kosten. Es zählen eine gute Idee, ein bisschen Schwung und eine Prise Glitzer.",
     "rulesNoBudget": "Wir haben keine Obergrenze für das Geschenk festgelegt, aber denkt daran: Die schönsten Geschenke kommen von Herzen. Es zählen eine gute Idee, ein bisschen Schwung und eine Prise Glitzer.",
     "rules2": "Und das Wichtigste: Behaltet euer Ergebnis für euch!",
+    "rulesAsk": "Bereit für die Auslosung?",
     "draw1": "Wichtel, auf eure Plätze! Die große Auslosung beginnt!",
     "draw2": "Die Namen wirbeln, die Glöckchen klingen, und der große Strumpf übernimmt das Glücksrad…",
     "draw3": "Fertig! Jeder Name hat seinen Wichtel gefunden.",

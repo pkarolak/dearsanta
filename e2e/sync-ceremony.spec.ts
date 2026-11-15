@@ -72,13 +72,21 @@ test("live ceremony: create, join, let in, exclusions, draw and reveal", async (
   await screen.getByRole("button", { name: /Light the fireplace/ }).click();
   await screen.screenshot({ path: `${shots}/03-screen-lobby.png` });
 
-  // Run the ceremony chapter by chapter.
+  // Santa runs the show himself; the chief only answers his two questions.
   await host.getByRole("button", { name: "Start the ceremony" }).click();
-  for (const chapter of ["The elves", "The rules", "The draw", "The reveal"]) {
-    await host.getByRole("button", { name: `Next: ${chapter}` }).click();
-    await expect(host.getByRole("button", { name: /Next:|Replay/ }).first()).toBeEnabled();
-  }
-  await expect(screen.getByText("Look at your own device", { exact: true })).toBeVisible();
+  const allHere = host.getByRole("button", { name: "Yes, let’s begin" });
+  await expect(allHere).toBeEnabled({ timeout: 90_000 });
+  await expect(screen.getByRole("button", { name: "Yes, let’s begin" })).toBeVisible();
+  await screen.screenshot({ path: `${shots}/03b-screen-question.png` });
+  await host.screenshot({ path: `${shots}/03c-host-question.png` });
+  await allHere.click();
+  await expect(host.getByText("Santa will carry on by himself")).toBeVisible();
+  await host.screenshot({ path: `${shots}/03d-host-auto.png` });
+  const letsDraw = host.getByRole("button", { name: "Let’s draw!" });
+  await expect(letsDraw).toBeEnabled({ timeout: 120_000 });
+  await screen.getByRole("button", { name: "Let’s draw!" }).click();
+  // After the draw Santa moves on to the reveal by himself.
+  await expect(screen.getByText("Look at your own device", { exact: true })).toBeVisible({ timeout: 60_000 });
   await screen.screenshot({ path: `${shots}/04-screen-reveal.png` });
 
   // Ola unwraps her match on her phone.
@@ -98,6 +106,13 @@ test("live ceremony: create, join, let in, exclusions, draw and reveal", async (
 
   await invited.waitForTimeout(1500);
   await invited.screenshot({ path: `${shots}/07-remote-split.png` });
+
+  // Not everyone has unwrapped yet, so the chief moves on to the farewell by hand.
+  await host.getByRole("button", { name: "Continue", exact: true }).click({ timeout: 60_000 });
+  // The banner waits for Santa's goodbye and the closing curtain.
+  await expect(screen.getByText("Merry Christmas!", { exact: true })).toBeVisible({ timeout: 60_000 });
+  await expect(screen.getByText("For the rest of the evening")).toBeInViewport({ timeout: 10_000 });
+  await screen.screenshot({ path: `${shots}/08-screen-curtain.png` });
 
   // Everyone got a keepsake e-mail.
   await host.goto("/dev/mail");

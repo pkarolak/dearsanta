@@ -374,26 +374,64 @@ async function pairsFor(session: Session) {
   return pairs;
 }
 
-/** Sync mode: the Elf Chief moves the ceremony forward; Santa draws when the "draw" chapter begins. */
+const stepQueues = new Map<string, Promise<unknown>>();
+
+/** One ceremony move at a time per session: the big screen and the chief's phone often ask at the same moment. */
+function oneAtATime<T>(sessionId: string, fn: () => Promise<T>): Promise<T> {
+  const next = (stepQueues.get(sessionId) ?? Promise.resolve()).catch(() => {}).then(fn);
+  stepQueues.set(sessionId, next);
+  void next.catch(() => {}).finally(() => stepQueues.get(sessionId) === next && stepQueues.delete(sessionId));
+  return next;
+}
+
+/** Opens a chapter; Santa draws when the "draw" chapter begins. */
+async function enterStep(session: Session, step: CeremonyStep) {
+  if (step === "draw" && !session.drawnAt) {
+    const pending = (await listParticipants(session.id)).filter((p) => p.status === "pending");
+    if (pending.length) throw new ActionError("pending_guests", pending.map((p) => p.displayName));
+    await draw(session);
+  }
+
+  const enteringReveal = step === "reveal" && session.status !== "drawn" && session.status !== "done";
+  const status =
+    step === "farewell" ? "done" : step === "reveal" ? "drawn" : session.status === "open" ? "ceremony" : undefined;
+  await setCeremonyStep(session.id, step, status);
+  if (enteringReveal) await sendResults(session, await pairsFor(session));
+}
+
+/** Sync mode: the Elf Chief starts the ceremony, or replays the current chapter. */
 export async function advanceCeremonyAction(code: string, target?: CeremonyStep) {
   return run(async () => {
     const { session } = await requireHost(code);
     if (session.mode !== "sync") throw new ActionError("wrong_mode");
-    const step = target === session.ceremonyStep ? target : nextStep(session.ceremonyStep);
-    if (!step) throw new ActionError("finished");
+    return oneAtATime(session.id, async () => {
+      const current = await loadSession(code);
+      const step = target === current.ceremonyStep ? target : nextStep(current.ceremonyStep);
+      if (!step) throw new ActionError("finished");
+      await enterStep(current, step);
+      return { step };
+    });
+  });
+}
 
-    if (step === "draw" && !session.drawnAt) {
-      const pending = (await listParticipants(session.id)).filter((p) => p.status === "pending");
-      if (pending.length) throw new ActionError("pending_guests", pending.map((p) => p.displayName));
-      await draw(session);
-    }
-
-    const enteringReveal = step === "reveal" && session.status !== "drawn" && session.status !== "done";
-    const status =
-      step === "farewell" ? "done" : step === "reveal" ? "drawn" : session.status === "open" ? "ceremony" : undefined;
-    await setCeremonyStep(session.id, step, status);
-    if (enteringReveal) await sendResults(session, await pairsFor(session));
-    return { step };
+/**
+ * Moves on from chapter `from`: the answer to Santa's question, or the screen and the chief's phone carrying
+ * the show on by themselves. Asking twice is harmless, the second request finds the chapter already over.
+ */
+export async function continueCeremonyAction(code: string, from: CeremonyStep, screenKey?: string | null) {
+  return run(async () => {
+    const session = await loadSession(code);
+    const viewer = await getViewer(session, screenKey);
+    if (!viewer.isHost && !(viewer.isScreen && from !== "lobby")) throw new ActionError("forbidden");
+    if (session.mode !== "sync") throw new ActionError("wrong_mode");
+    return oneAtATime(session.id, async () => {
+      const current = await loadSession(code);
+      if (current.ceremonyStep !== from) return { step: current.ceremonyStep };
+      const step = nextStep(from);
+      if (!step) throw new ActionError("finished");
+      await enterStep(current, step);
+      return { step };
+    });
   });
 }
 
