@@ -307,7 +307,7 @@
   },
   "host": {
     "eyebrow": "Painel do Chefe dos duendes",
-    "code": "Código",
+    "code": "Código para convidados",
     "mode": {
       "sync": "Cerimónia ao vivo",
       "async": "Um sorteio totalmente à distância"
@@ -392,7 +392,7 @@
     "fullscreen": "Ecrã inteiro",
     "room": {
       "title": "A oficina está aberta!",
-      "lead": "Lê o código com o telemóvel ou abre a página e escreve o código.",
+      "lead": "Os convidados leem o código QR com o telemóvel ou escrevem o código de convidados no site.",
       "leadAsync": "Envia este link à família – cada um junta-se quando quiser.",
       "waiting": "À espera dos primeiros elfos…",
       "inside": "{count, plural, one {# elfo lá dentro} other {# elfos lá dentro}}",
@@ -405,8 +405,8 @@
       "tooFew": "O sorteio precisa de pelo menos 2 duendes.",
       "more": "Definições, regras e convites",
       "myElf": "Cria o teu elfo",
-      "tvHint": "Na televisão ou noutro portátil, abra <b>{url}</b> e escreva o código do ecrã:",
-      "leadRemote": "Os convidados leem o código no ecrã grande. Código da sessão: <b>{code}</b>",
+      "tvHint": "Queres a cerimónia na televisão ou noutro portátil? Abre lá <b>{url}</b> e escreve o código do ecrã. Este código é só para o ecrã – não o dês aos convidados.",
+      "leadRemote": "Os convidados leem o código QR no ecrã grande. Código para convidados: <b>{code}</b>",
       "hostRole": "Estás a conduzir a cerimónia",
       "screenTitle": "O ecrã grande",
       "youPlay": "Também entras no sorteio",
@@ -414,7 +414,10 @@
       "changeElf": "Mudar o teu elfo",
       "screenOn": "Ligado",
       "youDontPlay": "Conduzes, mas não entras no sorteio",
-      "youDontPlayHint": "Não dás presente a ninguém e ninguém te tira a ti. Podes mudar isto nas definições."
+      "youDontPlayHint": "Não dás presente a ninguém e ninguém te tira a ti. Podes mudar isto nas definições.",
+      "guestCode": "Código para convidados",
+      "guestHint": "ou vai a <b>{url}</b> e escreve este código",
+      "screenCode": "Código do ecrã"
     },
     "phone": {
       "button": "Levar para o telemóvel",

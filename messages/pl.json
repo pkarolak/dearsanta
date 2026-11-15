@@ -307,7 +307,7 @@
   },
   "host": {
     "eyebrow": "Panel Naczelnika elfów",
-    "code": "Kod",
+    "code": "Kod dla gości",
     "mode": {
       "sync": "Ceremonia na żywo",
       "async": "Losowanie w pełni zdalne"
@@ -392,7 +392,7 @@
     "fullscreen": "Pełny ekran",
     "room": {
       "title": "Warsztat otwarty!",
-      "lead": "Zeskanujcie kod QR telefonem albo wejdźcie na stronę i wpiszcie kod.",
+      "lead": "Goście skanują kod QR telefonem albo wpisują kod dla gości na stronie.",
       "leadAsync": "Wyślij ten link rodzinie – każdy dołączy, kiedy mu pasuje.",
       "waiting": "Czekamy na pierwsze elfy…",
       "inside": "{count, plural, one {# elf już jest} few {# elfy już są} many {# elfów już jest} other {# elfa już jest}}",
@@ -405,8 +405,8 @@
       "tooFew": "Do losowania potrzeba co najmniej 2 elfów.",
       "more": "Ustawienia, zasady i zaproszenia",
       "myElf": "Stwórz swojego elfa",
-      "tvHint": "Na telewizorze albo drugim laptopie wejdź na <b>{url}</b> i wpisz kod ekranu:",
-      "leadRemote": "Goście skanują kod z dużego ekranu. Kod sesji: <b>{code}</b>",
+      "tvHint": "Chcesz pokazać ceremonię na telewizorze albo drugim laptopie? Wejdź na nim na <b>{url}</b> i wpisz kod ekranu. Ten kod jest tylko dla ekranu – gościom go nie podawaj.",
+      "leadRemote": "Goście skanują kod QR z dużego ekranu. Kod dla gości: <b>{code}</b>",
       "hostRole": "Prowadzisz ceremonię",
       "screenTitle": "Duży ekran",
       "youPlay": "Ty też losujesz",
@@ -414,7 +414,10 @@
       "changeElf": "Zmień wygląd elfa",
       "screenOn": "Połączony",
       "youDontPlay": "Prowadzisz, ale nie losujesz",
-      "youDontPlayHint": "Nie dasz nikomu prezentu i nikt nie wylosuje Ciebie. Możesz to zmienić w ustawieniach."
+      "youDontPlayHint": "Nie dasz nikomu prezentu i nikt nie wylosuje Ciebie. Możesz to zmienić w ustawieniach.",
+      "guestCode": "Kod dla gości",
+      "guestHint": "albo wejdź na <b>{url}</b> i wpisz ten kod",
+      "screenCode": "Kod ekranu"
     },
     "phone": {
       "button": "Weź sesję na telefon",

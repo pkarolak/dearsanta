@@ -47,10 +47,13 @@ export function WaitingRoom({ state, joinUrl, screenUrl }: Props) {
           <div className="rounded-[1.6rem] bg-paper p-4 shadow-[0_30px_70px_-20px_rgb(0_0_0/0.7),0_0_60px_-10px_rgb(255_200_110/0.35)]">
             <QRCodeSVG value={joinUrl} size={232} bgColor="transparent" fgColor="#2b1810" className="h-[min(232px,62vw)] w-[min(232px,62vw)]" />
           </div>
-          <p className="foil mt-5 font-display text-5xl font-black tracking-[0.16em] md:text-6xl" data-testid="room-code">
+          <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-gold">{t("guestCode")}</p>
+          <p className="foil mt-1 font-display text-5xl font-black tracking-[0.16em] md:text-6xl" data-testid="room-code">
             {s.code}
           </p>
-          <p className="mt-1 font-mono text-sm text-snow/60">{shortUrl.replace(/\/join\/.*/, "")}</p>
+          <p className="mt-1 text-center text-sm text-snow/65">
+            {t.rich("guestHint", { url: shortUrl.replace(/\/join\/.*/, ""), b: (chunks) => <strong className="font-mono font-normal text-snow/85">{chunks}</strong> })}
+          </p>
         </div>
         )}
 
@@ -89,10 +92,13 @@ export function WaitingRoom({ state, joinUrl, screenUrl }: Props) {
                 )}
               </p>
               {!onScreen && s.screenCode && (
-                <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
-                  <p className="min-w-0 flex-1 text-sm text-snow/80">{t.rich("tvHint", { url: tvUrl, b: (chunks) => <strong className="text-snow">{chunks}</strong> })}</p>
-                  <p className="font-display text-3xl font-black tracking-[0.12em] text-gold" data-testid="screen-code">
-                    {s.screenCode.replace(/(\d{3})(\d{3})/, "$1 $2")}
+                <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2">
+                  <p className="min-w-0 flex-1 basis-60 text-sm text-snow/80">{t.rich("tvHint", { url: tvUrl, b: (chunks) => <strong className="text-snow">{chunks}</strong> })}</p>
+                  <p className="text-center">
+                    <span className="block text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-snow/60">{t("screenCode")}</span>
+                    <span className="block font-display text-3xl font-black tracking-[0.12em] text-gold" data-testid="screen-code">
+                      {s.screenCode.replace(/(\d{3})(\d{3})/, "$1 $2")}
+                    </span>
                   </p>
                 </div>
               )}

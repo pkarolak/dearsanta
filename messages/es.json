@@ -307,7 +307,7 @@
   },
   "host": {
     "eyebrow": "Panel del Jefe de los elfos",
-    "code": "Código",
+    "code": "Código para invitados",
     "mode": {
       "sync": "Ceremonia en directo",
       "async": "Un sorteo totalmente a distancia"
@@ -392,7 +392,7 @@
     "fullscreen": "Pantalla completa",
     "room": {
       "title": "¡El taller está abierto!",
-      "lead": "Escanead el código con el móvil o abrid la página y escribid el código.",
+      "lead": "Los invitados escanean el código QR con el móvil o escriben el código de invitados en la web.",
       "leadAsync": "Envía este enlace a la familia: cada uno se une cuando quiera.",
       "waiting": "Esperando a los primeros elfos…",
       "inside": "{count, plural, one {# elfo dentro} other {# elfos dentro}}",
@@ -405,8 +405,8 @@
       "tooFew": "El sorteo necesita al menos 2 elfos.",
       "more": "Ajustes, reglas e invitaciones",
       "myElf": "Crea tu elfo",
-      "tvHint": "En la tele o en otro portátil, entra en <b>{url}</b> y escribe el código de pantalla:",
-      "leadRemote": "Los invitados escanean el código de la pantalla grande. Código de la sesión: <b>{code}</b>",
+      "tvHint": "¿Quieres ver la ceremonia en la tele o en otro portátil? Abre allí <b>{url}</b> y escribe el código de pantalla. Este código es solo para la pantalla: no se lo des a los invitados.",
+      "leadRemote": "Los invitados escanean el código QR de la pantalla grande. Código para invitados: <b>{code}</b>",
       "hostRole": "Diriges la ceremonia",
       "screenTitle": "La pantalla grande",
       "youPlay": "Tú también participas",
@@ -414,7 +414,10 @@
       "changeElf": "Cambiar tu elfo",
       "screenOn": "Conectada",
       "youDontPlay": "Diriges, pero no participas en el sorteo",
-      "youDontPlayHint": "No harás ningún regalo y nadie te sacará a ti. Puedes cambiarlo en los ajustes."
+      "youDontPlayHint": "No harás ningún regalo y nadie te sacará a ti. Puedes cambiarlo en los ajustes.",
+      "guestCode": "Código para invitados",
+      "guestHint": "o entra en <b>{url}</b> y escribe este código",
+      "screenCode": "Código de pantalla"
     },
     "phone": {
       "button": "Llevarlo a mi móvil",

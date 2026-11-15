@@ -307,7 +307,7 @@
   },
   "host": {
     "eyebrow": "Oberwichtel-Pult",
-    "code": "Code",
+    "code": "Code für Gäste",
     "mode": {
       "sync": "Live-Zeremonie",
       "async": "Wichteln komplett aus der Ferne"
@@ -392,7 +392,7 @@
     "fullscreen": "Vollbild",
     "room": {
       "title": "Die Werkstatt ist offen!",
-      "lead": "Scannt den Code mit dem Handy oder öffnet die Seite und tippt den Code ein.",
+      "lead": "Die Gäste scannen den QR-Code mit dem Handy oder geben den Gästecode auf der Website ein.",
       "leadAsync": "Schick diesen Link an die Familie – jeder macht mit, wann er will.",
       "waiting": "Wir warten auf die ersten Elfen…",
       "inside": "{count, plural, one {# Elf drin} other {# Elfen drin}}",
@@ -405,8 +405,8 @@
       "tooFew": "Für die Auslosung braucht es mindestens 2 Wichtel.",
       "more": "Einstellungen, Regeln und Einladungen",
       "myElf": "Deinen Elf gestalten",
-      "tvHint": "Geh auf dem Fernseher oder einem zweiten Laptop auf <b>{url}</b> und gib den Bildschirmcode ein:",
-      "leadRemote": "Die Gäste scannen den Code auf dem großen Bildschirm. Sitzungscode: <b>{code}</b>",
+      "tvHint": "Soll die Zeremonie auf einem Fernseher oder zweiten Laptop laufen? Öffne dort <b>{url}</b> und gib den Bildschirmcode ein. Dieser Code ist nur für den Bildschirm – gib ihn nicht an die Gäste weiter.",
+      "leadRemote": "Die Gäste scannen den QR-Code auf dem großen Bildschirm. Code für Gäste: <b>{code}</b>",
       "hostRole": "Du leitest die Zeremonie",
       "screenTitle": "Der große Bildschirm",
       "youPlay": "Du wichtelst auch mit",
@@ -414,7 +414,10 @@
       "changeElf": "Deinen Elf ändern",
       "screenOn": "Verbunden",
       "youDontPlay": "Du leitest, wichtelst aber nicht mit",
-      "youDontPlayHint": "Du beschenkst niemanden und niemand zieht dich. Das kannst du in den Einstellungen ändern."
+      "youDontPlayHint": "Du beschenkst niemanden und niemand zieht dich. Das kannst du in den Einstellungen ändern.",
+      "guestCode": "Code für Gäste",
+      "guestHint": "oder auf <b>{url}</b> gehen und diesen Code eingeben",
+      "screenCode": "Bildschirmcode"
     },
     "phone": {
       "button": "Aufs Handy holen",

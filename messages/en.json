@@ -307,7 +307,7 @@
   },
   "host": {
     "eyebrow": "Elf Chief panel",
-    "code": "Code",
+    "code": "Code for guests",
     "mode": {
       "sync": "Live ceremony",
       "async": "A fully remote draw"
@@ -392,7 +392,7 @@
     "fullscreen": "Full screen",
     "room": {
       "title": "The workshop is open!",
-      "lead": "Scan the code with your phone, or open the page and type the code.",
+      "lead": "Guests scan the QR code with their phones or type the guest code on the website.",
       "leadAsync": "Send this link to the family – everyone joins when they like.",
       "waiting": "Waiting for the first elves…",
       "inside": "{count, plural, one {# elf inside} other {# elves inside}}",
@@ -405,8 +405,8 @@
       "tooFew": "The draw needs at least 2 elves.",
       "more": "Settings, rules and invitations",
       "myElf": "Make your elf",
-      "tvHint": "On the TV or a second laptop, go to <b>{url}</b> and type the screen code:",
-      "leadRemote": "Guests scan the code on the big screen. Session code: <b>{code}</b>",
+      "tvHint": "Want the ceremony on a TV or a second laptop? Open <b>{url}</b> on it and type the screen code. This code is only for the screen – don’t give it to your guests.",
+      "leadRemote": "Guests scan the QR code on the big screen. Code for guests: <b>{code}</b>",
       "hostRole": "You’re running the show",
       "screenTitle": "The big screen",
       "youPlay": "You’re in the draw too",
@@ -414,7 +414,10 @@
       "changeElf": "Change your elf",
       "screenOn": "Connected",
       "youDontPlay": "You run the show, but you’re not in the draw",
-      "youDontPlayHint": "You won’t give anyone a gift and nobody will draw you. You can change this in the settings."
+      "youDontPlayHint": "You won’t give anyone a gift and nobody will draw you. You can change this in the settings.",
+      "guestCode": "Code for guests",
+      "guestHint": "or go to <b>{url}</b> and type this code",
+      "screenCode": "Screen code"
     },
     "phone": {
       "button": "Take it to my phone",
