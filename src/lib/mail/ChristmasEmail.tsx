@@ -103,14 +103,11 @@ export function ChristmasEmail(props: ChristmasEmailProps) {
                   backgroundColor: colors.snow,
                   border: `1.5px dashed ${colors.goldLine}`,
                   borderRadius: 20,
-                  padding: "8px 28px 22px",
+                  padding: "22px 28px 24px",
                   margin: "24px 0",
                   textAlign: "center",
                 }}
               >
-                <Text style={{ color: colors.gold, fontFamily: serif, fontSize: 64, lineHeight: "64px", margin: "0 0 -18px" }}>
-                  “
-                </Text>
                 <Text
                   style={{
                     color: colors.red,

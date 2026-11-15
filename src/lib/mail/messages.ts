@@ -46,6 +46,8 @@ export async function sendInvites(session: Session, host: Participant | undefine
       : [];
     mails.push({
       to: p.email,
+      fromName: host ? t("invite.fromName", { host: host.displayName }) : undefined,
+      replyTo: host?.email ?? undefined,
       subject: t("invite.subject", { host: host?.displayName ?? "Santa", title: session.title }),
       attachments: ics ? [{ filename: "secret-santa.ics", content: ics, contentType: "text/calendar" }] : undefined,
       email: {

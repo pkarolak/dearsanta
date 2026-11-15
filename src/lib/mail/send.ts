@@ -10,6 +10,10 @@ export type OutgoingMail = {
   /** Elves who joined with just a name have no address; their mail is skipped. */
   to: string | null;
   subject: string;
+  /** Shown as the sender instead of the brand, e.g. "Anna via Drogi Mikołaju!"; the address stays the app's. */
+  fromName?: string;
+  /** Where a reply goes; the brand's contact address when unset. */
+  replyTo?: string;
   email: ChristmasEmailProps;
   attachments?: { filename: string; content: string; contentType: string }[];
 };
@@ -48,6 +52,8 @@ export async function sendMails(all: OutgoingMail[]) {
   }
 
   const from = process.env.MAIL_FROM ?? `${brand.name} <onboarding@resend.dev>`;
+  const address = from.match(/<([^>]+)>/)?.[1] ?? from;
+  const sender = (name?: string) => (name ? `"${name.replace(/["<>\\\r\n]/g, "")}" <${address}>` : from);
   const santa = { filename: santaInline.filename, content: await readFile(path.join(process.cwd(), santaInline.path)), contentId: santaInline.contentId };
 
   // Inline pictures are attachments, which the batch endpoint does not take, so mails go one by one,
@@ -55,8 +61,8 @@ export async function sendMails(all: OutgoingMail[]) {
   for (const [i, m] of rendered.entries()) {
     if (i > 0) await new Promise((r) => setTimeout(r, 600));
     const { error } = await resendClient.emails.send({
-      from,
-      replyTo: brand.contact,
+      from: sender(m.fromName),
+      replyTo: m.replyTo ?? brand.contact,
       to: m.to,
       subject: m.subject,
       html: m.html,

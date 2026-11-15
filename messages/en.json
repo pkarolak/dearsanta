@@ -508,7 +508,8 @@
       "cta": "Create my elf profile",
       "google": "Add to Google Calendar",
       "ics": "Add to Apple / Outlook",
-      "noteLabel": "A note with your invitation"
+      "noteLabel": "A note with your invitation",
+      "fromName": "{host} via Drogi Mikołaju!"
     },
     "host": {
       "subject": "Your Secret Santa “{title}” is ready",

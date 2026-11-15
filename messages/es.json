@@ -508,7 +508,8 @@
       "cta": "Crear mi perfil de elfo",
       "google": "Añadir a Google Calendar",
       "ics": "Añadir a Apple / Outlook",
-      "noteLabel": "Unas palabras con tu invitación"
+      "noteLabel": "Unas palabras con tu invitación",
+      "fromName": "{host} vía Drogi Mikołaju!"
     },
     "host": {
       "subject": "Tu amigo invisible «{title}» está listo",

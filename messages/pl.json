@@ -508,7 +508,8 @@
       "cta": "Stwórz profil elfa",
       "google": "Dodaj do Kalendarza Google",
       "ics": "Dodaj do Apple / Outlook",
-      "noteLabel": "Dopisek do zaproszenia"
+      "noteLabel": "Dopisek do zaproszenia",
+      "fromName": "{host} przez Drogi Mikołaju!"
     },
     "host": {
       "subject": "Twój Secret Santa „{title}” jest gotowy",

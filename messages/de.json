@@ -508,7 +508,8 @@
       "cta": "Wichtelprofil erstellen",
       "google": "Zu Google Kalender hinzufügen",
       "ics": "Zu Apple / Outlook hinzufügen",
-      "noteLabel": "Ein paar Worte zur Einladung"
+      "noteLabel": "Ein paar Worte zur Einladung",
+      "fromName": "{host} über Drogi Mikołaju!"
     },
     "host": {
       "subject": "Dein Wichteln „{title}“ ist bereit",
