@@ -157,7 +157,7 @@ export function Select({
           renderTrigger(selected, open)
         ) : (
           <>
-            {lead(selected, false)}
+            {selected?.leading && <span className="-my-1 flex shrink-0">{lead(selected, false)}</span>}
             <span className={`min-w-0 flex-1 truncate ${selected ? "" : "text-muted"}`}>{selected?.label ?? placeholder}</span>
             <CaretDown weight="bold" className={`h-4 w-4 shrink-0 text-muted transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
           </>
