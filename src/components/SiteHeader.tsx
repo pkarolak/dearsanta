@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Gift } from "@phosphor-icons/react/dist/ssr";
 import { Link } from "@/i18n/navigation";
 import { JoinButton } from "./JoinButton";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -22,7 +23,8 @@ export function SiteHeader({ fixed = false }: { fixed?: boolean }) {
         <nav className="flex items-center gap-0.5 text-sm font-semibold">
           <LanguageSwitcher tone="dark" short />
           <span className="mx-1.5 h-5 w-px bg-snow/20 max-sm:hidden" aria-hidden />
-          <Link href="/new" className="btn-primary mr-1 h-9 whitespace-nowrap px-4 py-0 text-sm">
+          <Link href="/new" className="btn-primary mr-1 h-9 gap-1.5 whitespace-nowrap px-4 py-0 text-sm">
+            <Gift weight="fill" className="h-4 w-4 shrink-0" aria-hidden />
             {t("create")}
           </Link>
           <JoinButton tone="dark" />
