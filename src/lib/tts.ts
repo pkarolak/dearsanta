@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { getTtsLine, registerTtsLine, storeTtsAudio } from "@/lib/db/repo";
+import { getTtsLine, hasTtsAudio, registerTtsLine, storeTtsAudio } from "@/lib/db/repo";
 
 /** ElevenLabs premade voice "Bill" – a warm, older male narrator. Override with ELEVENLABS_VOICE_ID. */
 const DEFAULT_VOICE = "pqHfZKP75CvOlQylNhV4";
@@ -91,6 +91,25 @@ export async function audioForHash(hash: string) {
     await storeTtsAudio(hash, null, null);
     return null;
   }
+}
+
+/** The audio URL of a line only if it is already recorded, so playing it needs no internet. */
+export async function recordedLine(text: string, lang: string): Promise<string | null> {
+  const p = ttsProvider();
+  if (!p) return null;
+  const hash = hashLine(text, lang, p.voice);
+  return (await hasTtsAudio(hash)) ? `/api/tts/${hash}` : null;
+}
+
+/** Records lines now, one by one, and reports which of them have audio. */
+export async function recordLines(texts: string[], lang: string) {
+  const results: { text: string; ok: boolean }[] = [];
+  for (const text of texts) {
+    const url = await prepareLine(text, lang);
+    const audio = url ? await audioForHash(url.split("/").pop()!) : null;
+    results.push({ text, ok: !!audio });
+  }
+  return results;
 }
 
 const warming = new Set<string>();

@@ -510,6 +510,11 @@ export async function getTtsLine(hash: string) {
   };
 }
 
+export async function hasTtsAudio(hash: string) {
+  const rows = await (await db()).query("select 1 from tts_cache where hash = $1 and audio is not null", [hash]);
+  return rows.length > 0;
+}
+
 export async function storeTtsAudio(hash: string, audio: Buffer | null, mime: string | null) {
   await (await db()).query(
     "update tts_cache set audio = $2, mime = $3, failed_at = case when $2::bytea is null then now() else null end where hash = $1",

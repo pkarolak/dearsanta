@@ -2,7 +2,13 @@
 
 import { chordVoicings, jingleBellsChords, melodies, noteFrequency } from "./melodies";
 
-export type VoiceLine = { id: string; text: string; audioUrl: string | null; cue?: "bells" | "drumroll" | "chime" | "laugh" };
+export type VoiceLine = {
+  id: string;
+  text: string;
+  audioUrl: string | null;
+  parts?: string[];
+  cue?: "bells" | "drumroll" | "chime" | "laugh";
+};
 
 export type FilmSfx =
   | "bells" | "whoosh" | "steps" | "giggle" | "sneeze" | "creak" | "clank" | "sputter" | "pop" | "sparkle" | "tick" | "splat" | "fanfare";
@@ -569,6 +575,11 @@ class WorkshopAudio {
     return cached;
   }
 
+  /** Fetches every recording a line needs. */
+  prefetchLine(line: VoiceLine) {
+    return Promise.all(line.parts?.length ? line.parts.map((url) => this.prefetch(url)) : [this.prefetch(line.audioUrl)]);
+  }
+
   /** Current loudness of Santa's voice, 0..1, for lip sync. */
   level() {
     if (!this.ctx || !this.currentAudio) return 0;
@@ -590,12 +601,16 @@ class WorkshopAudio {
     const token = ++this.speakToken;
     const started = Date.now();
     if (line.cue) this.cue(line.cue);
-    const src = await this.prefetch(line.audioUrl);
+    const srcs = await this.prefetchLine(line);
     if (token !== this.speakToken) return;
     this.duck(true);
     try {
       // Without Santa's recording the line stays silent: a robotic stand-in voice would break the show.
-      if (src && this.ctx && this.voiceEl) await this.playAudio(src, token, startAt);
+      if (this.ctx && this.voiceEl && srcs.every(Boolean)) {
+        if (srcs.length === 1) await this.playAudio(srcs[0]!, token, startAt);
+        // Pieces can't be sought into, so someone arriving mid-line just reads the subtitle.
+        else if (startAt === 0) for (const src of srcs) if (token === this.speakToken) await this.playAudio(src!, token, 0);
+      }
       // A refused or missing recording must not flash the subtitle by.
       const left = startAt > 0 ? 0 : readingMs(line.text) * 0.8 - (Date.now() - started);
       if (left > 0 && token === this.speakToken) await new Promise((r) => setTimeout(r, left));

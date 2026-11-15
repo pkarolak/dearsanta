@@ -37,7 +37,7 @@ export function useVoice(
     if (!enabled || !script?.length) return;
     const audio = workshopAudio();
     let cancelled = false;
-    script.forEach((l) => audio.prefetch(l.audioUrl));
+    script.forEach((l) => audio.prefetchLine(l));
 
     (async () => {
       let elapsed = Math.max(0, (Date.now() - startRef.current) / 1000);
