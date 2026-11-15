@@ -266,7 +266,14 @@
       "face": "Twarz",
       "hat": "Czapka",
       "outfit": "Strój"
-    }
+    },
+    "live": "Na żywo",
+    "liveFrom": "z warsztatu Mikołaja",
+    "gateTitle": "Usiądź wygodnie przy kominku",
+    "gateBody": "Mikołaj poprowadzi losowanie na żywo. Włącz dźwięk, żeby słyszeć go razem ze wszystkimi.",
+    "chapterOf": "Rozdział {n} z {total}",
+    "switchToRoom": "Jesteś jednak przy dużym ekranie?",
+    "switchToRoomAction": "Oglądam w pokoju"
   },
   "reveal": {
     "eyebrow": "Ściśle tajne",

@@ -266,7 +266,14 @@
       "face": "Face",
       "hat": "Hat",
       "outfit": "Outfit"
-    }
+    },
+    "live": "Live",
+    "liveFrom": "from Santa’s workshop",
+    "gateTitle": "Make yourself cosy by the fire",
+    "gateBody": "Santa hosts the draw live. Turn the sound on to hear him with everyone else.",
+    "chapterOf": "Chapter {n} of {total}",
+    "switchToRoom": "By the big screen after all?",
+    "switchToRoomAction": "I’m in the room"
   },
   "reveal": {
     "eyebrow": "Top secret",

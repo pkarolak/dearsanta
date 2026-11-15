@@ -266,7 +266,14 @@
       "face": "Cara",
       "hat": "Gorro",
       "outfit": "Roupa"
-    }
+    },
+    "live": "Em direto",
+    "liveFrom": "da oficina do Pai Natal",
+    "gateTitle": "Põe-te confortável junto à lareira",
+    "gateBody": "O Pai Natal apresenta o sorteio em direto. Liga o som para o ouvires com todos.",
+    "chapterOf": "Capítulo {n} de {total}",
+    "switchToRoom": "Afinal estás no ecrã grande?",
+    "switchToRoomAction": "Estou na sala"
   },
   "reveal": {
     "eyebrow": "Ultrassecreto",

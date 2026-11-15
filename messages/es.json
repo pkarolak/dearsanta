@@ -266,7 +266,14 @@
       "face": "Cara",
       "hat": "Gorro",
       "outfit": "Ropa"
-    }
+    },
+    "live": "En directo",
+    "liveFrom": "desde el taller de Papá Noel",
+    "gateTitle": "Ponte cómodo junto a la chimenea",
+    "gateBody": "Papá Noel presenta el sorteo en directo. Activa el sonido para oírlo con todos.",
+    "chapterOf": "Capítulo {n} de {total}",
+    "switchToRoom": "¿Al final estás frente a la pantalla grande?",
+    "switchToRoomAction": "Estoy en la sala"
   },
   "reveal": {
     "eyebrow": "Alto secreto",

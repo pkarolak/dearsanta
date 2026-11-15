@@ -3,7 +3,7 @@
 import { Broadcast, PencilSimple, Television } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { useState, useTransition } from "react";
+import { useState, useSyncExternalStore, useTransition } from "react";
 import { Avatar } from "./Avatar";
 import { AvatarEditor } from "./AvatarEditor";
 import { CeremonyStage } from "./CeremonyStage";
@@ -13,8 +13,10 @@ import { PageBand } from "./PageBand";
 import { WizardHeader } from "./WizardHeader";
 import { SantaPuppet } from "./show/SantaPuppet";
 import { Cast, Vignette } from "./show/Vignette";
-import { MuteButton, SoundGateOverlay, useSoundGate } from "./SoundControls";
+import { MuteButton, useSoundGate } from "./SoundControls";
+import { SnowflakeIcon, SpeakerIcon } from "./icons";
 import { Link } from "@/i18n/navigation";
+import { ceremonySteps } from "@/lib/ceremony/steps";
 import { markRevealedAction, setRemoteAction } from "@/lib/actions";
 import type { SessionState } from "@/lib/state";
 import { useSessionState } from "@/lib/useSessionState";
@@ -23,6 +25,8 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
   const locale = useLocale();
   const t = useTranslations("elf");
   const sound = useSoundGate();
+  const ts = useTranslations("sound");
+  const wide = useWide();
   const { state, serverToLocal, refresh } = useSessionState(code, locale, { initial, voice: sound.enabled });
   const [pending, start] = useTransition();
   // A first visit is a short wizard: who you are, your elf's look, then where you watch from.
@@ -158,7 +162,7 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
 
       {s.mode === "sync" && s.step === "farewell" && <FestiveLinks />}
 
-      {s.mode === "sync" && !state.assignment && !late && (
+      {s.mode === "sync" && !state.assignment && !late && !isRemote && (
         <section className="card p-5">
           <h2 className="mb-3 font-display text-xl font-bold">{t("whereTitle")}</h2>
           {whereChoice(false)}
@@ -225,24 +229,114 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
     );
   }
 
-  // Remote elves get Santa's broadcast next to their own panel (stacked picture-in-picture on phones).
+  // Remote elves watch Santa's broadcast like a live show: the stage up front, their own things in a side panel.
   return (
-    <main className="min-h-dvh bg-cream lg:grid lg:grid-cols-[1.6fr_1fr]">
-      <div className="sticky top-0 z-20 bg-wall p-2 lg:h-dvh lg:p-4">
-        <div className="relative aspect-video overflow-hidden rounded-felt lg:aspect-auto lg:h-full">
-          <CeremonyStage state={state} locale={locale} audible={sound.enabled} serverToLocal={serverToLocal} compact className="h-full w-full" />
-          {!sound.enabled && <SoundGateOverlay onEnable={sound.enable} compact />}
-          {sound.enabled && (
-            <div className="absolute right-4 top-14 z-30">
-              <MuteButton muted={sound.muted} onToggle={sound.toggleMute} />
-            </div>
+    <main className="min-h-dvh bg-[radial-gradient(110%_70%_at_30%_0%,#5c1a21_0%,#2b0f13_55%,#160a0b_100%)] lg:grid lg:h-dvh lg:grid-cols-[minmax(0,1fr)_25rem] lg:overflow-hidden">
+      <section className="sticky top-0 z-20 bg-[#1c0b0d]/95 pb-3 backdrop-blur-md lg:static lg:flex lg:flex-col lg:justify-center lg:bg-transparent lg:px-10 lg:py-6 lg:backdrop-blur-none">
+        <div className="mx-auto w-full lg:max-w-[calc((100dvh-11rem)*16/9)]">
+          <header className="flex items-center justify-between gap-3 px-4 py-2.5 text-snow lg:px-0 lg:pb-4 lg:pt-0">
+            <Link href="/" className="flex items-center gap-2 font-display text-base font-bold lg:text-lg">
+              <SnowflakeIcon className="h-4 w-4 text-gold lg:h-5 lg:w-5" />
+              Santa Helper
+            </Link>
+            <p className="flex items-center gap-2 rounded-full bg-snow/10 py-1 pl-2.5 pr-3 text-xs font-semibold ring-1 ring-snow/15 lg:text-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inset-0 animate-ping rounded-full bg-berry opacity-75 motion-reduce:animate-none" />
+                <span className="relative h-2 w-2 rounded-full bg-[#ff4757]" />
+              </span>
+              <span className="uppercase tracking-[0.14em]">{t("live")}</span>
+              <span className="text-snow/60 max-sm:hidden">· {t("liveFrom")}</span>
+            </p>
+          </header>
+          <div className="relative overflow-hidden lg:aspect-video lg:rounded-2xl lg:shadow-[0_50px_90px_-40px_rgb(0_0_0/0.9),0_0_0_1px_rgb(242_185_53/0.28)]">
+            <CeremonyStage
+              state={state}
+              locale={locale}
+              audible={sound.enabled}
+              serverToLocal={serverToLocal}
+              compact={!wide}
+              captionsBelow={!wide}
+              className={wide ? "absolute inset-0" : ""}
+              controls={sound.enabled ? <MuteButton muted={sound.muted} onToggle={sound.toggleMute} /> : undefined}
+            />
+            {!sound.enabled && (
+              <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#140809]/60 px-6 text-center text-snow backdrop-blur-[3px]">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-gold lg:text-xs">{t("liveFrom")}</p>
+                <p className="mt-1.5 font-display text-lg font-bold leading-tight lg:mt-3 lg:text-3xl">{t("gateTitle")}</p>
+                <p className="mt-1 max-w-md text-xs text-snow/75 max-sm:hidden lg:mt-2 lg:text-base">{t("gateBody")}</p>
+                <button onClick={sound.enable} className="btn-primary mt-3 px-5 py-2.5 text-sm lg:mt-6 lg:px-7 lg:py-3.5 lg:text-base">
+                  <SpeakerIcon className="h-5 w-5" />
+                  {ts("start")}
+                </button>
+              </div>
+            )}
+          </div>
+          <ChapterStrip step={s.step} />
+        </div>
+      </section>
+
+      <aside className="bg-snow lg:overflow-y-auto lg:rounded-l-[2rem] lg:shadow-[-30px_0_60px_-30px_rgb(0_0_0/0.6)]">
+        <div className="flex items-center gap-4 px-5 pb-2 pt-6">
+          <Avatar config={me.avatar} className="h-14 w-14 shrink-0 shadow-[0_10px_20px_-10px_rgba(80,45,25,0.5)]" />
+          <div className="min-w-0">
+            <h1 className="truncate font-display text-2xl font-bold">{t("hello", { name: me.displayName })}</h1>
+            <p className="truncate text-sm text-muted">{s.title}</p>
+          </div>
+        </div>
+        {state.isHost && (
+          <div className="px-5">
+            <Link href={`/s/${code}/host`} className="btn-soft mt-2 px-4 py-2 text-sm">{t("hostPanel")}</Link>
+          </div>
+        )}
+        <div className="px-5 pb-8 pt-4">
+          {panel}
+          {s.mode === "sync" && !state.assignment && !late && (
+            <p className="mt-6 text-center text-sm text-muted">
+              {t("switchToRoom")}{" "}
+              <button type="button" disabled={pending} onClick={() => setRemote(false)} className="font-semibold text-pine underline-offset-2 hover:underline">
+                {t("switchToRoomAction")}
+              </button>
+            </p>
           )}
         </div>
-      </div>
-      <div className="felt-texture pb-10 lg:h-dvh lg:overflow-y-auto">
-        {band}
-        <div className="px-5 pt-6">{panel}</div>
-      </div>
+      </aside>
     </main>
+  );
+}
+
+/** Where the ceremony has got to: one segment per chapter, the current one lit. */
+function ChapterStrip({ step }: { step: (typeof ceremonySteps)[number] }) {
+  const t = useTranslations("elf");
+  const th = useTranslations("host");
+  const at = ceremonySteps.indexOf(step);
+  return (
+    <div className="px-4 pt-3 text-snow lg:px-0 lg:pt-5">
+      <div className="flex items-baseline justify-between text-xs lg:hidden">
+        <span className="font-semibold">{th(`steps.${step}`)}</span>
+        <span className="text-snow/55">{t("chapterOf", { n: at + 1, total: ceremonySteps.length })}</span>
+      </div>
+      <ol className="mt-1.5 flex gap-1.5 lg:mt-0 lg:gap-2">
+        {ceremonySteps.map((id, i) => (
+          <li key={id} className="flex-1">
+            <span className={`block h-1 rounded-full transition-colors lg:h-1.5 ${i < at ? "bg-gold/70" : i === at ? "bg-gold" : "bg-snow/15"}`} />
+            <span className={`mt-2 hidden text-xs font-semibold lg:block ${i === at ? "text-gold" : i < at ? "text-snow/70" : "text-snow/40"}`}>{th(`steps.${id}`)}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+const wideQuery = "(min-width: 1024px)";
+/** Big screens get the show's regular lettering; phones the larger, compact one. */
+function useWide() {
+  return useSyncExternalStore(
+    (onChange) => {
+      const query = window.matchMedia(wideQuery);
+      query.addEventListener("change", onChange);
+      return () => query.removeEventListener("change", onChange);
+    },
+    () => window.matchMedia(wideQuery).matches,
+    () => false,
   );
 }

@@ -266,7 +266,14 @@
       "face": "Gesicht",
       "hat": "Mütze",
       "outfit": "Outfit"
-    }
+    },
+    "live": "Live",
+    "liveFrom": "aus der Werkstatt des Weihnachtsmanns",
+    "gateTitle": "Mach es dir am Kamin gemütlich",
+    "gateBody": "Der Weihnachtsmann moderiert die Auslosung live. Schalte den Ton ein, um ihn mit allen anderen zu hören.",
+    "chapterOf": "Kapitel {n} von {total}",
+    "switchToRoom": "Doch am großen Bildschirm?",
+    "switchToRoomAction": "Ich bin im Raum"
   },
   "reveal": {
     "eyebrow": "Streng geheim",
