@@ -8,6 +8,8 @@ const guestEmail = `ola-${stamp}@example.com`;
 const invitedEmail = `tom-${stamp}@example.com`;
 
 test("live ceremony: create, join, let in, exclusions, draw and reveal", async ({ browser }) => {
+  // The Elf Chief waits for Santa to finish every chapter, as at a real party.
+  test.setTimeout(240_000);
   const host = await (await browser.newContext({ viewport: { width: 1280, height: 900 } })).newPage();
   const guest = await (await browser.newContext({ viewport: { width: 390, height: 844 } })).newPage();
   const invited = await (await browser.newContext({ viewport: { width: 1280, height: 800 } })).newPage();

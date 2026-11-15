@@ -32,6 +32,7 @@ import {
   updateSettingsAction,
   type ActionResult,
 } from "@/lib/actions";
+import { chapterSeconds } from "@/lib/audio/timing";
 import { ceremonySteps, nextStep } from "@/lib/ceremony/steps";
 import type { PublicParticipant, SessionState } from "@/lib/state";
 import { useSessionState } from "@/lib/useSessionState";
@@ -42,10 +43,11 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
   const locale = useLocale();
   const t = useTranslations("host");
   const te = useTranslations("errors");
-  const { state, refresh } = useSessionState(code, locale, { initial });
+  const { state, refresh, serverToLocal } = useSessionState(code, locale, { initial });
   const [pending, start] = useTransition();
   const [message, setMessage] = useState<{ kind: "error" | "ok"; text: string } | null>(null);
   const devicesReady = useDevicesReady(code);
+  const santaLeft = useSantaSpeaking(state, serverToLocal);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -177,8 +179,12 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
               <p className="mt-4 text-muted">{t(`stepHint.${s.step}`)}</p>
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
                 {upcoming && (
-                  <button className="btn-primary" disabled={pending || (s.step === "lobby" && !!blocked)} onClick={() => act(() => advanceCeremonyAction(code))}>
-                    {s.step === "lobby" ? t("start") : t("next", { step: t(`steps.${upcoming}`) })}
+                  <button
+                    className="btn-primary"
+                    disabled={pending || (s.step === "lobby" && !!blocked) || santaLeft > 0}
+                    onClick={() => act(() => advanceCeremonyAction(code))}
+                  >
+                    {s.step === "lobby" ? t("start") : santaLeft > 0 ? t("santaSpeaking", { seconds: santaLeft }) : t("next", { step: t(`steps.${upcoming}`) })}
                   </button>
                 )}
                 {s.step !== "lobby" && (
@@ -602,4 +608,23 @@ function SettingsBox({
       </form>
     </>
   );
+}
+
+/** Grace after Santa's chapter, for screens and remote phones that started it a moment late. */
+const CHAPTER_GRACE_S = 2;
+
+/**
+ * Seconds until Santa finishes the current chapter, so the Elf Chief doesn't cut him off mid-sentence
+ * (remote elves hear him a moment later than the room). Zero in the lobby, where nobody waits for him.
+ */
+function useSantaSpeaking(state: SessionState | null, serverToLocal: (ms: number) => number) {
+  const [now, setNow] = useState(() => Date.now());
+  const script = state?.session.mode === "sync" && state.session.step !== "lobby" ? state.script : null;
+  const endsAt = script?.length ? serverToLocal(state!.session.stepStartedAt) + (chapterSeconds(script) + CHAPTER_GRACE_S) * 1000 : 0;
+  useEffect(() => {
+    if (endsAt <= Date.now()) return;
+    const timer = setInterval(() => setNow(Date.now()), 500);
+    return () => clearInterval(timer);
+  }, [endsAt]);
+  return Math.max(0, Math.ceil((endsAt - now) / 1000));
 }

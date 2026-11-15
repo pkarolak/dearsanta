@@ -447,7 +447,8 @@
       "tvDone": "Ecrã grande ligado!",
       "toRemote": "Ir para o comando",
       "skip": "Só tenho um dispositivo"
-    }
+    },
+    "santaSpeaking": "O Pai Natal está a falar… {seconds} s"
   },
   "screen": {
     "noAccessTitle": "Este é o ecrã grande",

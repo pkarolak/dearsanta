@@ -7,6 +7,7 @@ export type VoiceLine = {
   text: string;
   audioUrl: string | null;
   parts?: string[];
+  seconds?: number;
   cue?: "bells" | "drumroll" | "chime" | "laugh";
 };
 
@@ -74,6 +75,7 @@ class WorkshopAudio {
   /** One element for every line: iOS lets an element play later only if a tap started it once. */
   private voiceEl: HTMLAudioElement | null = null;
   private speakToken = 0;
+  private draining: Promise<void> = Promise.resolve();
   muted = false;
 
   get unlocked() {
@@ -98,6 +100,10 @@ class WorkshopAudio {
       this.voice.connect(this.analyser);
       this.noise = this.makeNoise();
       if (this.voiceEl) this.ctx.createMediaElementSource(this.voiceEl).connect(this.voice);
+      // A locked screen, a call or a trip to another app suspends the sound; coming back brings it back.
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible" && this.ctx && this.ctx.state !== "running") void this.ctx.resume().catch(() => {});
+      });
     }
     if (this.ctx.state !== "running") await this.ctx.resume();
   }
@@ -594,6 +600,34 @@ class WorkshopAudio {
     this.currentAudio?.pause();
     this.currentAudio = null;
     this.duck(false);
+  }
+
+  /**
+   * Lets the sentence Santa is saying end on its own when little of it is left, rather than cutting
+   * him off mid-word; a longer one stops now.
+   */
+  finishVoice(maxMs: number) {
+    const audio = this.currentAudio;
+    const left = audio && !audio.paused && audio.duration ? (audio.duration - audio.currentTime) * 1000 : 0;
+    if (!audio || left <= 0 || left > maxMs) return this.stopVoice();
+    const token = this.speakToken;
+    this.draining = new Promise<void>((resolve) => {
+      const done = () => {
+        clearTimeout(timer);
+        audio.removeEventListener("ended", done);
+        resolve();
+      };
+      const timer = setTimeout(() => {
+        if (token === this.speakToken) this.stopVoice();
+        done();
+      }, left + 300);
+      audio.addEventListener("ended", done);
+    });
+  }
+
+  /** Resolves once a sentence that was allowed to finish is over. */
+  voiceSettled() {
+    return this.draining;
   }
 
   /** Speaks a line and resolves when it has finished (or was interrupted). */

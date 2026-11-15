@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { getTtsLine, hasTtsAudio, registerTtsLine, storeTtsAudio } from "@/lib/db/repo";
+import { getTtsLine, hasTtsAudio, registerTtsLine, storeTtsAudio, ttsAudioSizes } from "@/lib/db/repo";
 
 /** ElevenLabs premade voice "Bill" – a warm, older male narrator. Override with ELEVENLABS_VOICE_ID. */
 const DEFAULT_VOICE = "pqHfZKP75CvOlQylNhV4";
@@ -110,6 +110,18 @@ export async function recordLines(texts: string[], lang: string) {
     results.push({ text, ok: !!audio });
   }
   return results;
+}
+
+/** Recordings are constant 64 kbit/s MP3 (see the request above), so their length follows from their size. */
+const BYTES_PER_SECOND = 64_000 / 8;
+
+/** How long each recorded line lasts, in seconds, by audio URL; lines not recorded yet are missing. */
+export async function recordedSeconds(urls: string[]) {
+  const sizes = await ttsAudioSizes(urls.map((u) => u.split("/").pop()!));
+  return new Map(urls.flatMap((u) => {
+    const size = sizes.get(u.split("/").pop()!);
+    return size ? [[u, size / BYTES_PER_SECOND] as const] : [];
+  }));
 }
 
 const warming = new Set<string>();

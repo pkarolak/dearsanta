@@ -1,6 +1,6 @@
 import type { CeremonyStep } from "./steps";
 import { formatMoney, toLocale, translatorFor } from "@/lib/i18n-server";
-import { prepareLine, recordedLine } from "@/lib/tts";
+import { prepareLine, recordedLine, recordedSeconds } from "@/lib/tts";
 
 export type ScriptLine = {
   id: string;
@@ -8,6 +8,8 @@ export type ScriptLine = {
   audioUrl: string | null;
   /** Recordings played back to back instead of `audioUrl`, for lines built from pre-recorded names. */
   parts?: string[];
+  /** Length of the recording(s), once recorded, so devices can keep in step with each other. */
+  seconds?: number;
   cue?: "bells" | "drumroll" | "chime" | "laugh";
 };
 
@@ -117,7 +119,7 @@ function draftsFor(step: CeremonyStep, ctx: Context): Draft[] {
 
 async function materialize(locale: string, drafts: Draft[], prefix: string): Promise<ScriptLine[]> {
   const t = translatorFor(locale, "ceremony");
-  return Promise.all(
+  const lines: ScriptLine[] = await Promise.all(
     drafts.map(async (d, i) => {
       const text = t(d.key as Parameters<typeof t>[0], d.vars as never);
       const parts = await recordedParts(locale, d);
@@ -125,6 +127,12 @@ async function materialize(locale: string, drafts: Draft[], prefix: string): Pro
       return { id: `${prefix}-${i}`, text, audioUrl: await prepareLine(text, toLocale(locale)), cue: d.cue };
     }),
   );
+  const seconds = await recordedSeconds(lines.flatMap((l) => l.parts ?? (l.audioUrl ? [l.audioUrl] : [])));
+  return lines.map((l) => {
+    const urls = l.parts ?? (l.audioUrl ? [l.audioUrl] : []);
+    const known = urls.length > 0 && urls.every((u) => seconds.has(u));
+    return known ? { ...l, seconds: urls.reduce((sum, u) => sum + seconds.get(u)!, 0) } : l;
+  });
 }
 
 export function buildStepScript(step: CeremonyStep, ctx: Context) {

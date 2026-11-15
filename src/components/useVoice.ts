@@ -2,9 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { workshopAudio, type VoiceLine } from "@/lib/audio/engine";
+import { LINE_PAUSE_S, lineSeconds } from "@/lib/audio/timing";
 
-const estimateSeconds = (line: VoiceLine) => 0.9 + line.text.length * 0.068;
 const pause = (ms: number) => new Promise((r) => setTimeout(r, ms));
+/** A device this far behind the chapter's start plays it from the top instead of skipping into a sentence. */
+const LAG_TOLERANCE_S = 4;
+/** On a new chapter, the sentence still playing may finish if this little of it is left. */
+const FINISH_SENTENCE_MS = 4000;
 
 /**
  * Plays a chapter of Santa's script in order. Devices that join late skip ahead to where the
@@ -32,6 +36,8 @@ export function useVoice(
   });
   const ready = !!lines?.length;
 
+  useEffect(() => () => workshopAudio().stopVoice(), []);
+
   useEffect(() => {
     const script = linesRef.current;
     if (!enabled || !script?.length) return;
@@ -40,10 +46,14 @@ export function useVoice(
     script.forEach((l) => audio.prefetchLine(l));
 
     (async () => {
+      await audio.voiceSettled();
+      if (cancelled) return;
       let elapsed = Math.max(0, (Date.now() - startRef.current) / 1000);
       let i = 0;
-      while (i < script.length && elapsed > estimateSeconds(script[i])) {
-        elapsed -= estimateSeconds(script[i]);
+      // A remote phone hears the news a moment after the big screen: that lag just starts it a bit later.
+      if (elapsed < LAG_TOLERANCE_S) elapsed = 0;
+      while (i < script.length && elapsed > lineSeconds(script[i]) + LINE_PAUSE_S) {
+        elapsed -= lineSeconds(script[i]) + LINE_PAUSE_S;
         i++;
       }
       for (; i < script.length && !cancelled; i++) {
@@ -52,7 +62,7 @@ export function useVoice(
         setPlaying({ chapter, index: i });
         await audio.speak(line, elapsed > 1.5 ? elapsed : 0);
         elapsed = 0;
-        if (!cancelled) await pause(500);
+        if (!cancelled) await pause(LINE_PAUSE_S * 1000);
       }
       if (!cancelled) {
         setPlaying({ chapter, index: script.length });
@@ -62,7 +72,7 @@ export function useVoice(
 
     return () => {
       cancelled = true;
-      audio.stopVoice();
+      audio.finishVoice(FINISH_SENTENCE_MS);
     };
   }, [chapter, enabled, ready, lang]);
 

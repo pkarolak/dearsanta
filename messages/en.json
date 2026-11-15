@@ -447,7 +447,8 @@
       "tvDone": "Big screen connected!",
       "toRemote": "Go to the remote",
       "skip": "I only have one device"
-    }
+    },
+    "santaSpeaking": "Santa is talking… {seconds}s"
   },
   "screen": {
     "noAccessTitle": "This is the big screen",

@@ -447,7 +447,8 @@
       "tvDone": "Großer Bildschirm verbunden!",
       "toRemote": "Zur Fernbedienung",
       "skip": "Ich habe nur ein Gerät"
-    }
+    },
+    "santaSpeaking": "Der Weihnachtsmann spricht… {seconds} s"
   },
   "screen": {
     "noAccessTitle": "Das ist der große Bildschirm",

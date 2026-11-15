@@ -515,6 +515,16 @@ export async function hasTtsAudio(hash: string) {
   return rows.length > 0;
 }
 
+/** Sizes of the recorded audio, by hash; lines without audio are left out. */
+export async function ttsAudioSizes(hashes: string[]) {
+  if (!hashes.length) return new Map<string, number>();
+  const rows = await (await db()).query(
+    "select hash, octet_length(audio) as size from tts_cache where hash = any($1) and audio is not null",
+    [hashes],
+  );
+  return new Map(rows.map((r) => [r.hash as string, Number(r.size)]));
+}
+
 export async function storeTtsAudio(hash: string, audio: Buffer | null, mime: string | null) {
   await (await db()).query(
     "update tts_cache set audio = $2, mime = $3, failed_at = case when $2::bytea is null then now() else null end where hash = $1",

@@ -447,7 +447,8 @@
       "tvDone": "Duży ekran połączony!",
       "toRemote": "Przejdź do pilota",
       "skip": "Mam tylko jedno urządzenie"
-    }
+    },
+    "santaSpeaking": "Mikołaj mówi… {seconds} s"
   },
   "screen": {
     "noAccessTitle": "To jest duży ekran",

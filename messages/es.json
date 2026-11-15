@@ -447,7 +447,8 @@
       "tvDone": "¡Pantalla grande conectada!",
       "toRemote": "Ir al mando",
       "skip": "Solo tengo un dispositivo"
-    }
+    },
+    "santaSpeaking": "Papá Noel está hablando… {seconds} s"
   },
   "screen": {
     "noAccessTitle": "Esta es la pantalla grande",
