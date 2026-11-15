@@ -134,6 +134,7 @@ export type NewSession = {
   budgetAmount: number | null;
   currency: string;
   autoAdmit?: boolean;
+  hostPlays?: boolean;
   host: { name: string; email: string | null; locale: string };
 };
 
@@ -143,8 +144,8 @@ export async function createSession(input: NewSession) {
     let row;
     for (let attempt = 0; attempt < 5 && !row; attempt++) {
       const rows = await tx.query(
-        `insert into sessions (code, screen_key, screen_code, title, mode, locale, timezone, scheduled_at, location, online_url, budget_amount, currency, auto_admit)
-         values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
+        `insert into sessions (code, screen_key, screen_code, title, mode, locale, timezone, scheduled_at, location, online_url, budget_amount, currency, auto_admit, host_plays)
+         values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
          on conflict do nothing returning *`,
         [
           sessionCode(),
@@ -160,6 +161,7 @@ export async function createSession(input: NewSession) {
           input.budgetAmount,
           input.currency,
           input.autoAdmit ?? false,
+          input.hostPlays ?? true,
         ],
       );
       row = rows[0];

@@ -19,8 +19,8 @@
         "body": "Papá Noel hace el sorteo en directo. Quien está en la sala lo ve en la pantalla grande, y quien está lejos ve el mismo espectáculo en su móvil o portátil. El resultado sigue siendo secreto: cada uno solo ve a quién le ha tocado."
       },
       "async": {
-        "title": "Sorteo a tu ritmo",
-        "body": "Prepara el sorteo y envía las invitaciones. Cada uno confirma que se apunta y luego, cuando le venga bien, descubre a quién le toca regalar este año."
+        "title": "Un sorteo totalmente a distancia",
+        "body": "Para elfos ocupados. Invita a familia y amigos compartiendo un enlace. Cuando todos confirmen que se apuntan, el sorteo se hará a distancia y cada uno verá, en el momento oportuno, a quién le hace el regalo. La misma magia navideña, aunque antes de las fiestas os persigan las obligaciones."
       }
     },
     "footer": "Hecho en el taller de Papá Noel. ¡Jo, jo, jo!",
@@ -88,8 +88,8 @@
         "body": "Todos en el mismo momento, en la sala o a distancia."
       },
       "async": {
-        "title": "Cada uno a su ritmo",
-        "body": "Perfiles por correo y luego tú desbloqueas el sorteo."
+        "title": "Un sorteo totalmente a distancia",
+        "body": "Todos se unen con un enlace y descubren su resultado en su propio móvil."
       }
     },
     "date": "Fecha",
@@ -119,7 +119,7 @@
         "needs": "Pantalla grande o tus propios dispositivos"
       },
       "ownTime": {
-        "body": "Envía un enlace a la familia. Cada uno se une cuando quiera y luego desbloqueas el sorteo.",
+        "body": "Para elfos ocupados. Comparte un enlace y, cuando todos confirmen, el sorteo se hará a distancia.",
         "needs": "Basta con el móvil"
       },
       "title": "Nuestro amigo invisible"
@@ -310,7 +310,7 @@
     "code": "Código",
     "mode": {
       "sync": "Ceremonia en directo",
-      "async": "Cada uno a su ritmo"
+      "async": "Un sorteo totalmente a distancia"
     },
     "status": {
       "open": "Abierto",
@@ -591,5 +591,23 @@
     "title": "Para el resto de la noche",
     "listen": "{by} · Spotify",
     "watch": "Chimenea · YouTube"
+  },
+  "remote": {
+    "heading": "Un sorteo totalmente a distancia",
+    "lead": "Cuatro preguntas rápidas y el taller está listo. Podrás cambiarlo todo después en el panel del Jefe de los elfos.",
+    "nameTitle": "¿Cómo llamamos al juego?",
+    "hostName": "¿Y tú, cómo te llamas?",
+    "budgetTitle": "¿Cuánto puede costar el regalo?",
+    "budgetHint": "Déjalo vacío si no queréis límite.",
+    "invitesTitle": "¿A quién invitas?",
+    "invitesHint": "Cada uno recibirá una invitación navideña por correo. Puedes saltarlo y compartir el enlace que verás en un momento.",
+    "invitesLabel": "Correos electrónicos",
+    "emailTitle": "¿Dónde te enviamos el enlace al panel?",
+    "emailHint": "Con él podrás volver al panel del Jefe de los elfos desde cualquier dispositivo.",
+    "how1": "Los elfos se unen con el enlace o la invitación y crean su personaje.",
+    "how2": "Cuando todos confirmen, lanzas el sorteo con un clic.",
+    "how3": "Cada uno recibe un correo y descubre a quién sorprende cuando le venga bien.",
+    "skip": "Saltar",
+    "open": "Abrir el taller"
   }
 }

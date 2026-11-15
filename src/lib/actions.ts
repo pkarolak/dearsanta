@@ -100,6 +100,8 @@ const createSchema = z.object({
   hostName: name,
   hostEmail: email,
   invites: z.array(email).max(100),
+  autoAdmit: z.boolean().optional(),
+  hostPlays: z.boolean().optional(),
 });
 
 export async function createSessionAction(input: z.input<typeof createSchema>) {
@@ -116,6 +118,8 @@ export async function createSessionAction(input: z.input<typeof createSchema>) {
       onlineUrl: data.onlineUrl || null,
       budgetAmount: data.budgetAmount,
       currency: data.currency,
+      autoAdmit: data.autoAdmit,
+      hostPlays: data.hostPlays,
       host: { name: data.hostName, email: data.hostEmail, locale },
     });
     await signInParticipant(session, host.id);

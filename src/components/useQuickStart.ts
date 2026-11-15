@@ -17,6 +17,8 @@ export function useQuickStart() {
   const [error, setError] = useState<string | null>(null);
 
   const pick = (kind: QuickKind) => {
+    // A fully remote draw needs a few answers first (budget, invites, where to reach the chief).
+    if (kind === "ownTime") return router.push("/new/remote");
     setChosen(kind);
     setError(null);
     start(async () => {

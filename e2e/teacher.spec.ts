@@ -8,18 +8,20 @@ test("a teacher runs the draw without taking part in it", async ({ browser }) =>
   const host = await (await browser.newContext({ viewport: { width: 1280, height: 900 } })).newPage();
   host.on("dialog", (d) => void d.accept());
 
-  await host.goto("/pl/new/plan");
-  await host.fill("#hostName", "Pani Ania");
-  await host.fill("#hostEmail", `teacher-${stamp}@example.com`);
-  await host.fill("#title", "Klasa 3b");
-  await host.getByRole("button", { name: /Każdy w swoim czasie/ }).click();
-  await host.locator("textarea").fill(elves.join(", "));
-  await host.getByRole("button", { name: "Utwórz sesję" }).click();
-  await host.waitForURL(/\/pl\/s\/[A-Z0-9]{6}\/host/);
-
-  await host.getByRole("button", { name: /^Ustawienia/ }).click();
+  // The fully remote draw is set up step by step.
+  await host.goto("/pl/new/remote");
+  await host.fill("#rw-title", "Klasa 3b");
+  await host.fill("#rw-host", "Pani Ania");
+  await host.getByRole("button", { name: "Dalej" }).click();
+  await host.fill("#rw-budget", "30");
   await host.getByRole("checkbox", { name: /Biorę udział w losowaniu/ }).uncheck();
-  await host.getByRole("button", { name: "Zapisz ustawienia" }).click();
+  await host.getByRole("button", { name: "Dalej" }).click();
+  await host.fill("#rw-invites", elves.join(", "));
+  await expect(host.getByText("Wyślemy 2 zaproszenia")).toBeVisible();
+  await host.getByRole("button", { name: "Dalej" }).click();
+  await host.fill("#rw-email", `teacher-${stamp}@example.com`);
+  await host.getByRole("button", { name: "Otwórz warsztat" }).click();
+  await host.waitForURL(/\/pl\/s\/[A-Z0-9]{6}\/host/);
   await expect(host.getByText("Prowadzisz, ale nie losujesz")).toBeVisible();
   await host.getByRole("button", { name: /^Elfy/ }).click();
   await expect(host.getByText("Prowadzi zabawę, nie losuje")).toBeVisible();

@@ -14,7 +14,7 @@ test("own-time session: invites, elf profiles, unlock and personal reveal", asyn
   await host.fill("#hostName", "Basia");
   await host.fill("#hostEmail", hostEmail);
   await host.fill("#title", "Biuro 2026");
-  await host.getByRole("button", { name: /Każdy w swoim czasie/ }).click();
+  await host.getByRole("button", { name: /Losowanie w pełni zdalne/ }).click();
   await host.locator("textarea").fill(elves.join(", "));
   await host.getByRole("button", { name: "Utwórz sesję" }).click();
   await host.waitForURL(/\/pl\/s\/[A-Z0-9]{6}\/host/);

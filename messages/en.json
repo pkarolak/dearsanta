@@ -19,8 +19,8 @@
         "body": "Santa runs the draw live. Whoever’s in the room watches on the big screen, and whoever’s far away watches the same show on their phone or laptop. The result still stays secret: each of you only sees your own match."
       },
       "async": {
-        "title": "A draw at your own pace",
-        "body": "Set up the draw and send the invites. Everyone confirms they’re in, then checks in their own time who they’re giving a gift to this year."
+        "title": "A fully remote draw",
+        "body": "For busy elves. Invite family and friends by sharing a link. Once everyone has said they’re in, the draw happens remotely and each person finds out who they’re giving a gift to when the moment is right. The same Christmas magic, even when the run-up to the holidays keeps you busy."
       }
     },
     "footer": "Made in Santa’s workshop. Ho ho ho!",
@@ -88,8 +88,8 @@
         "body": "Everyone together at one moment, in the room or remotely."
       },
       "async": {
-        "title": "Everyone in their own time",
-        "body": "Profiles by e-mail, then you unlock the draw."
+        "title": "A fully remote draw",
+        "body": "Everyone joins by link and finds out their match on their own phone."
       }
     },
     "date": "Date",
@@ -119,7 +119,7 @@
         "needs": "Big screen or your own devices"
       },
       "ownTime": {
-        "body": "Send the family a link. Everyone joins when they like, then you unlock the draw.",
+        "body": "For busy elves. Share a link and once everyone has said they’re in, the draw happens remotely.",
         "needs": "Just a phone"
       },
       "title": "Our Secret Santa"
@@ -310,7 +310,7 @@
     "code": "Code",
     "mode": {
       "sync": "Live ceremony",
-      "async": "In their own time"
+      "async": "A fully remote draw"
     },
     "status": {
       "open": "Open",
@@ -591,5 +591,23 @@
     "title": "For the rest of the evening",
     "listen": "{by} · Spotify",
     "watch": "Fireplace · YouTube"
+  },
+  "remote": {
+    "heading": "A fully remote draw",
+    "lead": "Four quick questions and the workshop is ready. You can change everything later in the Elf Chief’s panel.",
+    "nameTitle": "What shall we call it?",
+    "hostName": "And you, what’s your name?",
+    "budgetTitle": "How much can a gift cost?",
+    "budgetHint": "Leave it empty if you don’t want a limit.",
+    "invitesTitle": "Who are you inviting?",
+    "invitesHint": "Everyone gets a festive invitation by e-mail. You can skip this and simply share the link you’ll see in a moment.",
+    "invitesLabel": "E-mail addresses",
+    "emailTitle": "Where should we send your panel link?",
+    "emailHint": "With it you can get back to the Elf Chief’s panel from any device.",
+    "how1": "Elves join through the link or an invitation and make their characters.",
+    "how2": "Once everyone has said they’re in, you start the draw with one click.",
+    "how3": "Everyone gets an e-mail and finds out who they’re surprising whenever suits them.",
+    "skip": "Skip",
+    "open": "Open the workshop"
   }
 }

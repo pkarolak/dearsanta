@@ -19,8 +19,8 @@
         "body": "O Pai Natal faz o sorteio ao vivo. Quem está na sala vê no ecrã grande, e quem está longe vê o mesmo espetáculo no telemóvel ou portátil. O resultado continua secreto: cada um só vê quem lhe calhou."
       },
       "async": {
-        "title": "Sorteio ao seu ritmo",
-        "body": "Prepare o sorteio e envie os convites. Cada um confirma que entra na brincadeira e depois, quando lhe der jeito, descobre a quem vai dar um presente este ano."
+        "title": "Um sorteio totalmente à distância",
+        "body": "Para elfos atarefados. Convida família e amigos partilhando um link. Quando todos confirmarem que entram, o sorteio acontece à distância e cada um vê, no momento certo, a quem vai dar o presente. A mesma magia de Natal, mesmo quando antes das festas as obrigações não dão tréguas."
       }
     },
     "footer": "Feito na oficina do Pai Natal. Ho, ho, ho!",
@@ -88,8 +88,8 @@
         "body": "Todos ao mesmo tempo, na sala ou à distância."
       },
       "async": {
-        "title": "Cada um ao seu ritmo",
-        "body": "Perfis por e-mail e depois desbloqueia o sorteio."
+        "title": "Um sorteio totalmente à distância",
+        "body": "Todos entram por um link e descobrem o resultado no próprio telemóvel."
       }
     },
     "date": "Data",
@@ -119,7 +119,7 @@
         "needs": "Ecrã grande ou os vossos dispositivos"
       },
       "ownTime": {
-        "body": "Envia um link à família. Cada um junta-se quando quiser e depois desbloqueias o sorteio.",
+        "body": "Para elfos atarefados. Partilha um link e, quando todos confirmarem, o sorteio acontece à distância.",
         "needs": "Basta o telemóvel"
       },
       "title": "O nosso amigo secreto"
@@ -310,7 +310,7 @@
     "code": "Código",
     "mode": {
       "sync": "Cerimónia ao vivo",
-      "async": "Cada um ao seu ritmo"
+      "async": "Um sorteio totalmente à distância"
     },
     "status": {
       "open": "Aberto",
@@ -591,5 +591,23 @@
     "title": "Para o resto da noite",
     "listen": "{by} · Spotify",
     "watch": "Lareira · YouTube"
+  },
+  "remote": {
+    "heading": "Um sorteio totalmente à distância",
+    "lead": "Quatro perguntas rápidas e a oficina fica pronta. Podes mudar tudo depois no painel do Chefe dos elfos.",
+    "nameTitle": "Como vamos chamar o jogo?",
+    "hostName": "E tu, como te chamas?",
+    "budgetTitle": "Quanto pode custar o presente?",
+    "budgetHint": "Deixa vazio se não quiserem limite.",
+    "invitesTitle": "Quem vais convidar?",
+    "invitesHint": "Cada um recebe um convite de Natal por e-mail. Podes saltar este passo e partilhar o link que vais ver já a seguir.",
+    "invitesLabel": "Endereços de e-mail",
+    "emailTitle": "Para onde enviamos o link do painel?",
+    "emailHint": "Com ele voltas ao painel do Chefe dos elfos a partir de qualquer dispositivo.",
+    "how1": "Os elfos entram pelo link ou pelo convite e criam a sua personagem.",
+    "how2": "Quando todos confirmarem, lanças o sorteio com um clique.",
+    "how3": "Cada um recebe um e-mail e descobre a quem faz a surpresa quando lhe der jeito.",
+    "skip": "Saltar",
+    "open": "Abrir a oficina"
   }
 }

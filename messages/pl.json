@@ -19,8 +19,8 @@
         "body": "Mikołaj prowadzi losowanie na żywo. Kto jest w pokoju, ogląda je na dużym ekranie, a kto jest daleko – na swoim telefonie albo laptopie. Wynik i tak zostaje tajny: każdy widzi tylko, kogo sam wylosował."
       },
       "async": {
-        "title": "Losowanie w swoim tempie",
-        "body": "Przygotuj losowanie i wyślij zaproszenia. Każdy potwierdzi, że wchodzi do zabawy, a potem w wolnej chwili sprawdzi, kogo w tym roku obdarowuje."
+        "title": "Losowanie w pełni zdalne",
+        "body": "Dla zabieganych elfów. Zaproś rodzinę i znajomych, udostępniając link. Kiedy wszyscy potwierdzą chęć zabawy, losowanie odbędzie się zdalnie, a każdy w stosownej chwili zobaczy, komu robi prezent. Ta sama świąteczna magia, nawet gdy przed świętami gonią Was obowiązki."
       }
     },
     "footer": "Zrobione w warsztacie Mikołaja. Ho, ho, ho!",
@@ -88,8 +88,8 @@
         "body": "Wszyscy w jednym momencie – w pokoju albo zdalnie."
       },
       "async": {
-        "title": "Każdy w swoim czasie",
-        "body": "Profile przez e-mail, potem odblokowujesz losowanie."
+        "title": "Losowanie w pełni zdalne",
+        "body": "Każdy dołącza przez link, a wynik odkrywa na swoim telefonie."
       }
     },
     "date": "Data",
@@ -119,7 +119,7 @@
         "needs": "Duży ekran albo własne urządzenia"
       },
       "ownTime": {
-        "body": "Wyślij link rodzinie. Każdy dołączy, kiedy mu pasuje, a Ty uruchomisz losowanie.",
+        "body": "Dla zabieganych elfów. Udostępnij link, a gdy wszyscy potwierdzą udział, losowanie odbędzie się zdalnie.",
         "needs": "Wystarczy telefon"
       },
       "title": "Nasz Secret Santa"
@@ -310,7 +310,7 @@
     "code": "Kod",
     "mode": {
       "sync": "Ceremonia na żywo",
-      "async": "Każdy w swoim czasie"
+      "async": "Losowanie w pełni zdalne"
     },
     "status": {
       "open": "Otwarta",
@@ -591,5 +591,23 @@
     "title": "Na resztę wieczoru",
     "listen": "{by} · Spotify",
     "watch": "Kominek · YouTube"
+  },
+  "remote": {
+    "heading": "Losowanie w pełni zdalne",
+    "lead": "Cztery krótkie pytania i warsztat gotowy. Wszystko zmienisz później w panelu Naczelnika.",
+    "nameTitle": "Jak nazwiemy zabawę?",
+    "hostName": "A Ty, jak masz na imię?",
+    "budgetTitle": "Ile może kosztować prezent?",
+    "budgetHint": "Zostaw puste, jeśli nie chcecie limitu.",
+    "invitesTitle": "Kogo zapraszasz?",
+    "invitesHint": "Każdy dostanie świąteczne zaproszenie e-mailem. Możesz to pominąć i po prostu udostępnić link, który zobaczysz za chwilę.",
+    "invitesLabel": "Adresy e-mail",
+    "emailTitle": "Gdzie wysłać Ci link do panelu?",
+    "emailHint": "Dzięki niemu wrócisz do panelu Naczelnika z każdego urządzenia.",
+    "how1": "Elfy dołączają przez link albo zaproszenie i tworzą swoje postacie.",
+    "how2": "Kiedy wszyscy potwierdzą udział, uruchamiasz losowanie jednym kliknięciem.",
+    "how3": "Każdy dostaje e-mail i w dogodnej chwili odkrywa, komu robi prezent.",
+    "skip": "Pomiń",
+    "open": "Otwórz warsztat"
   }
 }

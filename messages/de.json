@@ -19,8 +19,8 @@
         "body": "Der Weihnachtsmann lost live aus. Wer im Raum ist, schaut auf dem großen Bildschirm zu, wer weit weg ist, sieht dieselbe Show auf dem eigenen Handy oder Laptop. Das Ergebnis bleibt trotzdem geheim: Jeder sieht nur, wen er selbst gezogen hat."
       },
       "async": {
-        "title": "Auslosung im eigenen Tempo",
-        "body": "Bereite die Auslosung vor und verschick die Einladungen. Jeder sagt zu und schaut dann in Ruhe nach, wen er dieses Jahr beschenken darf."
+        "title": "Wichteln komplett aus der Ferne",
+        "body": "Für viel beschäftigte Wichtel. Lade Familie und Freunde ein, indem du einen Link teilst. Sobald alle zugesagt haben, wird aus der Ferne ausgelost, und jeder erfährt im passenden Moment, wen er beschenkt. Derselbe Weihnachtszauber, auch wenn euch vor den Feiertagen die Pflichten jagen."
       }
     },
     "footer": "Gemacht in der Werkstatt des Weihnachtsmanns. Ho, ho, ho!",
@@ -88,8 +88,8 @@
         "body": "Alle zur selben Zeit – im Raum oder aus der Ferne."
       },
       "async": {
-        "title": "Jeder, wann er will",
-        "body": "Profile per E-Mail, dann gibst du die Auslosung frei."
+        "title": "Wichteln komplett aus der Ferne",
+        "body": "Alle treten über einen Link bei und entdecken ihr Los auf dem eigenen Handy."
       }
     },
     "date": "Datum",
@@ -119,7 +119,7 @@
         "needs": "Großer Bildschirm oder eigene Geräte"
       },
       "ownTime": {
-        "body": "Schick der Familie einen Link. Jeder macht mit, wann er will, dann gibst du die Auslosung frei.",
+        "body": "Für viel beschäftigte Wichtel. Teile einen Link, und sobald alle zugesagt haben, wird aus der Ferne ausgelost.",
         "needs": "Ein Handy reicht"
       },
       "title": "Unser Wichteln"
@@ -310,7 +310,7 @@
     "code": "Code",
     "mode": {
       "sync": "Live-Zeremonie",
-      "async": "Jeder, wann er will"
+      "async": "Wichteln komplett aus der Ferne"
     },
     "status": {
       "open": "Offen",
@@ -591,5 +591,23 @@
     "title": "Für den restlichen Abend",
     "listen": "{by} · Spotify",
     "watch": "Kaminfeuer · YouTube"
+  },
+  "remote": {
+    "heading": "Wichteln komplett aus der Ferne",
+    "lead": "Vier kurze Fragen und die Werkstatt ist bereit. Alles lässt sich später im Panel des Oberwichtels ändern.",
+    "nameTitle": "Wie soll die Runde heißen?",
+    "hostName": "Und du, wie heißt du?",
+    "budgetTitle": "Wie viel darf ein Geschenk kosten?",
+    "budgetHint": "Leer lassen, wenn ihr kein Limit wollt.",
+    "invitesTitle": "Wen lädst du ein?",
+    "invitesHint": "Alle bekommen eine festliche Einladung per E-Mail. Du kannst das überspringen und einfach den Link teilen, den du gleich siehst.",
+    "invitesLabel": "E-Mail-Adressen",
+    "emailTitle": "Wohin sollen wir dir den Link zum Panel schicken?",
+    "emailHint": "Damit kommst du von jedem Gerät zurück ins Panel des Oberwichtels.",
+    "how1": "Wichtel treten über den Link oder eine Einladung bei und gestalten ihre Figur.",
+    "how2": "Sobald alle zugesagt haben, startest du die Auslosung mit einem Klick.",
+    "how3": "Alle bekommen eine E-Mail und erfahren, wann es ihnen passt, wen sie beschenken.",
+    "skip": "Überspringen",
+    "open": "Werkstatt öffnen"
   }
 }
