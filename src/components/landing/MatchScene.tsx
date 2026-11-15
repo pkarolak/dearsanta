@@ -9,7 +9,7 @@ import { Aurora, Snowfall, Stars } from "./Atmosphere";
 import { useDepth, useSceneScroll } from "./useDepth";
 import { seededAvatar } from "@/lib/avatar";
 
-const receiver = { displayName: "Ola", avatar: seededAvatar("ola") };
+const receiver = { displayName: "Ola", avatar: { ...seededAvatar("ola"), hair: "waves", facial: "none" } as const };
 const rise = (delay: number) => ({
   initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
