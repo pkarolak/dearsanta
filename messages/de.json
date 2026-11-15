@@ -265,11 +265,6 @@
     "next": "Weiter",
     "lookTitle": "Zieh deinen Elf an",
     "changeLook": "Aussehen ändern",
-    "tabs": {
-      "face": "Gesicht",
-      "hat": "Mütze",
-      "outfit": "Outfit"
-    },
     "live": "Live",
     "liveFrom": "aus der Werkstatt des Weihnachtsmanns",
     "gateTitle": "Mach es dir am Kamin gemütlich",

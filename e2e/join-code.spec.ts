@@ -37,8 +37,7 @@ test("a guest lands on the home page and joins with the code from the organiser"
   await guest.getByRole("radio", { name: "Man", exact: true }).click();
   await guest.getByRole("button", { name: "Messy blond" }).click();
   await guest.getByRole("button", { name: "#E8B896" }).click();
-  await guest.getByRole("tab", { name: "Hat" }).click();
-  await guest.getByRole("button", { name: "None" }).click();
+  await guest.getByRole("group", { name: "Hat" }).getByRole("button", { name: "None" }).click();
   await expect(guest.getByRole("button", { name: "Santa hat" })).toBeDisabled();
   await expect(guest.getByRole("button", { name: "Beanie" })).toBeDisabled();
   await expect(guest.getByRole("button", { name: "Elf hat" })).toBeEnabled();

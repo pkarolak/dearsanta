@@ -18,9 +18,6 @@ type Props = {
   wizardSteps?: number;
 };
 
-type Tab = "face" | "hat" | "outfit";
-const tabs: Tab[] = ["face", "hat", "outfit"];
-
 type ColorKey = "skin" | "sweater" | "background";
 type ChoiceKey = "facial" | "hat" | "glasses";
 const genders: ElfGender[] = ["woman", "man"];
@@ -52,7 +49,6 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
   // A new elf starts by saying who they are, so the first look already fits them.
   const [gender, setGender] = useState<ElfGender | null>(() => (completed ? genderOf(initialAvatar) : null));
   const [allHair, setAllHair] = useState(false);
-  const [tab, setTab] = useState<Tab>("face");
 
   // Everyone in the room watches the elves take shape on the big screen, so every tweak goes out right away.
   const first = useRef(true);
@@ -81,13 +77,12 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
   const choose = (who: ElfGender) => {
     setGender(who);
     setAllHair(false);
-    setTab("face");
     randomize(who);
   };
 
   const choices = (key: ChoiceKey) => (
-    <div key={key}>
-      <span className="label">{t(`options.${key}`)}</span>
+    <div key={key} role="group" aria-labelledby={`elf-${key}`}>
+      <span className="label" id={`elf-${key}`}>{t(`options.${key}`)}</span>
       <div className="flex flex-wrap gap-2">
         {avatarOptions[key].map((value) => {
           const missing = key === "hat" && !hasHat({ ...avatar, hat: value as AvatarConfig["hat"] });
@@ -115,8 +110,8 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
   );
 
   const colors = (key: ColorKey) => (
-    <div key={key}>
-      <span className="label">{t(`options.${key}`)}</span>
+    <div key={key} role="group" aria-labelledby={`elf-${key}`}>
+      <span className="label" id={`elf-${key}`}>{t(`options.${key}`)}</span>
       <div className="flex flex-wrap gap-2">
         {avatarOptions[key].map((value) => (
           <button
@@ -229,61 +224,42 @@ export function AvatarEditor({ code, initialName, initialAvatar, completed, onSa
         </div>
       </div>
 
-      <div className="mt-6 flex gap-1 rounded-full bg-ink/5 p-1" role="tablist">
-        {tabs.map((id) => (
-          <button
-            key={id}
-            type="button"
-            role="tab"
-            aria-selected={tab === id}
-            onClick={() => setTab(id)}
-            className={`flex-1 rounded-full px-2 py-2 text-sm font-semibold transition ${tab === id ? "bg-snow text-ink shadow" : "text-ink/60 hover:text-ink"}`}
-          >
-            {t(`tabs.${id}`)}
-          </button>
-        ))}
-      </div>
-
-      <div className="mt-5 min-h-56 space-y-5" role="tabpanel">
-        {tab === "face" && (
-          <>
-            {colors("skin")}
-            <div>
-              <span className="label">{t("options.hair")}</span>
-              <div className="grid grid-cols-5 gap-2 sm:grid-cols-8">
-                {hairChoices.map((hair) => (
-                  <button
-                    type="button"
-                    key={hair}
-                    onClick={() => set("hair", hair)}
-                    aria-label={t(`hair.${hair}`)}
-                    title={t(`hair.${hair}`)}
-                    aria-pressed={avatar.hair === hair}
-                    className={`rounded-full transition ${avatar.hair === hair ? "ring-[3px] ring-pine ring-offset-2 ring-offset-paper" : "hover:scale-105"}`}
-                  >
-                    <Avatar config={{ ...avatar, hair, facial: "none", hat: "none", glasses: "none" }} className="w-full" />
-                  </button>
-                ))}
-              </div>
-              <button type="button" className="mt-2 text-sm font-semibold text-pine underline-offset-2 hover:underline" onClick={() => setAllHair((v) => !v)}>
-                {allHair ? t("fewerHair") : t("moreHair")}
-              </button>
+      <div className="mt-6 grid gap-x-8 gap-y-5 md:grid-cols-2">
+        <div className="space-y-5">
+          {colors("skin")}
+          <div>
+            <span className="label">{t("options.hair")}</span>
+            <div className="grid grid-cols-5 gap-2">
+              {hairChoices.map((hair) => (
+                <button
+                  type="button"
+                  key={hair}
+                  onClick={() => set("hair", hair)}
+                  aria-label={t(`hair.${hair}`)}
+                  title={t(`hair.${hair}`)}
+                  aria-pressed={avatar.hair === hair}
+                  className={`rounded-full transition ${avatar.hair === hair ? "ring-[3px] ring-pine ring-offset-2 ring-offset-paper" : "hover:scale-105"}`}
+                >
+                  <Avatar config={{ ...avatar, hair, facial: "none", hat: "none", glasses: "none" }} className="w-full" />
+                </button>
+              ))}
             </div>
-            {(gender === "man" || avatar.facial !== "none") && choices("facial")}
-            <label className="flex items-center gap-2 text-sm font-semibold text-muted">
-              <input type="checkbox" checked={avatar.blush} onChange={(e) => set("blush", e.target.checked)} className="h-4 w-4 accent-berry" />
-              {t("options.blush")}
-            </label>
-          </>
-        )}
-        {tab === "hat" && choices("hat")}
-        {tab === "outfit" && (
-          <>
-            {colors("sweater")}
-            {choices("glasses")}
-            {colors("background")}
-          </>
-        )}
+            <button type="button" className="mt-2 text-sm font-semibold text-pine underline-offset-2 hover:underline" onClick={() => setAllHair((v) => !v)}>
+              {allHair ? t("fewerHair") : t("moreHair")}
+            </button>
+          </div>
+          {(gender === "man" || avatar.facial !== "none") && choices("facial")}
+          <label className="flex items-center gap-2 text-sm font-semibold text-muted">
+            <input type="checkbox" checked={avatar.blush} onChange={(e) => set("blush", e.target.checked)} className="h-4 w-4 accent-berry" />
+            {t("options.blush")}
+          </label>
+        </div>
+        <div className="space-y-5">
+          {choices("hat")}
+          {colors("sweater")}
+          {choices("glasses")}
+          {colors("background")}
+        </div>
       </div>
 
       {error && <p className="mt-4 text-sm text-berry">{error}</p>}

@@ -40,7 +40,6 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   await guest.waitForURL(new RegExp(`/s/${code}/me`));
   await expect(guest.getByRole("heading", { name: "Who are you?" })).toBeVisible();
   await guest.getByRole("radio", { name: "Woman" }).click();
-  await guest.getByRole("tab", { name: "Hat" }).click();
 
   // Every tweak shows up for the room before she saves anything.
   await guest.getByRole("button", { name: "Antlers" }).click();
@@ -65,7 +64,6 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   await phone.getByRole("link", { name: "Change your elf" }).click();
   await phone.waitForURL(new RegExp(`/s/${code}/me`));
   await phone.getByRole("button", { name: "Change look" }).click();
-  await phone.getByRole("tab", { name: "Hat" }).click();
   // Any hat that fits her random elf and isn't on yet.
   const hats = { "Santa hat": "santa", "Elf hat": "elf", Beanie: "beanie", Antlers: "antlers" };
   const hat = phone.getByRole("button", { name: /^(Santa hat|Elf hat|Beanie|Antlers)$/, pressed: false, disabled: false }).first();
