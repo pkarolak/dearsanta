@@ -247,7 +247,16 @@
     "matchSoonLive": "Gleich wird gelost. Wenn der Weihnachtsmann sagt, ihr sollt in eure Strümpfe schauen, halte ihn hier gedrückt.",
     "lateTitle": "Die Auslosung lief ohne dich",
     "lateBody": "Der Weihnachtsmann hat die Namen gezogen, bevor du beigetreten bist. Sag dem Elfenchef Bescheid.",
-    "matchSoonDrawn": "Der Weihnachtsmann hat gelost! Dein Strumpf öffnet sich hier, sobald er es sagt."
+    "matchSoonDrawn": "Der Weihnachtsmann hat gelost! Dein Strumpf öffnet sich hier, sobald er es sagt.",
+    "introTitle": "Erzähl uns zuerst, wer du bist",
+    "genderLabel": "Dein Elf ist",
+    "gender": {
+      "woman": "Frau",
+      "man": "Mann"
+    },
+    "introNameFirst": "Gib deinen Namen ein und wähle dann deinen Elf.",
+    "moreHair": "Mehr Frisuren",
+    "fewerHair": "Weniger Frisuren"
   },
   "reveal": {
     "eyebrow": "Streng geheim",

@@ -247,7 +247,16 @@
     "matchSoonLive": "Santa is about to draw. When he tells you to look in your stocking, hold it here.",
     "lateTitle": "The draw happened without you",
     "lateBody": "Santa drew the names before you joined. Let the Elf Chief know.",
-    "matchSoonDrawn": "Santa has drawn the names! Your stocking opens here as soon as he says so."
+    "matchSoonDrawn": "Santa has drawn the names! Your stocking opens here as soon as he says so.",
+    "introTitle": "First, tell us who you are",
+    "genderLabel": "Your elf is a",
+    "gender": {
+      "woman": "Woman",
+      "man": "Man"
+    },
+    "introNameFirst": "Type your name, then pick your elf.",
+    "moreHair": "More hairstyles",
+    "fewerHair": "Fewer hairstyles"
   },
   "reveal": {
     "eyebrow": "Top secret",

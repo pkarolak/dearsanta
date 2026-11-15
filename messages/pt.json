@@ -247,7 +247,16 @@
     "matchSoonLive": "O Pai Natal está quase a sortear. Quando ele disser para espreitarem as meias, mantém-na premida aqui.",
     "lateTitle": "O sorteio foi feito sem ti",
     "lateBody": "O Pai Natal sorteou os nomes antes de entrares. Avisa o chefe dos elfos.",
-    "matchSoonDrawn": "O Pai Natal já sorteou! A tua meia abre aqui assim que ele disser."
+    "matchSoonDrawn": "O Pai Natal já sorteou! A tua meia abre aqui assim que ele disser.",
+    "introTitle": "Primeiro, diz-nos quem és",
+    "genderLabel": "O teu elfo é",
+    "gender": {
+      "woman": "Mulher",
+      "man": "Homem"
+    },
+    "introNameFirst": "Escreve o teu nome e depois escolhe o teu elfo.",
+    "moreHair": "Mais penteados",
+    "fewerHair": "Menos penteados"
   },
   "reveal": {
     "eyebrow": "Ultrassecreto",

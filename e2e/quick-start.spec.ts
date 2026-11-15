@@ -39,6 +39,7 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   await guest.getByRole("button", { name: "Knock on the workshop door" }).click();
   await guest.waitForURL(new RegExp(`/s/${code}/me`));
   await expect(guest.getByRole("heading", { name: "Create your elf" })).toBeVisible();
+  await guest.getByRole("radio", { name: "Woman" }).click();
 
   // Every tweak shows up for the room before she saves anything.
   await guest.getByRole("button", { name: "Antlers" }).click();

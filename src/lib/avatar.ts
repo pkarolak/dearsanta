@@ -38,8 +38,37 @@ function pick<T>(items: readonly T[], seed: number) {
   return items[seed % items.length];
 }
 
-/** Hairstyles drawn with a man's brows; a starter elf with one of these sometimes gets facial hair too. */
-const bearded = new Set<string>(["short", "slick", "tousled", "grandpa", "curls", "quiff", "manbun"]);
+export type ElfGender = "woman" | "man";
+
+/** Hairstyles drawn with a woman's or a man's face; only men's elves get facial hair. */
+export const hairFor: Record<ElfGender, readonly AvatarConfig["hair"][]> = {
+  woman: ["waves", "braids", "bob", "puffs", "ponytail", "granny", "pixie", "bun"],
+  man: ["short", "slick", "tousled", "grandpa", "curls", "quiff", "manbun"],
+};
+const bearded = new Set<string>(hairFor.man);
+
+export const genderOf = (avatar: AvatarConfig): ElfGender => (bearded.has(avatar.hair) ? "man" : "woman");
+
+/**
+ * A random starter elf for a woman or a man. `fits` says whether a hat exists for a hair and skin
+ * combination, so the elf never gets a hat we have no picture for.
+ */
+export function starterAvatar(gender: ElfGender, fits: (a: Pick<AvatarConfig, "hair" | "skin" | "hat">) => boolean): AvatarConfig {
+  const r = <T,>(items: readonly T[]) => items[Math.floor(Math.random() * items.length)];
+  const hair = r(hairFor[gender]);
+  const skin = r(avatarOptions.skin);
+  const hats = avatarOptions.hat.filter((hat) => hat !== "none" && fits({ hair, skin, hat }));
+  return {
+    skin,
+    hair,
+    facial: gender === "man" && Math.random() < 0.5 ? r(avatarOptions.facial.slice(1)) : "none",
+    hat: hats.length ? r(hats) : "none",
+    glasses: Math.random() < 0.2 ? "round" : "none",
+    sweater: r(avatarOptions.sweater),
+    background: r(avatarOptions.background),
+    blush: gender === "woman" || Math.random() < 0.4,
+  };
+}
 
 /** Deterministic starter avatar so every new elf looks a little different. */
 export function seededAvatar(seedText: string): AvatarConfig {

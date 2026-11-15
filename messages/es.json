@@ -247,7 +247,16 @@
     "matchSoonLive": "Papá Noel está a punto de sortear. Cuando diga que miréis el calcetín, mantenlo pulsado aquí.",
     "lateTitle": "El sorteo se hizo sin ti",
     "lateBody": "Papá Noel sacó los nombres antes de que te unieras. Avisa al jefe de los elfos.",
-    "matchSoonDrawn": "¡Papá Noel ya ha sorteado! Tu calcetín se abrirá aquí en cuanto él lo diga."
+    "matchSoonDrawn": "¡Papá Noel ya ha sorteado! Tu calcetín se abrirá aquí en cuanto él lo diga.",
+    "introTitle": "Primero, cuéntanos quién eres",
+    "genderLabel": "Tu elfo es",
+    "gender": {
+      "woman": "Mujer",
+      "man": "Hombre"
+    },
+    "introNameFirst": "Escribe tu nombre y luego elige tu elfo.",
+    "moreHair": "Más peinados",
+    "fewerHair": "Menos peinados"
   },
   "reveal": {
     "eyebrow": "Alto secreto",
