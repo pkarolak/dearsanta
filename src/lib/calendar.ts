@@ -1,3 +1,5 @@
+import { brand } from "@/lib/brand";
+
 type CalendarEvent = {
   uid: string;
   title: string;
@@ -33,11 +35,11 @@ export function buildIcs(event: CalendarEvent) {
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Santa Helper//EN",
+    `PRODID:-//${brand.name}//PL`,
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",
-    `UID:${event.uid}@santa-helper`,
+    `UID:${event.uid}@${brand.domain}`,
     `DTSTAMP:${stamp(new Date())}`,
     `DTSTART:${stamp(event.start)}`,
     `DTEND:${stamp(endOf(event))}`,

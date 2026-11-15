@@ -1,7 +1,8 @@
 import { fontVariables } from "../fonts";
 import "../globals.css";
+import { brand } from "@/lib/brand";
 
-export const metadata = { title: "Dev inbox · Santa Helper" };
+export const metadata = { title: `Dev inbox · ${brand.name}` };
 
 export default function DevLayout({ children }: { children: React.ReactNode }) {
   return (

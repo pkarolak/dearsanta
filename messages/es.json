@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Santa Helper – un amigo invisible mágico",
+    "title": "Drogi Mikołaju – un amigo invisible mágico",
     "description": "Sorteo de amigo invisible con familia, amigos o compañeros, presentado por el mismísimo Papá Noel."
   },
   "nav": {
@@ -38,7 +38,8 @@
     "codeLabel": "Código de la sesión",
     "codeNotFound": "No conocemos ese código. Compruébalo con el organizador.",
     "createShort": "Crear",
-    "modesStart": "Empezar"
+    "modesStart": "Empezar",
+    "contact": "Contacto"
   },
   "film": {
     "label": "Un pequeño cuento de Papá Noel, que necesita vuestra ayuda",
@@ -462,7 +463,7 @@
     "noAccessBody": "Pide al Jefe de los elfos que la abra con el enlace de su panel."
   },
   "email": {
-    "footer": "Recibes este mensaje porque alguien te ha invitado a un amigo invisible en Santa Helper. ¡Jo, jo, jo!",
+    "footer": "Recibes este mensaje porque alguien te ha invitado a un amigo invisible en Drogi Mikołaju. ¡Jo, jo, jo!",
     "calendarTitle": "Amigo invisible: {title}",
     "calendarDescription": "Ceremonia de Papá Noel organizada por {host}. Código: {code}.",
     "details": {
@@ -518,7 +519,7 @@
       "cta": "Abrir mi página de elfo"
     },
     "login": {
-      "subject": "Tu enlace mágico a Santa Helper",
+      "subject": "Tu enlace mágico a Drogi Mikołaju",
       "eyebrow": "Iniciar sesión",
       "heading": "Aquí tienes tu enlace mágico",
       "body": "Pulsa el botón para entrar. El enlace funciona durante 30 minutos.",

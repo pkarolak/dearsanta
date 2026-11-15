@@ -1,4 +1,4 @@
--- Santa Helper initial schema.
+-- Drogi Mikołaju initial schema.
 -- All access goes through the Next.js server (service connection), so RLS is enabled
 -- without policies: the Supabase anon/authenticated roles cannot read anything directly.
 

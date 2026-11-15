@@ -13,6 +13,7 @@ import {
   Text,
 } from "@react-email/components";
 import { appUrl } from "@/lib/auth";
+import { brand } from "@/lib/brand";
 
 export type ChristmasEmailProps = {
   lang: string;
@@ -57,7 +58,7 @@ export function ChristmasEmail(props: ChristmasEmailProps) {
             }}
           >
             <Text style={{ color: colors.snow, fontFamily: serif, fontSize: 22, fontWeight: 700, margin: "0 0 14px" }}>
-              Santa Helper
+              {brand.name}
             </Text>
             <Img
               src={`${appUrl()}/show/santa-email.png`}
@@ -154,6 +155,15 @@ export function ChristmasEmail(props: ChristmasEmailProps) {
 
             <Hr style={{ borderColor: colors.cream, margin: "28px 0 16px" }} />
             <Text style={{ color: colors.muted, fontSize: 12, lineHeight: "18px", margin: 0 }}>{props.footer}</Text>
+            <Text style={{ color: colors.muted, fontSize: 12, lineHeight: "18px", margin: "8px 0 0" }}>
+              <a href={`mailto:${brand.contact}`} style={{ color: colors.muted }}>
+                {brand.contact}
+              </a>
+              {" · "}
+              <a href={brand.url} style={{ color: colors.muted }}>
+                {brand.domain}
+              </a>
+            </Text>
           </Section>
         </Container>
       </Body>

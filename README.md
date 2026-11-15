@@ -1,4 +1,4 @@
-# Santa Helper
+# Drogi Mikołaju
 
 A Secret Santa draw hosted by Santa himself. The Elf Chief (the session owner) gathers the elves,
 keeps couples apart with exclusion rules and sets a budget. Santa then runs the ceremony on a big
@@ -51,11 +51,11 @@ The end-to-end run saves screenshots to `e2e/screens`.
 
 | Variable              | Required in production | Notes |
 | --------------------- | ---------------------- | ----- |
-| `APP_URL`             | yes | Public URL used in e-mails and calendar invites, e.g. `https://santa-helper.vercel.app`. |
+| `APP_URL`             | yes | Public URL used in e-mails and calendar invites, e.g. `https://drogimikolaju.pl`. |
 | `AUTH_SECRET`         | yes | Signs cookies and magic links. `openssl rand -base64 32`. |
 | `DATABASE_URL`        | yes | Supabase connection pooler URL (Transaction mode, port 6543). |
 | `RESEND_API_KEY`      | yes | Without it e-mails only reach the dev inbox. |
-| `MAIL_FROM`           | yes | e.g. `Santa Helper <santa@your-domain.com>`, on a domain verified in Resend. |
+| `MAIL_FROM`           | yes | e.g. `Drogi Mikołaju <kontakt@drogimikolaju.pl>`, on a domain verified in Resend. |
 | `ELEVENLABS_API_KEY`  | no  | Santa's natural voice. Without it the browser voice reads the subtitles. |
 | `ELEVENLABS_VOICE_ID` | no  | Defaults to the premade "Bill" voice. |
 | `ELEVENLABS_MODEL_ID` | no  | Defaults to `eleven_multilingual_v2`, which speaks all five languages. |

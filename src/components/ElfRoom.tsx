@@ -20,6 +20,7 @@ import { ceremonySteps } from "@/lib/ceremony/steps";
 import { markRevealedAction, setRemoteAction } from "@/lib/actions";
 import type { SessionState } from "@/lib/state";
 import { useSessionState } from "@/lib/useSessionState";
+import { brand } from "@/lib/brand";
 
 export function ElfRoom({ code, initial }: { code: string; initial: SessionState }) {
   const locale = useLocale();
@@ -237,7 +238,7 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
           <header className="flex items-center justify-between gap-3 px-4 py-2.5 text-snow lg:px-0 lg:pb-4 lg:pt-0">
             <Link href="/" className="flex items-center gap-2 font-display text-base font-bold lg:text-lg">
               <SnowflakeIcon className="h-4 w-4 text-gold lg:h-5 lg:w-5" />
-              Santa Helper
+              {brand.name}
             </Link>
             <p className="flex items-center gap-2 rounded-full bg-snow/10 py-1 pl-2.5 pr-3 text-xs font-semibold ring-1 ring-snow/15 lg:text-sm">
               <span className="relative flex h-2 w-2">

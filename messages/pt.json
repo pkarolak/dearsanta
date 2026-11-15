@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Santa Helper – um amigo secreto mágico",
+    "title": "Drogi Mikołaju – um amigo secreto mágico",
     "description": "Sorteio de amigo secreto com família, amigos ou colegas, apresentado pelo próprio Pai Natal."
   },
   "nav": {
@@ -38,7 +38,8 @@
     "codeLabel": "Código da sessão",
     "codeNotFound": "Não conhecemos esse código. Confirme com o organizador.",
     "createShort": "Criar",
-    "modesStart": "Começar"
+    "modesStart": "Começar",
+    "contact": "Contacto"
   },
   "film": {
     "label": "Um pequeno conto do Pai Natal, que precisa da vossa ajuda",
@@ -462,7 +463,7 @@
     "noAccessBody": "Peça ao Chefe dos duendes que o abra com o link do seu painel."
   },
   "email": {
-    "footer": "Recebe esta mensagem porque alguém o convidou para um amigo secreto no Santa Helper. Ho, ho, ho!",
+    "footer": "Recebe esta mensagem porque alguém o convidou para um amigo secreto no Drogi Mikołaju. Ho, ho, ho!",
     "calendarTitle": "Amigo secreto: {title}",
     "calendarDescription": "Cerimónia do Pai Natal organizada por {host}. Código: {code}.",
     "details": {
@@ -518,7 +519,7 @@
       "cta": "Abrir a minha página de duende"
     },
     "login": {
-      "subject": "O seu link mágico para o Santa Helper",
+      "subject": "O seu link mágico para o Drogi Mikołaju",
       "eyebrow": "Entrar",
       "heading": "Aqui está o seu link mágico",
       "body": "Clique no botão para entrar. O link funciona durante 30 minutos.",

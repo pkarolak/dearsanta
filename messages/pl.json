@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Santa Helper – magiczne losowanie Secret Santa",
+    "title": "Drogi Mikołaju – magiczne losowanie Secret Santa",
     "description": "Losowanie Secret Santa w rodzinie, wśród przyjaciół i w pracy, prowadzone przez samego Mikołaja."
   },
   "nav": {
@@ -38,7 +38,8 @@
     "codeLabel": "Kod sesji",
     "codeNotFound": "Nie znamy takiego kodu. Sprawdź go u organizatora.",
     "createShort": "Stwórz",
-    "modesStart": "Zacznij"
+    "modesStart": "Zacznij",
+    "contact": "Kontakt"
   },
   "film": {
     "label": "Bajka o Mikołaju, który potrzebuje pomocy",
@@ -462,7 +463,7 @@
     "noAccessBody": "Poproś Naczelnika elfów, by otworzył go linkiem ze swojego panelu."
   },
   "email": {
-    "footer": "Dostajesz tę wiadomość, bo ktoś zaprosił Cię do Secret Santa w Santa Helper. Ho, ho, ho!",
+    "footer": "Dostajesz tę wiadomość, bo ktoś zaprosił Cię do Secret Santa w aplikacji Drogi Mikołaju. Ho, ho, ho!",
     "calendarTitle": "Secret Santa: {title}",
     "calendarDescription": "Ceremonia Mikołaja, organizuje {host}. Kod sesji: {code}.",
     "details": {
@@ -518,7 +519,7 @@
       "cta": "Otwórz stronę elfa"
     },
     "login": {
-      "subject": "Twój magiczny link do Santa Helper",
+      "subject": "Twój magiczny link do aplikacji Drogi Mikołaju",
       "eyebrow": "Logowanie",
       "heading": "Oto Twój magiczny link",
       "body": "Kliknij przycisk, żeby się zalogować. Link działa przez 30 minut.",

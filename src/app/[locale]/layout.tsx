@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { fontVariables } from "../fonts";
 import "../globals.css";
+import { brand } from "@/lib/brand";
 
 
 export function generateStaticParams() {
@@ -14,7 +15,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  return { title: { default: t("title"), template: `%s · Santa Helper` }, description: t("description") };
+  return { title: { default: t("title"), template: `%s · ${brand.name}` }, description: t("description") };
 }
 
 export const viewport: Viewport = { themeColor: "#9b1f29", width: "device-width", initialScale: 1 };

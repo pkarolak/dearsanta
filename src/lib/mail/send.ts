@@ -2,6 +2,7 @@ import { render } from "@react-email/render";
 import { Resend } from "resend";
 import { ChristmasEmail, type ChristmasEmailProps } from "./ChristmasEmail";
 import { logMail } from "@/lib/db/repo";
+import { brand } from "@/lib/brand";
 
 export type OutgoingMail = {
   /** Elves who joined with just a name have no address; their mail is skipped. */
@@ -39,20 +40,21 @@ export async function sendMails(all: OutgoingMail[]) {
     return;
   }
 
-  const from = process.env.MAIL_FROM ?? "Santa Helper <onboarding@resend.dev>";
+  const from = process.env.MAIL_FROM ?? `${brand.name} <onboarding@resend.dev>`;
   const withAttachments = rendered.filter((m) => m.attachments?.length);
   const plain = rendered.filter((m) => !m.attachments?.length);
 
   // The batch endpoint does not accept attachments, so those go one by one.
   for (let i = 0; i < plain.length; i += 100) {
     const { error } = await resendClient.batch.send(
-      plain.slice(i, i + 100).map((m) => ({ from, to: m.to, subject: m.subject, html: m.html, text: m.text })),
+      plain.slice(i, i + 100).map((m) => ({ from, replyTo: brand.contact, to: m.to, subject: m.subject, html: m.html, text: m.text })),
     );
     if (error) console.error("[mail] batch failed", error);
   }
   for (const m of withAttachments) {
     const { error } = await resendClient.emails.send({
       from,
+      replyTo: brand.contact,
       to: m.to,
       subject: m.subject,
       html: m.html,

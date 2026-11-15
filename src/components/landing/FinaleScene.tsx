@@ -11,6 +11,7 @@ import { Aurora, Snowfall, Stars, StringLights } from "./Atmosphere";
 import { CoverStage } from "./CoverStage";
 import { useHoHo } from "./useHoHo";
 import { Link } from "@/i18n/navigation";
+import { brand } from "@/lib/brand";
 
 export function FinaleScene() {
   const t = useTranslations("home");
@@ -89,22 +90,23 @@ export function FinaleScene() {
         <div className="relative mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center justify-between gap-4 text-snow/85">
             <p className="font-display text-lg">{t("footer")}</p>
-            <nav className="flex items-center gap-5 font-semibold">
+            <nav className="flex flex-wrap items-center gap-x-5 gap-y-3 whitespace-nowrap font-semibold">
               <Link href="/me" className="hover:text-snow">{tn("mySessions")}</Link>
+              <a href={`mailto:${brand.contact}`} className="hover:text-snow">{t("contact")}</a>
               <Link href="/new" className="btn-primary">
                 {t("create")}
               </Link>
             </nav>
           </div>
           <motion.p
-            className="foil mt-10 whitespace-nowrap font-display text-[15.5vw] font-black leading-[0.85] tracking-[-0.045em] md:text-[min(15.5vw,15rem)]"
+            className="foil mt-10 whitespace-nowrap font-display text-[12.6vw] font-black leading-[0.85] tracking-[-0.045em] md:text-[min(13.4vw,13.5rem)]"
             initial={{ y: "35%", opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.9, ease: [0.2, 0.7, 0.2, 1] }}
             aria-hidden
           >
-            Santa Helper
+            {brand.name}
           </motion.p>
         </div>
       </footer>
