@@ -74,6 +74,8 @@ class WorkshopAudio {
   private currentAudio: HTMLAudioElement | null = null;
   /** One element for every line: iOS lets an element play later only if a tap started it once. */
   private voiceEl: HTMLAudioElement | null = null;
+  /** Unrouted twin of `voiceEl`: still reaches the speakers while the browser keeps Web Audio asleep. */
+  private plainEl: HTMLAudioElement | null = null;
   private speakToken = 0;
   private draining: Promise<void> = Promise.resolve();
   muted = false;
@@ -133,6 +135,20 @@ class WorkshopAudio {
     el.play().catch(() => {});
     this.voiceEl = el;
     if (this.ctx) this.ctx.createMediaElementSource(el).connect(this.voice);
+    const plain = new Audio(silence());
+    plain.play().catch(() => {});
+    this.plainEl = plain;
+  }
+
+  /**
+   * Wakes Web Audio if the browser put it to sleep (Safari does in a background tab, iOS on a locked
+   * screen). Some refuse without a tap; then `resume` never settles, so this gives up quickly.
+   */
+  private async awake(timeoutMs = 300) {
+    const ctx = this.ctx;
+    if (!ctx) return false;
+    if (ctx.state !== "running") await Promise.race([ctx.resume().catch(() => {}), new Promise((r) => setTimeout(r, timeoutMs))]);
+    return ctx.state === "running";
   }
 
   setMuted(muted: boolean) {
@@ -607,6 +623,8 @@ class WorkshopAudio {
   /** Current loudness of Santa's voice, 0..1, for lip sync. */
   level() {
     if (!this.ctx || !this.currentAudio) return 0;
+    // The plain element has no analyser: a gentle made-up mouth beats a frozen one.
+    if (this.currentAudio === this.plainEl) return this.currentAudio.paused ? 0 : 0.3 + 0.2 * Math.abs(Math.sin(performance.now() / 110));
     this.analyser.getByteTimeDomainData(this.levelData);
     let sum = 0;
     for (const v of this.levelData) sum += ((v - 128) / 128) ** 2;
@@ -659,9 +677,12 @@ class WorkshopAudio {
     try {
       // Without Santa's recording the line stays silent: a robotic stand-in voice would break the show.
       if (this.ctx && this.voiceEl && srcs.every(Boolean)) {
-        if (srcs.length === 1) await this.playAudio(srcs[0]!, token, startAt);
+        // A sleeping context would play the line in silence under its subtitle.
+        const el = (await this.awake()) || !this.plainEl ? this.voiceEl : this.plainEl;
+        if (token !== this.speakToken) return;
+        if (srcs.length === 1) await this.playAudio(el, srcs[0]!, token, startAt);
         // Pieces can't be sought into, so someone arriving mid-line just reads the subtitle.
-        else if (startAt === 0) for (const src of srcs) if (token === this.speakToken) await this.playAudio(src!, token, 0);
+        else if (startAt === 0) for (const src of srcs) if (token === this.speakToken) await this.playAudio(el, src!, token, 0);
       }
       // A refused or missing recording must not flash the subtitle by.
       const left = startAt > 0 ? 0 : readingMs(line.text) * 0.8 - (Date.now() - started);
@@ -671,9 +692,8 @@ class WorkshopAudio {
     }
   }
 
-  private playAudio(src: string, token: number, startAt: number) {
+  private playAudio(audio: HTMLAudioElement, src: string, token: number, startAt: number) {
     return new Promise<void>((resolve) => {
-      const audio = this.voiceEl!;
       let settled = false;
       const cleanup = () => {
         audio.removeEventListener("ended", done);
