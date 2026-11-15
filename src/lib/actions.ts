@@ -323,6 +323,15 @@ export async function updateSettingsAction(code: string, input: z.input<typeof s
   });
 }
 
+/** The Elf Chief changes only their name, e.g. from the setup wizard, without touching their elf. */
+export async function renameHostAction(code: string, displayName: string) {
+  return run(async () => {
+    const { host } = await requireHost(code);
+    await updateParticipant(host, { displayName: name.parse(displayName) });
+    return {};
+  });
+}
+
 export async function addExclusionAction(code: string, giverId: string, receiverId: string, bidirectional: boolean) {
   return run(async () => {
     const { session } = await requireHost(code);

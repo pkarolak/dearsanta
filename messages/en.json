@@ -647,7 +647,13 @@
     "sendCount": "Send {count, plural, one {# invitation} other {# invitations}}",
     "sent": "{count, plural, one {We sent # invitation} other {We sent # invitations}}",
     "later": "You can invite more people later in the panel.",
-    "toPanel": "Go to the panel"
+    "toPanel": "Go to the panel",
+    "summaryParty": "Party",
+    "summaryYou": "You",
+    "noLimit": "No limit",
+    "edit": "Change",
+    "emailLocked": "We’ve already sent your panel link to this address.",
+    "summaryBudget": "Budget"
   },
   "validation": {
     "required": "Please fill in this field.",

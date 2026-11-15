@@ -21,7 +21,7 @@ import { currencies, currencyOptions, parseEmails } from "./CreateSessionForm";
 import { Select } from "./Select";
 import { WizardHeader } from "./WizardHeader";
 import { useRouter } from "@/i18n/navigation";
-import { createSessionAction, inviteAction } from "@/lib/actions";
+import { createSessionAction, inviteAction, renameHostAction, updateSettingsAction, type ActionResult } from "@/lib/actions";
 
 const TOTAL = 4;
 type Currency = (typeof currencies)[number];
@@ -55,6 +55,9 @@ export function RemoteWizard() {
   const [hostName, setHostName] = useState("");
   const [hostPlays, setHostPlays] = useState(true);
   const [code, setCode] = useState<string | null>(null);
+  const [emails, setEmails] = useState("");
+  const [note, setNote] = useState("");
+  const [sent, setSent] = useState(0);
   const [pending, start] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const back = step > 1 ? () => setStep(step - 1) : undefined;
@@ -93,13 +96,54 @@ export function RemoteWizard() {
       setStep(4);
     });
 
+  /** After the party exists, going back and changing an answer updates it instead of creating another one. */
+  const save = (code: string) =>
+    start(async () => {
+      setError(null);
+      const amount = Number(budget.replace(",", "."));
+      let result: ActionResult;
+      if (step === 1) result = await updateSettingsAction(code, { title: title.trim() || tc("titlePlaceholder") });
+      else if (step === 2) result = await updateSettingsAction(code, { budgetAmount: amount > 0 ? amount : null, currency });
+      else {
+        result = await updateSettingsAction(code, { hostPlays });
+        if (result.ok) result = await renameHostAction(code, hostName.trim());
+      }
+      if (!result.ok) return fail(result.error);
+      setStep(step + 1);
+    });
+
   const next = (e: React.FormEvent) => {
     e.preventDefault();
-    if (step < 3) setStep(step + 1);
+    if (code) save(code);
+    else if (step < 3) setStep(step + 1);
     else create();
   };
 
-  if (step === 4 && code) return <InviteStep code={code} onDone={() => router.push(`/s/${code}/host`)} />;
+  if (step === 4 && code) {
+    const amount = Number(budget.replace(",", "."));
+    return (
+      <InviteStep
+        code={code}
+        summary={[
+          { label: t("summaryParty"), value: title.trim() || tc("titlePlaceholder"), step: 1 },
+          {
+            label: t("summaryBudget"),
+            value: amount > 0 ? new Intl.NumberFormat(locale, { style: "currency", currency, maximumFractionDigits: 2 }).format(amount) : t("noLimit"),
+            step: 2,
+          },
+          { label: t("summaryYou"), value: `${hostName.trim()} · ${hostPlays ? th("room.playsYes") : th("room.playsNo")}`, step: 3 },
+        ]}
+        onEdit={setStep}
+        emails={emails}
+        setEmails={setEmails}
+        note={note}
+        setNote={setNote}
+        sent={sent}
+        setSent={setSent}
+        onDone={() => router.push(`/s/${code}/host`)}
+      />
+    );
+  }
 
   return (
     <form onSubmit={next} className="card p-6 md:p-8">
@@ -152,8 +196,18 @@ export function RemoteWizard() {
           <WizardHeader step={3} total={TOTAL} title={t("coordTitle")} onBack={back} />
           <p className="-mt-2 mb-5 text-muted">{t("coordLead")}</p>
           <label className="label" htmlFor="rw-email">{tc("hostEmail")}</label>
-          <input id="rw-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="field" autoComplete="email" autoFocus />
-          <p className="mt-2 text-sm text-muted">{t("emailHint")}</p>
+          <input
+            id="rw-email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            readOnly={!!code}
+            required
+            className={`field ${code ? "text-muted" : ""}`}
+            autoComplete="email"
+            autoFocus={!code}
+          />
+          <p className="mt-2 text-sm text-muted">{code ? t("emailLocked") : t("emailHint")}</p>
           <label className="label mt-5" htmlFor="rw-host">{t("hostName")}</label>
           <input id="rw-host" value={hostName} onChange={(e) => setHostName(e.target.value)} required maxLength={40} className="field" autoComplete="given-name" />
           <p className="mt-2 text-sm text-muted">{t("hostNameHint", { name: hostName.trim() || tc("quick.hostName") })}</p>
@@ -195,7 +249,7 @@ export function RemoteWizard() {
           </button>
         )}
         <button className="btn-primary" disabled={pending}>
-          {step < 3 ? th("continue") : pending ? tc("creating") : t("create")}
+          {step < 3 || code ? th("continue") : pending ? tc("creating") : t("create")}
           {!pending && <ArrowRight weight="bold" className="h-4 w-4" />}
         </button>
       </div>
@@ -204,14 +258,35 @@ export function RemoteWizard() {
 }
 
 /** The party exists now: share its link, or send e-mail invitations with a personal note. */
-function InviteStep({ code, onDone }: { code: string; onDone: () => void }) {
+type Summary = { label: string; value: string; step: number }[];
+
+function InviteStep({
+  code,
+  summary,
+  onEdit,
+  emails,
+  setEmails,
+  note,
+  setNote,
+  sent,
+  setSent,
+  onDone,
+}: {
+  code: string;
+  summary: Summary;
+  onEdit: (step: number) => void;
+  emails: string;
+  setEmails: (v: string) => void;
+  note: string;
+  setNote: (v: string) => void;
+  sent: number;
+  setSent: (fn: (n: number) => number) => void;
+  onDone: () => void;
+}) {
   const t = useTranslations("remote");
   const te = useTranslations("errors");
   const locale = useLocale();
-  const [emails, setEmails] = useState("");
-  const [note, setNote] = useState("");
   const [copied, setCopied] = useState(false);
-  const [sent, setSent] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [pending, start] = useTransition();
   const list = parseEmails(emails);
@@ -238,8 +313,20 @@ function InviteStep({ code, onDone }: { code: string; onDone: () => void }) {
 
   return (
     <section className="card p-6 md:p-8">
-      <WizardHeader step={TOTAL} total={TOTAL} title={t("inviteTitle")} />
+      <WizardHeader step={TOTAL} total={TOTAL} title={t("inviteTitle")} onBack={() => onEdit(TOTAL - 1)} />
       <p className="-mt-2 text-muted">{t("inviteLead")}</p>
+
+      <dl className="mt-5 divide-y divide-ink/10 rounded-2xl bg-paper px-4 ring-1 ring-ink/5">
+        {summary.map((row) => (
+          <div key={row.step} className="flex items-center gap-3 py-2.5">
+            <dt className="w-24 shrink-0 text-sm text-muted">{row.label}</dt>
+            <dd className="min-w-0 flex-1 truncate font-semibold">{row.value}</dd>
+            <button type="button" onClick={() => onEdit(row.step)} className="shrink-0 text-sm font-semibold text-berry underline-offset-2 hover:underline">
+              {t("edit")}
+            </button>
+          </div>
+        ))}
+      </dl>
 
       <label className="label mt-6" htmlFor="rw-link">{t("linkLabel")}</label>
       <div className="flex flex-wrap gap-2">

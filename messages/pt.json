@@ -647,7 +647,13 @@
     "sendCount": "Enviar {count, plural, one {# convite} other {# convites}}",
     "sent": "{count, plural, one {Enviámos # convite} other {Enviámos # convites}}",
     "later": "Podes convidar mais pessoas depois no painel.",
-    "toPanel": "Ir para o painel"
+    "toPanel": "Ir para o painel",
+    "summaryParty": "Festa",
+    "summaryYou": "Tu",
+    "noLimit": "Sem limite",
+    "edit": "Mudar",
+    "emailLocked": "Já enviámos o link do painel para este endereço.",
+    "summaryBudget": "Orçamento"
   },
   "validation": {
     "required": "Preenche este campo.",

@@ -647,7 +647,13 @@
     "sendCount": "Wyślij {count, plural, one {# zaproszenie} few {# zaproszenia} many {# zaproszeń} other {# zaproszenia}}",
     "sent": "{count, plural, one {Wysłaliśmy # zaproszenie} few {Wysłaliśmy # zaproszenia} many {Wysłaliśmy # zaproszeń} other {Wysłaliśmy # zaproszenia}}",
     "later": "Kolejne osoby zaprosisz też później w panelu.",
-    "toPanel": "Przejdź do panelu"
+    "toPanel": "Przejdź do panelu",
+    "summaryParty": "Wydarzenie",
+    "summaryYou": "Ty",
+    "noLimit": "Bez limitu",
+    "edit": "Zmień",
+    "emailLocked": "Na ten adres wysłaliśmy już link do panelu.",
+    "summaryBudget": "Budżet"
   },
   "validation": {
     "required": "Uzupełnij to pole.",

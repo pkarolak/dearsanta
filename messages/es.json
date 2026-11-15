@@ -647,7 +647,13 @@
     "sendCount": "Enviar {count, plural, one {# invitación} other {# invitaciones}}",
     "sent": "{count, plural, one {Hemos enviado # invitación} other {Hemos enviado # invitaciones}}",
     "later": "Podrás invitar a más gente después en el panel.",
-    "toPanel": "Ir al panel"
+    "toPanel": "Ir al panel",
+    "summaryParty": "Fiesta",
+    "summaryYou": "Tú",
+    "noLimit": "Sin límite",
+    "edit": "Cambiar",
+    "emailLocked": "Ya hemos enviado el enlace al panel a esta dirección.",
+    "summaryBudget": "Presupuesto"
   },
   "validation": {
     "required": "Rellena este campo.",
