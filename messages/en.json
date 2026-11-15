@@ -627,5 +627,17 @@
       "school": "Class Secret Santa"
     },
     "nameHint": "Guests will see this name in the invitation and on their phones."
+  },
+  "validation": {
+    "required": "Please fill in this field.",
+    "check": "Tick this box to continue.",
+    "email": "Enter a valid e-mail address, e.g. ola@example.com.",
+    "url": "Enter a full link starting with https://.",
+    "tooShort": "Enter at least {min} characters.",
+    "tooLong": "{max} characters at most.",
+    "min": "The value can’t be lower than {min}.",
+    "max": "The value can’t be higher than {max}.",
+    "number": "Enter a number.",
+    "invalid": "Check that this field is filled in correctly."
   }
 }

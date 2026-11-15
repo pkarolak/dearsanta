@@ -627,5 +627,17 @@
       "school": "Klassenwichteln"
     },
     "nameHint": "Diesen Namen sehen die Gäste in der Einladung und auf ihrem Handy."
+  },
+  "validation": {
+    "required": "Bitte füll dieses Feld aus.",
+    "check": "Setz hier ein Häkchen, um weiterzumachen.",
+    "email": "Gib eine gültige E-Mail-Adresse ein, z. B. ola@example.com.",
+    "url": "Gib einen vollständigen Link ein, der mit https:// beginnt.",
+    "tooShort": "Gib mindestens {min} Zeichen ein.",
+    "tooLong": "Höchstens {max} Zeichen.",
+    "min": "Der Wert darf nicht kleiner als {min} sein.",
+    "max": "Der Wert darf nicht größer als {max} sein.",
+    "number": "Gib eine Zahl ein.",
+    "invalid": "Prüf, ob dieses Feld richtig ausgefüllt ist."
   }
 }

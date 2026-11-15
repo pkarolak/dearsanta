@@ -108,6 +108,16 @@
 @utility field {
   @apply well w-full px-4 py-3 text-ink placeholder:text-muted/45 outline-none focus:ring-3 focus:ring-gold;
 }
+/* The field our own validation bubble points at. */
+[aria-invalid="true"] {
+  --tw-ring-color: rgb(193 39 45 / 0.75);
+  box-shadow: 0 0 0 3px rgb(193 39 45 / 0.75);
+}
+input[type="checkbox"][aria-invalid="true"] {
+  box-shadow: none;
+  outline: 3px solid rgb(193 39 45 / 0.75);
+  outline-offset: 2px;
+}
 @utility label {
   @apply mb-1.5 block text-sm font-semibold text-muted;
 }

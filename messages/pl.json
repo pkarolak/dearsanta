@@ -627,5 +627,17 @@
       "school": "Mikołajki w klasie"
     },
     "nameHint": "Tę nazwę zobaczą goście w zaproszeniu i na swoim telefonie."
+  },
+  "validation": {
+    "required": "Uzupełnij to pole.",
+    "check": "Zaznacz to pole, żeby przejść dalej.",
+    "email": "Wpisz poprawny adres e-mail, np. ola@example.com.",
+    "url": "Wpisz pełny link zaczynający się od https://.",
+    "tooShort": "Wpisz co najmniej {min, plural, one {# znak} few {# znaki} many {# znaków} other {# znaku}}.",
+    "tooLong": "Maksymalnie {max, plural, one {# znak} few {# znaki} many {# znaków} other {# znaku}}.",
+    "min": "Wartość nie może być mniejsza niż {min}.",
+    "max": "Wartość nie może być większa niż {max}.",
+    "number": "Wpisz liczbę.",
+    "invalid": "Sprawdź, czy to pole jest dobrze wypełnione."
   }
 }

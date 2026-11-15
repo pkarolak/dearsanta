@@ -6,7 +6,7 @@ import { routing } from "@/i18n/routing";
 import { fontVariables } from "../fonts";
 import "../globals.css";
 import { brand } from "@/lib/brand";
-
+import { FormErrors } from "@/components/FormErrors";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -28,7 +28,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   return (
     <html lang={locale} className={fontVariables}>
       <body className="min-h-dvh">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          {children}
+          <FormErrors />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

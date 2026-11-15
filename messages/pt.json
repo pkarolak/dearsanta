@@ -627,5 +627,17 @@
       "school": "Amigo secreto da turma"
     },
     "nameHint": "Os convidados vão ver este nome no convite e no telemóvel."
+  },
+  "validation": {
+    "required": "Preenche este campo.",
+    "check": "Marca esta caixa para continuar.",
+    "email": "Escreve um e-mail válido, por ex. ola@example.com.",
+    "url": "Escreve um link completo que comece por https://.",
+    "tooShort": "Escreve pelo menos {min} caracteres.",
+    "tooLong": "No máximo {max} caracteres.",
+    "min": "O valor não pode ser menor que {min}.",
+    "max": "O valor não pode ser maior que {max}.",
+    "number": "Escreve um número.",
+    "invalid": "Verifica se este campo está bem preenchido."
   }
 }

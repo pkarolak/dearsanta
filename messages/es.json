@@ -627,5 +627,17 @@
       "school": "Amigo invisible de la clase"
     },
     "nameHint": "Los invitados verán este nombre en la invitación y en su móvil."
+  },
+  "validation": {
+    "required": "Rellena este campo.",
+    "check": "Marca esta casilla para continuar.",
+    "email": "Escribe un correo válido, p. ej. ola@example.com.",
+    "url": "Escribe un enlace completo que empiece por https://.",
+    "tooShort": "Escribe al menos {min} caracteres.",
+    "tooLong": "Como máximo {max} caracteres.",
+    "min": "El valor no puede ser menor que {min}.",
+    "max": "El valor no puede ser mayor que {max}.",
+    "number": "Escribe un número.",
+    "invalid": "Comprueba que este campo esté bien rellenado."
   }
 }
