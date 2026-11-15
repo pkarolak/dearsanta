@@ -51,12 +51,13 @@ export function JoinButton({ tone = "dark" }: { tone?: "light" | "dark" }) {
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-controls="join-panel"
-        className={`flex h-9 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-sm font-semibold transition-colors ${
+        className={`flex h-9 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-sm max-[379px]:px-2.5 font-semibold transition-colors ${
           tone === "dark" ? "text-snow/85 hover:bg-snow/10 hover:text-snow aria-expanded:bg-snow/10 aria-expanded:text-snow" : "text-ink hover:bg-ink/5"
         }`}
       >
         <SignIn weight="bold" className="h-4 w-4" />
-        {t("joinOpen")}
+        <span className="sm:hidden max-[379px]:sr-only">{t("joinOpen")}</span>
+        <span className="max-sm:hidden">{t("joinExisting")}</span>
       </button>
       {place &&
         createPortal(

@@ -4,7 +4,8 @@
     "description": "Wichteln mit Familie, Freunden oder Kollegen, moderiert vom Weihnachtsmann persönlich."
   },
   "nav": {
-    "mySessions": "Meine Runden"
+    "mySessions": "Meine Runden",
+    "create": "Neue Runde"
   },
   "home": {
     "title": "Mach aus dem Losen eine Show",
@@ -39,7 +40,8 @@
     "codeNotFound": "Diesen Code kennen wir nicht. Frag beim Organisator nach.",
     "createShort": "Erstellen",
     "modesStart": "Loslegen",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "joinExisting": "Bestehender beitreten"
   },
   "film": {
     "label": "Ein kleines Märchen vom Weihnachtsmann, der Hilfe braucht",

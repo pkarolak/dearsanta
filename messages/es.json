@@ -4,7 +4,8 @@
     "description": "Sorteo de amigo invisible con familia, amigos o compañeros, presentado por el mismísimo Papá Noel."
   },
   "nav": {
-    "mySessions": "Mis sorteos"
+    "mySessions": "Mis sorteos",
+    "create": "Nueva fiesta"
   },
   "home": {
     "title": "Convierte el sorteo en un show",
@@ -39,7 +40,8 @@
     "codeNotFound": "No conocemos ese código. Compruébalo con el organizador.",
     "createShort": "Crear",
     "modesStart": "Empezar",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "joinExisting": "Unirme a una existente"
   },
   "film": {
     "label": "Un pequeño cuento de Papá Noel, que necesita vuestra ayuda",

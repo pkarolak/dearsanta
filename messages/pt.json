@@ -4,7 +4,8 @@
     "description": "Sorteio de amigo secreto com família, amigos ou colegas, apresentado pelo próprio Pai Natal."
   },
   "nav": {
-    "mySessions": "Os meus sorteios"
+    "mySessions": "Os meus sorteios",
+    "create": "Nova festa"
   },
   "home": {
     "title": "Faça do sorteio um espetáculo",
@@ -39,7 +40,8 @@
     "codeNotFound": "Não conhecemos esse código. Confirme com o organizador.",
     "createShort": "Criar",
     "modesStart": "Começar",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "joinExisting": "Entrar numa existente"
   },
   "film": {
     "label": "Um pequeno conto do Pai Natal, que precisa da vossa ajuda",

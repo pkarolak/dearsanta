@@ -4,7 +4,8 @@
     "description": "Losowanie Secret Santa w rodzinie, wśród przyjaciół i w pracy, prowadzone przez samego Mikołaja."
   },
   "nav": {
-    "mySessions": "Moje sesje"
+    "mySessions": "Moje sesje",
+    "create": "Nowa zabawa"
   },
   "home": {
     "title": "Zamień losowanie w świąteczne przedstawienie",
@@ -39,7 +40,8 @@
     "codeNotFound": "Nie znamy takiego kodu. Sprawdź go u organizatora.",
     "createShort": "Stwórz",
     "modesStart": "Zacznij",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "joinExisting": "Dołącz do istniejącej"
   },
   "film": {
     "label": "Bajka o Mikołaju, który potrzebuje pomocy",

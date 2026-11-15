@@ -6,12 +6,11 @@ import { BrandMark } from "./BrandMark";
 import { brand } from "@/lib/brand";
 
 /**
- * The one bar on every page: a frosted strip with the brand, my sessions, language, join and create.
+ * The one bar on every page: a frosted strip with the brand, language, joining a party and starting a new one.
  * `fixed` pins it over the landing page's film and scenes; elsewhere it sits at the top of the page.
  */
 export function SiteHeader({ fixed = false }: { fixed?: boolean }) {
   const t = useTranslations("nav");
-  const th = useTranslations("home");
 
   return (
     <header className={`${fixed ? "fixed inset-x-0 top-0 z-50" : "relative z-30"} px-3 pt-3 text-snow md:px-5 md:pt-4`}>
@@ -21,15 +20,11 @@ export function SiteHeader({ fixed = false }: { fixed?: boolean }) {
           <span className="max-sm:sr-only">{brand.name}</span>
         </Link>
         <nav className="flex items-center gap-0.5 text-sm font-semibold">
-          <Link href="/me" className="hidden h-9 items-center whitespace-nowrap rounded-full px-3.5 text-snow/85 transition-colors hover:bg-snow/10 hover:text-snow md:flex">
-            {t("mySessions")}
-          </Link>
           <LanguageSwitcher tone="dark" short />
           <span className="mx-1.5 h-5 w-px bg-snow/20 max-sm:hidden" aria-hidden />
           <JoinButton tone="dark" />
           <Link href="/new" className="btn-primary ml-1 h-9 whitespace-nowrap px-4 py-0 text-sm">
-            <span className="sm:hidden">{th("createShort")}</span>
-            <span className="max-sm:hidden">{th("create")}</span>
+            {t("create")}
           </Link>
         </nav>
       </div>

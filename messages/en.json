@@ -4,7 +4,8 @@
     "description": "Draw Secret Santa with family, friends or colleagues, hosted by Santa himself."
   },
   "nav": {
-    "mySessions": "My sessions"
+    "mySessions": "My sessions",
+    "create": "New party"
   },
   "home": {
     "title": "Turn the name draw into a show",
@@ -39,7 +40,8 @@
     "codeNotFound": "We don’t know that code. Check it with the organiser.",
     "createShort": "Create",
     "modesStart": "Start",
-    "contact": "Contact"
+    "contact": "Contact",
+    "joinExisting": "Join an existing one"
   },
   "film": {
     "label": "A little tale of Santa, who needs your help",
