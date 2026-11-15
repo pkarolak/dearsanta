@@ -31,7 +31,7 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
 
   // The phone is the remote: no second QR code, the guests scan the one on the big screen.
   await expect(phone.getByTestId("room-code")).toHaveText(code, { timeout: 10_000 });
-  await expect(phone.getByText("Guests scan the code on the big screen.", { exact: false })).toBeVisible();
+  await expect(phone.getByText("Guests scan the QR code on the big screen.", { exact: false })).toBeVisible();
 
   // Ola scans the code and only types her name; the door opens by itself.
   await guest.goto(`/en/join/${code}`);
