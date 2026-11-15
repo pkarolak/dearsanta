@@ -17,6 +17,7 @@
 
   --font-display: var(--font-fraunces), Georgia, serif;
   --font-sans: var(--font-figtree), system-ui, sans-serif;
+  --font-hand: var(--font-caveat), "Segoe Print", cursive;
 
   --radius-felt: 1.75rem;
 }

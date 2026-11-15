@@ -1,12 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import layout from "./layout.json";
 import { SantaPuppet } from "./SantaPuppet";
 import { ElfPuppets } from "./ElfPuppets";
 import { FortuneWheel, type WheelDraw } from "./FortuneWheel";
 import { useMouth } from "../useVoice";
+import { Reindeer } from "./Vignette";
 import type { AvatarConfig } from "@/lib/avatar";
 import type { CeremonyStep } from "@/lib/ceremony/steps";
 
@@ -87,6 +87,7 @@ const glide = { type: "spring", stiffness: 70, damping: 18 } as const;
 
 /** The whole ceremony happens in Santa's workshop; for the draw the wheel steps forward and Santa makes room. */
 function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageText, compact, farewellExtras }: Props) {
+  const calm = useReducedMotion();
   const showReindeer = (step === "lobby" || step === "rules") && card;
   const drawing = step === "draw" || step === "reveal" || step === "farewell";
 
@@ -107,25 +108,19 @@ function Workshop({ step, elves, talking, level, draw, card, remoteLabel, stageT
           <motion.div
             key="reindeer"
             className="absolute left-[68%] top-[22%] w-[29%]"
+            style={{ transformOrigin: "50% 100%" }}
             initial={{ x: "70%", rotate: 8 }}
-            animate={{ x: 0, rotate: 0 }}
+            animate={{ x: 0, rotate: -4 }}
             exit={{ x: "80%", rotate: 8 }}
             transition={{ type: "spring", stiffness: 120, damping: 15 }}
           >
-            <div className="relative aspect-[3/4]">
-              <Image src="/show/reindeer.webp" alt="" fill unoptimized sizes="30vw" className="object-contain" />
-              <div
-                className="@container absolute overflow-hidden rounded-[0.4cqw] bg-paper"
-                style={{
-                  left: `${layout.reindeerCard.left - 0.6}%`,
-                  top: `${layout.reindeerCard.top - 0.4}%`,
-                  width: `${layout.reindeerCard.width + 1.2}%`,
-                  height: `${layout.reindeerCard.height + 0.8}%`,
-                }}
-              >
-                {card}
-              </div>
-            </div>
+            <motion.div
+              style={{ transformOrigin: "50% 100%" }}
+              animate={calm ? undefined : { rotate: [0, 1.2, 0] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Reindeer className="relative! w-full">{card}</Reindeer>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -5,10 +5,11 @@
     "width": 47.454,
     "height": 24.306
   },
-  "reindeerCard": {
-    "left": 15.51,
-    "top": 59.9,
-    "width": 69.68,
-    "height": 34.03
+  "reindeerBoard": {
+    "left": 16.9,
+    "top": 59.55,
+    "width": 68.55,
+    "height": 32.93,
+    "rotate": 1.85
   }
 }

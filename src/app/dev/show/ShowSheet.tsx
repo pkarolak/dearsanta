@@ -4,6 +4,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
 import { Avatar } from "@/components/Avatar";
 import { FestiveLinks } from "@/components/FestiveLinks";
+import { BudgetBoard, JoinBoard } from "@/components/show/BoardCards";
 import { ShowFrame, ShowStage } from "@/components/show/ShowStage";
 import { Reindeer } from "@/components/show/Vignette";
 import { avatarOptions, defaultAvatar, seededAvatar } from "@/lib/avatar";
@@ -49,20 +50,9 @@ export function ShowSheet({ step, count, level, draw: wanted }: { step: string |
       subtitle={{ id: s, text: sampleLines[s] }}
       card={
         s === "lobby" ? (
-          <div className="flex h-full items-center gap-[4cqw] p-[5cqw]">
-            <QRCodeSVG value="http://localhost:3000/en/join/YWXVT8" className="aspect-square h-[84%] w-auto shrink-0" fgColor="#2b1810" bgColor="#fffdf8" marginSize={0} />
-            <div className="min-w-0">
-              <p className="font-display text-[6.6cqw] font-bold leading-[1.1] text-ink">Scan to join Santa’s workshop</p>
-              <p className="mt-[2.5cqw] text-[4.4cqw] leading-tight text-muted">or open the site and enter the code</p>
-              <p className="mt-[1.5cqw] font-display text-[7cqw] font-black leading-none text-berry">YWXVT8</p>
-            </div>
-          </div>
+          <JoinBoard url="http://localhost:3000/en/join/YWXVT8" code="YWXVT8" title="Scan to join Santa’s workshop" hint="or open the site and enter the code" />
         ) : s === "rules" ? (
-          <div className="flex h-full flex-col justify-center p-[6cqw] text-center">
-            <p className="text-[6cqw] font-semibold text-muted">Gift budget</p>
-            <p className="font-display text-[16cqw] font-black leading-none text-berry">£100</p>
-            <p className="mt-[4cqw] font-display text-[6.5cqw] font-semibold leading-tight text-ink">Keep it secret until the gifts are opened</p>
-          </div>
+          <BudgetBoard label="Gift budget" budget="£100" note="Keep it secret until the gifts are opened" />
         ) : null
       }
       stageText={s === "reveal" ? { title: "Look at your own device", detail: "2 of 5 elves have unwrapped their match" } : { title: "Merry Christmas!" }}
