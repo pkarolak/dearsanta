@@ -11,6 +11,3 @@ export function SpeakerIcon({ className = "h-5 w-5", muted }: IconProps & { mute
   return <Icon weight="fill" className={className} aria-hidden />;
 }
 
-export function SnowflakeIcon({ className = "h-5 w-5" }: IconProps) {
-  return <Snowflake weight="bold" className={className} aria-hidden />;
-}

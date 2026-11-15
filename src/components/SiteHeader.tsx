@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { JoinButton } from "./JoinButton";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { SnowflakeIcon } from "./icons";
+import { BrandMark } from "./BrandMark";
 import { brand } from "@/lib/brand";
 
 /**
@@ -18,8 +18,8 @@ export function SiteHeader({ tone = "light", cta = false }: { tone?: "light" | "
     return (
       <header className={`fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-5 md:pt-4 ${color}`}>
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 rounded-full bg-ink/55 py-1.5 pl-4 pr-1.5 shadow-[0_12px_34px_-14px_rgb(0_0_0/0.65)] ring-1 ring-snow/12 backdrop-blur-xl md:pl-5">
-          <Link href="/" className="flex h-9 items-center gap-2 whitespace-nowrap font-display text-lg font-bold">
-            <SnowflakeIcon className="h-5 w-5 text-gold" />
+          <Link href="/" className="-ml-2 flex h-9 items-center gap-2.5 whitespace-nowrap font-display text-lg font-bold md:-ml-3">
+            <BrandMark className="h-9 w-9" />
             <span className="max-sm:sr-only">{brand.name}</span>
           </Link>
           <nav className="flex items-center gap-0.5 text-sm font-semibold">
@@ -42,7 +42,7 @@ export function SiteHeader({ tone = "light", cta = false }: { tone?: "light" | "
   return (
     <header className={`mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-5 md:py-4 ${color} [text-shadow:0_1px_8px_rgb(0_0_0/0.5)]`}>
       <Link href="/" className="flex h-11 items-center gap-2 whitespace-nowrap font-display text-lg font-bold md:text-xl">
-        <SnowflakeIcon className="h-5 w-5 text-gold" />
+        <BrandMark className="h-10 w-10" />
         <span>{brand.name}</span>
       </Link>
       <nav className={`flex items-center gap-1 text-sm font-semibold ${tone === "dark" ? "rounded-full bg-ink/55 p-1 ring-1 ring-snow/15 backdrop-blur-md shadow-[0_10px_30px_-12px_rgb(0_0_0/0.6)]" : ""}`}>

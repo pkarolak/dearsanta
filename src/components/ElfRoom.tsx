@@ -14,7 +14,8 @@ import { WizardHeader } from "./WizardHeader";
 import { SantaPuppet } from "./show/SantaPuppet";
 import { Cast, Vignette } from "./show/Vignette";
 import { MuteButton, useSoundGate } from "./SoundControls";
-import { SnowflakeIcon, SpeakerIcon } from "./icons";
+import { SpeakerIcon } from "./icons";
+import { BrandMark } from "./BrandMark";
 import { Link } from "@/i18n/navigation";
 import { ceremonySteps } from "@/lib/ceremony/steps";
 import { markRevealedAction, setRemoteAction } from "@/lib/actions";
@@ -238,7 +239,7 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
         <div className="mx-auto w-full lg:max-w-[calc((100dvh-11rem)*16/9)]">
           <header className="flex items-center justify-between gap-3 px-4 py-2.5 text-snow lg:px-0 lg:pb-4 lg:pt-0">
             <Link href="/" className="flex items-center gap-2 font-display text-base font-bold lg:text-lg">
-              <SnowflakeIcon className="h-4 w-4 text-gold lg:h-5 lg:w-5" />
+              <BrandMark className="h-7 w-7 lg:h-8 lg:w-8" />
               {brand.name}
             </Link>
             <p className="flex items-center gap-2 rounded-full bg-snow/10 py-1 pl-2.5 pr-3 text-xs font-semibold ring-1 ring-snow/15 lg:text-sm">
