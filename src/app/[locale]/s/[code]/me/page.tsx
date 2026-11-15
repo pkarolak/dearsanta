@@ -13,6 +13,8 @@ export default async function ElfPage({ params }: PageProps<"/[locale]/s/[code]/
   if (!session) notFound();
   const viewer = await getViewer(session);
   if (!viewer.participant) redirect({ href: `/join/${session.code}`, locale });
+  // An Elf Chief who only runs the show has no elf of their own.
+  if (viewer.isHost && !session.hostPlays) redirect({ href: `/s/${session.code}/host`, locale });
   const state = await buildState(session, viewer, locale);
   return <ElfRoom code={session.code} initial={state} />;
 }

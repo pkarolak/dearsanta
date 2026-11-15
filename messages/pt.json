@@ -412,7 +412,9 @@
       "youPlay": "Também entras no sorteio",
       "youPlayHint": "Como Chefe dos elfos participas como qualquer outro elfo.",
       "changeElf": "Mudar o teu elfo",
-      "screenOn": "Ligado"
+      "screenOn": "Ligado",
+      "youDontPlay": "Conduzes, mas não entras no sorteio",
+      "youDontPlayHint": "Não dás presente a ninguém e ninguém te tira a ti. Podes mudar isto nas definições."
     },
     "phone": {
       "button": "Levar para o telemóvel",
@@ -468,7 +470,10 @@
       "rules": "Vamos sortear!"
     },
     "continue": "Continuar",
-    "santaLeads": "O Pai Natal continua sozinho"
+    "santaLeads": "O Pai Natal continua sozinho",
+    "hostPlays": "Entro no sorteio",
+    "hostPlaysHint": "Desmarca se só conduzes o jogo, por exemplo como professor. Não dás presente a ninguém e ninguém te tira a ti.",
+    "notInDraw": "Conduz o jogo, não entra no sorteio"
   },
   "screen": {
     "noAccessTitle": "Este é o ecrã grande",

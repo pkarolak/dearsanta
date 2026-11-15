@@ -412,7 +412,9 @@
       "youPlay": "Tú también participas",
       "youPlayHint": "Como Jefe de los elfos juegas como cualquier otro elfo.",
       "changeElf": "Cambiar tu elfo",
-      "screenOn": "Conectada"
+      "screenOn": "Conectada",
+      "youDontPlay": "Diriges, pero no participas en el sorteo",
+      "youDontPlayHint": "No harás ningún regalo y nadie te sacará a ti. Puedes cambiarlo en los ajustes."
     },
     "phone": {
       "button": "Llevarlo a mi móvil",
@@ -468,7 +470,10 @@
       "rules": "¡A sortear!"
     },
     "continue": "Seguir",
-    "santaLeads": "Papá Noel seguirá solo"
+    "santaLeads": "Papá Noel seguirá solo",
+    "hostPlays": "Participo en el sorteo",
+    "hostPlaysHint": "Desmárcalo si solo diriges el juego, por ejemplo como profesor. No harás ningún regalo y nadie te sacará a ti.",
+    "notInDraw": "Dirige el juego, no participa"
   },
   "screen": {
     "noAccessTitle": "Esta es la pantalla grande",

@@ -54,7 +54,7 @@ export function CeremonyStage({ state, locale, audible, serverToLocal, joinUrl, 
   }, [step, startedAt, serverToLocal, goodbyeMs]);
   const closed = step === "farewell" && (voiced ? index >= state.script!.length : silentClose === startedAt);
   const stopped = step !== "draw" || (voiced ? index >= stopOnLine : silentStop === startedAt);
-  const elves = state.participants.filter((p) => p.status === "approved");
+  const elves = state.participants.filter((p) => p.status === "approved" && p.plays);
   const budget =
     state.session.budgetAmount !== null
       ? new Intl.NumberFormat(locale, { style: "currency", currency: state.session.currency, maximumFractionDigits: 0 }).format(

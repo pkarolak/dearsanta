@@ -412,7 +412,9 @@
       "youPlay": "You’re in the draw too",
       "youPlayHint": "As the Elf Chief you play along like every other elf.",
       "changeElf": "Change your elf",
-      "screenOn": "Connected"
+      "screenOn": "Connected",
+      "youDontPlay": "You run the show, but you’re not in the draw",
+      "youDontPlayHint": "You won’t give anyone a gift and nobody will draw you. You can change this in the settings."
     },
     "phone": {
       "button": "Take it to my phone",
@@ -468,7 +470,10 @@
       "rules": "Let’s draw!"
     },
     "continue": "Continue",
-    "santaLeads": "Santa will carry on by himself"
+    "santaLeads": "Santa will carry on by himself",
+    "hostPlays": "I’m in the draw",
+    "hostPlaysHint": "Untick this if you only run the game, e.g. as a teacher. You won’t give anyone a gift and nobody will draw you.",
+    "notInDraw": "Runs the game, not in the draw"
   },
   "screen": {
     "noAccessTitle": "This is the big screen",

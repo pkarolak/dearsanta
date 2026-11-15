@@ -76,7 +76,8 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
 
   const waiting = state.participants.filter((p) => p.status === "pending" || p.status === "invited");
   const approved = state.participants.filter((p) => p.status === "approved");
-  const ready = approved.filter((p) => p.profileComplete).length;
+  const players = approved.filter((p) => p.plays);
+  const ready = players.filter((p) => p.profileComplete).length;
   const end = stepEnds[s.step];
 
   const stepAt = ceremonySteps.indexOf(s.step);
@@ -98,7 +99,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
         }
       >
         <div className="mt-5 flex flex-wrap items-center gap-2">
-          {!inLobby && <Link href={`/s/${code}/me`} className="btn-soft px-4 py-2 text-sm">{t("myElf")}</Link>}
+          {!inLobby && s.hostPlays && <Link href={`/s/${code}/me`} className="btn-soft px-4 py-2 text-sm">{t("myElf")}</Link>}
           {!(s.step === "lobby" && !s.drawn) && <PhoneHandoff code={code} className="btn-soft px-4 py-2 text-sm max-sm:hidden" />}
           {s.mode === "sync" && !(s.step === "lobby" && !s.drawn) && (
             <a href={screenUrl} target="_blank" rel="noreferrer" className="btn-pine px-4 py-2 text-sm">
@@ -215,16 +216,16 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
           ) : (
             <>
               <h2 className="font-display text-2xl font-bold">{t("asyncTitle")}</h2>
-              <p className="mt-2 text-muted">{t("asyncReady", { ready, total: approved.length })}</p>
+              <p className="mt-2 text-muted">{t("asyncReady", { ready, total: players.length })}</p>
               <div className="mt-3 h-2 overflow-hidden rounded-full bg-ink/10">
-                <div className="h-full rounded-full bg-pine transition-all" style={{ width: `${approved.length ? (ready / approved.length) * 100 : 0}%` }} />
+                <div className="h-full rounded-full bg-pine transition-all" style={{ width: `${players.length ? (ready / players.length) * 100 : 0}%` }} />
               </div>
               {!s.drawn ? (
                 <button
                   className="btn-primary mt-5"
                   disabled={pending || !!blocked}
                   onClick={() => {
-                    if (ready < approved.length && !window.confirm(t("unlockConfirm"))) return;
+                    if (ready < players.length && !window.confirm(t("unlockConfirm"))) return;
                     act(() => unlockDrawAction(code), t("unlocked"));
                   }}
                 >
@@ -250,7 +251,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
           <Disclosure
             title={t("elvesLabel")}
             icon={<UsersThree weight="bold" className="h-5 w-5" />}
-            summary={t("elvesSummary", { count: approved.length, ready })}
+            summary={t("elvesSummary", { count: players.length, ready })}
           >
             <ul className="space-y-2">
               {approved.map((p) => (
@@ -347,7 +348,7 @@ function PersonRow({ p, children }: { p: PublicParticipant; children?: React.Rea
         </p>
         <p className="truncate text-xs text-muted">
           {p.email ? `${p.email} · ` : ""}
-          {p.status === "approved" ? (p.profileComplete ? t("profileReady") : t("profileMissing")) : t(`participantStatus.${p.status}`)}
+          {!p.plays ? t("notInDraw") : p.status === "approved" ? (p.profileComplete ? t("profileReady") : t("profileMissing")) : t(`participantStatus.${p.status}`)}
         </p>
       </div>
       <div className="flex flex-wrap items-center gap-1.5">{children}</div>
@@ -391,7 +392,7 @@ function ExclusionsBox({
   onDelete: (id: string) => void;
 }) {
   const t = useTranslations("host");
-  const people = state.participants.filter((p) => p.status !== "rejected");
+  const people = state.participants.filter((p) => p.status !== "rejected" && p.plays);
   const rules = state.exclusions ?? [];
   const [first, setFirst] = useState<string | null>(null);
   const [nudged, setNudged] = useState<string | null>(null);
@@ -542,7 +543,7 @@ function SettingsBox({
   return (
     <>
       <form
-        key={[s.title, s.scheduledAt, s.location, s.onlineUrl, s.budgetAmount, s.currency, s.locale, s.mode, s.drawn].join("|")}
+        key={[s.title, s.scheduledAt, s.location, s.onlineUrl, s.budgetAmount, s.currency, s.locale, s.mode, s.hostPlays, s.drawn].join("|")}
         className="space-y-4"
         action={(form) => {
           const date = String(form.get("date") ?? "");
@@ -553,7 +554,7 @@ function SettingsBox({
             scheduledAt: date ? new Date(`${date}T${time}`).toISOString() : null,
             location: String(form.get("location") ?? ""),
             onlineUrl: String(form.get("onlineUrl") ?? ""),
-            ...(s.drawn ? {} : { budgetAmount: budget > 0 ? budget : null }),
+            ...(s.drawn ? {} : { budgetAmount: budget > 0 ? budget : null, hostPlays: form.get("hostPlays") === "on" }),
             currency: String(form.get("currency")) as (typeof currencies)[number],
             locale: String(form.get("sessionLocale")),
             ...(s.step === "lobby" && !s.drawn ? { mode: String(form.get("mode")) as "sync" | "async" } : {}),
@@ -584,6 +585,13 @@ function SettingsBox({
             <Select id="s-currency" name="currency" defaultValue={s.currency} options={currencyOptions} className="field min-w-36" />
           </div>
         </div>
+        <label className={`flex items-start gap-3 rounded-2xl bg-paper p-4 ${s.drawn ? "opacity-60" : "cursor-pointer"}`}>
+          <input type="checkbox" name="hostPlays" defaultChecked={s.hostPlays} disabled={s.drawn} className="mt-0.5 h-5 w-5 shrink-0 accent-pine" />
+          <span>
+            <span className="block font-semibold">{t("hostPlays")}</span>
+            <span className="mt-0.5 block text-sm text-muted">{t("hostPlaysHint")}</span>
+          </span>
+        </label>
         <button type="button" className="flex items-center gap-1.5 text-sm font-semibold text-muted hover:text-ink" aria-expanded={more} onClick={() => setMore((m) => !m)}>
           <CaretDown weight="bold" className={`h-4 w-4 transition-transform ${more ? "rotate-180" : ""}`} />
           {more ? t("fewerSettings") : t("moreSettings")}

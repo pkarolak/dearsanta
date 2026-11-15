@@ -412,7 +412,9 @@
       "youPlay": "Ty też losujesz",
       "youPlayHint": "Jako Naczelnik elfów bierzesz udział w zabawie jak każdy inny elf.",
       "changeElf": "Zmień wygląd elfa",
-      "screenOn": "Połączony"
+      "screenOn": "Połączony",
+      "youDontPlay": "Prowadzisz, ale nie losujesz",
+      "youDontPlayHint": "Nie dasz nikomu prezentu i nikt nie wylosuje Ciebie. Możesz to zmienić w ustawieniach."
     },
     "phone": {
       "button": "Weź sesję na telefon",
@@ -468,7 +470,10 @@
       "rules": "Losujemy!"
     },
     "continue": "Dalej",
-    "santaLeads": "Mikołaj sam przejdzie dalej"
+    "santaLeads": "Mikołaj sam przejdzie dalej",
+    "hostPlays": "Biorę udział w losowaniu",
+    "hostPlaysHint": "Odznacz, jeśli tylko prowadzisz zabawę, np. jako nauczyciel. Nie dasz nikomu prezentu i nikt nie wylosuje Ciebie.",
+    "notInDraw": "Prowadzi zabawę, nie losuje"
   },
   "screen": {
     "noAccessTitle": "To jest duży ekran",

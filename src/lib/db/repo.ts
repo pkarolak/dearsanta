@@ -29,6 +29,8 @@ export type Session = {
   drawnAt: Date | null;
   /** Spontaneous sessions let people in as soon as they knock. */
   autoAdmit: boolean;
+  /** Off when the Elf Chief only runs the show and stays out of the draw. */
+  hostPlays: boolean;
   screenSeenAt: Date | null;
   remotePairedAt: Date | null;
   version: number;
@@ -79,6 +81,7 @@ function mapSession(r: any): Session {
     drawCommitment: r.draw_commitment,
     drawnAt: toDate(r.drawn_at),
     autoAdmit: !!r.auto_admit,
+    hostPlays: r.host_plays !== false,
     screenSeenAt: toDate(r.screen_seen_at),
     remotePairedAt: toDate(r.remote_paired_at),
     version: Number(r.version),
@@ -196,7 +199,7 @@ export async function getSessionVersion(code: string) {
 }
 
 export type SessionPatch = Partial<
-  Pick<Session, "title" | "scheduledAt" | "location" | "onlineUrl" | "budgetAmount" | "currency" | "locale" | "mode">
+  Pick<Session, "title" | "scheduledAt" | "location" | "onlineUrl" | "budgetAmount" | "currency" | "locale" | "mode" | "hostPlays">
 >;
 
 const sessionColumns: Record<keyof SessionPatch, string> = {
@@ -208,6 +211,7 @@ const sessionColumns: Record<keyof SessionPatch, string> = {
   currency: "currency",
   locale: "locale",
   mode: "mode",
+  hostPlays: "host_plays",
 };
 
 export async function updateSession(id: string, patch: SessionPatch) {
@@ -397,9 +401,14 @@ export async function deleteExclusion(sessionId: string, exclusionId: string) {
 
 /* ---------- draw ---------- */
 
+/** Whether a participant gives and gets a gift: everyone but an Elf Chief who only runs the show. */
+export function playsInDraw(p: Pick<Participant, "role">, session: Pick<Session, "hostPlays">) {
+  return p.role !== "host" || session.hostPlays;
+}
+
 export async function drawIds(sessionId: string) {
-  const participants = await listParticipants(sessionId);
-  return participants.filter((p) => p.status === "approved").map((p) => p.id);
+  const [session, participants] = await Promise.all([getSessionById(sessionId), listParticipants(sessionId)]);
+  return participants.filter((p) => p.status === "approved" && (!session || playsInDraw(p, session))).map((p) => p.id);
 }
 
 /** Runs the draw exactly once per session; later calls return the existing result. */
@@ -411,7 +420,8 @@ export async function runDraw(sessionId: string) {
     if (locked.drawn_at) return { alreadyDrawn: true };
     const ids = (
       await tx.query<{ id: string }>(
-        "select id from session_participants where session_id = $1 and status = 'approved' order by created_at",
+        `select id from session_participants where session_id = $1 and status = 'approved'
+           and (role <> 'host' or (select host_plays from sessions where id = $1)) order by created_at`,
         [sessionId],
       )
     ).map((r) => r.id);

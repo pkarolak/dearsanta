@@ -18,6 +18,7 @@ import {
   getSessionByScreenCode,
   listParticipants,
   markRevealed,
+  playsInDraw,
   runDraw,
   saveProfileFromParticipant,
   setCeremonyStep,
@@ -293,13 +294,15 @@ const settingsSchema = z.object({
   currency: currency.optional(),
   locale: z.string().optional(),
   mode: z.enum(["sync", "async"]).optional(),
+  hostPlays: z.boolean().optional(),
 });
 
 export async function updateSettingsAction(code: string, input: z.input<typeof settingsSchema>) {
   return run(async () => {
     const { session } = await requireHost(code);
     const data = settingsSchema.parse(input);
-    if (session.drawnAt && (data.mode || data.budgetAmount !== undefined)) throw new ActionError("already_drawn");
+    const changesDraw = data.mode || data.budgetAmount !== undefined || (data.hostPlays !== undefined && data.hostPlays !== session.hostPlays);
+    if (session.drawnAt && changesDraw) throw new ActionError("already_drawn");
     if (data.mode && session.ceremonyStep !== "lobby") throw new ActionError("ceremony_started");
     await updateSession(session.id, {
       title: data.title,
@@ -310,6 +313,7 @@ export async function updateSettingsAction(code: string, input: z.input<typeof s
       currency: data.currency,
       locale: data.locale ? toLocale(data.locale) : undefined,
       mode: data.mode,
+      hostPlays: data.hostPlays,
     });
     return {};
   });
@@ -445,7 +449,7 @@ export async function unlockDrawAction(code: string) {
     if (pending.length) throw new ActionError("pending_guests", pending.map((p) => p.displayName));
     await draw(session);
     await setCeremonyStep(session.id, "reveal", "drawn");
-    const participants = (await listParticipants(session.id)).filter((p) => p.status === "approved");
+    const participants = (await listParticipants(session.id)).filter((p) => p.status === "approved" && playsInDraw(p, session));
     await sendDrawReady(session, participants);
     return {};
   });

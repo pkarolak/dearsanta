@@ -57,6 +57,7 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
   }
 
   const isRemote = me.isRemote && s.mode === "sync";
+  const team = state.participants.filter((p) => p.plays);
   const late = s.drawn && !me.inDraw;
   const ceremonyRunning = s.mode === "sync" && s.step !== "lobby";
   const asksWhere = s.mode === "sync" && !s.drawn;
@@ -204,9 +205,9 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
         ))}
 
       <section>
-        <h2 className="mb-3 font-display text-xl font-bold">{t("team", { count: state.participants.length })}</h2>
+        <h2 className="mb-3 font-display text-xl font-bold">{t("team", { count: team.length })}</h2>
         <ul className="flex flex-wrap gap-2">
-          {state.participants.map((p) => (
+          {team.map((p) => (
             <li
               key={p.id}
               title={p.profileComplete ? undefined : t("dressing")}

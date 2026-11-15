@@ -412,7 +412,9 @@
       "youPlay": "Du wichtelst auch mit",
       "youPlayHint": "Als Oberwichtel machst du mit wie jeder andere Wichtel.",
       "changeElf": "Deinen Elf ändern",
-      "screenOn": "Verbunden"
+      "screenOn": "Verbunden",
+      "youDontPlay": "Du leitest, wichtelst aber nicht mit",
+      "youDontPlayHint": "Du beschenkst niemanden und niemand zieht dich. Das kannst du in den Einstellungen ändern."
     },
     "phone": {
       "button": "Aufs Handy holen",
@@ -468,7 +470,10 @@
       "rules": "Auslosen!"
     },
     "continue": "Weiter",
-    "santaLeads": "Der Weihnachtsmann macht von selbst weiter"
+    "santaLeads": "Der Weihnachtsmann macht von selbst weiter",
+    "hostPlays": "Ich wichtele mit",
+    "hostPlaysHint": "Entferne den Haken, wenn du nur die Runde leitest, z. B. als Lehrkraft. Du beschenkst niemanden und niemand zieht dich.",
+    "notInDraw": "Leitet die Runde, wichtelt nicht mit"
   },
   "screen": {
     "noAccessTitle": "Das ist der große Bildschirm",

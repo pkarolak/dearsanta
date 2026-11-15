@@ -7,6 +7,7 @@ import {
   getAssignmentForGiver,
   listExclusions,
   listParticipants,
+  playsInDraw,
   type ParticipantStatus,
   type Session,
 } from "@/lib/db/repo";
@@ -20,6 +21,8 @@ export type PublicParticipant = {
   role: "host" | "elf";
   status: ParticipantStatus;
   isRemote: boolean;
+  /** Gives and gets a gift; only an Elf Chief who just runs the show doesn't. */
+  plays: boolean;
   profileComplete: boolean;
   online: boolean;
   email?: string | null;
@@ -41,6 +44,7 @@ export type SessionState = {
     budgetAmount: number | null;
     currency: string;
     autoAdmit: boolean;
+    hostPlays: boolean;
     step: CeremonyStep;
     stepStartedAt: number;
     drawn: boolean;
@@ -68,6 +72,7 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
   const participants = await listParticipants(session.id);
   const exclusions = await listExclusions(session.id);
   const approved = participants.filter((p) => p.status === "approved");
+  const players = approved.filter((p) => playsInDraw(p, session));
   const now = Date.now();
 
   const toPublic = (p: (typeof participants)[number], withEmail: boolean): PublicParticipant => ({
@@ -77,6 +82,7 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
     role: p.role,
     status: p.status,
     isRemote: p.isRemote,
+    plays: playsInDraw(p, session),
     profileComplete: !!p.profileCompletedAt,
     online: !!p.lastSeenAt && now - p.lastSeenAt.getTime() < ONLINE_WINDOW_MS,
     ...(withEmail ? { email: p.email } : {}),
@@ -97,7 +103,7 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
   let feasibility: SessionState["feasibility"];
   if (viewer.isHost) {
     const result = checkFeasibility(
-      approved.map((p) => p.id),
+      players.map((p) => p.id),
       exclusions,
     );
     const names = new Map(participants.map((p) => [p.id, p.displayName]));
@@ -111,8 +117,8 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
   const scriptContext = {
     locale,
     title: session.title,
-    names: approved.map((p) => p.displayName),
-    remoteNames: approved.filter((p) => p.isRemote).map((p) => p.displayName),
+    names: players.map((p) => p.displayName),
+    remoteNames: players.filter((p) => p.isRemote).map((p) => p.displayName),
     hasExclusions: exclusions.length > 0,
     budget: session.budgetAmount ? { amount: session.budgetAmount, currency: session.currency } : null,
   };
@@ -140,6 +146,7 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
       budgetAmount: session.budgetAmount,
       currency: session.currency,
       autoAdmit: session.autoAdmit,
+      hostPlays: session.hostPlays,
       step: session.ceremonyStep,
       stepStartedAt: session.stepStartedAt.getTime(),
       drawn: !!session.drawnAt,

@@ -21,7 +21,7 @@ type Props = { state: SessionState; joinUrl: string; screenUrl: string };
 export function WaitingRoom({ state, joinUrl, screenUrl }: Props) {
   const t = useTranslations("host.room");
   const s = state.session;
-  const elves = state.participants.filter((p) => p.status === "approved");
+  const elves = state.participants.filter((p) => p.status === "approved" && p.plays);
   const [copied, setCopied] = useState(false);
   const shortUrl = joinUrl.replace(/^https?:\/\//, "");
   const tvUrl = `${shortUrl.split("/")[0]}/tv`;
@@ -141,6 +141,17 @@ export function HostElfCard({ state, onChanged }: { state: SessionState; onChang
   const [pending, start] = useTransition();
   const [name, setName] = useState("");
   if (!me) return null;
+  if (!state.session.hostPlays) {
+    return (
+      <section className="card flex items-center gap-4 p-5 md:p-6">
+        <Avatar config={me.avatar} title={me.displayName} className="h-12 w-12 shrink-0 opacity-60 grayscale" />
+        <div className="min-w-0">
+          <p className="font-display text-xl font-bold">{t("youDontPlay")}</p>
+          <p className="text-sm text-muted">{t("youDontPlayHint")}</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="card flex flex-wrap items-center gap-4 p-5 md:p-6">
