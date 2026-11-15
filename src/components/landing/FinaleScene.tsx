@@ -82,7 +82,7 @@ export function FinaleScene() {
         </div>
       </section>
 
-      <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#101a3c,#0b1230)] px-5 pb-8 pt-20 text-snow md:px-8">
+      <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#101a3c,#0b1230)] px-5 pb-[max(2.5rem,4.5vw)] pt-20 text-snow md:px-8">
         <Stars count={50} />
         <Aurora className="-top-[20%]" />
         <StringLights swags={6} perSwag={6} sag={22} />
@@ -99,7 +99,7 @@ export function FinaleScene() {
             </nav>
           </div>
           <motion.p
-            className="foil mt-10 whitespace-nowrap font-display text-[12.6vw] font-black leading-[0.85] tracking-[-0.045em] md:text-[min(13.4vw,13.5rem)]"
+            className="foil mt-10 whitespace-nowrap pr-[0.1em] font-display text-[calc((100vw-2.5rem)/7.6)] font-black leading-[0.85] tracking-[-0.045em] md:text-[min(calc((100vw-4rem)/6.9),11.5rem)]"
             initial={{ y: "35%", opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}
