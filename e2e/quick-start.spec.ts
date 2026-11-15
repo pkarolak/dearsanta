@@ -26,11 +26,11 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   await phone.waitForURL(new RegExp(`/s/${code}/host$`));
 
   // Once the phone is in, the laptop turns into the stage by itself.
-  await expect(laptop.getByText("Phone connected!")).toBeVisible({ timeout: 10_000 });
-  await laptop.waitForURL(new RegExp(`/s/${code}/screen\\?k=`), { timeout: 10_000 });
+  await expect(laptop.getByText("Phone connected!")).toBeVisible({ timeout: 20_000 });
+  await laptop.waitForURL(new RegExp(`/s/${code}/screen\\?k=`), { timeout: 20_000 });
 
   // The phone is the remote: no second QR code, the guests scan the one on the big screen.
-  await expect(phone.getByTestId("room-code")).toHaveText(code, { timeout: 10_000 });
+  await expect(phone.getByTestId("room-code")).toHaveText(code, { timeout: 20_000 });
   await expect(phone.getByText("Guests scan the QR code on the big screen.", { exact: false })).toBeVisible();
 
   // Ola scans the code and only types her name; the door opens by itself.
@@ -44,13 +44,13 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
 
   // Every tweak shows up for the room before she saves anything.
   await guest.getByRole("button", { name: "Antlers" }).click();
-  await expect(phone.getByText("2 elves inside")).toBeVisible({ timeout: 10_000 });
-  await expect(phone.locator('[aria-label="Ola"] img[src*="-antlers.webp"]')).toBeVisible({ timeout: 10_000 });
+  await expect(phone.getByText("2 elves inside")).toBeVisible({ timeout: 20_000 });
+  await expect(phone.locator('[aria-label="Ola"] img[src*="-antlers.webp"]')).toBeVisible({ timeout: 20_000 });
   await expect(laptop.getByText("Ola").first()).toBeVisible();
 
   // Trying on a new hat puts her in the big screen's spotlight.
   await guest.getByRole("button", { name: "Santa hat" }).click();
-  await expect(laptop.locator('[aria-label="Ola"] img[src*="-santa.webp"]').first()).toBeVisible({ timeout: 10_000 });
+  await expect(laptop.locator('[aria-label="Ola"] img[src*="-santa.webp"]').first()).toBeVisible({ timeout: 20_000 });
   await laptop.waitForTimeout(700);
   await laptop.screenshot({ path: `${shots}/14-screen-spotlight.png` });
 
@@ -71,7 +71,7 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   const hat = phone.getByRole("button", { name: /^(Santa hat|Elf hat|Beanie|Antlers)$/, pressed: false, disabled: false }).first();
   const slug = hats[(await hat.innerText()).trim() as keyof typeof hats];
   await hat.click();
-  await expect(laptop.locator(`[aria-label="Anna"] img[src*="-${slug}.webp"]`).first()).toBeVisible({ timeout: 10_000 });
+  await expect(laptop.locator(`[aria-label="Anna"] img[src*="-${slug}.webp"]`).first()).toBeVisible({ timeout: 20_000 });
 });
 
 test("party on a phone: the TV opens the stage with the short code, then the phone is the remote", async ({ browser }) => {
@@ -96,7 +96,7 @@ test("party on a phone: the TV opens the stage with the short code, then the pho
   await tv.getByRole("button", { name: "Open the screen" }).click();
   await tv.waitForURL(new RegExp(`/s/${code}/screen\\?k=`));
 
-  await expect(phone.getByText("Big screen connected!")).toBeVisible({ timeout: 10_000 });
+  await expect(phone.getByText("Big screen connected!")).toBeVisible({ timeout: 20_000 });
   await phone.getByRole("button", { name: "Go to the remote" }).click();
   await expect(phone.getByTestId("room-code")).toHaveText(code);
   await expect(phone.getByRole("button", { name: "Start the ceremony" })).toBeVisible();

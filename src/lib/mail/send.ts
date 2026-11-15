@@ -14,16 +14,17 @@ export type OutgoingMail = {
 
 let resend: Resend | null = null;
 function client() {
-  if (!process.env.RESEND_API_KEY) return null;
-  resend ??= new Resend(process.env.RESEND_API_KEY);
+  if (devInboxEnabled()) return null;
+  resend ??= new Resend(process.env.RESEND_API_KEY!);
   return resend;
 }
 
+/** MAIL_TRANSPORT=inbox keeps mail local even with a Resend key, so tests never reach real addresses. */
 export function devInboxEnabled() {
-  return !process.env.RESEND_API_KEY;
+  return !process.env.RESEND_API_KEY || process.env.MAIL_TRANSPORT === "inbox";
 }
 
-/** Sends mails in one batch. Without RESEND_API_KEY they land in the local inbox at /dev/mail. */
+/** Sends mails in one batch. Without RESEND_API_KEY (or with MAIL_TRANSPORT=inbox) they land in the local inbox at /dev/mail. */
 export async function sendMails(all: OutgoingMail[]) {
   const mails = all.filter((m): m is OutgoingMail & { to: string } => !!m.to);
   if (!mails.length) return;

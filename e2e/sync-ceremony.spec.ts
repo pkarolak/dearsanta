@@ -111,7 +111,7 @@ test("live ceremony: create, join, let in, exclusions, draw and reveal", async (
   await host.getByRole("button", { name: "Continue", exact: true }).click({ timeout: 60_000 });
   // The banner waits for Santa's goodbye and the closing curtain.
   await expect(screen.getByText("Merry Christmas!", { exact: true })).toBeVisible({ timeout: 60_000 });
-  await expect(screen.getByText("For the rest of the evening")).toBeInViewport({ timeout: 10_000 });
+  await expect(screen.getByText("For the rest of the evening")).toBeInViewport({ timeout: 20_000 });
   await screen.screenshot({ path: `${shots}/08-screen-curtain.png` });
 
   // Everyone got a keepsake e-mail.

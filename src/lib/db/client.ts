@@ -15,7 +15,7 @@ const MIGRATIONS_DIR = path.join(process.cwd(), "supabase", "migrations");
 
 async function createPglite(): Promise<Database> {
   const { PGlite } = await import("@electric-sql/pglite");
-  const dataDir = path.join(process.cwd(), ".data", "pglite");
+  const dataDir = path.resolve(process.env.PGLITE_DIR ?? path.join(".data", "pglite"));
   await fs.mkdir(dataDir, { recursive: true });
   const pg = await PGlite.create(dataDir);
   const db: Database = {
