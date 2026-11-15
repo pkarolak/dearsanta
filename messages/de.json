@@ -396,7 +396,7 @@
       "leadAsync": "Schick diesen Link an die Familie – jeder macht mit, wann er will.",
       "waiting": "Wir warten auf die ersten Elfen…",
       "inside": "{count, plural, one {# Elf drin} other {# Elfen drin}}",
-      "yourName": "Und du, wie heißt du?",
+      "yourName": "Dein Name",
       "saveName": "Speichern",
       "share": "Link teilen",
       "copy": "Link kopieren",
@@ -410,14 +410,18 @@
       "hostRole": "Du leitest die Zeremonie",
       "screenTitle": "Der große Bildschirm",
       "youPlay": "Du wichtelst auch mit",
-      "youPlayHint": "Als Oberwichtel machst du mit wie jeder andere Wichtel.",
+      "youPlayHint": "Du ziehst wie jeder andere Wichtel: Jemand beschenkt dich und du beschenkst jemanden.",
       "changeElf": "Deinen Elf ändern",
       "screenOn": "Verbunden",
       "youDontPlay": "Du leitest, wichtelst aber nicht mit",
-      "youDontPlayHint": "Du beschenkst niemanden und niemand zieht dich. Das kannst du in den Einstellungen ändern.",
+      "youDontPlayHint": "Du leitest die Zeremonie, ziehst aber nicht. Du beschenkst niemanden und niemand zieht dich.",
       "guestCode": "Code für Gäste",
       "guestHint": "oder auf <b>{url}</b> gehen und diesen Code eingeben",
-      "screenCode": "Bildschirmcode"
+      "screenCode": "Bildschirmcode",
+      "chief": "Oberwichtel",
+      "roleLabel": "Deine Rolle",
+      "playsYes": "Ich mache mit",
+      "playsNo": "Ich leite nur"
     },
     "phone": {
       "button": "Aufs Handy holen",
@@ -476,7 +480,9 @@
     "santaLeads": "Der Weihnachtsmann macht von selbst weiter",
     "hostPlays": "Ich wichtele mit",
     "hostPlaysHint": "Entferne den Haken, wenn du nur die Runde leitest, z. B. als Lehrkraft. Du beschenkst niemanden und niemand zieht dich.",
-    "notInDraw": "Leitet die Runde, wichtelt nicht mit"
+    "notInDraw": "Leitet die Runde, wichtelt nicht mit",
+    "you": "Du",
+    "other": "Sonstiges"
   },
   "screen": {
     "noAccessTitle": "Das ist der große Bildschirm",

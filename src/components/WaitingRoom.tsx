@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ShareNetwork, Television } from "@phosphor-icons/react";
+import { Check, PencilSimple, ShareNetwork, Television } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
@@ -9,16 +9,16 @@ import { Avatar } from "./Avatar";
 import { Snowfall, StringLights } from "./landing/Atmosphere";
 import { PhoneHandoff } from "./PhoneHandoff";
 import { Link } from "@/i18n/navigation";
-import { saveProfileAction } from "@/lib/actions";
+import { saveProfileAction, updateSettingsAction } from "@/lib/actions";
 import type { SessionState } from "@/lib/state";
 
-type Props = { state: SessionState; joinUrl: string; screenUrl: string };
+type Props = { state: SessionState; joinUrl: string; screenUrl: string; children?: React.ReactNode };
 
 /**
  * Where a spontaneous Secret Santa begins: the code to scan, and every elf popping in as they join,
  * their looks changing live while they dress up on their phones.
  */
-export function WaitingRoom({ state, joinUrl, screenUrl }: Props) {
+export function WaitingRoom({ state, joinUrl, screenUrl, children }: Props) {
   const t = useTranslations("host.room");
   const s = state.session;
   const elves = state.participants.filter((p) => p.status === "approved" && p.plays);
@@ -135,69 +135,103 @@ export function WaitingRoom({ state, joinUrl, screenUrl }: Props) {
 
         </div>
       </div>
+      {children && <div className="relative mt-8 rounded-[1.25rem] bg-snow/10 p-5 ring-1 ring-snow/10 md:p-6">{children}</div>}
     </section>
   );
 }
 
-/** The Elf Chief draws too: their own name and elf, kept apart from running the show. */
+/**
+ * "You" in the lobby: the Elf Chief's own card. Their name (guests see it in invitations), their elf, and whether
+ * they take part in the draw or only run the show.
+ */
 export function HostElfCard({ state, onChanged }: { state: SessionState; onChanged: () => void }) {
+  const me = state.viewer;
+  if (!me) return null;
+  return <YouCard key={me.displayName} state={state} onChanged={onChanged} />;
+}
+
+function YouCard({ state, onChanged }: { state: SessionState; onChanged: () => void }) {
   const t = useTranslations("host.room");
   const locale = useLocale();
-  const me = state.viewer;
+  const me = state.viewer!;
+  const s = state.session;
   const [pending, start] = useTransition();
-  const [name, setName] = useState("");
-  if (!me) return null;
-  if (!state.session.hostPlays) {
-    return (
-      <section className="card flex items-center gap-4 p-5 md:p-6">
-        <Avatar config={me.avatar} title={me.displayName} className="h-12 w-12 shrink-0 opacity-60 grayscale" />
-        <div className="min-w-0">
-          <p className="font-display text-xl font-bold">{t("youDontPlay")}</p>
-          <p className="text-sm text-muted">{t("youDontPlayHint")}</p>
-        </div>
-      </section>
-    );
-  }
+  const [name, setName] = useState(me.displayName);
+  const changed = name.trim() && name.trim() !== me.displayName;
+
+  const setPlays = (plays: boolean) =>
+    plays !== s.hostPlays &&
+    start(async () => {
+      await updateSettingsAction(s.code, { hostPlays: plays });
+      onChanged();
+    });
 
   return (
     <section className="card p-5 md:p-6">
       <div className="flex items-center gap-4">
-        <Avatar config={me.avatar} title={me.displayName} className="h-14 w-14 shrink-0" />
+        <div className="relative shrink-0">
+          <Avatar config={me.avatar} title={me.displayName} className={`h-16 w-16 transition ${s.hostPlays ? "" : "opacity-60 grayscale"}`} />
+          {s.hostPlays && (
+            <Link
+              href={`/s/${s.code}/me`}
+              aria-label={me.profileComplete ? t("changeElf") : t("myElf")}
+              title={me.profileComplete ? t("changeElf") : t("myElf")}
+              className="absolute -bottom-1 -right-1 grid h-7 w-7 place-items-center rounded-full bg-pine text-snow shadow-md ring-2 ring-cream transition hover:scale-105"
+            >
+              <PencilSimple weight="bold" className="h-3.5 w-3.5" />
+            </Link>
+          )}
+        </div>
         <div className="min-w-0">
-          <label className="font-display text-xl font-bold" htmlFor="host-name">
-            {t("youPlay")}
-          </label>
-          <p className="text-sm text-muted">{t("youPlayHint")}</p>
+          <p className="truncate font-display text-xl font-bold">{me.displayName}</p>
+          {me.displayName !== t("chief") && <p className="text-sm font-semibold text-muted">{t("chief")}</p>}
         </div>
       </div>
+
       <form
-        className="mt-4 flex gap-2"
+        className="mt-5"
         action={() =>
           start(async () => {
-            if (!name.trim()) return;
-            await saveProfileAction(state.session.code, { displayName: name.trim(), avatar: me.avatar }, locale);
-            setName("");
+            if (!changed) return;
+            await saveProfileAction(s.code, { displayName: name.trim(), avatar: me.avatar }, locale);
             onChanged();
           })
         }
       >
-        <input
-          id="host-name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder={me.displayName}
-          aria-label={t("yourName")}
-          maxLength={40}
-          className="field min-w-0 flex-1"
-          autoComplete="given-name"
-        />
-        <button className="btn-soft" disabled={pending || !name.trim()}>
-          {t("saveName")}
-        </button>
+        <label className="label" htmlFor="host-name">{t("yourName")}</label>
+        <div className="flex gap-2">
+          <input id="host-name" value={name} onChange={(e) => setName(e.target.value)} maxLength={40} required className="field min-w-0 flex-1" autoComplete="given-name" />
+          <button className="btn-soft" disabled={pending || !changed}>
+            {t("saveName")}
+          </button>
+        </div>
       </form>
-      <Link href={`/s/${state.session.code}/me`} className="btn-pine mt-3 w-full">
-        {me.profileComplete ? t("changeElf") : t("myElf")}
-      </Link>
+
+      <div className="mt-5">
+        <p className="label" id="host-plays">{t("roleLabel")}</p>
+        <div role="radiogroup" aria-labelledby="host-plays" className="well grid grid-cols-2 gap-1 rounded-full p-1">
+          {[true, false].map((plays) => (
+            <button
+              key={String(plays)}
+              type="button"
+              role="radio"
+              aria-checked={s.hostPlays === plays}
+              disabled={pending || s.drawn}
+              onClick={() => setPlays(plays)}
+              className={`rounded-full px-3 py-2 text-sm font-semibold transition ${s.hostPlays === plays ? "bg-pine text-snow shadow" : "text-muted hover:text-ink"}`}
+            >
+              {plays ? t("playsYes") : t("playsNo")}
+            </button>
+          ))}
+        </div>
+        <p className="mt-2 text-sm text-muted">{s.hostPlays ? t("youPlayHint") : t("youDontPlayHint")}</p>
+      </div>
+
+      {s.hostPlays && !me.profileComplete && (
+        <Link href={`/s/${s.code}/me`} className="btn-pine mt-5 w-full">
+          {t("myElf")}
+        </Link>
+      )}
     </section>
   );
 }

@@ -396,7 +396,7 @@
       "leadAsync": "Send this link to the family – everyone joins when they like.",
       "waiting": "Waiting for the first elves…",
       "inside": "{count, plural, one {# elf inside} other {# elves inside}}",
-      "yourName": "And you, what's your name?",
+      "yourName": "Your name",
       "saveName": "Save",
       "share": "Share the link",
       "copy": "Copy link",
@@ -410,14 +410,18 @@
       "hostRole": "You’re running the show",
       "screenTitle": "The big screen",
       "youPlay": "You’re in the draw too",
-      "youPlayHint": "As the Elf Chief you play along like every other elf.",
+      "youPlayHint": "You draw like every other elf: someone gives you a present, and you give one to someone.",
       "changeElf": "Change your elf",
       "screenOn": "Connected",
       "youDontPlay": "You run the show, but you’re not in the draw",
-      "youDontPlayHint": "You won’t give anyone a gift and nobody will draw you. You can change this in the settings.",
+      "youDontPlayHint": "You run the ceremony but don’t draw. You won’t give anyone a present and no one will draw you.",
       "guestCode": "Code for guests",
       "guestHint": "or go to <b>{url}</b> and type this code",
-      "screenCode": "Screen code"
+      "screenCode": "Screen code",
+      "chief": "Elf Chief",
+      "roleLabel": "Your role",
+      "playsYes": "I’m playing",
+      "playsNo": "Just hosting"
     },
     "phone": {
       "button": "Take it to my phone",
@@ -476,7 +480,9 @@
     "santaLeads": "Santa will carry on by himself",
     "hostPlays": "I’m in the draw",
     "hostPlaysHint": "Untick this if you only run the game, e.g. as a teacher. You won’t give anyone a gift and nobody will draw you.",
-    "notInDraw": "Runs the game, not in the draw"
+    "notInDraw": "Runs the game, not in the draw",
+    "you": "You",
+    "other": "Other"
   },
   "screen": {
     "noAccessTitle": "This is the big screen",

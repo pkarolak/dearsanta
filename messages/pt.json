@@ -396,7 +396,7 @@
       "leadAsync": "Envia este link à família – cada um junta-se quando quiser.",
       "waiting": "À espera dos primeiros elfos…",
       "inside": "{count, plural, one {# elfo lá dentro} other {# elfos lá dentro}}",
-      "yourName": "E tu, como te chamas?",
+      "yourName": "O teu nome",
       "saveName": "Guardar",
       "share": "Partilhar link",
       "copy": "Copiar link",
@@ -410,14 +410,18 @@
       "hostRole": "Estás a conduzir a cerimónia",
       "screenTitle": "O ecrã grande",
       "youPlay": "Também entras no sorteio",
-      "youPlayHint": "Como Chefe dos elfos participas como qualquer outro elfo.",
+      "youPlayHint": "Participas como qualquer outro elfo: alguém te dá um presente e tu dás a alguém.",
       "changeElf": "Mudar o teu elfo",
       "screenOn": "Ligado",
       "youDontPlay": "Conduzes, mas não entras no sorteio",
-      "youDontPlayHint": "Não dás presente a ninguém e ninguém te tira a ti. Podes mudar isto nas definições.",
+      "youDontPlayHint": "Conduzes a cerimónia, mas não entras no sorteio. Não dás presente a ninguém e ninguém te tira a ti.",
       "guestCode": "Código para convidados",
       "guestHint": "ou vai a <b>{url}</b> e escreve este código",
-      "screenCode": "Código do ecrã"
+      "screenCode": "Código do ecrã",
+      "chief": "Chefe dos elfos",
+      "roleLabel": "O teu papel",
+      "playsYes": "Participo",
+      "playsNo": "Só apresento"
     },
     "phone": {
       "button": "Levar para o telemóvel",
@@ -476,7 +480,9 @@
     "santaLeads": "O Pai Natal continua sozinho",
     "hostPlays": "Entro no sorteio",
     "hostPlaysHint": "Desmarca se só conduzes o jogo, por exemplo como professor. Não dás presente a ninguém e ninguém te tira a ti.",
-    "notInDraw": "Conduz o jogo, não entra no sorteio"
+    "notInDraw": "Conduz o jogo, não entra no sorteio",
+    "you": "Tu",
+    "other": "Outros"
   },
   "screen": {
     "noAccessTitle": "Este é o ecrã grande",

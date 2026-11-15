@@ -88,6 +88,88 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
   const inLobby = s.step === "lobby" && !s.drawn;
   const pairing = s.mode === "sync" && inLobby && !(s.screenConnected && s.remotePaired);
 
+  /** The one thing to do next; in the lobby it sits in the big navy box, under the joining instructions. */
+  const nextStep = (dark: boolean) => (
+    <>
+        {s.mode === "sync" ? (
+          <>
+            <div className="flex items-baseline justify-between gap-3">
+              <h2 className="font-display text-2xl font-bold">{t(`steps.${s.step}`)}</h2>
+              <p className={`shrink-0 text-sm font-semibold ${dark ? "text-snow/70" : "text-muted"}`}>{t("stepOf", { n: stepAt + 1, total: ceremonySteps.length })}</p>
+            </div>
+            <div className="mt-3 flex gap-1" aria-hidden>
+              {ceremonySteps.map((step, i) => (
+                <span key={step} className={`h-1.5 flex-1 rounded-full ${i < stepAt ? "bg-pine" : i === stepAt ? "bg-berry" : dark ? "bg-snow/15" : "bg-ink/10"}`} />
+              ))}
+            </div>
+            <p className={`mt-4 ${dark ? "text-snow/80" : "text-muted"}`}>{t(`stepHint.${s.step}`)}</p>
+            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+              {end === "start" && (
+                <button className="btn-primary" disabled={pending || !!blocked} onClick={() => act(() => advanceCeremonyAction(code))}>
+                  {t("start")}
+                </button>
+              )}
+              {(end === "answer" || end === "reveal" || (end === "auto" && stuck)) && (
+                <button
+                  className="btn-primary"
+                  disabled={pending || santaLeft > 0}
+                  onClick={() => act(() => continueCeremonyAction(code, s.step))}
+                >
+                  {santaLeft > 0 ? t("santaSpeaking", { seconds: santaLeft }) : end === "answer" ? t(`answer.${s.step as "welcome" | "rules"}`) : t("continue")}
+                </button>
+              )}
+              {end === "auto" && !stuck && (
+                <p className={`flex items-center gap-2 font-semibold ${dark ? "text-gold" : "text-pine"}`} role="status">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-pine motion-reduce:animate-none" />
+                  {t("santaLeads")}
+                </p>
+              )}
+              {s.step !== "lobby" && (
+                <button className="text-sm font-semibold text-muted underline-offset-2 hover:text-ink hover:underline" disabled={pending} onClick={() => act(() => advanceCeremonyAction(code, s.step))}>
+                  {t("replay")}
+                </button>
+              )}
+            </div>
+            {state.revealProgress && s.drawn && (
+              <p className={`mt-4 text-sm font-semibold ${dark ? "text-gold" : "text-pine"}`}>
+                {t("revealProgress", { revealed: state.revealProgress.revealed, total: state.revealProgress.total })}
+              </p>
+            )}
+          </>
+        ) : (
+          <>
+            <h2 className="font-display text-2xl font-bold">{t("asyncTitle")}</h2>
+            <p className={`mt-2 ${dark ? "text-snow/80" : "text-muted"}`}>{t("asyncReady", { ready, total: players.length })}</p>
+            <div className={`mt-3 h-2 overflow-hidden rounded-full ${dark ? "bg-snow/15" : "bg-ink/10"}`}>
+              <div className="h-full rounded-full bg-pine transition-all" style={{ width: `${players.length ? (ready / players.length) * 100 : 0}%` }} />
+            </div>
+            {!s.drawn ? (
+              <button
+                className="btn-primary mt-5"
+                disabled={pending || !!blocked}
+                onClick={() => {
+                  if (ready < players.length && !window.confirm(t("unlockConfirm"))) return;
+                  act(() => unlockDrawAction(code), t("unlocked"));
+                }}
+              >
+                {t("unlock")}
+              </button>
+            ) : (
+              <p className={`mt-5 font-semibold ${dark ? "text-gold" : "text-pine"}`}>
+                {t("unlockedProgress", { revealed: state.revealProgress?.revealed ?? 0, total: state.revealProgress?.total ?? 0 })}
+              </p>
+            )}
+          </>
+        )}
+
+        {blocked && (
+          <p className={`mt-4 rounded-2xl px-4 py-3 text-sm ${dark ? "bg-gold/20 text-snow" : "bg-gold/15 text-ink"}`}>
+            {state.feasibility!.tooFew ? t("feasibility.tooFew") : t("feasibility.blocked", { names: state.feasibility!.blockedNames.join(", ") })}
+          </p>
+        )}
+    </>
+  );
+
   return (
     <main className="felt-texture min-h-dvh pb-20">
       <PageBand
@@ -119,7 +201,9 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
       <div className={inLobby ? "mx-auto grid max-w-7xl gap-5 px-5 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-start" : ""}>
       {inLobby && (
         <div className="min-w-0 lg:sticky lg:top-4 lg:order-2">
-          <WaitingRoom state={state} joinUrl={joinUrl} screenUrl={screenUrl} />
+          <WaitingRoom state={state} joinUrl={joinUrl} screenUrl={screenUrl}>
+            {nextStep(true)}
+          </WaitingRoom>
         </div>
       )}
       <div className={inLobby ? "min-w-0 space-y-5 lg:order-1" : "mx-auto max-w-3xl space-y-5 px-5 py-6"}>
@@ -168,88 +252,18 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
           </section>
         )}
 
-        {/* The one thing to do next */}
-        <section className="card p-5 md:p-6">
-          {s.mode === "sync" ? (
-            <>
-              <div className="flex items-baseline justify-between gap-3">
-                <h2 className="font-display text-2xl font-bold">{t(`steps.${s.step}`)}</h2>
-                <p className="shrink-0 text-sm font-semibold text-muted">{t("stepOf", { n: stepAt + 1, total: ceremonySteps.length })}</p>
-              </div>
-              <div className="mt-3 flex gap-1" aria-hidden>
-                {ceremonySteps.map((step, i) => (
-                  <span key={step} className={`h-1.5 flex-1 rounded-full ${i < stepAt ? "bg-pine" : i === stepAt ? "bg-berry" : "bg-ink/10"}`} />
-                ))}
-              </div>
-              <p className="mt-4 text-muted">{t(`stepHint.${s.step}`)}</p>
-              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-                {end === "start" && (
-                  <button className="btn-primary" disabled={pending || !!blocked} onClick={() => act(() => advanceCeremonyAction(code))}>
-                    {t("start")}
-                  </button>
-                )}
-                {(end === "answer" || end === "reveal" || (end === "auto" && stuck)) && (
-                  <button
-                    className="btn-primary"
-                    disabled={pending || santaLeft > 0}
-                    onClick={() => act(() => continueCeremonyAction(code, s.step))}
-                  >
-                    {santaLeft > 0 ? t("santaSpeaking", { seconds: santaLeft }) : end === "answer" ? t(`answer.${s.step as "welcome" | "rules"}`) : t("continue")}
-                  </button>
-                )}
-                {end === "auto" && !stuck && (
-                  <p className="flex items-center gap-2 font-semibold text-pine" role="status">
-                    <span className="h-2 w-2 animate-pulse rounded-full bg-pine motion-reduce:animate-none" />
-                    {t("santaLeads")}
-                  </p>
-                )}
-                {s.step !== "lobby" && (
-                  <button className="text-sm font-semibold text-muted underline-offset-2 hover:text-ink hover:underline" disabled={pending} onClick={() => act(() => advanceCeremonyAction(code, s.step))}>
-                    {t("replay")}
-                  </button>
-                )}
-              </div>
-              {state.revealProgress && s.drawn && (
-                <p className="mt-4 text-sm font-semibold text-pine">
-                  {t("revealProgress", { revealed: state.revealProgress.revealed, total: state.revealProgress.total })}
-                </p>
-              )}
-            </>
-          ) : (
-            <>
-              <h2 className="font-display text-2xl font-bold">{t("asyncTitle")}</h2>
-              <p className="mt-2 text-muted">{t("asyncReady", { ready, total: players.length })}</p>
-              <div className="mt-3 h-2 overflow-hidden rounded-full bg-ink/10">
-                <div className="h-full rounded-full bg-pine transition-all" style={{ width: `${players.length ? (ready / players.length) * 100 : 0}%` }} />
-              </div>
-              {!s.drawn ? (
-                <button
-                  className="btn-primary mt-5"
-                  disabled={pending || !!blocked}
-                  onClick={() => {
-                    if (ready < players.length && !window.confirm(t("unlockConfirm"))) return;
-                    act(() => unlockDrawAction(code), t("unlocked"));
-                  }}
-                >
-                  {t("unlock")}
-                </button>
-              ) : (
-                <p className="mt-5 font-semibold text-pine">
-                  {t("unlockedProgress", { revealed: state.revealProgress?.revealed ?? 0, total: state.revealProgress?.total ?? 0 })}
-                </p>
-              )}
-            </>
-          )}
+        {!inLobby && <section className="card p-5 md:p-6">{nextStep(false)}</section>}
 
-          {blocked && (
-            <p className="mt-4 rounded-2xl bg-gold/15 px-4 py-3 text-sm text-ink">
-              {state.feasibility!.tooFew ? t("feasibility.tooFew") : t("feasibility.blocked", { names: state.feasibility!.blockedNames.join(", ") })}
-            </p>
-          )}
-        </section>
+        {inLobby && (
+          <div className="space-y-3">
+            <h2 className="px-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted">{t("you")}</h2>
+            <HostElfCard state={state} onChanged={refresh} />
+          </div>
+        )}
 
         {/* Everything else, folded away */}
-        <div className="card overflow-hidden p-0">
+        {inLobby && <h2 className="px-1 pt-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted">{t("settings")}</h2>}
+        <div className={`card overflow-hidden p-0 ${inLobby ? "-mt-2" : ""}`}>
           <Disclosure
             title={t("elvesLabel")}
             icon={<UsersThree weight="bold" className="h-5 w-5" />}
@@ -314,7 +328,7 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
           </Disclosure>
 
           <Disclosure
-            title={t("settings")}
+            title={t("other")}
             icon={<GearSix weight="bold" className="h-5 w-5" />}
             summary={[when ?? t("noDate"), budget ? t("budgetSummary", { amount: budget }) : t("noBudget")].join(" · ")}
           >
@@ -327,7 +341,6 @@ export function HostPanel({ code, initial, joinUrl, screenUrl }: Props) {
           </Disclosure>
         </div>
 
-        {inLobby && <HostElfCard state={state} onChanged={refresh} />}
       </div>
       </div>
         </>
@@ -557,7 +570,7 @@ function SettingsBox({
             scheduledAt: date ? new Date(`${date}T${time}`).toISOString() : null,
             location: String(form.get("location") ?? ""),
             onlineUrl: String(form.get("onlineUrl") ?? ""),
-            ...(s.drawn ? {} : { budgetAmount: budget > 0 ? budget : null, hostPlays: form.get("hostPlays") === "on" }),
+            ...(s.drawn ? {} : { budgetAmount: budget > 0 ? budget : null }),
             currency: String(form.get("currency")) as (typeof currencies)[number],
             locale: String(form.get("sessionLocale")),
             ...(s.step === "lobby" && !s.drawn ? { mode: String(form.get("mode")) as "sync" | "async" } : {}),
@@ -588,13 +601,7 @@ function SettingsBox({
             <Select id="s-currency" name="currency" defaultValue={s.currency} options={currencyOptions} className="field min-w-36" />
           </div>
         </div>
-        <label className={`flex items-start gap-3 rounded-2xl bg-paper p-4 ${s.drawn ? "opacity-60" : "cursor-pointer"}`}>
-          <input type="checkbox" name="hostPlays" defaultChecked={s.hostPlays} disabled={s.drawn} className="mt-0.5 h-5 w-5 shrink-0 accent-pine" />
-          <span>
-            <span className="block font-semibold">{t("hostPlays")}</span>
-            <span className="mt-0.5 block text-sm text-muted">{t("hostPlaysHint")}</span>
-          </span>
-        </label>
+        
         <button type="button" className="flex items-center gap-1.5 text-sm font-semibold text-muted hover:text-ink" aria-expanded={more} onClick={() => setMore((m) => !m)}>
           <CaretDown weight="bold" className={`h-4 w-4 transition-transform ${more ? "rotate-180" : ""}`} />
           {more ? t("fewerSettings") : t("moreSettings")}

@@ -29,7 +29,7 @@ test("a teacher runs the draw without taking part in it", async ({ browser }) =>
   await expect(host.getByText("Wysłaliśmy 2 zaproszenia")).toBeVisible();
   await host.getByRole("button", { name: "Przejdź do panelu" }).click();
   await host.waitForURL(/\/pl\/s\/[A-Z0-9]{6}\/host/);
-  await expect(host.getByText("Prowadzisz, ale nie losujesz")).toBeVisible();
+  await expect(host.getByRole("radio", { name: "Tylko prowadzę" })).toBeChecked();
   await host.getByRole("button", { name: /^Elfy/ }).click();
   await expect(host.getByText("Prowadzi zabawę, nie losuje")).toBeVisible();
 

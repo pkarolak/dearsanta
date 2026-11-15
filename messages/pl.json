@@ -396,7 +396,7 @@
       "leadAsync": "Wyślij ten link rodzinie – każdy dołączy, kiedy mu pasuje.",
       "waiting": "Czekamy na pierwsze elfy…",
       "inside": "{count, plural, one {# elf już jest} few {# elfy już są} many {# elfów już jest} other {# elfa już jest}}",
-      "yourName": "A Ty, jak masz na imię?",
+      "yourName": "Twoje imię",
       "saveName": "Zapisz",
       "share": "Udostępnij link",
       "copy": "Kopiuj link",
@@ -410,14 +410,18 @@
       "hostRole": "Prowadzisz ceremonię",
       "screenTitle": "Duży ekran",
       "youPlay": "Ty też losujesz",
-      "youPlayHint": "Jako Naczelnik elfów bierzesz udział w zabawie jak każdy inny elf.",
+      "youPlayHint": "Losujesz jak każdy inny elf: ktoś zrobi prezent Tobie, a Ty komuś.",
       "changeElf": "Zmień wygląd elfa",
       "screenOn": "Połączony",
       "youDontPlay": "Prowadzisz, ale nie losujesz",
-      "youDontPlayHint": "Nie dasz nikomu prezentu i nikt nie wylosuje Ciebie. Możesz to zmienić w ustawieniach.",
+      "youDontPlayHint": "Prowadzisz ceremonię, ale nie losujesz. Nie dasz nikomu prezentu i nikt nie wylosuje Ciebie.",
       "guestCode": "Kod dla gości",
       "guestHint": "albo wejdź na <b>{url}</b> i wpisz ten kod",
-      "screenCode": "Kod ekranu"
+      "screenCode": "Kod ekranu",
+      "chief": "Naczelnik elfów",
+      "roleLabel": "Twoja rola",
+      "playsYes": "Biorę udział",
+      "playsNo": "Tylko prowadzę"
     },
     "phone": {
       "button": "Weź sesję na telefon",
@@ -476,7 +480,9 @@
     "santaLeads": "Mikołaj sam przejdzie dalej",
     "hostPlays": "Biorę udział w losowaniu",
     "hostPlaysHint": "Odznacz, jeśli tylko prowadzisz zabawę, np. jako nauczyciel. Nie dasz nikomu prezentu i nikt nie wylosuje Ciebie.",
-    "notInDraw": "Prowadzi zabawę, nie losuje"
+    "notInDraw": "Prowadzi zabawę, nie losuje",
+    "you": "Ty",
+    "other": "Inne"
   },
   "screen": {
     "noAccessTitle": "To jest duży ekran",

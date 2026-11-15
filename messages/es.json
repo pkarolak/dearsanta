@@ -396,7 +396,7 @@
       "leadAsync": "Envía este enlace a la familia: cada uno se une cuando quiera.",
       "waiting": "Esperando a los primeros elfos…",
       "inside": "{count, plural, one {# elfo dentro} other {# elfos dentro}}",
-      "yourName": "¿Y tú, cómo te llamas?",
+      "yourName": "Tu nombre",
       "saveName": "Guardar",
       "share": "Compartir enlace",
       "copy": "Copiar enlace",
@@ -410,14 +410,18 @@
       "hostRole": "Diriges la ceremonia",
       "screenTitle": "La pantalla grande",
       "youPlay": "Tú también participas",
-      "youPlayHint": "Como Jefe de los elfos juegas como cualquier otro elfo.",
+      "youPlayHint": "Participas como cualquier otro elfo: alguien te hará un regalo y tú se lo harás a alguien.",
       "changeElf": "Cambiar tu elfo",
       "screenOn": "Conectada",
       "youDontPlay": "Diriges, pero no participas en el sorteo",
-      "youDontPlayHint": "No harás ningún regalo y nadie te sacará a ti. Puedes cambiarlo en los ajustes.",
+      "youDontPlayHint": "Diriges la ceremonia, pero no participas en el sorteo. No harás ningún regalo y nadie te sacará a ti.",
       "guestCode": "Código para invitados",
       "guestHint": "o entra en <b>{url}</b> y escribe este código",
-      "screenCode": "Código de pantalla"
+      "screenCode": "Código de pantalla",
+      "chief": "Jefe de los elfos",
+      "roleLabel": "Tu papel",
+      "playsYes": "Participo",
+      "playsNo": "Solo presento"
     },
     "phone": {
       "button": "Llevarlo a mi móvil",
@@ -476,7 +480,9 @@
     "santaLeads": "Papá Noel seguirá solo",
     "hostPlays": "Participo en el sorteo",
     "hostPlaysHint": "Desmárcalo si solo diriges el juego, por ejemplo como profesor. No harás ningún regalo y nadie te sacará a ti.",
-    "notInDraw": "Dirige el juego, no participa"
+    "notInDraw": "Dirige el juego, no participa",
+    "you": "Tú",
+    "other": "Otros"
   },
   "screen": {
     "noAccessTitle": "Esta es la pantalla grande",
