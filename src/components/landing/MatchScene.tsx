@@ -26,7 +26,7 @@ export function MatchScene() {
   const words = useDepth(p, [0, 0.5, 1], [30, 0, -25]);
   const phone = useDepth(p, [0, 0.5, 1], [35, 0, -30]);
   const tilt = useDepth(p, [0, 0.5, 1], [7, 0, -6], "deg");
-  const walk = useDepth(p, [0.35, 1], [0, 150]);
+  const walk = useDepth(p, [0.35, 1], [0, -40]);
   const hop = useDepth(p, [0.35, 0.5, 0.65, 0.8, 1], [0, -8, 0, -8, 0]);
   return (
     <section
@@ -65,20 +65,10 @@ export function MatchScene() {
               aria-hidden
               className="absolute -inset-[30%] rounded-full bg-[radial-gradient(closest-side,rgb(255_200_110/0.45),transparent)]"
             />
-            <div
-              data-ui
-              className="relative rounded-[3rem] bg-ink p-2.5 shadow-[0_40px_90px_-25px_rgb(0_0_0/0.8),0_0_0_1.5px_rgb(255_220_150/0.25)]"
+            <motion.div
+              className="absolute -bottom-[17%] -left-[2%] w-[38%] lg:-bottom-[4%] lg:-left-[60%] lg:w-[58%]"
+              style={{ x: walk, y: hop }}
             >
-              <div className="overflow-hidden rounded-[2.5rem] bg-snow">
-                <div className="bg-wall px-6 pb-6 pt-12">
-                  <p className="font-display text-3xl font-bold text-snow">{t("matchHello")}</p>
-                </div>
-                <div className="p-4 pb-8">
-                  <RevealCard receiver={receiver} budget={null} />
-                </div>
-              </div>
-            </div>
-            <motion.div className="absolute -bottom-[4%] -left-[42%] w-[62%]" style={{ x: walk, y: hop }}>
               <motion.div
                 initial={{ x: "-30%", opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
@@ -100,6 +90,19 @@ export function MatchScene() {
                 />
               </motion.div>
             </motion.div>
+            <div
+              data-ui
+              className="relative rounded-[3rem] bg-ink p-2.5 shadow-[0_40px_90px_-25px_rgb(0_0_0/0.8),0_0_0_1.5px_rgb(255_220_150/0.25)]"
+            >
+              <div className="overflow-hidden rounded-[2.5rem] bg-snow">
+                <div className="bg-wall px-6 pb-6 pt-12">
+                  <p className="font-display text-3xl font-bold text-snow">{t("matchHello")}</p>
+                </div>
+                <div className="p-4 pb-8">
+                  <RevealCard receiver={receiver} budget={null} />
+                </div>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
