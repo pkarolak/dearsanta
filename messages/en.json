@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Drogi Mikołaju – a magical Secret Santa",
+    "title": "Drogi Mikołaju! – a magical Secret Santa",
     "description": "Draw Secret Santa with family, friends or colleagues, hosted by Santa himself."
   },
   "nav": {
@@ -491,7 +491,7 @@
     "noAccessBody": "Ask the Elf Chief to open it with the link from their panel."
   },
   "email": {
-    "footer": "You are receiving this because someone invited you to a Secret Santa on Drogi Mikołaju. Ho ho ho!",
+    "footer": "You are receiving this because someone invited you to a Secret Santa on “Drogi Mikołaju!”. Ho ho ho!",
     "calendarTitle": "Secret Santa: {title}",
     "calendarDescription": "Santa’s ceremony hosted by {host}. Session code: {code}.",
     "details": {
@@ -548,7 +548,7 @@
       "cta": "Open my elf page"
     },
     "login": {
-      "subject": "Your magic link to Drogi Mikołaju",
+      "subject": "Your magic link to “Drogi Mikołaju!”",
       "eyebrow": "Sign in",
       "heading": "Here is your magic link",
       "body": "Click the button to sign in. The link works for 30 minutes.",

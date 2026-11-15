@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Drogi Mikołaju – magiczne losowanie Secret Santa",
+    "title": "Drogi Mikołaju! – magiczne losowanie Secret Santa",
     "description": "Losowanie Secret Santa w rodzinie, wśród przyjaciół i w pracy, prowadzone przez samego Mikołaja."
   },
   "nav": {
@@ -491,7 +491,7 @@
     "noAccessBody": "Poproś Naczelnika elfów, by otworzył go linkiem ze swojego panelu."
   },
   "email": {
-    "footer": "Dostajesz tę wiadomość, bo ktoś zaprosił Cię do Secret Santa w aplikacji Drogi Mikołaju. Ho, ho, ho!",
+    "footer": "Dostajesz tę wiadomość, bo ktoś zaprosił Cię do Secret Santa w aplikacji „Drogi Mikołaju!”. Ho, ho, ho!",
     "calendarTitle": "Secret Santa: {title}",
     "calendarDescription": "Ceremonia Mikołaja, organizuje {host}. Kod sesji: {code}.",
     "details": {
@@ -548,7 +548,7 @@
       "cta": "Otwórz stronę elfa"
     },
     "login": {
-      "subject": "Twój magiczny link do aplikacji Drogi Mikołaju",
+      "subject": "Twój magiczny link do aplikacji „Drogi Mikołaju!”",
       "eyebrow": "Logowanie",
       "heading": "Oto Twój magiczny link",
       "body": "Kliknij przycisk, żeby się zalogować. Link działa przez 30 minut.",

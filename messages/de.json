@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Drogi Mikołaju – ein magisches Wichteln",
+    "title": "Drogi Mikołaju! – ein magisches Wichteln",
     "description": "Wichteln mit Familie, Freunden oder Kollegen, moderiert vom Weihnachtsmann persönlich."
   },
   "nav": {
@@ -491,7 +491,7 @@
     "noAccessBody": "Bitte den Oberwichtel, ihn mit dem Link aus seinem Pult zu öffnen."
   },
   "email": {
-    "footer": "Du bekommst diese Nachricht, weil dich jemand zum Wichteln bei Drogi Mikołaju eingeladen hat. Ho, ho, ho!",
+    "footer": "Du bekommst diese Nachricht, weil dich jemand zum Wichteln bei „Drogi Mikołaju!“ eingeladen hat. Ho, ho, ho!",
     "calendarTitle": "Wichteln: {title}",
     "calendarDescription": "Zeremonie des Weihnachtsmanns, organisiert von {host}. Code: {code}.",
     "details": {
@@ -548,7 +548,7 @@
       "cta": "Meine Wichtelseite öffnen"
     },
     "login": {
-      "subject": "Dein magischer Link zu Drogi Mikołaju",
+      "subject": "Dein magischer Link zu „Drogi Mikołaju!“",
       "eyebrow": "Anmelden",
       "heading": "Hier ist dein magischer Link",
       "body": "Klicke auf den Button, um dich anzumelden. Der Link ist 30 Minuten gültig.",
