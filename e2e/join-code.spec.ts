@@ -28,16 +28,17 @@ test("a guest lands on the home page and joins with the code from the organiser"
   await panel.getByRole("button", { name: "Join", exact: true }).click();
   await guest.waitForURL(new RegExp(`/join/${code}$`));
 
-  // A hairstyle and skin without a finished hat portrait: that hat is crossed out and taken off.
+  // A hairstyle and skin without a finished hat portrait: that hat is crossed out.
   await guest.fill("#name", "Ola");
   await guest.getByRole("button", { name: "Knock on the workshop door" }).click();
   await guest.waitForURL(new RegExp(`/s/${code}/me`));
   await expect(guest.locator("#elf-name")).toHaveValue("Ola");
   await guest.screenshot({ path: `${shots}/19-elf-intro.png` });
   await guest.getByRole("radio", { name: "Man", exact: true }).click();
-  await guest.getByRole("button", { name: "Santa hat" }).click();
   await guest.getByRole("button", { name: "Messy blond" }).click();
   await guest.getByRole("button", { name: "#E8B896" }).click();
+  await guest.getByRole("tab", { name: "Hat" }).click();
+  await guest.getByRole("button", { name: "None" }).click();
   await expect(guest.getByRole("button", { name: "Santa hat" })).toBeDisabled();
   await expect(guest.getByRole("button", { name: "Beanie" })).toBeDisabled();
   await expect(guest.getByRole("button", { name: "Elf hat" })).toBeEnabled();

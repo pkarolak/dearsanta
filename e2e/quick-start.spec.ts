@@ -38,8 +38,9 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   await guest.fill("#name", "Ola");
   await guest.getByRole("button", { name: "Knock on the workshop door" }).click();
   await guest.waitForURL(new RegExp(`/s/${code}/me`));
-  await expect(guest.getByRole("heading", { name: "Create your elf" })).toBeVisible();
+  await expect(guest.getByRole("heading", { name: "Who are you?" })).toBeVisible();
   await guest.getByRole("radio", { name: "Woman" }).click();
+  await guest.getByRole("tab", { name: "Hat" }).click();
 
   // Every tweak shows up for the room before she saves anything.
   await guest.getByRole("button", { name: "Antlers" }).click();
@@ -62,8 +63,14 @@ test("party on a laptop: pair the phone, the laptop becomes the stage, guests jo
   await laptop.screenshot({ path: `${shots}/13-screen-lobby-live.png` });
   await phone.getByRole("link", { name: "Make your elf" }).click();
   await phone.waitForURL(new RegExp(`/s/${code}/me`));
-  await phone.getByRole("button", { name: "Elf hat" }).click();
-  await expect(laptop.locator('[aria-label="Anna"] img[src*="-elf.webp"]').first()).toBeVisible({ timeout: 10_000 });
+  await phone.getByRole("button", { name: "Change look" }).click();
+  await phone.getByRole("tab", { name: "Hat" }).click();
+  // Any hat that fits her random elf and isn't on yet.
+  const hats = { "Santa hat": "santa", "Elf hat": "elf", Beanie: "beanie", Antlers: "antlers" };
+  const hat = phone.getByRole("button", { name: /^(Santa hat|Elf hat|Beanie|Antlers)$/, pressed: false, disabled: false }).first();
+  const slug = hats[(await hat.innerText()).trim() as keyof typeof hats];
+  await hat.click();
+  await expect(laptop.locator(`[aria-label="Anna"] img[src*="-${slug}.webp"]`).first()).toBeVisible({ timeout: 10_000 });
 });
 
 test("party on a phone: the TV opens the stage with the short code, then the phone is the remote", async ({ browser }) => {

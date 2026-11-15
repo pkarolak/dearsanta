@@ -248,7 +248,7 @@
     "lateTitle": "Losowanie odbyło się bez Ciebie",
     "lateBody": "Mikołaj rozlosował imiona przed Twoim dołączeniem. Daj znać Naczelnikowi elfów.",
     "matchSoonDrawn": "Mikołaj już wylosował! Skarpeta otworzy się tutaj, gdy powie, żeby do niej zajrzeć.",
-    "introTitle": "Najpierw powiedz, kim jesteś",
+    "introTitle": "Kim jesteś?",
     "genderLabel": "Twój elf to",
     "gender": {
       "woman": "Kobieta",
@@ -256,7 +256,17 @@
     },
     "introNameFirst": "Wpisz imię, a potem wybierz elfa.",
     "moreHair": "Więcej fryzur",
-    "fewerHair": "Mniej fryzur"
+    "fewerHair": "Mniej fryzur",
+    "stepOf": "Krok {step} z {total}",
+    "back": "Wstecz",
+    "next": "Dalej",
+    "lookTitle": "Ubierz swojego elfa",
+    "changeLook": "Zmień wygląd",
+    "tabs": {
+      "face": "Twarz",
+      "hat": "Czapka",
+      "outfit": "Strój"
+    }
   },
   "reveal": {
     "eyebrow": "Ściśle tajne",

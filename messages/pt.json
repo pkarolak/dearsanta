@@ -248,7 +248,7 @@
     "lateTitle": "O sorteio foi feito sem ti",
     "lateBody": "O Pai Natal sorteou os nomes antes de entrares. Avisa o chefe dos elfos.",
     "matchSoonDrawn": "O Pai Natal já sorteou! A tua meia abre aqui assim que ele disser.",
-    "introTitle": "Primeiro, diz-nos quem és",
+    "introTitle": "Quem és tu?",
     "genderLabel": "O teu elfo é",
     "gender": {
       "woman": "Mulher",
@@ -256,7 +256,17 @@
     },
     "introNameFirst": "Escreve o teu nome e depois escolhe o teu elfo.",
     "moreHair": "Mais penteados",
-    "fewerHair": "Menos penteados"
+    "fewerHair": "Menos penteados",
+    "stepOf": "Passo {step} de {total}",
+    "back": "Voltar",
+    "next": "Seguinte",
+    "lookTitle": "Veste o teu elfo",
+    "changeLook": "Mudar visual",
+    "tabs": {
+      "face": "Cara",
+      "hat": "Gorro",
+      "outfit": "Roupa"
+    }
   },
   "reveal": {
     "eyebrow": "Ultrassecreto",

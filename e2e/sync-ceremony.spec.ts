@@ -38,6 +38,9 @@ test("live ceremony: create, join, let in, exclusions, draw and reveal", async (
   const inviteLink = await linkFromInbox(invited, invitedEmail);
   await invited.goto(inviteLink);
   await expect(invited.getByRole("heading", { name: /Hello, tom/i })).toBeVisible();
+  // A first visit walks through a short wizard: who you are, the elf's look, where you watch from.
+  await invited.getByRole("radio", { name: "Man", exact: true }).click();
+  await invited.getByRole("button", { name: "Next", exact: true }).click();
   await invited.getByRole("radio", { name: /I’m not in the room/ }).click();
   await expect(invited.getByRole("button", { name: /Light the fireplace/ })).toBeVisible();
 

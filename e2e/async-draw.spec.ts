@@ -27,7 +27,7 @@ test("own-time session: invites, elf profiles, unlock and personal reveal", asyn
     if (!elfPages.length) await page.screenshot({ path: `${shots}/10-elf-builder.png`, fullPage: true });
     await page.getByRole("radio", { name: elfPages.length % 2 ? "Mężczyzna" : "Kobieta" }).click();
     await page.getByRole("button", { name: "Stwórz elfa" }).click();
-    await expect(page.getByText("Zapisane!")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Zmień wygląd" })).toBeVisible();
     elfPages.push(page);
   }
   await host.goto("/dev/mail");

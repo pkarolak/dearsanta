@@ -248,7 +248,7 @@
     "lateTitle": "Die Auslosung lief ohne dich",
     "lateBody": "Der Weihnachtsmann hat die Namen gezogen, bevor du beigetreten bist. Sag dem Elfenchef Bescheid.",
     "matchSoonDrawn": "Der Weihnachtsmann hat gelost! Dein Strumpf öffnet sich hier, sobald er es sagt.",
-    "introTitle": "Erzähl uns zuerst, wer du bist",
+    "introTitle": "Wer bist du?",
     "genderLabel": "Dein Elf ist",
     "gender": {
       "woman": "Frau",
@@ -256,7 +256,17 @@
     },
     "introNameFirst": "Gib deinen Namen ein und wähle dann deinen Elf.",
     "moreHair": "Mehr Frisuren",
-    "fewerHair": "Weniger Frisuren"
+    "fewerHair": "Weniger Frisuren",
+    "stepOf": "Schritt {step} von {total}",
+    "back": "Zurück",
+    "next": "Weiter",
+    "lookTitle": "Zieh deinen Elf an",
+    "changeLook": "Aussehen ändern",
+    "tabs": {
+      "face": "Gesicht",
+      "hat": "Mütze",
+      "outfit": "Outfit"
+    }
   },
   "reveal": {
     "eyebrow": "Streng geheim",
