@@ -14,7 +14,7 @@ describe("pre-recorded names", () => {
   it("splits a list line into the fixed words around the names", () => {
     expect(listFrame("pl", "elvesNames")).toEqual({ before: "", after: "" });
     expect(listFrame("pl", "elvesRemote")).toEqual({
-      before: "I ciepłe pozdrowienia dla tych, którzy są z nami z daleka:",
+      before: "I serdeczne pozdrowienia dla tych, którzy są z nami z daleka:",
       after: "Świąteczna magia działa na każdą odległość.",
     });
   });

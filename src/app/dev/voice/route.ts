@@ -1,9 +1,10 @@
 import { listFrame, nameTakes } from "@/lib/ceremony/script";
-import { toLocale } from "@/lib/i18n-server";
+import { toLocale, translatorFor } from "@/lib/i18n-server";
+import en from "../../../../messages/en.json";
 import { recordLines, ttsProvider } from "@/lib/tts";
 
 /**
- * Records names ahead of the party, so Santa can read the roll call even without internet:
+ * Records Santa's fixed lines and the given names ahead of the party, so the ceremony needs no internet:
  * POST { "locale": "pl", "names": ["Patryk", "Babcia Kasia"] }
  */
 export async function POST(req: Request) {
@@ -13,6 +14,11 @@ export async function POST(req: Request) {
   const locale = toLocale(body.locale);
   const names = (body.names ?? []).filter((n) => n.trim());
   const texts = new Set<string>();
+  const t = translatorFor(locale, "ceremony");
+  for (const key of Object.keys(en.ceremony) as (keyof typeof en.ceremony)[]) {
+    const raw = t.raw(key) as string;
+    if (!raw.includes("{")) texts.add(t(key));
+  }
   for (const key of ["elvesNames", "elvesRemote"] as const) {
     const { before, after } = listFrame(locale, key);
     if (before) texts.add(before);

@@ -21,10 +21,10 @@ _Zanim Naczelnik elfów rozpocznie ceremonię. Na tablicy renifera jest kod QR._
   > Ho, ho, ho! Dobry wieczór, moi drodzy!
 
 - **`welcome2`**
-  > To ja, Święty Mikołaj. Dziś mój warsztat należy do was. Elfy wypolerowały każdy dzwoneczek i podgrzały kakao.
+  > To ja, Święty Mikołaj. Dziś mój warsztat należy do was. Moi pomocnicy posprzątali, upiekli dla was ciasteczka i podgrzali kakao.
 
 - **`welcome3`**
-  > Spotykamy się na „{title}” i widzę tu {count, plural, one {jednego wspaniałego elfa} few {# wspaniałe elfy} many {# wspaniałych elfów} other {# wspaniałego elfa}}.
+  > Widzę tu {count, plural, one {jednego nowego elfa} few {# nowe elfy} many {# nowych elfów} other {# nowego elfa}}.
   
   ℹ️ `{title}` to nazwa sesji, `{count}` to liczba elfów. Część `{count, plural, …}` odmienia „elf” przez liczby: one = 1, few = 2–4, many = 5+, other = ułamki. Popraw same słowa w środku, a `#` zostaw, bo to miejsce na liczbę.
 
@@ -44,7 +44,7 @@ _Na kole pojawiają się wszyscy uczestnicy._
   > Co za wspaniała drużyna! Każde z was jest w tym roku na mojej liście grzecznych.
 
 - **`elvesRemote`** — _tylko gdy ktoś ogląda zdalnie_
-  > I ciepłe pozdrowienia dla tych, którzy są z nami z daleka: {names}. Świąteczna magia działa na każdą odległość.
+  > I serdeczne pozdrowienia dla tych, którzy są z nami z daleka: {names}. Świąteczna magia działa na każdą odległość.
   
   ℹ️ Fragmenty przed i po `{names}` są nagrane osobno. Po zmianie trzeba je nagrać ponownie, zrobię to.
 
@@ -53,24 +53,24 @@ _Na kole pojawiają się wszyscy uczestnicy._
 _Na tablicy renifera jest budżet._
 
 - **`rules1`**
-  > A teraz zasady warsztatu. Każde z was w tajemnicy dostanie jedną osobę, którą trzeba zaskoczyć prezentem.
+  > A teraz zasady warsztatu. Każde z was w tajemnicy dostanie imię jednej osoby, którą w tym roku należy zaskoczyć prezentem.
 
 - **`rulesExclusions`** — _gdy są pary, które się nie losują_
-  > Nikt nie wylosuje siebie, a Naczelnik elfów zadbał, by niektóre pary się ominęły, żeby każda niespodzianka pozostała niespodzianką.
+  > Oczywiście nikt nie wylosuje samego siebie, a Naczelnik elfów zadbał, by niektóre pary się ominęły, żeby każda niespodzianka pozostała niespodzianką. Nad uczciwym przebiegiem losowania czuwają Pani Mikołajowa i Rudolf.
 
 - **`rulesNoSelf`** — _gdy nie ma takich par (zamiast poprzedniej)_
-  > Nikt nie wylosuje siebie, a każde imię ma dokładnie taką samą szansę.
+  > Oczywiście nikt nie wylosuje samego siebie. Nad uczciwym przebiegiem losowania czuwają Pani Mikołajowa i Rudolf.
 
 - **`rulesBudget`** — _gdy jest ustalony budżet_
-  > Prezent ma kosztować do {budget}. Liczy się myśl i odrobina brokatu.
+  > Prezent ma kosztować nie więcej niż {budget}. Liczy się dobry pomysł, polot i odrobina brokatu.
   
   ℹ️ `{budget}` to kwota z walutą, np. „100 zł”.
 
 - **`rulesNoBudget`** — _gdy nie ma budżetu (zamiast poprzedniej)_
-  > Dziś nie ma limitu, ale pamiętajcie: najlepsze prezenty płyną prosto z serca.
+  > Nie ustaliliśmy ograniczenia na to, ile ma kosztować prezent, ale pamiętajcie – najlepsze prezenty płyną prosto z serca. Liczy się dobry pomysł, polot i odrobina brokatu.
 
 - **`rules2`**
-  > I najważniejsze: zachowajcie wynik w tajemnicy, aż prezenty zostaną otwarte!
+  > I najważniejsze: zachowajcie wynik w tajemnicy!
 
 ## 5. Losowanie
 
@@ -80,7 +80,7 @@ _Koło się kręci. Na trzeciej kwestii zwalnia i staje._
   > Elfy, na stanowiska! Niech zacznie się wielkie losowanie!
 
 - **`draw2`** — _dźwięk: werbel_
-  > Imiona wirują, dzwoneczki dzwonią…
+  > Imiona wirują, dzwoneczki dzwonią, koło fortuny przejmuje wielka skarpeta…
 
 - **`draw3`** — _dźwięk: dzwonek, koło się zatrzymuje_
   > Gotowe! Każde imię znalazło swojego elfa.
@@ -102,10 +102,10 @@ _Każdy rozpakowuje prezent na swoim telefonie._
 _Na ekranie są linki do świątecznej muzyki._
 
 - **`farewell1`**
-  > To cała magia na dzisiejszy wieczór. Dziękuję, że odwiedziliście mój warsztat.
+  > To koniec losowania, ale niech nie opuszcza was świąteczna atmosfera. Przygotowaliśmy dla was kilka list świątecznych przebojów do posłuchania.
 
 - **`farewell2`** — _Mikołaj się śmieje_
-  > Wesołych Świąt, moje kochane elfy! Ho, ho, ho!
+  > Dziękuję, że odwiedziliście mój warsztat. Wesołych Świąt, moje kochane elfy! Ho, ho, ho!
 
 ---
 
@@ -119,7 +119,7 @@ _Każdy odtwarza ją sam na swoim telefonie, kiedy losowanie jest już gotowe._
   ℹ️ `{name}` to imię osoby, która ogląda.
 
 - **`personal2`**
-  > Elfy skończyły wielkie losowanie „{title}” i mam dla Ciebie mały sekret.
+  > Elfy skończyły wielkie losowanie i mam dla Ciebie mały sekret.
   
   ℹ️ `{title}` to nazwa sesji.
 
@@ -127,7 +127,7 @@ _Każdy odtwarza ją sam na swoim telefonie, kiedy losowanie jest już gotowe._
   > Gotowe? No to słuchaj…
 
 - **`personalReveal`** — _dźwięk: dzwonek_
-  > W tym roku zaskoczysz… {receiver}!
+  > W tym roku {receiver} będzie osobą, którą zaskoczysz świątecznym prezentem!
   
   ℹ️ `{receiver}` to imię wylosowanej osoby.
 
