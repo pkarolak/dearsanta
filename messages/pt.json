@@ -504,7 +504,8 @@
       "bodySync": "Prepare um chocolate quente e junte-se à cerimónia do Pai Natal à hora indicada. Já pode criar o seu duende.",
       "cta": "Criar o meu perfil de duende",
       "google": "Adicionar ao Google Calendar",
-      "ics": "Adicionar ao Apple / Outlook"
+      "ics": "Adicionar ao Apple / Outlook",
+      "noteFrom": "Uma mensagem de {host}:"
     },
     "host": {
       "subject": "O seu amigo secreto «{title}» está pronto",
@@ -597,22 +598,16 @@
   },
   "remote": {
     "heading": "Um sorteio totalmente à distância",
-    "lead": "Cinco perguntas rápidas e a oficina fica pronta. O teu próprio elfo crias depois no painel, como toda a gente.",
+    "lead": "Quatro passos e a festa fica pronta. Podes mudar tudo depois no painel do Chefe dos elfos.",
     "nameTitle": "Como vamos chamar o jogo?",
     "budgetTitle": "Quanto pode custar o presente?",
     "budgetHint": "Deixa vazio se não quiserem limite.",
-    "invitesTitle": "Quem vais convidar?",
-    "invitesHint": "Cada um recebe um convite de Natal por e-mail. Podes saltar este passo e partilhar o link que vais ver já a seguir.",
-    "invitesLabel": "Endereços de e-mail",
-    "emailTitle": "Para onde enviamos o link do painel?",
-    "emailHint": "Com ele voltas ao painel do Chefe dos elfos a partir de qualquer dispositivo.",
+    "emailHint": "Vamos enviar-te um link para voltares ao painel a partir de qualquer dispositivo.",
     "how1": "Os elfos entram pelo link ou pelo convite e criam a sua personagem.",
     "how2": "Quando todos confirmarem, lanças o sorteio com um clique.",
     "how3": "Cada um recebe um e-mail e descobre a quem faz a surpresa quando lhe der jeito.",
     "skip": "Saltar",
-    "open": "Abrir a oficina",
     "contextTitle": "Com quem vão festejar?",
-    "contextLead": "Vamos adaptar as sugestões à vossa festa.",
     "contexts": {
       "family": "Família",
       "friends": "Amigos",
@@ -626,7 +621,27 @@
       "work": "Amigo secreto no trabalho",
       "school": "Amigo secreto da turma"
     },
-    "nameHint": "Os convidados vão ver este nome no convite e no telemóvel."
+    "nameHint": "Os convidados vão ver este nome no convite e no telemóvel.",
+    "nameLabel": "Nome da festa (opcional)",
+    "coordTitle": "Organização",
+    "coordLead": "Como Chefe dos elfos és tu que conduzes o jogo. Diz-nos como te contactar.",
+    "hostName": "O teu nome",
+    "hostNameHint": "Os convidados vão vê-lo no convite: “{name} convida-te para jogar”.",
+    "create": "Criar a festa",
+    "inviteTitle": "Convida os outros",
+    "inviteLead": "A festa está pronta! Envia aos convidados o link ou convites por e-mail.",
+    "linkLabel": "Link da festa",
+    "copy": "Copiar",
+    "copied": "Copiado!",
+    "share": "Partilhar",
+    "emailsLabel": "Convidar por e-mail",
+    "noteLabel": "A tua mensagem aos convidados (opcional)",
+    "notePlaceholder": "Por ex. Trocamos os presentes na Consoada depois do jantar!",
+    "send": "Enviar convites",
+    "sendCount": "Enviar {count, plural, one {# convite} other {# convites}}",
+    "sent": "{count, plural, one {Enviámos # convite} other {Enviámos # convites}}",
+    "later": "Podes convidar mais pessoas depois no painel.",
+    "toPanel": "Ir para o painel"
   },
   "validation": {
     "required": "Preenche este campo.",

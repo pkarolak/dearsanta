@@ -504,7 +504,8 @@
       "bodySync": "Mach dir einen Kakao und sei zur unten genannten Zeit bei der Zeremonie dabei. Deinen Wichtel kannst du schon jetzt erstellen.",
       "cta": "Wichtelprofil erstellen",
       "google": "Zu Google Kalender hinzufügen",
-      "ics": "Zu Apple / Outlook hinzufügen"
+      "ics": "Zu Apple / Outlook hinzufügen",
+      "noteFrom": "Eine Nachricht von {host}:"
     },
     "host": {
       "subject": "Dein Wichteln „{title}“ ist bereit",
@@ -597,22 +598,16 @@
   },
   "remote": {
     "heading": "Wichteln komplett aus der Ferne",
-    "lead": "Fünf kurze Fragen und die Werkstatt ist bereit. Deinen eigenen Wichtel gestaltest du danach im Panel, wie alle anderen.",
+    "lead": "Vier Schritte und eure Runde steht. Alles lässt sich später im Panel des Oberwichtels ändern.",
     "nameTitle": "Wie soll die Runde heißen?",
     "budgetTitle": "Wie viel darf ein Geschenk kosten?",
     "budgetHint": "Leer lassen, wenn ihr kein Limit wollt.",
-    "invitesTitle": "Wen lädst du ein?",
-    "invitesHint": "Alle bekommen eine festliche Einladung per E-Mail. Du kannst das überspringen und einfach den Link teilen, den du gleich siehst.",
-    "invitesLabel": "E-Mail-Adressen",
-    "emailTitle": "Wohin sollen wir dir den Link zum Panel schicken?",
-    "emailHint": "Damit kommst du von jedem Gerät zurück ins Panel des Oberwichtels.",
+    "emailHint": "Wir schicken dir einen Link, mit dem du von jedem Gerät zurück ins Panel kommst.",
     "how1": "Wichtel treten über den Link oder eine Einladung bei und gestalten ihre Figur.",
     "how2": "Sobald alle zugesagt haben, startest du die Auslosung mit einem Klick.",
     "how3": "Alle bekommen eine E-Mail und erfahren, wann es ihnen passt, wen sie beschenken.",
     "skip": "Überspringen",
-    "open": "Werkstatt öffnen",
     "contextTitle": "Mit wem feiert ihr?",
-    "contextLead": "Wir passen die Vorschläge an eure Runde an.",
     "contexts": {
       "family": "Familie",
       "friends": "Freunde",
@@ -626,7 +621,27 @@
       "work": "Wichteln im Büro",
       "school": "Klassenwichteln"
     },
-    "nameHint": "Diesen Namen sehen die Gäste in der Einladung und auf ihrem Handy."
+    "nameHint": "Diesen Namen sehen die Gäste in der Einladung und auf ihrem Handy.",
+    "nameLabel": "Name der Runde (optional)",
+    "coordTitle": "Organisation",
+    "coordLead": "Als Oberwichtel leitest du die Runde. Sag uns, wie wir dich erreichen.",
+    "hostName": "Dein Name",
+    "hostNameHint": "Die Gäste sehen ihn in der Einladung: „{name} lädt dich zum Wichteln ein“.",
+    "create": "Runde erstellen",
+    "inviteTitle": "Lade die anderen ein",
+    "inviteLead": "Eure Runde steht! Schick den Gästen den Link oder Einladungen per E-Mail.",
+    "linkLabel": "Link zur Runde",
+    "copy": "Kopieren",
+    "copied": "Kopiert!",
+    "share": "Teilen",
+    "emailsLabel": "Per E-Mail einladen",
+    "noteLabel": "Deine Nachricht an die Gäste (optional)",
+    "notePlaceholder": "Z. B. Wir beschenken uns an Heiligabend nach dem Essen!",
+    "send": "Einladungen senden",
+    "sendCount": "{count, plural, one {# Einladung} other {# Einladungen}} senden",
+    "sent": "{count, plural, one {# Einladung verschickt} other {# Einladungen verschickt}}",
+    "later": "Weitere Leute kannst du später im Panel einladen.",
+    "toPanel": "Zum Panel"
   },
   "validation": {
     "required": "Bitte füll dieses Feld aus.",

@@ -247,7 +247,7 @@ export async function removeParticipantAction(code: string, participantId: strin
   });
 }
 
-export async function inviteAction(code: string, emails: string[]) {
+export async function inviteAction(code: string, emails: string[], note?: string) {
   return run(async () => {
     const { session, host } = await requireHost(code);
     if (session.drawnAt) throw new ActionError("already_drawn");
@@ -261,7 +261,7 @@ export async function inviteAction(code: string, emails: string[]) {
       }
       invitees.push(await addParticipant(session.id, { email: address, status: "invited", emailVerified: false }));
     }
-    await sendInvites(session, host, invitees);
+    await sendInvites(session, host, invitees, z.string().trim().max(500).optional().parse(note) || undefined);
     return { sent: invitees.length };
   });
 }

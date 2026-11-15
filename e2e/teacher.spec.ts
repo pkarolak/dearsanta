@@ -15,14 +15,19 @@ test("a teacher runs the draw without taking part in it", async ({ browser }) =>
   await host.fill("#rw-title", "Klasa 3b");
   await host.getByRole("button", { name: "Dalej" }).click();
   await host.fill("#rw-budget", "30");
-  // A class draw assumes the teacher only runs it.
-  await expect(host.getByRole("checkbox", { name: /Biorę udział w losowaniu/ })).not.toBeChecked();
-  await host.getByRole("button", { name: "Dalej" }).click();
-  await host.fill("#rw-invites", elves.join(", "));
-  await expect(host.getByText("Wyślemy 2 zaproszenia")).toBeVisible();
   await host.getByRole("button", { name: "Dalej" }).click();
   await host.fill("#rw-email", `teacher-${stamp}@example.com`);
-  await host.getByRole("button", { name: "Otwórz warsztat" }).click();
+  await host.fill("#rw-host", "Pani Ania");
+  await expect(host.getByText("„Pani Ania zaprasza Cię do zabawy”", { exact: false })).toBeVisible();
+  // A class draw assumes the teacher only runs it.
+  await expect(host.getByRole("checkbox", { name: /Biorę udział w losowaniu/ })).not.toBeChecked();
+  await host.getByRole("button", { name: "Utwórz wydarzenie" }).click();
+  await expect(host.locator("#rw-link")).toHaveValue(/\/pl\/join\/[A-Z0-9]{6}$/);
+  await host.fill("#rw-invites", elves.join(", "));
+  await host.fill("#rw-note", "Prezenty dajemy sobie w ostatni dzień szkoły!");
+  await host.getByRole("button", { name: "Wyślij 2 zaproszenia" }).click();
+  await expect(host.getByText("Wysłaliśmy 2 zaproszenia")).toBeVisible();
+  await host.getByRole("button", { name: "Przejdź do panelu" }).click();
   await host.waitForURL(/\/pl\/s\/[A-Z0-9]{6}\/host/);
   await expect(host.getByText("Prowadzisz, ale nie losujesz")).toBeVisible();
   await host.getByRole("button", { name: /^Elfy/ }).click();

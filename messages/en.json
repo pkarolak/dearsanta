@@ -504,7 +504,8 @@
       "bodySync": "Warm up some cocoa and join Santa’s ceremony at the time below. You can create your elf already now.",
       "cta": "Create my elf profile",
       "google": "Add to Google Calendar",
-      "ics": "Add to Apple / Outlook"
+      "ics": "Add to Apple / Outlook",
+      "noteFrom": "A message from {host}:"
     },
     "host": {
       "subject": "Your Secret Santa “{title}” is ready",
@@ -597,22 +598,16 @@
   },
   "remote": {
     "heading": "A fully remote draw",
-    "lead": "Five quick questions and the workshop is ready. You’ll make your own elf later in the panel, like everyone else.",
+    "lead": "Four steps and your party is ready. You can change everything later in the Elf Chief’s panel.",
     "nameTitle": "What shall we call it?",
     "budgetTitle": "How much can a gift cost?",
     "budgetHint": "Leave it empty if you don’t want a limit.",
-    "invitesTitle": "Who are you inviting?",
-    "invitesHint": "Everyone gets a festive invitation by e-mail. You can skip this and simply share the link you’ll see in a moment.",
-    "invitesLabel": "E-mail addresses",
-    "emailTitle": "Where should we send your panel link?",
-    "emailHint": "With it you can get back to the Elf Chief’s panel from any device.",
+    "emailHint": "We’ll send you a link that takes you back to the panel from any device.",
     "how1": "Elves join through the link or an invitation and make their characters.",
     "how2": "Once everyone has said they’re in, you start the draw with one click.",
     "how3": "Everyone gets an e-mail and finds out who they’re surprising whenever suits them.",
     "skip": "Skip",
-    "open": "Open the workshop",
     "contextTitle": "Who are you celebrating with?",
-    "contextLead": "We’ll tailor the suggestions to your party.",
     "contexts": {
       "family": "Family",
       "friends": "Friends",
@@ -626,7 +621,27 @@
       "work": "Office Secret Santa",
       "school": "Class Secret Santa"
     },
-    "nameHint": "Guests will see this name in the invitation and on their phones."
+    "nameHint": "Guests will see this name in the invitation and on their phones.",
+    "nameLabel": "Party name (optional)",
+    "coordTitle": "Running the party",
+    "coordLead": "As the Elf Chief you run the game. Tell us how to reach you.",
+    "hostName": "Your name",
+    "hostNameHint": "Guests will see it in the invitation: “{name} invites you to play”.",
+    "create": "Create the party",
+    "inviteTitle": "Invite the others",
+    "inviteLead": "Your party is ready! Send your guests the link or e-mail invitations.",
+    "linkLabel": "Party link",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "share": "Share",
+    "emailsLabel": "Invite by e-mail",
+    "noteLabel": "Your message to the guests (optional)",
+    "notePlaceholder": "E.g. We’ll swap presents on Christmas Eve after dinner!",
+    "send": "Send invitations",
+    "sendCount": "Send {count, plural, one {# invitation} other {# invitations}}",
+    "sent": "{count, plural, one {We sent # invitation} other {We sent # invitations}}",
+    "later": "You can invite more people later in the panel.",
+    "toPanel": "Go to the panel"
   },
   "validation": {
     "required": "Please fill in this field.",

@@ -31,7 +31,7 @@ export function calendarEvent(session: Session, host: Participant | undefined) {
   };
 }
 
-export async function sendInvites(session: Session, host: Participant | undefined, invitees: Participant[]) {
+export async function sendInvites(session: Session, host: Participant | undefined, invitees: Participant[], note?: string) {
   const t = translatorFor(session.locale, "email");
   const event = calendarEvent(session, host);
   const ics = event ? buildIcs(event) : null;
@@ -56,6 +56,7 @@ export async function sendInvites(session: Session, host: Participant | undefine
           t("invite.body", { host: host?.displayName ?? "Santa", title: session.title }),
           session.mode === "async" ? t("invite.bodyAsync") : t("invite.bodySync"),
         ],
+        note: note ? { from: t("invite.noteFrom", { host: host?.displayName ?? "Santa" }), text: note } : undefined,
         details: sessionDetails(session, host),
         cta: { label: t("invite.cta"), href: link },
         links,

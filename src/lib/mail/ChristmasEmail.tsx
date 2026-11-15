@@ -20,6 +20,8 @@ export type ChristmasEmailProps = {
   preview: string;
   heading: string;
   paragraphs: string[];
+  /** A personal message from the Elf Chief, shown as a quote. */
+  note?: { from: string; text: string };
   highlight?: { label: string; value: string; note?: string };
   details?: { label: string; value: string }[];
   cta?: { label: string; href: string };
@@ -88,6 +90,15 @@ export function ChristmasEmail(props: ChristmasEmailProps) {
                 {p}
               </Text>
             ))}
+
+            {props.note && (
+              <Section style={{ backgroundColor: colors.cream, borderLeft: `4px solid ${colors.gold}`, borderRadius: 14, padding: "16px 20px", margin: "18px 0" }}>
+                <Text style={{ color: colors.muted, fontSize: 13, fontWeight: 700, margin: 0 }}>{props.note.from}</Text>
+                <Text style={{ color: colors.ink, fontFamily: serif, fontSize: 17, fontStyle: "italic", lineHeight: "26px", margin: "6px 0 0", whiteSpace: "pre-line" }}>
+                  {props.note.text}
+                </Text>
+              </Section>
+            )}
 
             {props.highlight && (
               <Section

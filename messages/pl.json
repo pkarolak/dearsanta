@@ -504,7 +504,8 @@
       "bodySync": "Przygotuj kakao i dołącz do ceremonii Mikołaja o podanej godzinie. Elfa możesz stworzyć już teraz.",
       "cta": "Stwórz profil elfa",
       "google": "Dodaj do Kalendarza Google",
-      "ics": "Dodaj do Apple / Outlook"
+      "ics": "Dodaj do Apple / Outlook",
+      "noteFrom": "Wiadomość od {host}:"
     },
     "host": {
       "subject": "Twój Secret Santa „{title}” jest gotowy",
@@ -597,22 +598,16 @@
   },
   "remote": {
     "heading": "Losowanie w pełni zdalne",
-    "lead": "Pięć krótkich pytań i warsztat gotowy. Swojego elfa stworzysz potem w panelu, jak każdy uczestnik.",
+    "lead": "Cztery kroki i wydarzenie gotowe. Wszystko zmienisz później w panelu Naczelnika.",
     "nameTitle": "Jak nazwiemy zabawę?",
     "budgetTitle": "Ile może kosztować prezent?",
     "budgetHint": "Zostaw puste, jeśli nie chcecie limitu.",
-    "invitesTitle": "Kogo zapraszasz?",
-    "invitesHint": "Każdy dostanie świąteczne zaproszenie e-mailem. Możesz to pominąć i po prostu udostępnić link, który zobaczysz za chwilę.",
-    "invitesLabel": "Adresy e-mail",
-    "emailTitle": "Gdzie wysłać Ci link do panelu?",
-    "emailHint": "Dzięki niemu wrócisz do panelu Naczelnika z każdego urządzenia.",
+    "emailHint": "Wyślemy na niego link, dzięki któremu wrócisz do panelu z każdego urządzenia.",
     "how1": "Elfy dołączają przez link albo zaproszenie i tworzą swoje postacie.",
     "how2": "Kiedy wszyscy potwierdzą udział, uruchamiasz losowanie jednym kliknięciem.",
     "how3": "Każdy dostaje e-mail i w dogodnej chwili odkrywa, komu robi prezent.",
     "skip": "Pomiń",
-    "open": "Otwórz warsztat",
     "contextTitle": "Z kim się bawicie?",
-    "contextLead": "Dopasujemy podpowiedzi do Waszej zabawy.",
     "contexts": {
       "family": "Rodzina",
       "friends": "Znajomi",
@@ -626,7 +621,27 @@
       "work": "Mikołajki w pracy",
       "school": "Mikołajki w klasie"
     },
-    "nameHint": "Tę nazwę zobaczą goście w zaproszeniu i na swoim telefonie."
+    "nameHint": "Tę nazwę zobaczą goście w zaproszeniu i na swoim telefonie.",
+    "nameLabel": "Nazwa wydarzenia (opcjonalnie)",
+    "coordTitle": "Koordynacja wydarzenia",
+    "coordLead": "Jako Naczelnik elfów prowadzisz zabawę. Powiedz nam, jak się z Tobą skontaktować.",
+    "hostName": "Twoje imię",
+    "hostNameHint": "Goście zobaczą je w zaproszeniu: „{name} zaprasza Cię do zabawy”.",
+    "create": "Utwórz wydarzenie",
+    "inviteTitle": "Zaproś innych",
+    "inviteLead": "Wydarzenie gotowe! Wyślij gościom link albo zaproszenia e-mailem.",
+    "linkLabel": "Link do zabawy",
+    "copy": "Kopiuj",
+    "copied": "Skopiowano!",
+    "share": "Udostępnij",
+    "emailsLabel": "Zaproś mailem",
+    "noteLabel": "Twoja wiadomość do gości (opcjonalnie)",
+    "notePlaceholder": "Np. Prezenty dajemy sobie w Wigilię po kolacji!",
+    "send": "Wyślij zaproszenia",
+    "sendCount": "Wyślij {count, plural, one {# zaproszenie} few {# zaproszenia} many {# zaproszeń} other {# zaproszenia}}",
+    "sent": "{count, plural, one {Wysłaliśmy # zaproszenie} few {Wysłaliśmy # zaproszenia} many {Wysłaliśmy # zaproszeń} other {Wysłaliśmy # zaproszenia}}",
+    "later": "Kolejne osoby zaprosisz też później w panelu.",
+    "toPanel": "Przejdź do panelu"
   },
   "validation": {
     "required": "Uzupełnij to pole.",

@@ -504,7 +504,8 @@
       "bodySync": "Prepara un chocolate caliente y únete a la ceremonia de Papá Noel a la hora indicada. Ya puedes crear tu elfo.",
       "cta": "Crear mi perfil de elfo",
       "google": "Añadir a Google Calendar",
-      "ics": "Añadir a Apple / Outlook"
+      "ics": "Añadir a Apple / Outlook",
+      "noteFrom": "Un mensaje de {host}:"
     },
     "host": {
       "subject": "Tu amigo invisible «{title}» está listo",
@@ -597,22 +598,16 @@
   },
   "remote": {
     "heading": "Un sorteo totalmente a distancia",
-    "lead": "Cinco preguntas rápidas y el taller está listo. Tu propio elfo lo crearás después en el panel, como todos.",
+    "lead": "Cuatro pasos y la fiesta está lista. Podrás cambiarlo todo después en el panel del Jefe de los elfos.",
     "nameTitle": "¿Cómo llamamos al juego?",
     "budgetTitle": "¿Cuánto puede costar el regalo?",
     "budgetHint": "Déjalo vacío si no queréis límite.",
-    "invitesTitle": "¿A quién invitas?",
-    "invitesHint": "Cada uno recibirá una invitación navideña por correo. Puedes saltarlo y compartir el enlace que verás en un momento.",
-    "invitesLabel": "Correos electrónicos",
-    "emailTitle": "¿Dónde te enviamos el enlace al panel?",
-    "emailHint": "Con él podrás volver al panel del Jefe de los elfos desde cualquier dispositivo.",
+    "emailHint": "Te enviaremos un enlace para volver al panel desde cualquier dispositivo.",
     "how1": "Los elfos se unen con el enlace o la invitación y crean su personaje.",
     "how2": "Cuando todos confirmen, lanzas el sorteo con un clic.",
     "how3": "Cada uno recibe un correo y descubre a quién sorprende cuando le venga bien.",
     "skip": "Saltar",
-    "open": "Abrir el taller",
     "contextTitle": "¿Con quién lo celebráis?",
-    "contextLead": "Adaptaremos las sugerencias a vuestra fiesta.",
     "contexts": {
       "family": "Familia",
       "friends": "Amigos",
@@ -626,7 +621,27 @@
       "work": "Amigo invisible en el trabajo",
       "school": "Amigo invisible de la clase"
     },
-    "nameHint": "Los invitados verán este nombre en la invitación y en su móvil."
+    "nameHint": "Los invitados verán este nombre en la invitación y en su móvil.",
+    "nameLabel": "Nombre de la fiesta (opcional)",
+    "coordTitle": "Organización",
+    "coordLead": "Como Jefe de los elfos diriges el juego. Dinos cómo contactarte.",
+    "hostName": "Tu nombre",
+    "hostNameHint": "Los invitados lo verán en la invitación: «{name} te invita a jugar».",
+    "create": "Crear la fiesta",
+    "inviteTitle": "Invita a los demás",
+    "inviteLead": "¡La fiesta está lista! Envía a tus invitados el enlace o invitaciones por correo.",
+    "linkLabel": "Enlace de la fiesta",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "share": "Compartir",
+    "emailsLabel": "Invitar por correo",
+    "noteLabel": "Tu mensaje para los invitados (opcional)",
+    "notePlaceholder": "P. ej. ¡Nos daremos los regalos en Nochebuena después de cenar!",
+    "send": "Enviar invitaciones",
+    "sendCount": "Enviar {count, plural, one {# invitación} other {# invitaciones}}",
+    "sent": "{count, plural, one {Hemos enviado # invitación} other {Hemos enviado # invitaciones}}",
+    "later": "Podrás invitar a más gente después en el panel.",
+    "toPanel": "Ir al panel"
   },
   "validation": {
     "required": "Rellena este campo.",
