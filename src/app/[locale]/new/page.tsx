@@ -14,7 +14,7 @@ export default function NewSessionPage({ params }: PageProps<"/[locale]/new">) {
       />
       <div aria-hidden className="felt-texture absolute inset-0 opacity-60" />
       <div className="absolute inset-x-0 top-0 z-20">
-        <SiteHeader tone="dark" />
+        <SiteHeader />
       </div>
       <QuickStart />
     </main>

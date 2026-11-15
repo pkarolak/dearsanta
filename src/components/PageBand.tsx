@@ -18,7 +18,7 @@ export function PageBand({
   return (
     <section className="relative overflow-hidden bg-wall text-snow">
       <div className="relative z-10">
-        <SiteHeader tone="dark" />
+        <SiteHeader />
       </div>
       <div className="relative mx-auto max-w-5xl px-5 pb-12 pt-4 md:pb-16 md:pt-8">
         <div className="max-w-[62%] md:max-w-xl">

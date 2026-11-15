@@ -28,7 +28,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
 
   return (
     <main className="bg-wall">
-      <SiteHeader tone="dark" cta />
+      <SiteHeader fixed />
       <LandingMotion>
         <StoryFilm lines={lines} />
         <MatchScene />

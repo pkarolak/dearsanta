@@ -15,13 +15,12 @@ import { SantaPuppet } from "./show/SantaPuppet";
 import { Cast, Vignette } from "./show/Vignette";
 import { MuteButton, useSoundGate } from "./SoundControls";
 import { SpeakerIcon } from "./icons";
-import { BrandMark } from "./BrandMark";
+import { SiteHeader } from "./SiteHeader";
 import { Link } from "@/i18n/navigation";
 import { ceremonySteps } from "@/lib/ceremony/steps";
 import { markRevealedAction, setRemoteAction } from "@/lib/actions";
 import type { SessionState } from "@/lib/state";
 import { useSessionState } from "@/lib/useSessionState";
-import { brand } from "@/lib/brand";
 
 export function ElfRoom({ code, initial }: { code: string; initial: SessionState }) {
   const locale = useLocale();
@@ -237,12 +236,11 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
     <main className="min-h-dvh bg-[radial-gradient(110%_70%_at_30%_0%,#5c1a21_0%,#2b0f13_55%,#160a0b_100%)] lg:grid lg:h-dvh lg:grid-cols-[minmax(0,1fr)_25rem] lg:overflow-hidden">
       <section className="sticky top-0 z-20 bg-[#1c0b0d]/95 pb-3 backdrop-blur-md lg:static lg:flex lg:flex-col lg:justify-center lg:bg-transparent lg:px-10 lg:py-6 lg:backdrop-blur-none">
         <div className="mx-auto w-full lg:max-w-[calc((100dvh-11rem)*16/9)]">
-          <header className="flex items-center justify-between gap-3 px-4 py-2.5 text-snow lg:px-0 lg:pb-4 lg:pt-0">
-            <Link href="/" className="flex items-center gap-2 font-display text-base font-bold lg:text-lg">
-              <BrandMark className="h-7 w-7 lg:h-8 lg:w-8" />
-              {brand.name}
-            </Link>
-            <p className="flex items-center gap-2 rounded-full bg-snow/10 py-1 pl-2.5 pr-3 text-xs font-semibold ring-1 ring-snow/15 lg:text-sm">
+          <div className="pb-2.5 lg:pb-4 lg:[&>header]:px-0 lg:[&>header]:pt-0">
+            <SiteHeader />
+          </div>
+          <div className="relative overflow-hidden lg:aspect-video lg:rounded-2xl lg:shadow-[0_50px_90px_-40px_rgb(0_0_0/0.9),0_0_0_1px_rgb(242_185_53/0.28)]">
+            <p className="pointer-events-none absolute left-3 top-3 z-20 flex items-center gap-2 rounded-full bg-ink/55 py-1 pl-2.5 pr-3 text-xs font-semibold ring-1 text-snow ring-snow/15 backdrop-blur-md lg:text-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inset-0 animate-ping rounded-full bg-berry opacity-75 motion-reduce:animate-none" />
                 <span className="relative h-2 w-2 rounded-full bg-[#ff4757]" />
@@ -250,8 +248,6 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
               <span className="uppercase tracking-[0.14em]">{t("live")}</span>
               <span className="text-snow/60 max-sm:hidden">· {t("liveFrom")}</span>
             </p>
-          </header>
-          <div className="relative overflow-hidden lg:aspect-video lg:rounded-2xl lg:shadow-[0_50px_90px_-40px_rgb(0_0_0/0.9),0_0_0_1px_rgb(242_185_53/0.28)]">
             <CeremonyStage
               state={state}
               locale={locale}
