@@ -1,4 +1,4 @@
-import { Snowflake, SpeakerHigh, SpeakerSlash, WifiHigh } from "@phosphor-icons/react/dist/ssr";
+import { SpeakerHigh, SpeakerSlash, WifiHigh } from "@phosphor-icons/react/dist/ssr";
 
 type IconProps = { className?: string };
 
