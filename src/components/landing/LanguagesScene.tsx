@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -77,28 +77,25 @@ export function LanguagesScene() {
           </ul>
         </div>
 
-        <div className="relative mt-24 h-[19rem] md:mt-0 md:h-auto">
+        <div className="relative mt-24 h-[25rem] md:mt-0 md:h-auto">
           <motion.div className="absolute inset-0" style={{ y: duck, opacity: gone }}>
             <motion.div
-              className="absolute -bottom-[3rem] left-1/2 w-[min(24rem,78%)] -translate-x-1/2 md:-bottom-[4.5rem]"
+              className="absolute -bottom-[3rem] left-1/2 w-[min(34rem,92%)] -translate-x-1/2 md:-bottom-[4.5rem]"
               initial={{ y: "40%" }}
               whileInView={{ y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ type: "spring", stiffness: 90, damping: 13 }}
             >
-              <AnimatePresence mode="wait">
-                <motion.p
+              <motion.p
                   key={speaking}
                   lang={speaking}
                   className="absolute bottom-[96%] left-1/2 z-10 w-max max-w-[min(22rem,90vw)] -translate-x-1/2 rounded-felt bg-snow px-6 py-4 text-center font-display text-2xl font-bold text-ink shadow-[0_18px_40px_-12px_rgb(0_0_0/0.6)] md:text-3xl"
-                  initial={{ opacity: 0, y: 12, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                  initial={{ y: 6, scale: 0.94 }}
+                  animate={{ y: 0, scale: 1 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 22 }}
                 >
                   {greetings[speaking]}
                 </motion.p>
-              </AnimatePresence>
               <div className="drop-shadow-[0_0_40px_rgb(255_190_100/0.35)]">
                 <SantaPuppet level={level} />
               </div>
