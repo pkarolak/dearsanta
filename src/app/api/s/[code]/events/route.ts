@@ -1,6 +1,6 @@
 import { getSessionVersion } from "@/lib/db/repo";
 
-export const maxDuration = 60;
+export const maxDuration = 25;
 
 const POLL_MS = 2_000;
 const STREAM_LIFETIME_MS = 20_000;

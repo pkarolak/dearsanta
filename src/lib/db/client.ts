@@ -43,17 +43,26 @@ async function createPostgres(url: string): Promise<Database> {
   // prepare: false keeps it compatible with the Supabase transaction pooler (pgbouncer).
   // One connection per instance: several warm functions each opening five clients fills the pooler,
   // and the next lookup waits until the statement is cancelled.
-  const sql = postgres(url, { prepare: false, max: 1, idle_timeout: 20, connect_timeout: 5 });
-  const run = (client: typeof sql) =>
+  const sql = postgres(url, { prepare: false, max: 1, idle_timeout: 5, connect_timeout: 5 });
+  // The pooler's default statement timeout is two minutes. A lookup that waits that long
+  // holds the only connection in this instance until Vercel kills the function, and the next
+  // screen, TV, or phone request queues behind it. Cap each statement and release on failure.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const run = (client: any, inTransaction: boolean) =>
     async function query<T>(text: string, params: unknown[] = []) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const rows = await client.unsafe(text, params as any[]);
-      return rows as unknown as T[];
+      const exec = async (tx: any) => {
+        await tx.unsafe("set local statement_timeout = '8s'");
+        const rows = await tx.unsafe(text, params);
+        return rows as unknown as T[];
+      };
+      if (inTransaction) return exec(client);
+      return client.begin(exec) as Promise<T[]>;
     };
   return {
-    query: run(sql),
+    query: run(sql, false),
     async transaction<T>(fn: (tx: Queryable) => Promise<T>) {
-      return sql.begin(async (tx) => fn({ query: run(tx as unknown as typeof sql) })) as Promise<T>;
+      return sql.begin(async (tx) => fn({ query: run(tx, true) })) as Promise<T>;
     },
   };
 }
