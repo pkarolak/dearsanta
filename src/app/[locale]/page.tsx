@@ -10,6 +10,10 @@ import { SiteHeader } from "@/components/SiteHeader";
 import type { VoiceLine } from "@/lib/audio/engine";
 import { prepareLine } from "@/lib/tts";
 
+// Voice URLs are registered in Postgres. A build-time prerender runs before that
+// database is reachable and would publish audioUrl: null for the life of the deploy.
+export const dynamic = "force-dynamic";
+
 export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -21,7 +25,18 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       lineKeys.map(async (key): Promise<[LineKey, VoiceLine]> => {
         const text = t(key);
         const voice = spoken.has(key) ? spoken(key) : text;
-        return [key, { id: `film-${key}`, text, audioUrl: await prepareLine(voice, locale).catch(() => null) }];
+        return [
+          key,
+          {
+            id: `film-${key}`,
+            text,
+            audioUrl: await prepareLine(voice, locale).catch((error: unknown) => {
+              const message = error instanceof Error ? error.message.split("\n")[0] : "failed";
+              console.error("[tts] film line", message);
+              return null;
+            }),
+          },
+        ];
       }),
     ),
   ) as Record<LineKey, VoiceLine>;
