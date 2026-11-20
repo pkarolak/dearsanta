@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { appOrigin, localePath, safeSessionNext } from "./urls";
+import { localePath } from "./locale-path";
+import { appOrigin, safeSessionNext } from "./urls";
 
 describe("appOrigin", () => {
   it("uses a LAN APP_URL for local development", () => {

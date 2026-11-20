@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 import { Snowfall, StringLights } from "./landing/Atmosphere";
 import { openScreenAction } from "@/lib/actions";
-import { localePath } from "@/lib/urls";
+import { localePath } from "@/lib/locale-path";
 
 export function TvCodeForm() {
   const t = useTranslations("tv");

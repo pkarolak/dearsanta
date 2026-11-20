@@ -44,12 +44,6 @@ export function isLocalHost(host: string) {
   return name === "localhost" || name.endsWith(".local") || /^(127|10|192\.168|172\.(1[6-9]|2\d|3[01]))\./.test(name);
 }
 
-/** A path from the server, including any query, under the locale prefix. */
-export function localePath(locale: string, path: string) {
-  const suffix = path.startsWith("/") ? path : `/${path}`;
-  return `/${locale}${suffix}`;
-}
-
 export function isLocalOrigin(value: string) {
   try {
     const url = new URL(value.includes("://") ? value : `http://${value}`);
