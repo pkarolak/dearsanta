@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appOrigin } from "./urls";
+import { appOrigin, safeSessionNext } from "./urls";
 
 describe("appOrigin", () => {
   it("uses a LAN APP_URL for local development", () => {
@@ -15,5 +15,24 @@ describe("appOrigin", () => {
     expect(() => appOrigin({ VERCEL: "1", APP_URL: "http://192.168.68.53:3000" })).toThrow(/APP_URL/);
     expect(() => appOrigin({ NODE_ENV: "production", APP_URL: "http://localhost:3000" })).toThrow(/APP_URL/);
     expect(appOrigin({ VERCEL: "1", APP_URL: "https://drogimikolaju.pl/" })).toBe("https://drogimikolaju.pl");
+  });
+});
+
+describe("safeSessionNext", () => {
+  const code = "AB12CD";
+
+  it("keeps this session's own pages", () => {
+    expect(safeSessionNext(`/s/${code}/host`, code)).toBe(`/s/${code}/host`);
+    expect(safeSessionNext(`/s/${code}/host?remote=1`, code)).toBe(`/s/${code}/host?remote=1`);
+    expect(safeSessionNext(`/s/${code}/reveal`, code)).toBe(`/s/${code}/reveal`);
+    expect(safeSessionNext(null, code)).toBe(`/s/${code}/me`);
+  });
+
+  it("drops external and escaped targets", () => {
+    expect(safeSessionNext("https://evil.example", code)).toBe(`/s/${code}/me`);
+    expect(safeSessionNext("//evil.example", code)).toBe(`/s/${code}/me`);
+    expect(safeSessionNext(`/s/${code}/../../../../evil.example`, code)).toBe(`/s/${code}/me`);
+    expect(safeSessionNext(`/s/${code}/host?next=https://evil.example`, code)).toBe(`/s/${code}/me`);
+    expect(safeSessionNext(`/s/OTHER/host`, code)).toBe(`/s/${code}/me`);
   });
 });

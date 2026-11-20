@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { hashToken, signInParticipant, signInProfile } from "@/lib/auth";
 import { getParticipant, getSessionById, markDevice, updateParticipant, consumeToken } from "@/lib/db/repo";
 import { toLocale } from "@/lib/i18n-server";
-import { requestOrigin } from "@/lib/urls";
+import { requestOrigin, safeSessionNext } from "@/lib/urls";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
   await signInParticipant(session, participant.id);
   if (participant.email) await signInProfile(participant.email);
 
-  const safeNext = next && next.startsWith(`/s/${session.code}/`) ? next : `/s/${session.code}/me`;
+  const safeNext = safeSessionNext(next, session.code);
   if (participant.role === "host" && safeNext.startsWith(`/s/${session.code}/host`)) await markDevice(session.id, "remote");
   return redirectTo(safeNext);
 }

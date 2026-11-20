@@ -52,3 +52,24 @@ export function isLocalOrigin(value: string) {
     return true;
   }
 }
+
+/**
+ * Where a magic link may continue. Only this session's own pages, on this site.
+ * Anything else (another host, a scheme, a path that climbs out with `..`) is dropped.
+ */
+export function safeSessionNext(next: string | null | undefined, code: string) {
+  const fallback = `/s/${code}/me`;
+  if (!next || /[\s\\]/.test(next) || next.includes("://") || next.startsWith("//")) return fallback;
+  let url: URL;
+  try {
+    url = new URL(next, "https://app.invalid");
+  } catch {
+    return fallback;
+  }
+  if (url.origin !== "https://app.invalid" || url.username || url.password || url.hash) return fallback;
+  const path = url.pathname.replace(/\/+$/, "") || "/";
+  if (path !== `/s/${code}/me` && path !== `/s/${code}/host` && path !== `/s/${code}/reveal`) return fallback;
+  const remote = path === `/s/${code}/host` && url.searchParams.get("remote") === "1" && [...url.searchParams.keys()].every((key) => key === "remote");
+  if (url.search && !remote) return fallback;
+  return remote ? `${path}?remote=1` : path;
+}

@@ -43,6 +43,20 @@ export type ActionResult<T = object> = ({ ok: true } & T) | { ok: false; error: 
 
 const email = z.string().trim().toLowerCase().email().max(200);
 const name = z.string().trim().min(1).max(40);
+const plainText = (max: number, min = 0) =>
+  z.string().trim().min(min).max(max).refine((value) => !/(https?:\/\/|www\.)/i.test(value), "url");
+const httpUrl = z
+  .string()
+  .trim()
+  .max(300)
+  .refine((value) => {
+    try {
+      const url = new URL(value);
+      return (url.protocol === "https:" || url.protocol === "http:") && !url.username && !url.password;
+    } catch {
+      return false;
+    }
+  }, "url");
 const currency = z.enum(["PLN", "EUR", "USD", "GBP", "BRL", "CHF"]);
 
 async function loadSession(code: string) {
@@ -88,13 +102,13 @@ async function run<T extends object>(fn: () => Promise<T>): Promise<ActionResult
 /* ---------- creating & joining ---------- */
 
 const createSchema = z.object({
-  title: z.string().trim().min(1).max(80),
+  title: plainText(80, 1),
   mode: z.enum(["sync", "async"]),
   locale: z.string(),
   timezone: z.string().max(64),
   scheduledAt: z.string().datetime().nullable(),
-  location: z.string().trim().max(200).nullable(),
-  onlineUrl: z.string().trim().url().max(300).nullable(),
+  location: plainText(200).nullable(),
+  onlineUrl: httpUrl.nullable(),
   budgetAmount: z.number().positive().max(100000).nullable(),
   currency,
   hostName: name,
@@ -261,7 +275,7 @@ export async function inviteAction(code: string, emails: string[], note?: string
       }
       invitees.push(await addParticipant(session.id, { email: address, status: "invited", emailVerified: false }));
     }
-    await sendInvites(session, host, invitees, z.string().trim().max(500).optional().parse(note) || undefined);
+    await sendInvites(session, host, invitees, plainText(500).optional().parse(note) || undefined);
     return { sent: invitees.length };
   });
 }
@@ -290,10 +304,10 @@ export async function setRemoteAction(code: string, participantId: string, isRem
 /* ---------- Elf Chief: settings & exclusions ---------- */
 
 const settingsSchema = z.object({
-  title: z.string().trim().min(1).max(80).optional(),
+  title: plainText(80, 1).optional(),
   scheduledAt: z.string().datetime().nullable().optional(),
-  location: z.string().trim().max(200).nullable().optional(),
-  onlineUrl: z.union([z.string().trim().url().max(300), z.literal("")]).nullable().optional(),
+  location: plainText(200).nullable().optional(),
+  onlineUrl: z.union([httpUrl, z.literal("")]).nullable().optional(),
   budgetAmount: z.number().positive().max(100000).nullable().optional(),
   currency: currency.optional(),
   locale: z.string().optional(),
