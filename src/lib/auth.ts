@@ -2,6 +2,7 @@ import { createHash, randomBytes } from "node:crypto";
 import { cookies } from "next/headers";
 import { jwtVerify, SignJWT } from "jose";
 import { findParticipantByEmail, getParticipant, insertToken, normalizeEmail, type Participant, type Session } from "@/lib/db/repo";
+import { appOrigin } from "@/lib/urls";
 
 const PROFILE_COOKIE = "sh_profile";
 const participantCookie = (code: string) => `sh_p_${code.toUpperCase()}`;
@@ -114,7 +115,7 @@ export async function createParticipantToken(participant: Pick<Participant, "id"
 }
 
 export function appUrl() {
-  return (process.env.APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  return appOrigin();
 }
 
 export async function participantLink(participant: Pick<Participant, "id" | "email">, locale: string, next?: string) {
