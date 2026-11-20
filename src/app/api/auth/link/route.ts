@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { hashToken, signInParticipant, signInProfile } from "@/lib/auth";
+import { getViewer, hashToken, signInParticipant, signInProfile } from "@/lib/auth";
 import { getParticipant, getSessionById, markDevice, updateParticipant, consumeToken } from "@/lib/db/repo";
 import { toLocale } from "@/lib/i18n-server";
 import { requestOrigin, safeSessionNext } from "@/lib/urls";
@@ -26,12 +26,15 @@ export async function GET(request: Request) {
   if (!participant || !session) return redirectTo("/login?expired=1");
 
   // Clicking a personal link proves ownership of the e-mail address.
+  // A host who opens a guest's link keeps the host seat and the host's verified email.
+  const viewer = await getViewer(session);
+  const switchingAwayFromHost = viewer.isHost && participant.role !== "host";
   await updateParticipant(participant, {
     emailVerified: participant.email ? true : undefined,
     status: participant.status === "invited" ? "approved" : undefined,
   });
   await signInParticipant(session, participant.id);
-  if (participant.email) await signInProfile(participant.email);
+  if (participant.email && !switchingAwayFromHost) await signInProfile(participant.email);
 
   const safeNext = safeSessionNext(next, session.code);
   if (participant.role === "host" && safeNext.startsWith(`/s/${session.code}/host`)) await markDevice(session.id, "remote");

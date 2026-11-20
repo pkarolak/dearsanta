@@ -1,5 +1,5 @@
 import type { AvatarConfig } from "@/lib/avatar";
-import type { Viewer } from "@/lib/auth";
+import { parkedHost, type Viewer } from "@/lib/auth";
 import { buildStepScript, type ScriptLine } from "@/lib/ceremony/script";
 import { isRevealOpen, nextStep, type CeremonyStep } from "@/lib/ceremony/steps";
 import {
@@ -61,6 +61,8 @@ export type SessionState = {
   /** `inDraw`: whether the draw that already happened gave this person someone to surprise. */
   viewer: (PublicParticipant & { emailVerified: boolean; email: string | null; inDraw: boolean }) | null;
   isHost: boolean;
+  /** This browser still has the host seat parked beside the person it is showing. */
+  canResumeHost: boolean;
   isScreen: boolean;
   assignment: { receiver: { displayName: string; avatar: AvatarConfig }; revealed: boolean } | null;
   script: ScriptLine[] | null;
@@ -92,6 +94,8 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
 
   let assignment: SessionState["assignment"] = null;
   const me = viewer.participant;
+  const parked = await parkedHost(session);
+  const canResumeHost = !!parked && parked.id !== me?.id;
   const mayReveal = session.mode === "async" ? !!session.drawnAt : !!session.drawnAt && isRevealOpen(session.ceremonyStep);
   let inDraw = false;
   if (me && me.status === "approved" && session.drawnAt) {
@@ -164,6 +168,7 @@ export async function buildState(session: Session, viewer: Viewer, locale: strin
     revealProgress: viewer.isHost || viewer.isScreen ? await countRevealed(session.id) : undefined,
     viewer: me ? { ...toPublic(me, true), email: me.email, emailVerified: me.emailVerified, inDraw } : null,
     isHost: viewer.isHost,
+    canResumeHost,
     isScreen: viewer.isScreen,
     assignment,
     script,

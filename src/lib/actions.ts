@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { avatarSchema } from "@/lib/avatar";
-import { createParticipantToken, getViewer, participantLink, signInParticipant, signOutProfile } from "@/lib/auth";
+import { createParticipantToken, getViewer, participantLink, resumeHost, signInParticipant, signOutProfile } from "@/lib/auth";
 import { nextStep, type CeremonyStep } from "@/lib/ceremony/steps";
 import {
   addExclusion,
@@ -174,6 +174,15 @@ export async function quickStartAction(input: { kind: keyof typeof quickModes; l
     });
     await signInParticipant(session, host.id);
     return { code: session.code };
+  });
+}
+
+/** Puts this browser back in the host seat after a guest link was opened beside it. */
+export async function resumeHostAction(code: string) {
+  return run(async () => {
+    const session = await loadSession(code);
+    if (!(await resumeHost(session))) throw new ActionError("forbidden");
+    return {};
   });
 }
 

@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useState, useSyncExternalStore, useTransition } from "react";
 import { Avatar } from "./Avatar";
 import { AvatarEditor } from "./AvatarEditor";
+import { ResumeHost } from "./ResumeHost";
 import { CeremonyStage } from "./CeremonyStage";
 import { FestiveLinks } from "./FestiveLinks";
 import { RevealCard } from "./RevealCard";
@@ -35,6 +36,11 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
   const [editing, setEditing] = useState(false);
   if (!state) return null;
 
+  const resume = state.canResumeHost ? (
+    <div className="mb-6">
+      <ResumeHost code={code} />
+    </div>
+  ) : null;
   const me = state.viewer!;
   const s = state.session;
   const budget =
@@ -45,6 +51,7 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
   if (me.status !== "approved") {
     return (
       <main className="felt-texture flex min-h-dvh flex-col items-center justify-center px-5 py-10 text-center">
+        {resume}
         <Vignette set="home" focus="45% 50%" className="aspect-[4/3] w-full max-w-sm">
           <SantaPuppet className="absolute left-[22%] top-[10%] w-[56%] animate-sway" />
           <Cast who="presents" className="-bottom-[8%] left-[4%] w-[92%]" />
@@ -107,7 +114,7 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
   );
 
   const steps = asksWhere ? 3 : 2;
-  const panel = wizard ? (
+  const room = wizard ? (
     <div className="space-y-6">
       {wizard === "elf" ? (
         <AvatarEditor
@@ -220,6 +227,12 @@ export function ElfRoom({ code, initial }: { code: string; initial: SessionState
         </ul>
       </section>
     </div>
+  );
+  const panel = (
+    <>
+      {resume}
+      {room}
+    </>
   );
 
   if (!isRemote) {
