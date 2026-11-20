@@ -87,7 +87,20 @@ export function seededAvatar(seedText: string): AvatarConfig {
   };
 }
 
+/** The database driver can hand back a jsonb string (or a string of one). Unwrap until it is an object. */
+function unwrapAvatar(value: unknown): unknown {
+  let current = value;
+  for (let i = 0; i < 2 && typeof current === "string"; i++) {
+    try {
+      current = JSON.parse(current);
+    } catch {
+      return value;
+    }
+  }
+  return current;
+}
+
 export function parseAvatar(value: unknown, fallbackSeed = "elf"): AvatarConfig {
-  const parsed = avatarSchema.safeParse(value);
+  const parsed = avatarSchema.safeParse(unwrapAvatar(value));
   return parsed.success ? parsed.data : seededAvatar(fallbackSeed);
 }

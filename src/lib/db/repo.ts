@@ -269,7 +269,7 @@ async function insertParticipant(tx: Queryable, sessionId: string, input: NewPar
   if (!input.email) {
     const rows = await tx.query(
       `insert into session_participants (session_id, email, display_name, avatar, role, status, email_verified)
-       values ($1,null,$2,$3::jsonb,$4,$5,false) returning *`,
+       values ($1,null,$2,$3::text::jsonb,$4,$5,false) returning *`,
       [sessionId, input.displayName?.trim() || "Elf", JSON.stringify(seededAvatar(crypto.randomUUID())), input.role ?? "elf", input.status],
     );
     await bumpVersion(sessionId, tx);
@@ -282,7 +282,7 @@ async function insertParticipant(tx: Queryable, sessionId: string, input: NewPar
   const avatar = profile?.avatar ?? seededAvatar(email);
   const rows = await tx.query(
     `insert into session_participants (session_id, profile_id, email, display_name, avatar, role, status, email_verified)
-     values ($1,$2,$3,$4,$5::jsonb,$6,$7,$8)
+     values ($1,$2,$3,$4,$5::text::jsonb,$6,$7,$8)
      on conflict (session_id, email) do update set
        status = case when session_participants.status = 'rejected' then excluded.status else session_participants.status end,
        display_name = case when session_participants.profile_completed_at is null then excluded.display_name else session_participants.display_name end
@@ -337,7 +337,7 @@ const participantColumns: Record<keyof ParticipantPatch, string> = {
 export async function updateParticipant(participant: Pick<Participant, "id" | "sessionId">, patch: ParticipantPatch, bump = true) {
   const entries = Object.entries(patch).filter(([, v]) => v !== undefined) as [keyof ParticipantPatch, unknown][];
   if (!entries.length) return;
-  const sets = entries.map(([k], i) => `${participantColumns[k]} = $${i + 2}${k === "avatar" ? "::jsonb" : ""}`);
+  const sets = entries.map(([k], i) => `${participantColumns[k]} = $${i + 2}${k === "avatar" ? "::text::jsonb" : ""}`);
   const d = await db();
   await d.query(`update session_participants set ${sets.join(", ")} where id = $1`, [
     participant.id,
@@ -361,7 +361,7 @@ export async function saveProfileFromParticipant(participant: Participant, local
   if (!participant.email) return;
   const d = await db();
   const rows = await d.query(
-    `insert into profiles (email, display_name, avatar, locale) values ($1,$2,$3::jsonb,$4)
+    `insert into profiles (email, display_name, avatar, locale) values ($1,$2,$3::text::jsonb,$4)
      on conflict (email) do update set display_name = excluded.display_name, avatar = excluded.avatar, locale = excluded.locale, updated_at = now()
      returning id`,
     [participant.email, participant.displayName, JSON.stringify(participant.avatar), locale],
