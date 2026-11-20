@@ -8,37 +8,15 @@ import { lineKeys, type LineKey } from "@/components/film/script";
 import { StoryFilm } from "@/components/film/StoryFilm";
 import { SiteHeader } from "@/components/SiteHeader";
 import type { VoiceLine } from "@/lib/audio/engine";
-import { prepareLine } from "@/lib/tts";
-
-// Voice URLs are registered in Postgres. A build-time prerender runs before that
-// database is reachable and would publish audioUrl: null for the life of the deploy.
-export const dynamic = "force-dynamic";
 
 export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "film.lines" });
-  // Santa's voice reads `film.spoken` where the subtitle has something TTS mispronounces, like digits.
-  const spoken = await getTranslations({ locale, namespace: "film.spoken" });
+  // Subtitles only. Recordings load after paint from /api/film-voice, so a slow
+  // database cannot hold the document open.
   const lines = Object.fromEntries(
-    await Promise.all(
-      lineKeys.map(async (key): Promise<[LineKey, VoiceLine]> => {
-        const text = t(key);
-        const voice = spoken.has(key) ? spoken(key) : text;
-        return [
-          key,
-          {
-            id: `film-${key}`,
-            text,
-            audioUrl: await prepareLine(voice, locale).catch((error: unknown) => {
-              const message = error instanceof Error ? error.message.split("\n")[0] : "failed";
-              console.error("[tts] film line", message);
-              return null;
-            }),
-          },
-        ];
-      }),
-    ),
+    lineKeys.map((key): [LineKey, VoiceLine] => [key, { id: `film-${key}`, text: t(key), audioUrl: null }]),
   ) as Record<LineKey, VoiceLine>;
 
   return (

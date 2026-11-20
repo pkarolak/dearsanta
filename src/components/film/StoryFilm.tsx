@@ -3,7 +3,7 @@
 import { ArrowCounterClockwise, Pause, Play, SkipForward } from "@phosphor-icons/react";
 import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { JoinCodeForm } from "../JoinCodeForm";
 import { SpeakerIcon } from "../icons";
@@ -41,6 +41,33 @@ function useTall() {
 export function StoryFilm({ lines }: Props) {
   const t = useTranslations("film");
   const th = useTranslations("home");
+  const locale = useLocale();
+  const [voiceLines, setVoiceLines] = useState(lines);
+  const voiceRef = useRef(voiceLines);
+  voiceRef.current = voiceLines;
+  useEffect(() => {
+    setVoiceLines(lines);
+  }, [lines]);
+  useEffect(() => {
+    let gone = false;
+    fetch(`/api/film-voice?locale=${encodeURIComponent(locale)}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((urls: Record<string, string | null> | null) => {
+        if (!urls || gone) return;
+        setVoiceLines((current) => {
+          const next = { ...current };
+          for (const key of Object.keys(next) as LineKey[]) {
+            const audioUrl = urls[key];
+            if (audioUrl) next[key] = { ...next[key], audioUrl };
+          }
+          return next;
+        });
+      })
+      .catch(() => {});
+    return () => {
+      gone = true;
+    };
+  }, [locale]);
   const reduced = useReducedMotion();
   const tall = useTall();
   const ref = useRef<HTMLElement>(null);
@@ -90,8 +117,8 @@ export function StoryFilm({ lines }: Props) {
   }, []);
 
   useEffect(() => {
-    Object.values(lines).forEach((l) => workshopAudio().prefetch(l.audioUrl));
-  }, [lines]);
+    Object.values(voiceLines).forEach((l) => workshopAudio().prefetch(l.audioUrl));
+  }, [voiceLines]);
 
   // The first clip often loads before the page hydrates, so its readiness is read off the element too.
   useEffect(() => {
@@ -164,7 +191,7 @@ export function StoryFilm({ lines }: Props) {
     const fire = () => {
       const q = cues[next++];
       if (q.sfx && soundRef.current) audio.effect(q.sfx);
-      if (q.line) say(lines[q.line]);
+      if (q.line) say(voiceRef.current[q.line]);
     };
     // A line waits for the one before it to finish, so Santa never talks over himself.
     const tick = () => {
