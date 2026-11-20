@@ -41,7 +41,9 @@ async function createPglite(): Promise<Database> {
 async function createPostgres(url: string): Promise<Database> {
   const { default: postgres } = await import("postgres");
   // prepare: false keeps it compatible with the Supabase transaction pooler (pgbouncer).
-  const sql = postgres(url, { prepare: false, max: 5, idle_timeout: 20 });
+  // One connection per instance: several warm functions each opening five clients fills the pooler,
+  // and the next lookup waits until the statement is cancelled.
+  const sql = postgres(url, { prepare: false, max: 1, idle_timeout: 20, connect_timeout: 5 });
   const run = (client: typeof sql) =>
     async function query<T>(text: string, params: unknown[] = []) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

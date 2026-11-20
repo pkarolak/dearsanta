@@ -1,15 +1,15 @@
 "use client";
 
 import { Television } from "@phosphor-icons/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 import { Snowfall, StringLights } from "./landing/Atmosphere";
-import { useRouter } from "@/i18n/navigation";
 import { openScreenAction } from "@/lib/actions";
+import { localePath } from "@/lib/urls";
 
 export function TvCodeForm() {
   const t = useTranslations("tv");
-  const router = useRouter();
+  const locale = useLocale();
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const [pending, start] = useTransition();
@@ -24,7 +24,8 @@ export function TvCodeForm() {
         action={() =>
           start(async () => {
             const res = await openScreenAction(digits);
-            if (res.ok) router.push(res.path);
+            // The locale router drops "?k=", so a TV would open the screen with no key and be turned away.
+            if (res.ok) window.location.assign(localePath(locale, res.path));
             else setError(true);
           })
         }

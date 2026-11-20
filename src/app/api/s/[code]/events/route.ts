@@ -2,8 +2,8 @@ import { getSessionVersion } from "@/lib/db/repo";
 
 export const maxDuration = 60;
 
-const POLL_MS = 800;
-const STREAM_LIFETIME_MS = 50_000;
+const POLL_MS = 2_000;
+const STREAM_LIFETIME_MS = 20_000;
 
 /**
  * Server-Sent Events stream announcing session version changes. It watches the version column
@@ -41,7 +41,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ code
             send(": keep-alive\n\n");
           }
         } catch (error) {
-          console.error("[events]", error);
+          const message = error instanceof Error ? error.message.split("\n")[0] : "failed";
+          console.error("[events]", message);
+          // A timed-out poll holds a pooler client until it is cancelled. Stop, and let the browser reconnect.
+          break;
         }
         await new Promise((r) => setTimeout(r, POLL_MS));
       }

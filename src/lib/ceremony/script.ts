@@ -1,6 +1,6 @@
 import type { CeremonyStep } from "./steps";
 import { formatMoney, toLocale, translatorFor } from "@/lib/i18n-server";
-import { prepareLine, recordedLine, recordedSeconds } from "@/lib/tts";
+import { prepareLines, recordedLine, recordedSeconds } from "@/lib/tts";
 
 export type ScriptLine = {
   id: string;
@@ -144,12 +144,17 @@ async function piecesOf(locale: string, d: Draft, split: boolean): Promise<Piece
 
 async function materialize(locale: string, drafts: Draft[], prefix: string, split = false): Promise<ScriptLine[]> {
   const pieces = (await Promise.all(drafts.map((d) => piecesOf(locale, d, split)))).flat();
-  const lines: ScriptLine[] = await Promise.all(
-    pieces.map(async ({ text, parts, cue }, i) => {
-      if (parts) return { id: `${prefix}-${i}`, text, audioUrl: null, parts, cue };
-      return { id: `${prefix}-${i}`, text, audioUrl: await prepareLine(text, toLocale(locale)), cue };
-    }),
-  );
+  const lang = toLocale(locale);
+  // One insert for the whole chapter. A handful of parallel inserts through the pooler stall until they are cancelled.
+  const spoken = pieces.flatMap((piece, i) => (piece.parts ? [] : [{ key: String(i), text: piece.text, lang }]));
+  const urls = await prepareLines(spoken);
+  const lines: ScriptLine[] = pieces.map(({ text, parts, cue }, i) => ({
+    id: `${prefix}-${i}`,
+    text,
+    audioUrl: parts ? null : (urls[String(i)] ?? null),
+    parts: parts ?? undefined,
+    cue,
+  }));
   const seconds = await recordedSeconds(lines.flatMap((l) => l.parts ?? (l.audioUrl ? [l.audioUrl] : [])));
   return lines.map((l) => {
     const urls = l.parts ?? (l.audioUrl ? [l.audioUrl] : []);

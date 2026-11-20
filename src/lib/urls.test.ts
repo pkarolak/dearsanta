@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appOrigin, safeSessionNext } from "./urls";
+import { appOrigin, localePath, safeSessionNext } from "./urls";
 
 describe("appOrigin", () => {
   it("uses a LAN APP_URL for local development", () => {
@@ -15,6 +15,12 @@ describe("appOrigin", () => {
     expect(() => appOrigin({ VERCEL: "1", APP_URL: "http://192.168.68.53:3000" })).toThrow(/APP_URL/);
     expect(() => appOrigin({ NODE_ENV: "production", APP_URL: "http://localhost:3000" })).toThrow(/APP_URL/);
     expect(appOrigin({ VERCEL: "1", APP_URL: "https://drogimikolaju.pl/" })).toBe("https://drogimikolaju.pl");
+  });
+});
+
+describe("localePath", () => {
+  it("keeps the screen key the locale router would drop", () => {
+    expect(localePath("pl", "/s/AB12CD/screen?k=abc")).toBe("/pl/s/AB12CD/screen?k=abc");
   });
 });
 
