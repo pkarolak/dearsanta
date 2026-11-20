@@ -502,9 +502,21 @@ export async function consumeToken(hash: string) {
 /* ---------- tts cache ---------- */
 
 export async function registerTtsLine(hash: string, text: string, lang: string, voice: string) {
+  await registerTtsLines([{ hash, text, lang, voice }]);
+}
+
+/** One insert for many lines. Parallel inserts through the Supabase pooler stall until the statement times out. */
+export async function registerTtsLines(lines: { hash: string; text: string; lang: string; voice: string }[]) {
+  if (!lines.length) return;
+  const params: unknown[] = [];
+  const tuples = lines.map((line) => {
+    const n = params.length;
+    params.push(line.hash, line.text, line.lang, line.voice);
+    return `($${n + 1},$${n + 2},$${n + 3},$${n + 4})`;
+  });
   await (await db()).query(
-    "insert into tts_cache (hash, text, lang, voice) values ($1,$2,$3,$4) on conflict (hash) do nothing",
-    [hash, text, lang, voice],
+    `insert into tts_cache (hash, text, lang, voice) values ${tuples.join(",")} on conflict (hash) do nothing`,
+    params,
   );
 }
 

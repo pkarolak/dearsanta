@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { getTtsLine, hasTtsAudio, registerTtsLine, storeTtsAudio, ttsAudioSizes } from "@/lib/db/repo";
+import { getTtsLine, hasTtsAudio, registerTtsLines, storeTtsAudio, ttsAudioSizes } from "@/lib/db/repo";
 
 /** ElevenLabs premade voice "Bill" – a warm, older male narrator. Override with ELEVENLABS_VOICE_ID. */
 const DEFAULT_VOICE = "pqHfZKP75CvOlQylNhV4";
@@ -68,11 +68,23 @@ const hashLine = (text: string, lang: string, voice: string) =>
  * can be synthesized, so the endpoint cannot be abused to spend the TTS quota on arbitrary text.
  */
 export async function prepareLine(text: string, lang: string): Promise<string | null> {
+  const urls = await prepareLines([{ key: "line", text, lang }]);
+  return urls.line ?? null;
+}
+
+/** Registers many fixed lines in one write and returns `/api/tts/…` urls. Null when no voice provider is configured. */
+export async function prepareLines(items: { key: string; text: string; lang: string }[]): Promise<Record<string, string | null>> {
   const p = ttsProvider();
-  if (!p) return null;
-  const hash = hashLine(text, lang, p.voice);
-  await registerTtsLine(hash, text, lang, p.voice);
-  return `/api/tts/${hash}`;
+  if (!p) return Object.fromEntries(items.map((item) => [item.key, null]));
+  const rows = items.map((item) => ({
+    key: item.key,
+    hash: hashLine(item.text, item.lang, p.voice),
+    text: item.text,
+    lang: item.lang,
+    voice: p.voice,
+  }));
+  await registerTtsLines(rows);
+  return Object.fromEntries(rows.map((row) => [row.key, `/api/tts/${row.hash}`]));
 }
 
 export async function audioForHash(hash: string) {
